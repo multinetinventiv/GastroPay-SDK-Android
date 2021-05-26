@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="digit_number_gastropay_sdk" translatable="false">0123456789</string>
+    <string name="digit_number_with_space_gastropay_sdk" translatable="false">0123456789\u0020</string>
+    <string name="digit_phone_number_gastropay_sdk" translatable="false">0123456789()\u0020</string>
+    <string name="digit_alphabets_with_space_gastropay_sdk" translatable="false">abcçdefgğhıijklmnoöpqrsştuüvwxyzABCÇDEFGĞHIİJKLMNOÖPQRSŞTUÜVWXYZ\u0020</string>
+    <string name="digit_alphabets_without_space_gastropay_sdk" translatable="false">abcçdefgğhıijklmnoöpqrsştuüvwxyzABCÇDEFGĞHIİJKLMNOÖPQRSŞTUÜVWXYZ</string>
+    <string name="mask_phone_gastropay_sdk" translatable="false">0(5##) ### ## ##</string>
+</resources>

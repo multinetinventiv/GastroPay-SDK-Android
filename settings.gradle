@@ -1,0 +1,3 @@
+rootProject.name = "Gastropay SDK Android"
+include ':app'
+include ':gastropaysdk'

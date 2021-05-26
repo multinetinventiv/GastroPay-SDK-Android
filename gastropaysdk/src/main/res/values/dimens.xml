@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="button_height_gastropay_sdk">48dp</dimen>
+    <dimen name="elevation_toolbar_gastropay_sdk">2dp</dimen>
+
+    <dimen name="text_appearance_size_body_1_gastropay_sdk">14sp</dimen>
+    <dimen name="text_appearance_size_body_2_gastropay_sdk">12sp</dimen>
+</resources>

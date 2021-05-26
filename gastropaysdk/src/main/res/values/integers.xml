@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="otp_length_multipay_sdk">6</integer>
+    <integer name="multinet_card_length_multipay_sdk">19</integer>
+    <integer name="multinet_card_cvv_length_multipay_sdk">4</integer>
+</resources>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.App.GastroPaySdk" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="android:statusBarColor" tools:ignore="NewApi">
+            ?android:attr/colorBackground
+        </item>
+
+        <item name="android:navigationBarColor" tools:ignore="NewApi">
+            ?android:attr/colorBackground
+        </item>
+
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">
+            ?attr/colorControlHighlight
+        </item>
+
+        <item name="android:textColor">?attr/colorSecondary</item>
+
+        <!--Material type attributes-->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.GastroPaySdk.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.GastroPaySdk.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.GastroPaySdk.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.GastroPaySdk.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.GastroPaySdk.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.GastroPaySdk.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.GastroPaySdk.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.GastroPaySdk.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.GastroPaySdk.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.GastroPaySdk.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.GastroPaySdk.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.GastroPaySdk.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.GastroPaySdk.Overline</item>
+    </style>
+
+    <style name="Base.Theme.GastroPaySdk" parent="Base.Theme.App.GastroPaySdk">
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
+        <item name="colorPrimary">@color/celtic_gastropay_sdk</item>
+        <item name="colorPrimaryVariant">@color/dark_green_gastropay_sdk</item>
+        <item name="colorSecondary">@color/sunglow_gastropay_sdk</item>
+        <item name="colorSecondaryVariant">@color/celtic_overlay_gastropay_sdk</item>
+        <item name="android:colorBackground">@color/white_gastropay_sdk</item>
+        <item name="colorSurface">@color/white_gastropay_sdk</item>
+        <!--
+        <item name="colorError">@color/carmine_multipay_sdk</item>
+        <item name="colorOnPrimary">@color/white_multipay_sdk</item>
+        <item name="colorOnSecondary">@color/white_multipay_sdk</item>
+        <item name="colorOnBackground">@color/black_multipay_sdk</item>
+        <item name="colorOnSurface">@color/black_multipay_sdk</item>
+        <item name="colorOnError">@color/white_multipay_sdk</item>
+        <item name="colorControlHighlight">@color/clear_day_multipay_sdk</item>
+        -->
+    </style>
+</resources>
