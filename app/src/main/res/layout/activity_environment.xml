@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".EnvironmentActivity">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/descriptionGastropaySdkTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SDK testi için lütfen ortam seçiniz"
+        app:layout_constraintBottom_toTopOf="@+id/devEnvButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/devEnvButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="DEV"
+        app:layout_constraintBottom_toTopOf="@+id/pilotEnvButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionGastropaySdkTextView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/pilotEnvButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="PILOT"
+        app:layout_constraintBottom_toTopOf="@+id/testEnvButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/devEnvButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/testEnvButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TEST"
+        app:layout_constraintBottom_toTopOf="@+id/productionEnvButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pilotEnvButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/productionEnvButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="PRODUCTION"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/testEnvButton" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
