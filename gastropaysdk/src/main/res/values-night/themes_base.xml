@@ -11,13 +11,13 @@
         <item name="android:colorBackground">@color/white_gastropay_sdk</item>
         <item name="colorSurface">@color/white_gastropay_sdk</item>
         <!--
-        <item name="colorError">@color/carmine_multipay_sdk</item>
-        <item name="colorOnPrimary">@color/white_multipay_sdk</item>
-        <item name="colorOnSecondary">@color/white_multipay_sdk</item>
-        <item name="colorOnBackground">@color/black_multipay_sdk</item>
-        <item name="colorOnSurface">@color/black_multipay_sdk</item>
-        <item name="colorOnError">@color/white_multipay_sdk</item>
-        <item name="colorControlHighlight">@color/clear_day_multipay_sdk</item>
+        <item name="colorError">@color/carmine_gastropay_sdk</item>
+        <item name="colorOnPrimary">@color/white_gastropay_sdk</item>
+        <item name="colorOnSecondary">@color/white_gastropay_sdk</item>
+        <item name="colorOnBackground">@color/black_gastropay_sdk</item>
+        <item name="colorOnSurface">@color/black_gastropay_sdk</item>
+        <item name="colorOnError">@color/white_gastropay_sdk</item>
+        <item name="colorControlHighlight">@color/clear_day_gastropay_sdk</item>
         -->
     </style>
 </resources>

@@ -3,15 +3,19 @@ plugins {
     id 'kotlin-android'
 }
 
+apply {
+    from("$rootDir/versions.gradle")
+}
+
 android {
-    compileSdkVersion 30
+    compileSdkVersion versions.sdkVersion
 
     defaultConfig {
         applicationId "com.inventiv.gastropaysdk.sample"
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.sdkVersion
+        versionCode versions.versionCode
+        versionName versions.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -26,15 +30,19 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.5.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    //Test
+    testImplementation(test.junit)
+    androidTestImplementation(androidTest.junit)
+    androidTestImplementation(androidTest.espressoCore)
+    //
+
+    implementation(deps.coreKtx)
+    implementation(deps.appCompat)
+    implementation(deps.material)
+    implementation(deps.constraint)
+    implementation(deps.glide)
 
     // GastroPay SDK
     implementation project(':gastropaysdk')
-
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    //
 }
