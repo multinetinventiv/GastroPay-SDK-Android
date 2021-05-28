@@ -2,6 +2,8 @@ package com.inventiv.gastropaysdk.data.model
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onStart
 import retrofit2.HttpException
 import java.net.UnknownHostException
 
@@ -38,5 +40,9 @@ fun <T> safeFlow(suspendfun: suspend () -> T): Flow<Resource<T>> {
             )
             emit(Resource.Error(apiError))
         }
+    }.onStart {
+        emit(Resource.Loading(true))
+    }.onCompletion {
+        emit(Resource.Loading(false))
     }
 }
