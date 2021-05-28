@@ -1,8 +1,9 @@
-package com.inventiv.gastropaysdk.fragments
+package com.inventiv.gastropaysdk.ui.home
 
 import android.os.Bundle
 import android.view.View
 import com.inventiv.gastropaysdk.R
+import com.inventiv.gastropaysdk.common.BaseFragment
 import com.inventiv.gastropaysdk.databinding.FragmentHomeGastropaySdkBinding
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.constant.PermissionConstants
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils

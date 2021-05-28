@@ -1,4 +1,4 @@
-package com.inventiv.gastropaysdk.activity
+package com.inventiv.gastropaysdk.common
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity

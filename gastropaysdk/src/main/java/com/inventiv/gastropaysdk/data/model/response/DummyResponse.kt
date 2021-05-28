@@ -1,4 +1,4 @@
-package com.inventiv.gastropaysdk.api.response
+package com.inventiv.gastropaysdk.data.model.response
 
 import com.google.gson.annotations.SerializedName
 

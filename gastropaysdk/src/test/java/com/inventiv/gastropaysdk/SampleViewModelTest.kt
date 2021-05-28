@@ -1,8 +1,8 @@
 package com.inventiv.gastropaysdk
 
-import com.inventiv.gastropaysdk.activity.MainViewModel
+import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.api.NetworkModule
-import com.inventiv.gastropaysdk.api.response.DummyResponse
+import com.inventiv.gastropaysdk.data.model.response.DummyResponse
 import com.inventiv.gastropaysdk.data.model.Resource
 import com.inventiv.gastropaysdk.repository.MainRepository
 import com.inventiv.gastropaysdk.utils.MainCoroutineScopeRule
