@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
+import com.inventiv.gastropaysdk.shared.GastroPaySdkException
 import com.inventiv.gastropaysdk.shared.GastroPaySdkListener
 import com.inventiv.gastropaysdk.shared.Language
 
@@ -39,13 +40,7 @@ class SdkStartActivity : AppCompatActivity() {
 
         infoModel = intent.getParcelableExtra(EXTRA_INFOS)!!
 
-        removeInfosButton.setOnClickListener {
-            getSharedPref().edit().clear().apply()
-            startActivity(Intent(this, EnvironmentActivity::class.java))
-            finish()
-        }
-
-        startSdkButton.setOnClickListener {
+        try {
             GastroPaySdk.init(
                 application,
                 infoModel.environment,
@@ -56,6 +51,18 @@ class SdkStartActivity : AppCompatActivity() {
                         Log.d("isInitialized", isInitialized.toString())
                     }
                 })
+        } catch (e: GastroPaySdkException) {
+            // Sdk couldn't be loaded successfully, check private key if its correct
+        }
+
+        removeInfosButton.setOnClickListener {
+            getSharedPref().edit().clear().apply()
+            startActivity(Intent(this, EnvironmentActivity::class.java))
+            finish()
+        }
+
+        startSdkButton.setOnClickListener {
+            // GastroPaySdk.start
         }
     }
 }

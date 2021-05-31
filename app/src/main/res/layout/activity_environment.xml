@@ -24,21 +24,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="DEV"
-        app:layout_constraintBottom_toTopOf="@+id/pilotEnvButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionGastropaySdkTextView" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/pilotEnvButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="PILOT"
         app:layout_constraintBottom_toTopOf="@+id/testEnvButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/devEnvButton" />
+        app:layout_constraintTop_toBottomOf="@+id/descriptionGastropaySdkTextView" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/testEnvButton"
@@ -46,10 +35,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="TEST"
+        app:layout_constraintBottom_toTopOf="@+id/pilotEnvButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/devEnvButton" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/pilotEnvButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="PILOT"
         app:layout_constraintBottom_toTopOf="@+id/productionEnvButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pilotEnvButton" />
+        app:layout_constraintTop_toBottomOf="@+id/testEnvButton" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/productionEnvButton"
@@ -60,6 +60,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/testEnvButton" />
+        app:layout_constraintTop_toBottomOf="@+id/pilotEnvButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

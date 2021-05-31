@@ -1,10 +1,8 @@
 package com.inventiv.gastropaysdk.shared
 
 import android.app.Application
-import android.content.Intent
 import com.inventiv.gastropaysdk.BuildConfig
 import com.inventiv.gastropaysdk.GastroPaySdkComponent
-import com.inventiv.gastropaysdk.ui.MainActivity
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.Utils
 
@@ -25,6 +23,7 @@ object GastroPaySdk {
 
     @JvmOverloads
     @JvmStatic
+    @Throws(GastroPaySdkException::class)
     fun init(
         application: Application,
         environment: Environment = Environment.PRODUCTION,
@@ -44,10 +43,10 @@ object GastroPaySdk {
         }*/
 
         //TODO : test amaçlı burada aktivite açılıyor. ileride buradan kaldırılacak
-        Intent(application, MainActivity::class.java).apply {
+        /*Intent(application, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
             application.startActivity(this)
-        }
+        }*/
 
         this.gastroPaySdkComponent = GastroPaySdkComponent(
             appContext = application,
