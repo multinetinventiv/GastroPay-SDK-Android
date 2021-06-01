@@ -1,0 +1,90 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    if (project.plugins.findPlugin("com.android.library")) {
+        // For Android libraries
+        from android.sourceSets.main.java.srcDirs
+        from android.sourceSets.main.kotlin.srcDirs
+    } else {
+        // For pure Kotlin libraries, in case you have them
+        from sourceSets.main.java.srcDirs
+        from sourceSets.main.kotlin.srcDirs
+    }
+}
+
+artifacts {
+    archives androidSourcesJar
+}
+
+group = maven.PUBLISH_GROUP_ID
+version = maven.PUBLISH_VERSION
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId maven.PUBLISH_GROUP_ID
+                artifactId maven.PUBLISH_ARTIFACT_ID
+                version maven.PUBLISH_VERSION
+
+                // Two artifacts, the `aar` (or `jar`) and the sources
+                if (project.plugins.findPlugin("com.android.library")) {
+                    from components.release
+                } else {
+                    from components.java
+                }
+
+                artifact androidSourcesJar
+
+                // Mostly self-explanatory metadata
+                pom {
+                    name = maven.PUBLISH_ARTIFACT_ID
+                    description = 'GastroPay official Android SDK'
+                    url = 'https://github.com/multinetinventiv/GastroPay-SDK-Android'
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'https://github.com/multinetinventiv/GastroPay-SDK-Android/blob/main/LICENSE'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'erimkorkmaz'
+                            name = 'Mehmet Erim Korkmaz'
+                            email = 'mehmeterim.korkmaz@inventiv.com.tr'
+                        }
+                        developer {
+                            id = 'NaCI'
+                            name = 'Naci Ozyildirim'
+                            email = 'naci.ozyildirim@inventiv.com.tr'
+                        }
+                        developer {
+                            id = 'murgupluoglu'
+                            name = 'Mustafa Urgupluoglu'
+                            email = 'mustafa.urgupluoglu@inventiv.com.tr'
+                        }
+                    }
+                    organization {
+                        name = 'Inventiv'
+                        url = 'https://inventiv.com.tr'
+                    }
+                    scm {
+                        connection = 'scm:git:github.com/multinetinventiv/GastroPay-SDK-Android.git'
+                        developerConnection = 'scm:git:ssh://github.com/multinetinventiv/GastroPay-SDK-Android.git'
+                        url = 'https://github.com/multinetinventiv/GastroPay-SDK-Android/tree/main'
+                    }
+                }
+            }
+        }
+    }
+}
+
+ext["signing.keyId"] = rootProject.ext["signing.keyId"]
+ext["signing.password"] = rootProject.ext["signing.password"]
+ext["signing.secretKeyRingFile"] = rootProject.ext["signing.secretKeyRingFile"]
+
+signing {
+    sign publishing.publications
+}

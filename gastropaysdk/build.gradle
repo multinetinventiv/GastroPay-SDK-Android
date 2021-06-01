@@ -6,6 +6,7 @@ plugins {
 
 apply {
     from("$rootDir/versions.gradle")
+    from("${rootDir}/scripts/publish-module.gradle")
 }
 
 android {
