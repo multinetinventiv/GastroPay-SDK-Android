@@ -7,7 +7,7 @@ ext.versions = [
 def maven = [:]
 maven.PUBLISH_GROUP_ID = "tr.com.inventiv"
 maven.PUBLISH_ARTIFACT_ID = "gastropaysdk"
-maven.PUBLISH_VERSION = "0.0.1-ALPHA"
+maven.PUBLISH_VERSION = "0.0.1-BETA"
 ext.maven = maven
 
 def glideVersion = "4.12.0"
