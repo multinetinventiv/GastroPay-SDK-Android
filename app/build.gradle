@@ -16,7 +16,7 @@ android {
         minSdkVersion versions.minSdkVersion
         targetSdkVersion versions.sdkVersion
         versionCode versions.versionCode
-        versionName versions.versionName
+        versionName maven.PUBLISH_VERSION
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

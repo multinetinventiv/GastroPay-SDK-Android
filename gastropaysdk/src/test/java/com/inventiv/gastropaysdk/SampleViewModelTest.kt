@@ -1,26 +1,11 @@
 package com.inventiv.gastropaysdk
 
-import com.inventiv.gastropaysdk.ui.MainViewModel
-import com.inventiv.gastropaysdk.api.NetworkModule
-import com.inventiv.gastropaysdk.data.model.response.DummyResponse
-import com.inventiv.gastropaysdk.data.model.Resource
-import com.inventiv.gastropaysdk.repository.MainRepository
-import com.inventiv.gastropaysdk.utils.MainCoroutineScopeRule
-import io.mockk.MockKAnnotations
-import io.mockk.coEvery
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collectIndexed
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class SampleViewModelTest {
 
-    @get:Rule
+    /*@get:Rule
     val coroutineScope = MainCoroutineScopeRule()
 
     private val viewModel by lazy {
@@ -63,6 +48,6 @@ class SampleViewModelTest {
         viewModel.mainRepository.getDummy(-1)
 
         job.cancel()
-    }
+    }*/
 
 }
