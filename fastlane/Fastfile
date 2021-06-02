@@ -1,0 +1,113 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+
+    before_all do |lane, options|
+        ENV["APP_IDENTIFIER"] = "com.inventiv.gastropaysdk.sample"
+        ENV["APP_NAME"] = "GastroPay-SDK-Android"
+    end
+
+
+    lane :generate_apk do |options|
+
+        gradle(
+            task: "clean assemble",
+            flavor: options[:flavor],
+            build_type: options[:build_type])
+    end
+
+
+    lane :generate_signed_apk do |options|
+
+        gradle(
+            task: "clean assemble",
+            build_type: options[:build_type],
+            print_command: false,
+            properties: {
+                "android.injected.signing.store.file" => options[:keystore_path],
+                "android.injected.signing.store.password" => options[:store_password],
+                "android.injected.signing.key.alias" => options[:key_alias],
+                "android.injected.signing.key.password" => options[:key_password]})
+    end
+
+
+    lane :run_unit_tests do
+        gradle(task: "test")
+    end
+
+
+    lane :get_sdk_version_name do |options|
+        sdk_version = get_properties_value(
+            path:"versions.gradle",
+            key:"maven.PUBLISH_VERSION"
+        )
+        UI.message("\n=====================================\n sdk version : "+ sdk_version +"\n=====================================")
+        sdk_version
+    end
+
+
+    lane :app_center_upload do |options|
+
+        version_name = get_sdk_version_name()
+        UI.message("\n=====================================\n sdk version : "+ version_name +"\n=====================================")
+
+        section_identifier = '[Unreleased]'
+        if options[:isReleaseBranch] != nil && options[:isReleaseBranch] == true
+            section_identifier = '['+version_name+']'
+        end
+
+        changeLogEntries = read_changelog(
+            changelog_path: './gastropaysdk/CHANGELOG.md',
+            section_identifier: section_identifier
+        )
+        UI.message("\n=====================================\n changeLogEntries : "+ changeLogEntries +"\n=====================================")
+
+        appcenter_upload(
+            api_token: options[:app_center_api_token],
+            owner_name: "inventiv",
+            owner_type: "organization",
+            app_name: ENV["APP_NAME"],
+            file: "app/build/outputs/apk/"+options[:build_type]+"/app-"+options[:build_type]+".apk",
+            release_notes: changeLogEntries,
+            destinations: "GastroPay%20SDK%20Android%20Testers",
+            destination_type: "group",
+            notify_testers: options[:sendNotification]
+        )
+    end
+
+
+    lane :generate_and_upload_apk_to_app_center do |options|
+
+        generate_signed_apk(
+            build_type: options[:build_type],
+            keystore_path: options[:keystore_path],
+            store_password: options[:store_password],
+            key_alias: options[:key_alias],
+            key_password: options[:key_password]
+        )
+
+        app_center_upload(
+            app_center_api_token: options[:app_center_api_token],
+            build_type: options[:build_type],
+            sendNotification: options[:sendNotification],
+            isReleaseBranch: options[:isReleaseBranch]
+        )
+    end
+end
+
+# Usage : fastlane generate_and_upload_apk_to_app_center build_type:"debug" keystore_path:test.keystore store_password:"" key_alias:"" key_password:"" app_center_api_token:"" sendNotification:true isReleaseBranch:false
