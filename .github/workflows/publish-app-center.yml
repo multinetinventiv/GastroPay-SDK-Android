@@ -9,7 +9,7 @@ on:
         default: 'debug'
       send_email:
         description: 'Send email to all testers(true, false)'
-        default: 'false'
+        default: 'true'
 
 jobs:
   build:
