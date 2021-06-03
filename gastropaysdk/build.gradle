@@ -46,7 +46,11 @@ dependencies {
     //Test
     testImplementation(test.junit)
     testImplementation(test.coroutines)
-    testImplementation(test.mockK)
+    testImplementation(test.truth)
+    testImplementation(test.mockitoKotlin)
+    testImplementation(test.mockitoInline)
+    testImplementation(test.coreTesting)
+    testImplementation(test.turbine)
 
     androidTestImplementation(androidTest.junit)
     androidTestImplementation(androidTest.espressoCore)
