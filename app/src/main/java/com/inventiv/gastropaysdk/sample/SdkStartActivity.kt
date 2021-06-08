@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.textview.MaterialTextView
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.shared.GastroPaySdkException
 import com.inventiv.gastropaysdk.shared.GastroPaySdkListener
@@ -31,6 +32,10 @@ class SdkStartActivity : AppCompatActivity() {
         findViewById(R.id.startSdkButton)
     }
 
+    private val textViewVersion: MaterialTextView by lazy {
+        findViewById(R.id.versionGastropaySdkTextView)
+    }
+
     private lateinit var infoModel: InfoModel
 
 
@@ -40,6 +45,7 @@ class SdkStartActivity : AppCompatActivity() {
 
         infoModel = intent.getParcelableExtra(EXTRA_INFOS)!!
 
+        textViewVersion.text = getVersionText()
         try {
             GastroPaySdk.init(
                 application,

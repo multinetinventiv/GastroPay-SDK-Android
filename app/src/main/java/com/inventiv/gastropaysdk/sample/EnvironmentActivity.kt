@@ -3,6 +3,7 @@ package com.inventiv.gastropaysdk.sample
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.textview.MaterialTextView
 import com.google.gson.Gson
 import com.inventiv.gastropaysdk.shared.Environment
 
@@ -20,11 +21,15 @@ class EnvironmentActivity : AppCompatActivity() {
     private val buttonProduction: MaterialButton by lazy {
         findViewById(R.id.productionEnvButton)
     }
+    private val textViewVersion: MaterialTextView by lazy {
+        findViewById(R.id.versionGastropaySdkTextView)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_environment)
 
+        textViewVersion.text = getVersionText()
         buttonDev.setOnClickListener {
             saveAndGo(Environment.DEV)
         }
