@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="test">TR</string>
+
+    <string name="bottom_nav_merchants">Restoranlar</string>
+    <string name="bottom_nav_pay">Ödeme Yap</string>
+    <string name="bottom_nav_wallet">Cüzdan</string>
 </resources>

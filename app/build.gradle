@@ -17,6 +17,7 @@ android {
         targetSdkVersion versions.sdkVersion
         versionCode versions.versionCode
         versionName maven.PUBLISH_VERSION
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -37,6 +38,7 @@ dependencies {
     androidTestImplementation(androidTest.espressoCore)
     //
 
+    implementation(deps.multidex)
     implementation(deps.coreKtx)
     implementation(deps.appCompat)
     implementation(deps.material)

@@ -16,7 +16,6 @@ class SdkStartActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_INFOS = "extra_infos"
-        const val TAG = "MultinetWalletActivity"
 
         fun newIntent(context: Context, infos: InfoModel) =
             Intent(context, SdkStartActivity::class.java).apply {
@@ -60,6 +59,8 @@ class SdkStartActivity : AppCompatActivity() {
         } catch (e: GastroPaySdkException) {
             // Sdk couldn't be loaded successfully, check private key if its correct
         }
+
+        GastroPaySdk.start()
 
         removeInfosButton.setOnClickListener {
             getSharedPref().edit().clear().apply()

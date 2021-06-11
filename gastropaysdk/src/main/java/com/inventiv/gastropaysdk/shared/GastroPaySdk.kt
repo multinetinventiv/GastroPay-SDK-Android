@@ -1,8 +1,10 @@
 package com.inventiv.gastropaysdk.shared
 
 import android.app.Application
+import android.content.Intent
 import com.inventiv.gastropaysdk.BuildConfig
 import com.inventiv.gastropaysdk.GastroPaySdkComponent
+import com.inventiv.gastropaysdk.ui.MainActivity
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.Utils
 
@@ -57,6 +59,15 @@ object GastroPaySdk {
         }
 
         getComponent().globalGastroPaySdkListener?.onInitialized(true)
+    }
+
+    @JvmStatic
+    @Throws(GastroPaySdkException::class)
+    fun start() {
+        Intent(Utils.getApp(), MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            Utils.getApp().startActivity(this)
+        }
     }
 
 }
