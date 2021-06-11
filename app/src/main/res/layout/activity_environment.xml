@@ -66,8 +66,8 @@
         android:id="@+id/versionGastropaySdkTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="v1.0.0"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        tools:text="v1.0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

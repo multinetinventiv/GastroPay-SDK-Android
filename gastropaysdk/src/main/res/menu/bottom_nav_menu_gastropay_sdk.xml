@@ -4,16 +4,16 @@
     <item
         android:id="@+id/navigation_merchants"
         android:icon="@drawable/ic_merchants_gastropay_sdk"
-        android:title="@string/bottom_nav_merchants" />
+        android:title="@string/bottom_nav_merchants_gastropay_sdk" />
 
     <item
         android:id="@+id/navigation_pay"
         android:icon="@drawable/ic_pay_gastropay_sdk"
-        android:title="@string/bottom_nav_pay" />
+        android:title="@string/bottom_nav_pay_gastropay_sdk" />
 
     <item
         android:id="@+id/navigation_wallet"
         android:icon="@drawable/ic_wallet_gastropay_sdk"
-        android:title="@string/bottom_nav_wallet" />
+        android:title="@string/bottom_nav_wallet_gastropay_sdk" />
 
 </menu>
