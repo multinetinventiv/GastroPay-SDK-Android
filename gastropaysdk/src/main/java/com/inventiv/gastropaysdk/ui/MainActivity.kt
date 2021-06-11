@@ -1,6 +1,7 @@
 package com.inventiv.gastropaysdk.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.inventiv.gastropaysdk.R
@@ -9,6 +10,8 @@ import com.inventiv.gastropaysdk.databinding.ActivityMainGastropaySdkBinding
 import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.merchants.MerchantsFragment
+import com.inventiv.gastropaysdk.ui.pay.PayFragment
+import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.viewBinding
 import com.ncapdevi.fragnav.FragNavController
 import java.util.*
@@ -55,7 +58,7 @@ internal class MainActivity : BaseActivity() {
 
     private fun prepareNavigationViews(savedInstanceState: Bundle?) {
         rootFragments.add(MerchantsFragment())
-        rootFragments.add(MerchantsFragment())
+        rootFragments.add(PayFragment())
         rootFragments.add(MerchantsFragment())
 
         controller = FragNavController(supportFragmentManager, R.id.mainContainer)
@@ -73,7 +76,13 @@ internal class MainActivity : BaseActivity() {
             }
 
             override fun onTabTransaction(fragment: Fragment?, index: Int) {
-
+                LogUtils.d("FRAGMENT_INDEX", index)
+                if (index == FragNavController.TAB2) {
+                    //TODO hide toolbar & bottom navigation
+                    binding.bottomNavigationView.visibility = View.GONE
+                } else {
+                    binding.bottomNavigationView.visibility = View.VISIBLE
+                }
             }
         }
     }
