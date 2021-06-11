@@ -5,4 +5,9 @@
     <string name="bottom_nav_merchants_gastropay_sdk">Restoranlar</string>
     <string name="bottom_nav_pay_gastropay_sdk">Ödeme Yap</string>
     <string name="bottom_nav_wallet_gastropay_sdk">Cüzdan</string>
+
+
+    <!--region Merchants-->
+    <string name="near_me_gastropay_sdk">Yakınımdakiler</string>
+    <!--endregion Merchants-->
 </resources>

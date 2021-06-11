@@ -8,7 +8,6 @@ import com.inventiv.gastropaysdk.common.BaseActivity
 import com.inventiv.gastropaysdk.databinding.ActivityMainGastropaySdkBinding
 import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
-import com.inventiv.gastropaysdk.ui.home.HomeFragment
 import com.inventiv.gastropaysdk.ui.merchants.MerchantsFragment
 import com.inventiv.gastropaysdk.utils.viewBinding
 import com.ncapdevi.fragnav.FragNavController
@@ -44,6 +43,7 @@ internal class MainActivity : BaseActivity() {
                 }
                 R.id.navigation_pay -> {
                     switchTab(FragNavController.TAB2)
+                    return@setOnNavigationItemSelectedListener false
                 }
                 R.id.navigation_wallet -> {
                     switchTab(FragNavController.TAB3)
@@ -54,7 +54,7 @@ internal class MainActivity : BaseActivity() {
     }
 
     private fun prepareNavigationViews(savedInstanceState: Bundle?) {
-        rootFragments.add(HomeFragment())
+        rootFragments.add(MerchantsFragment())
         rootFragments.add(MerchantsFragment())
         rootFragments.add(MerchantsFragment())
 
