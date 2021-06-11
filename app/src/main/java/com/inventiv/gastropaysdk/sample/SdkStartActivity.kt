@@ -60,8 +60,6 @@ class SdkStartActivity : AppCompatActivity() {
             // Sdk couldn't be loaded successfully, check private key if its correct
         }
 
-        GastroPaySdk.start()
-
         removeInfosButton.setOnClickListener {
             getSharedPref().edit().clear().apply()
             startActivity(Intent(this, EnvironmentActivity::class.java))
@@ -69,7 +67,7 @@ class SdkStartActivity : AppCompatActivity() {
         }
 
         startSdkButton.setOnClickListener {
-            // GastroPaySdk.start
+            GastroPaySdk.start()
         }
     }
 }
