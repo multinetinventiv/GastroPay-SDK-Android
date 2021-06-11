@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:background="@color/dark_green_gastropay_sdk"
+        android:background="@color/celtic_gastropay_sdk"
         app:itemIconTint="@color/state_navigation_gastropay_sdk"
         app:itemTextColor="@color/state_navigation_gastropay_sdk"
         app:layout_constraintBottom_toBottomOf="parent"
