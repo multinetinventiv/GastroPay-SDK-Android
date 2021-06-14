@@ -7,6 +7,7 @@ import com.inventiv.gastropaysdk.api.NetworkModule
 import com.inventiv.gastropaysdk.shared.Environment
 import com.inventiv.gastropaysdk.shared.GastroPaySdkListener
 import com.inventiv.gastropaysdk.shared.Language
+import com.inventiv.gastropaysdk.utils.LIBRARY_GENERAL_LOG_TAG
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.getLanguage
 
@@ -23,8 +24,14 @@ internal class GastroPaySdkComponent(
         val networkModule = NetworkModule(environment = environment, logging = logging())
         this.language = getLanguage(appContext, language)
         gastroPayService = networkModule.provideGastroPayService()
-        LogUtils.getConfig().isLogSwitch = logging()
-        LogUtils.getConfig().globalTag = getString(R.string.library_name)
+        prepareLogUtils()
+    }
+
+    private fun prepareLogUtils() {
+        with(LogUtils.getConfig()) {
+            isLogSwitch = logging()
+            globalTag = LIBRARY_GENERAL_LOG_TAG
+        }
     }
 
     fun logging() = logging ?: BuildConfig.DEBUG

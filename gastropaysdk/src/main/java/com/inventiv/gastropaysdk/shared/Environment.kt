@@ -2,32 +2,41 @@ package com.inventiv.gastropaysdk.shared
 
 enum class Environment(
     internal var baseUrl: String,
-    internal var apiServicePath: String,
     internal val encryptedBaseUrl: ByteArray,
-    internal val encryptedApiServicePath: ByteArray
 ) {
     DEV(
         baseUrl = "",
-        apiServicePath = "",
-        encryptedBaseUrl = byteArrayOf(-1),
-        encryptedApiServicePath = byteArrayOf(-1)
-    ),
-    PILOT(
-        baseUrl = "",
-        apiServicePath = "",
-        encryptedBaseUrl = byteArrayOf(-1),
-        encryptedApiServicePath = byteArrayOf(-1)
+        encryptedBaseUrl = byteArrayOf(
+            -32, -37, -67, 36, -122, -67, 1, -125, 34, 50, 0, 54, -74,
+            8, 94, -16, 117, -44, -29, -33, -128, 36, -106, 88, -36, -40, -73, -115, -81, -79, 58,
+            71, 76, -21, 44, -4, 33, 127, 114, -66, -128, -34, -38, -105, -66, -97, 75, 59, 126,
+            -20, -29, 58, 79, 26, -126, 108, 58, 15, -42, -15, 70, 3, -95, 29, 36, 97, -117, -5,
+            -66, -5, -122, -39, 87, -63, -23, 85, -126, -40, -54, -7
+        )
     ),
     TEST(
         baseUrl = "",
-        apiServicePath = "",
-        encryptedBaseUrl = byteArrayOf(-1),
-        encryptedApiServicePath = byteArrayOf(-1)
+        encryptedBaseUrl = byteArrayOf(
+            -82, -62, 125, 85, 61, -95, -128, 45, -69, 49, 81, 90, -11,
+            -121, -27, -27, 76, 80, -99, -14, -1, 37, -19, -128, -11, 58, 106, -28, -96, -36, -110,
+            -38, 61, -54, -71, 41, 17, -57, 43, 70, 62, 67, -28, -89, -13, 124, -5, -36, -93, 52,
+            -41, 43, 127, -51, 64, -63, 19, -63, -32, -91, -110, 59, -116, 101
+        )
+    ),
+    PILOT(
+        baseUrl = "",
+        encryptedBaseUrl = byteArrayOf(
+            -80, 45, 16, 52, -116, -77, -71, -88, 51, 116, 97, -76,
+            -38, 102, 77, 52, 95, 66, 35, -60, -105, 98, -61, 49, -102, 82, -98, 87, 75, 5, 92,
+            107, -58, 0, 18, -64, -99, 30, -72, 3, 38, -63, -126, -104, 6, -39, 44, -112
+        )
     ),
     PRODUCTION(
         baseUrl = "",
-        apiServicePath = "",
-        encryptedBaseUrl = byteArrayOf(-1),
-        encryptedApiServicePath = byteArrayOf(-1)
+        encryptedBaseUrl = byteArrayOf(
+            -80, 45, 16, 52, -116, -77, -71, -88, 51, 116, 97, -76,
+            -38, 102, 77, 52, 95, 66, 35, -60, -105, 98, -61, 49, -102, 82, -98, 87, 75, 5, 92,
+            107, -58, 0, 18, -64, -99, 30, -72, 3, 38, -63, -126, -104, 6, -39, 44, -112
+        )
     )
 }

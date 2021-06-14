@@ -8,7 +8,7 @@ import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
 import com.inventiv.gastropaysdk.data.model.Resource
 import com.inventiv.gastropaysdk.databinding.FragmentMerchantsGastropaySdkBinding
-import com.inventiv.gastropaysdk.repository.MainRepositoryImp
+import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.utils.RecyclerMarginDecoration
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.ConvertUtils
@@ -73,7 +73,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
 
     private val viewModel: MerchantsViewModel by lazy {
         val viewModelFactory = MerchantsViewModelFactory(
-            MainRepositoryImp(GastroPaySdk.getComponent().gastroPayService)
+            MerchantRepositoryImp(GastroPaySdk.getComponent().gastroPayService)
         )
         ViewModelProvider(this, viewModelFactory).get(MerchantsViewModel::class.java)
     }
@@ -83,7 +83,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
 
         setupObservers()
         initMerchantAdapter()
-        viewModel.getDummy(1)
+        viewModel.getMerchants(latitude = 41.0032993914033, longitude = 29.02845396783002, page = 1)
     }
 
     private fun initMerchantAdapter() {

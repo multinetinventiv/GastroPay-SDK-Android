@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
@@ -49,6 +50,7 @@ class SdkStartActivity : AppCompatActivity() {
             GastroPaySdk.init(
                 application = application,
                 environment = infoModel.environment,
+                obfuscationKey = "",
                 language = Language.TR,
                 logging = true,
                 listener = object : GastroPaySdkListener {
@@ -59,16 +61,26 @@ class SdkStartActivity : AppCompatActivity() {
                 })
         } catch (e: GastroPaySdkException) {
             // Sdk couldn't be loaded successfully, check private key if its correct
+            Toast.makeText(
+                this@SdkStartActivity,
+                "GastroPaySdkError : ${e.message}",
+                Toast.LENGTH_LONG
+            ).show()
+            removeInfoAndReturn()
         }
 
         removeInfosButton.setOnClickListener {
-            getSharedPref().edit().clear().apply()
-            startActivity(Intent(this, EnvironmentActivity::class.java))
-            finish()
+            removeInfoAndReturn()
         }
 
         startSdkButton.setOnClickListener {
             GastroPaySdk.start(this)
         }
+    }
+
+    private fun removeInfoAndReturn() {
+        getSharedPref().edit().clear().apply()
+        startActivity(Intent(this, EnvironmentActivity::class.java))
+        finish()
     }
 }
