@@ -16,16 +16,16 @@ internal class MerchantsViewModel(val merchantRepository: MerchantRepository) : 
     private val _uiState = MutableStateFlow<Resource<MerchantPaging>>(Resource.Empty)
     val uiState: StateFlow<Resource<MerchantPaging>> get() = _uiState.asStateFlow()
 
+    var currentPage = 0
+
     fun getMerchants(
-        latitude: Double,
-        longitude: Double,
+        latLong: MerchantsFragment.LatLong,
         tags: String? = null,
-        merchantName: String? = null,
-        page: Int = 0
+        merchantName: String? = null
     ) {
         viewModelScope.launch {
             merchantRepository.getMerchants(
-                latitude, longitude, tags, merchantName, page
+                latLong.lat, latLong.long, tags, merchantName, currentPage
             ).collect { response ->
                 _uiState.value = response
             }

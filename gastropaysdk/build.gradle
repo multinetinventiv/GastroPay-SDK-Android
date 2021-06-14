@@ -77,4 +77,5 @@ dependencies {
 
     implementation(deps.zxing)
     implementation(deps.fragnav)
+    implementation(deps.paginate)
 }

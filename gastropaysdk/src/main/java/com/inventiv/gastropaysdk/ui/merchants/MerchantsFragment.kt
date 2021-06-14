@@ -7,69 +7,44 @@ import androidx.lifecycle.lifecycleScope
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
 import com.inventiv.gastropaysdk.data.model.Resource
+import com.inventiv.gastropaysdk.data.model.response.Merchant
 import com.inventiv.gastropaysdk.databinding.FragmentMerchantsGastropaySdkBinding
 import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
+import com.inventiv.gastropaysdk.utils.CustomLoadingListItemCreator
 import com.inventiv.gastropaysdk.utils.RecyclerMarginDecoration
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.ConvertUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.viewBinding
+import com.paginate.Paginate
 import kotlinx.coroutines.flow.collect
 
 internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gastropay_sdk) {
 
     private val binding by viewBinding(FragmentMerchantsGastropaySdkBinding::bind)
 
-    data class TestMerchant(val name: String, val distance: String, val image: String)
+    data class LatLong(val lat: Double, val long: Double)
 
     private lateinit var merchantAdapter: MerchantAdapter
-    private var merchantsList = arrayListOf(
-        TestMerchant(
-            "Starbucks",
-            "1.79 km",
-            "https://www.coinkolik.com/wp-content/uploads/2021/04/starbucks-btc-bitcoin.jpg"
-        ),
-        TestMerchant(
-            "Starbucks 2",
-            "11.79 km",
-            "https://media-cdn.tripadvisor.com/media/photo-s/19/59/0e/54/starbucks.jpg"
-        ),
-        TestMerchant(
-            "Starbucks 3",
-            "100 km",
-            "https://www.coinkolik.com/wp-content/uploads/2021/04/starbucks-btc-bitcoin.jpg"
-        ),
-        TestMerchant(
-            "Starbucks",
-            "1.79 km",
-            "https://www.coinkolik.com/wp-content/uploads/2021/04/starbucks-btc-bitcoin.jpg"
-        ),
-        TestMerchant(
-            "Starbucks 2",
-            "11.79 km",
-            "https://media-cdn.tripadvisor.com/media/photo-s/19/59/0e/54/starbucks.jpg"
-        ),
-        TestMerchant(
-            "Starbucks 3",
-            "100 km",
-            "https://www.coinkolik.com/wp-content/uploads/2021/04/starbucks-btc-bitcoin.jpg"
-        ),
-        TestMerchant(
-            "Starbucks",
-            "1.79 km",
-            "https://www.coinkolik.com/wp-content/uploads/2021/04/starbucks-btc-bitcoin.jpg"
-        ),
-        TestMerchant(
-            "Starbucks 2",
-            "11.79 km",
-            "https://media-cdn.tripadvisor.com/media/photo-s/19/59/0e/54/starbucks.jpg"
-        ),
-        TestMerchant(
-            "Starbucks 3",
-            "100 km",
-            "https://www.coinkolik.com/wp-content/uploads/2021/04/starbucks-btc-bitcoin.jpg"
-        ),
-    )
+    private lateinit var merchantPaginate: Paginate
+    private var merchantsList = ArrayList<Merchant>()
+    private var isLoadingPaging = false
+    private var allItemsLoaded = false
+    private var myPosition = LatLong(41.0032993914033,29.02845396783002)
+    private val paginateWinCallbacks = object : Paginate.Callbacks {
+        override fun onLoadMore() {
+            isLoadingPaging = true
+            viewModel.getMerchants(myPosition)
+        }
+
+        override fun isLoading(): Boolean {
+            return isLoadingPaging
+        }
+
+        override fun hasLoadedAllItems(): Boolean {
+            return allItemsLoaded
+        }
+    }
 
     private val viewModel: MerchantsViewModel by lazy {
         val viewModelFactory = MerchantsViewModelFactory(
@@ -82,13 +57,13 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         super.onViewCreated(view, bundle)
 
         setupObservers()
-        initMerchantAdapter()
-        viewModel.getMerchants(latitude = 41.0032993914033, longitude = 29.02845396783002, page = 1)
+        setupMerchantAdapter()
+        viewModel.getMerchants(myPosition)
     }
 
-    private fun initMerchantAdapter() {
+    private fun setupMerchantAdapter() {
         merchantAdapter = MerchantAdapter(merchantsList) { merchant ->
-
+            LogUtils.d("Clicked", merchant)
         }
         binding.merchantsRecyclerView.addItemDecoration(
             RecyclerMarginDecoration(
@@ -98,6 +73,11 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
             )
         )
         binding.merchantsRecyclerView.adapter = merchantAdapter
+        merchantPaginate = Paginate.with(binding.merchantsRecyclerView, paginateWinCallbacks)
+            .setLoadingTriggerThreshold(1)
+            .addLoadingListItem(true)
+            .setLoadingListItemCreator(CustomLoadingListItemCreator())
+            .build()
     }
 
     private fun setupObservers() {
@@ -105,13 +85,21 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
             viewModel.uiState.collect { uiState ->
                 when (uiState) {
                     is Resource.Loading -> {
-                        LogUtils.d("Resource", uiState.isLoading)
+                        LogUtils.d("Loading", uiState.isLoading)
                     }
                     is Resource.Success -> {
-                        LogUtils.d("Resource", uiState.data)
+                        LogUtils.d("Success", uiState.data)
+
+                        isLoadingPaging = false
+                        if (uiState.data.isLastPage) {
+                            allItemsLoaded = true
+                        }
+                        viewModel.currentPage = uiState.data.pageIndex + 1
+                        merchantsList.addAll(uiState.data.merchants)
+                        merchantAdapter.notifyDataSetChanged()
                     }
                     is Resource.Error -> {
-                        LogUtils.d("Resource", uiState.apiError)
+                        LogUtils.d("Error", uiState.apiError)
                     }
                     else -> {
                     }

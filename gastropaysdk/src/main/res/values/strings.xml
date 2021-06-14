@@ -9,5 +9,7 @@
 
     <!--region Merchants-->
     <string name="near_me_gastropay_sdk">Yakınımdakiler</string>
+    <string name="merchant_distance_label_km_gastropay_sdk">"%1$s km yakınında"</string>
+    <string name="merchant_distance_label_mt_gastropay_sdk">"%1$s m yakınında"</string>
     <!--endregion Merchants-->
 </resources>
