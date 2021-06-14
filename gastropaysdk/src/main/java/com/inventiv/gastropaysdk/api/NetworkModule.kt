@@ -1,6 +1,5 @@
 package com.inventiv.gastropaysdk.api
 
-import com.inventiv.gastropaysdk.BuildConfig
 import com.inventiv.gastropaysdk.shared.Environment
 import com.inventiv.gastropaysdk.utils.CONNECTION_TIMEOUT_IN_MINUTES
 import okhttp3.OkHttpClient
@@ -9,20 +8,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-internal class NetworkModule(private val environment: Environment) {
+internal class NetworkModule(private val environment: Environment, private val logging: Boolean) {
 
     private fun provideOkHttpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.level =
-            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-
-//        val dispatcher = Dispatcher()
-//        dispatcher.maxRequests = 1
+            if (logging) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
 
         val okHttpClientBuilder = OkHttpClient.Builder()
             .connectTimeout(CONNECTION_TIMEOUT_IN_MINUTES, TimeUnit.MINUTES)
             .readTimeout(CONNECTION_TIMEOUT_IN_MINUTES, TimeUnit.MINUTES)
-//            .dispatcher(dispatcher)
             .addInterceptor(loggingInterceptor)
         return okHttpClientBuilder.build()
     }

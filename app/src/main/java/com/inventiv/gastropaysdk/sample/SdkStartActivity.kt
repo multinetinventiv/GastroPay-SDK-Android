@@ -47,10 +47,11 @@ class SdkStartActivity : AppCompatActivity() {
         textViewVersion.text = getVersionText()
         try {
             GastroPaySdk.init(
-                application,
-                infoModel.environment,
-                Language.TR,
-                object : GastroPaySdkListener {
+                application = application,
+                environment = infoModel.environment,
+                language = Language.TR,
+                logging = true,
+                listener = object : GastroPaySdkListener {
                     override fun onInitialized(isInitialized: Boolean) {
                         super.onInitialized(isInitialized)
                         Log.d("isInitialized", isInitialized.toString())
@@ -67,7 +68,7 @@ class SdkStartActivity : AppCompatActivity() {
         }
 
         startSdkButton.setOnClickListener {
-            GastroPaySdk.start()
+            GastroPaySdk.start(this)
         }
     }
 }

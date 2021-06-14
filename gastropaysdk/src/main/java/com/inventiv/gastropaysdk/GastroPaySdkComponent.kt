@@ -13,17 +13,21 @@ import com.inventiv.gastropaysdk.utils.getLanguage
 internal class GastroPaySdkComponent(
     private val appContext: Context,
     private val environment: Environment,
-    private var language: Language?
+    private var language: Language?,
+    private val logging: Boolean?
 ) {
     val gastroPayService: GastroPayService
     var globalGastroPaySdkListener: GastroPaySdkListener? = null
 
     init {
-        val networkModule = NetworkModule(environment = environment)
+        val networkModule = NetworkModule(environment = environment, logging = logging())
         this.language = getLanguage(appContext, language)
         gastroPayService = networkModule.provideGastroPayService()
-        LogUtils.d(BuildConfig.DEBUG)
+        LogUtils.getConfig().isLogSwitch = logging()
+        LogUtils.getConfig().globalTag = getString(R.string.library_name)
     }
+
+    fun logging() = logging ?: BuildConfig.DEBUG
 
     fun language() = requireNotNull(language)
 
