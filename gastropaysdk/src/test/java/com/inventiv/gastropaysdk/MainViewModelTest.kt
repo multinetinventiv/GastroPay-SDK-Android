@@ -2,6 +2,7 @@ package com.inventiv.gastropaysdk
 
 import com.google.common.truth.Truth
 import com.inventiv.gastropaysdk.data.model.Resource
+import com.inventiv.gastropaysdk.data.model.response.DummyResponse
 import com.inventiv.gastropaysdk.repository.MainRepository
 import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.utils.MainCoroutineScopeRule

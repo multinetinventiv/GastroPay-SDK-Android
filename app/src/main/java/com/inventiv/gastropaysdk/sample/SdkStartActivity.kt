@@ -50,7 +50,7 @@ class SdkStartActivity : AppCompatActivity() {
             GastroPaySdk.init(
                 application = application,
                 environment = infoModel.environment,
-                obfuscationKey = "",
+                obfuscationKey = infoModel.obfuscationKey,
                 language = Language.TR,
                 logging = true,
                 listener = object : GastroPaySdkListener {
