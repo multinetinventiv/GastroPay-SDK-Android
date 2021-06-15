@@ -61,6 +61,7 @@ dependencies {
     implementation(deps.appCompat)
     implementation(deps.material)
     implementation(deps.constraint)
+    implementation(deps.location)
     implementation(deps.coroutinesCore)
     implementation(deps.coroutinesAndroid)
     implementation(deps.lifecycleViewModel)

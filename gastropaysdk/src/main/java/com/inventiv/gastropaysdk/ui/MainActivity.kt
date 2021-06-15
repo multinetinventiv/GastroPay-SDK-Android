@@ -12,7 +12,7 @@ import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.merchants.MerchantsFragment
 import com.inventiv.gastropaysdk.ui.pay.PayFragment
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
-import com.inventiv.gastropaysdk.utils.viewBinding
+import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.ncapdevi.fragnav.FragNavController
 import java.util.*
 

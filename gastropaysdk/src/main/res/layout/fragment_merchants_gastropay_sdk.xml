@@ -32,4 +32,29 @@
         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
         tools:listitem="@layout/item_merchant_gastropay_sdk" />
 
+    <include
+        android:id="@+id/layoutLocationPermission"
+        layout="@layout/layout_location_gastropay_sdk"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+
+    <TextView
+        android:id="@+id/emptyLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@color/white_gastropay_sdk"
+        android:text="@string/warning_no_restaurant_found_gastropay_sdk"
+        android:textColor="#000000"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/merchantsRecyclerView"
+        tools:visibility="visible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

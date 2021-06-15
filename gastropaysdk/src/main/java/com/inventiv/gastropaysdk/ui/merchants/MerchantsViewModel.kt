@@ -1,5 +1,6 @@
 package com.inventiv.gastropaysdk.ui.merchants
 
+import android.location.Location
 import androidx.lifecycle.viewModelScope
 import com.inventiv.gastropaysdk.common.BaseViewModel
 import com.inventiv.gastropaysdk.data.model.Resource
@@ -11,7 +12,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-internal class MerchantsViewModel(val merchantRepository: MerchantRepository) : BaseViewModel() {
+internal class MerchantsViewModel(private val merchantRepository: MerchantRepository) :
+    BaseViewModel() {
 
     private val _uiState = MutableStateFlow<Resource<MerchantPaging>>(Resource.Empty)
     val uiState: StateFlow<Resource<MerchantPaging>> get() = _uiState.asStateFlow()
@@ -19,13 +21,17 @@ internal class MerchantsViewModel(val merchantRepository: MerchantRepository) : 
     var currentPage = 0
 
     fun getMerchants(
-        latLong: MerchantsFragment.LatLong,
+        location: Location,
         tags: String? = null,
         merchantName: String? = null
     ) {
         viewModelScope.launch {
             merchantRepository.getMerchants(
-                latLong.lat, latLong.long, tags, merchantName, currentPage
+                latitude = location.latitude,
+                longitude = location.longitude,
+                tags = tags,
+                merchantName = merchantName,
+                page = currentPage
             ).collect { response ->
                 _uiState.value = response
             }

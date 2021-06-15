@@ -8,7 +8,7 @@ import com.inventiv.gastropaysdk.databinding.FragmentPayGastropaySdkBinding
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.constant.PermissionConstants
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.PermissionUtils
-import com.inventiv.gastropaysdk.utils.viewBinding
+import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 
 internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
 

@@ -9,7 +9,13 @@ import com.paginate.recycler.LoadingListItemCreator
 class CustomLoadingListItemCreator : LoadingListItemCreator {
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent?.context)
-        return LoadingItemViewHolder(ItemPagignLoadingGastropaySdkBinding.inflate(inflater, parent, false))
+        return LoadingItemViewHolder(
+            ItemPagignLoadingGastropaySdkBinding.inflate(
+                inflater,
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {

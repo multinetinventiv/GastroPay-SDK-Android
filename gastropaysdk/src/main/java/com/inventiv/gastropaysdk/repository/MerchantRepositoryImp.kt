@@ -18,7 +18,7 @@ internal class MerchantRepositoryImp(private val gastroPayService: GastroPayServ
         page: Int
     ): Flow<Resource<MerchantPaging>> {
 
-        return safeFlow(suspendFun = {
+        return safeFlow {
             gastroPayService.merchantsInfo(
                 latitude,
                 longitude,
@@ -27,11 +27,6 @@ internal class MerchantRepositoryImp(private val gastroPayService: GastroPayServ
                 merchantName,
                 page
             )
-        }, modifyFun = { resource ->
-            if (resource is Resource.Success) {
-                resource.data.pageIndex = page
-            }
-            return@safeFlow resource
-        })
+        }
     }
 }
