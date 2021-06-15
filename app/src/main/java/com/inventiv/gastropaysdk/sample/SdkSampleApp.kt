@@ -1,8 +1,8 @@
 package com.inventiv.gastropaysdk.sample
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 
-class SdkSampleApp : Application() {
+class SdkSampleApp : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
 

@@ -69,9 +69,10 @@ dependencies {
     implementation(deps.lifecycleRuntime)
     implementation(deps.retrofit)
     implementation(deps.retrofitConverter)
-    implementation(deps.okhttp)
+    implementation(deps.okhttp){
+        force = true //API 19 support
+    }
     implementation(deps.okhttpInterceptor)
-    implementation(deps.okhttpUrlConnection)
 
     implementation(deps.glide)
     kapt(deps.glideKapt)
