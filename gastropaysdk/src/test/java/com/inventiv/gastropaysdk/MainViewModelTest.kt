@@ -49,7 +49,7 @@ class MainViewModelTest {
             viewModel.uiState.collectIndexed { index, response ->
                 when (index) {
                     0 -> {
-                        assert(response is Resource.Empty)
+                        Truth.assertThat(response is Resource.Empty)
                     }
                     1 -> {
                         response.loadingTrueExpected()
