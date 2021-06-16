@@ -31,4 +31,8 @@ internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
                 }
             }).request()
     }
+
+    override fun initDynamicViewProperties() {
+        hideToolbar()
+    }
 }

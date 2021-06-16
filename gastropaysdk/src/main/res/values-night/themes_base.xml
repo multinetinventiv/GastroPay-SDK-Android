@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="Base.Theme.GastroPaySdk" parent="Base.Theme.App.GastroPaySdk">
-        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
-        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
         <item name="colorPrimary">@color/celtic_gastropay_sdk</item>
         <item name="colorPrimaryVariant">@color/dark_green_gastropay_sdk</item>
         <item name="colorSecondary">@color/sunglow_gastropay_sdk</item>

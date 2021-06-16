@@ -39,7 +39,7 @@ internal class MainActivity : BaseActivity() {
     }
 
     private fun setupBottomNavigation() {
-        binding.bottomNavigationView.setOnNavigationItemSelectedListener {
+        binding.bottomNavigationViewGastroPaySdk.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_merchants -> {
                     switchTab(FragNavController.TAB1)
@@ -61,7 +61,7 @@ internal class MainActivity : BaseActivity() {
         rootFragments.add(PayFragment())
         rootFragments.add(MerchantsFragment())
 
-        controller = FragNavController(supportFragmentManager, R.id.mainContainer)
+        controller = FragNavController(supportFragmentManager, R.id.mainContainerGastroPaySdk)
         controller.rootFragments = rootFragments
 
         controller.fragmentHideStrategy = FragNavController.DETACH_ON_NAVIGATE_HIDE_ON_SWITCH
@@ -79,9 +79,9 @@ internal class MainActivity : BaseActivity() {
                 LogUtils.d("FRAGMENT_INDEX", index)
                 if (index == FragNavController.TAB2) {
                     //TODO hide toolbar & bottom navigation
-                    binding.bottomNavigationView.visibility = View.GONE
+                    binding.bottomNavigationViewGastroPaySdk.visibility = View.GONE
                 } else {
-                    binding.bottomNavigationView.visibility = View.VISIBLE
+                    binding.bottomNavigationViewGastroPaySdk.visibility = View.VISIBLE
                 }
             }
         }

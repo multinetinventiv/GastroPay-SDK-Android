@@ -4,15 +4,15 @@
     <style name="Base.Theme.App.GastroPaySdk" parent="@style/Theme.MaterialComponents.DayNight.NoActionBar">
 
         <item name="android:statusBarColor" tools:ignore="NewApi">
-            ?android:attr/colorBackground
+            ?colorPrimary
         </item>
 
         <item name="android:navigationBarColor" tools:ignore="NewApi">
-            ?android:attr/colorBackground
+            ?colorPrimaryVariant
         </item>
 
         <item name="android:navigationBarDividerColor" tools:ignore="NewApi">
-            ?attr/colorControlHighlight
+            ?attr/colorPrimaryVariant
         </item>
 
         <item name="android:textColor">?attr/colorSecondary</item>
@@ -34,22 +34,18 @@
     </style>
 
     <style name="Base.Theme.GastroPaySdk" parent="Base.Theme.App.GastroPaySdk">
-        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
-        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
         <item name="colorPrimary">@color/celtic_gastropay_sdk</item>
         <item name="colorPrimaryVariant">@color/dark_green_gastropay_sdk</item>
         <item name="colorSecondary">@color/sunglow_gastropay_sdk</item>
         <item name="colorSecondaryVariant">@color/celtic_overlay_gastropay_sdk</item>
         <item name="android:colorBackground">@color/white_gastropay_sdk</item>
         <item name="colorSurface">@color/white_gastropay_sdk</item>
-        <!--
-        <item name="colorError">@color/carmine_gastropay_sdk</item>
+        <item name="colorError">@color/shamrock_gastropay_sdk</item>
         <item name="colorOnPrimary">@color/white_gastropay_sdk</item>
-        <item name="colorOnSecondary">@color/white_gastropay_sdk</item>
-        <item name="colorOnBackground">@color/black_gastropay_sdk</item>
-        <item name="colorOnSurface">@color/black_gastropay_sdk</item>
-        <item name="colorOnError">@color/white_gastropay_sdk</item>
-        <item name="colorControlHighlight">@color/clear_day_gastropay_sdk</item>
-        -->
+        <item name="colorOnSecondary">@color/black_gastropay_sdk</item>
+        <item name="colorOnBackground">@color/dark_green_gastropay_sdk</item>
+        <item name="colorOnSurface">@color/white_gastropay_sdk</item>
+        <item name="colorOnError">@color/shamrock_gastropay_sdk</item>
+        <item name="colorControlHighlight">@color/white_smoke_gastropay_sdk</item>
     </style>
 </resources>

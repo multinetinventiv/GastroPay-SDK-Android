@@ -113,6 +113,13 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
             .build()
     }
 
+    override fun initDynamicViewProperties() {
+        showToolbar(true)
+        getToolbar()?.onRightIconClick {
+            getMainActivity().closeSdk()
+        }
+    }
+
     private fun setupObservers() {
         lifecycleScope.launchWhenStarted {
             viewModel.uiState.collect { uiState ->
