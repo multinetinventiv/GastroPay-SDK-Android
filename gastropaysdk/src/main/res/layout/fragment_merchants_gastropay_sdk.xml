@@ -12,10 +12,10 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        app:drawableEndCompat="@drawable/ic_search_gastropay_sdk"
         android:text="@string/near_me_gastropay_sdk"
         android:textColor="@color/celtic_gastropay_sdk"
         android:textSize="16sp"
+        app:drawableEndCompat="@drawable/ic_search_gastropay_sdk"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

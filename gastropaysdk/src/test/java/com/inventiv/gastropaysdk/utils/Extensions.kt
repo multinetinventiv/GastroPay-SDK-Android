@@ -4,6 +4,10 @@ import com.google.common.truth.Truth
 import com.inventiv.gastropaysdk.data.model.Resource
 
 
+fun <T> Resource<T>.emptyExpected() {
+    Truth.assertThat(this is Resource.Empty)
+}
+
 fun <T> Resource<T>.loadingTrueExpected() {
     Truth.assertThat(this is Resource.Loading)
     val loading = this as Resource.Loading
