@@ -49,18 +49,18 @@ class CommonInfoDialogFragment(
         super.onViewCreated(view, savedInstanceState)
 
         arguments?.apply {
-            getInt(PARAM_IMAGE_RESID).let { binding.imageInfoDialog.setImageResource(it) }
-            getString(PARAM_TITLE)?.let { binding.titleTextView.text = it }
-            getString(PARAM_BUTTON_TEXT).let { binding.materialButton.text = it }
+            getInt(PARAM_IMAGE_RESID).let { binding.imageInfoDialogGastroPaySdk.setImageResource(it) }
+            getString(PARAM_TITLE)?.let { binding.titleTextViewGastroPaySdk.text = it }
+            getString(PARAM_BUTTON_TEXT).let { binding.materialButtonGastroPaySdk.text = it }
             getString(PARAM_DESCRIPTION).let {
                 if (!it.isNullOrEmpty()) {
-                    binding.descTextView.visibility = View.VISIBLE
-                    binding.descTextView.text = it
+                    binding.descTextViewGastroPaySdk.visibility = View.VISIBLE
+                    binding.descTextViewGastroPaySdk.text = it
                 }
             }
         }
-        binding.materialButton.setOnClickListener { buttonClick.invoke(this) }
-        binding.closeButton.setOnClickListener { dismiss() }
+        binding.materialButtonGastroPaySdk.setOnClickListener { buttonClick.invoke(this) }
+        binding.closeButtonGastroPaySdk.setOnClickListener { dismiss() }
     }
 
     override fun onDismiss(dialog: DialogInterface) {

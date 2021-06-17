@@ -40,7 +40,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
                 }
 
                 override fun onLocationSuccess() {
-                    binding.layoutLocationPermission.root.visibility = View.GONE
+                    binding.layoutLocationPermissionGastroPaySdk.root.visibility = View.GONE
                 }
 
                 override fun onLocationFailed() {
@@ -98,19 +98,20 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         merchantAdapter = MerchantAdapter(merchantsList) { merchant ->
             LogUtils.d("Clicked", merchant)
         }
-        binding.merchantsRecyclerView.addItemDecoration(
+        binding.merchantsRecyclerViewGastroPaySdk.addItemDecoration(
             RecyclerMarginDecoration(
                 ConvertUtils.dp2px(
                     16f
                 )
             )
         )
-        binding.merchantsRecyclerView.adapter = merchantAdapter
-        merchantPaginate = Paginate.with(binding.merchantsRecyclerView, paginateWinCallbacks)
-            .setLoadingTriggerThreshold(1)
-            .addLoadingListItem(true)
-            .setLoadingListItemCreator(CustomLoadingListItemCreator())
-            .build()
+        binding.merchantsRecyclerViewGastroPaySdk.adapter = merchantAdapter
+        merchantPaginate =
+            Paginate.with(binding.merchantsRecyclerViewGastroPaySdk, paginateWinCallbacks)
+                .setLoadingTriggerThreshold(1)
+                .addLoadingListItem(true)
+                .setLoadingListItemCreator(CustomLoadingListItemCreator())
+                .build()
     }
 
     override fun initDynamicViewProperties() {
@@ -136,9 +137,9 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
                         }
                         viewModel.currentPage = uiState.data.pageIndex + 1
                         if (uiState.data.merchants.isNullOrEmpty()) {
-                            binding.emptyLayout.visibility = View.VISIBLE
+                            binding.emptyLayoutGastroPaySdk.visibility = View.VISIBLE
                         } else {
-                            binding.emptyLayout.visibility = View.GONE
+                            binding.emptyLayoutGastroPaySdk.visibility = View.GONE
                             merchantsList.addAll(uiState.data.merchants)
                         }
                         merchantAdapter.notifyDataSetChanged()
@@ -154,7 +155,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
     }
 
     private fun setupClickListeners() {
-        binding.layoutLocationPermission.root.setOnClickListener {
+        binding.layoutLocationPermissionGastroPaySdk.root.setOnClickListener {
             locationHelper.requestLocation()
         }
     }

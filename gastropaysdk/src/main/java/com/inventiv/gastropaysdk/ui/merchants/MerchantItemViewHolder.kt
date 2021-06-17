@@ -1,5 +1,7 @@
 package com.inventiv.gastropaysdk.ui.merchants
 
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.inventiv.gastropaysdk.data.model.response.Merchant
@@ -17,10 +19,18 @@ internal class MerchantItemViewHolder(
                 clickedListener.invoke(merchant)
             }
 
-            nameTextView.text = merchant.name
-            distanceTextView.text = binding.root.context.getDistanceAsMeters(merchant.distance)
-            priceTextView.text = merchant.rewardPercentage
-            Glide.with(binding.root.context).load(merchant.showcaseImageUrl).into(mainImageView)
+            nameTextViewGastroPaySdk.text = merchant.name
+            distanceTextViewGastroPaySdk.text =
+                binding.root.context.getDistanceAsMeters(merchant.distance)
+            priceTextViewGastroPaySdk.text = merchant.rewardPercentage
+            Glide.with(binding.root.context).load(merchant.showcaseImageUrl)
+                .into(mainImageViewGastroPaySdk)
+
+            if (merchant.isBonusPoint == true) {
+                imageBonusGastroPaySdk.visibility = VISIBLE
+            } else {
+                imageBonusGastroPaySdk.visibility = GONE
+            }
         }
     }
 }
