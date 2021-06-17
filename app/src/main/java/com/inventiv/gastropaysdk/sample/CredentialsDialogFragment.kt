@@ -57,10 +57,17 @@ class CredentialsDialogFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        insertPreDefinedData()
         buttonStartSdk?.setOnClickListener {
             val obfuscationKey = editTextObfuscationKey?.text.toString()
             val infoModel = InfoModel(environment, obfuscationKey)
             onCredentialsEntered.onCredentialsEntered(infoModel)
+        }
+    }
+
+    fun insertPreDefinedData() {
+        if (BuildConfig.OBFUSCATION_KEY.isNotEmpty()) {
+            editTextObfuscationKey?.setText(BuildConfig.OBFUSCATION_KEY)
         }
     }
 }
