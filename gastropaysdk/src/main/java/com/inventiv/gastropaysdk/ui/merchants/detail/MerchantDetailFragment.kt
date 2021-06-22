@@ -74,6 +74,11 @@ internal class MerchantDetailFragment :
                 when (uiState) {
                     is Resource.Loading -> {
                         LogUtils.d("Loading", uiState.isLoading)
+                        if(uiState.isLoading){
+                            binding.loadingLayout.visibility = View.VISIBLE
+                        }else{
+                            binding.loadingLayout.visibility = View.GONE
+                        }
                     }
                     is Resource.Success -> {
                         LogUtils.d("Success", uiState.data)

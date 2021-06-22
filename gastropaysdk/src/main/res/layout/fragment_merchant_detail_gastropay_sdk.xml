@@ -256,4 +256,23 @@
 
     </androidx.core.widget.NestedScrollView>
 
+
+    <FrameLayout
+        android:id="@+id/loadingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        tools:visibility="gone"
+        android:focusable="true"
+        android:background="@color/celtic_overlay_gastropay_sdk">
+
+        <ProgressBar
+            android:id="@+id/progressBarGastroPaySdk"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_margin="16dp" />
+    </FrameLayout>
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
