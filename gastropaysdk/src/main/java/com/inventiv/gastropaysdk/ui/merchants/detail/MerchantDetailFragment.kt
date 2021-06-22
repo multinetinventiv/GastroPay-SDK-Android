@@ -8,6 +8,7 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.chip.Chip
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
@@ -36,6 +37,7 @@ internal class MerchantDetailFragment :
 
     private val binding by viewBinding(FragmentMerchantDetailGastropaySdkBinding::bind)
     private var merchantId = ""
+    private var toolbarTitle = ""
 
     private val viewModel: MerchantDetailViewModel by lazy {
         val viewModelFactory = MerchantDetailViewModelFactory(
@@ -63,6 +65,7 @@ internal class MerchantDetailFragment :
         binding.toolbar.setNavigationOnClickListener {
             getMainActivity().onBackPressed()
         }
+        binding.appBarLayout.addOnOffsetChangedListener(getOffsetChangedListener())
     }
 
     private fun setupObservers() {
@@ -83,6 +86,7 @@ internal class MerchantDetailFragment :
                                 .load(logoUrl)
                                 .circleCrop()
                                 .into(binding.merchantImageView)
+                            toolbarTitle = name
                             binding.merchantNameTextView.text = name
                             binding.merchantAddressTextView.setAddress(address)
                             binding.merchantPhoneTextView.text =
@@ -144,6 +148,26 @@ internal class MerchantDetailFragment :
             this.visibility = View.VISIBLE
         } else {
             this.visibility = View.GONE
+        }
+    }
+
+    private fun getOffsetChangedListener(): AppBarLayout.OnOffsetChangedListener {
+        return object : AppBarLayout.OnOffsetChangedListener {
+            var isShow: Boolean = false
+            var scrollRange = -1
+
+            override fun onOffsetChanged(appBarLayout: AppBarLayout?, verticalOffset: Int) {
+                if (scrollRange == -1) {
+                    scrollRange = appBarLayout!!.totalScrollRange
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    binding.toolbarTitleTextView.text = toolbarTitle
+                    isShow = true
+                } else if (isShow) {
+                    binding.toolbarTitleTextView.text = ""
+                    isShow = false
+                }
+            }
         }
     }
 }

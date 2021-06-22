@@ -64,6 +64,13 @@
                 app:navigationIcon="@drawable/ic_arrow_back_gastropay_sdk"
                 app:navigationIconTint="@color/white_gastropay_sdk">
 
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/toolbarTitleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
             </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
