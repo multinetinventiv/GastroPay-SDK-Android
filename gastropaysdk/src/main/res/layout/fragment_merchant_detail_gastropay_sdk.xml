@@ -174,6 +174,36 @@
                 tools:orientation="horizontal" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/descTitleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center|start"
+                android:text="@string/description_gastropay_sdk"
+                android:textColor="@color/celtic_gastropay_sdk"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/merchantTagsChipGroup" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/descTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center|start"
+                android:textColor="@color/celtic_gastropay_sdk"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/descTitleTextView"
+                tools:text="@tools:sample/lorem/random" />
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/expensivenessTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -186,7 +216,7 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/merchantTagsChipGroup" />
+                app:layout_constraintTop_toBottomOf="@+id/descTextView" />
 
             <include
                 android:id="@+id/expensivenessLayout"
@@ -211,7 +241,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/black_gastropay_sdk"
                 android:textSize="16sp"
-                app:backgroundTint="@color/selector_navigation_gastropay_sdk"
+                app:backgroundTint="@color/selector_navigation_button_gastropay_sdk"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/expensivenessLayout" />

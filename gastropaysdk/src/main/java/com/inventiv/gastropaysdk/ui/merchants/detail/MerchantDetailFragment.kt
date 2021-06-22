@@ -90,6 +90,14 @@ internal class MerchantDetailFragment :
                             tags.forEach {
                                 addChipToGroup(it.tagName)
                             }
+                            if (note.isNullOrEmpty().not()) {
+                                binding.descTextView.text = note
+                                binding.descTitleTextView.visibility = View.VISIBLE
+                                binding.descTextView.visibility = View.VISIBLE
+                            } else {
+                                binding.descTitleTextView.visibility = View.GONE
+                                binding.descTextView.visibility = View.GONE
+                            }
                             binding.expensivenessLayout.apply {
                                 when {
                                     rate() >= 1 -> {
