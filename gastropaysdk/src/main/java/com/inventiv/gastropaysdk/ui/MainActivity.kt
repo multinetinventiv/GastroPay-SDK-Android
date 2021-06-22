@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseActivity
+import com.inventiv.gastropaysdk.common.BaseFragment
 import com.inventiv.gastropaysdk.databinding.ActivityMainGastropaySdkBinding
 import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
@@ -89,5 +90,17 @@ internal class MainActivity : BaseActivity() {
 
     private fun switchTab(index: Int) {
         controller.switchTab(index)
+    }
+
+    fun pushFragment(framgnet: BaseFragment) {
+        controller.pushFragment(framgnet)
+    }
+
+    override fun onBackPressed() {
+        if (controller.isRootFragment.not()) {
+            controller.popFragment()
+        } else {
+            super.onBackPressed()
+        }
     }
 }

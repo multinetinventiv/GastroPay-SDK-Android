@@ -16,4 +16,10 @@
     <string name="warning_no_restaurant_found_gastropay_sdk">Aradığınız konumda restoran bulunamadı.</string>
     <string name="restaurants_permission_dialog__button_text_gastropay_sdk">AYARLARA GİT</string>
     <!--endregion Merchants-->
+
+    <!--region Merchant Detail-->
+    <string name="earn_gastropay_sdk">KAZAN</string>
+    <string name="value_degree_gastropay_sdk">PAHALILIK DERECESİ</string>
+    <string name="merchant_detail_navigation_button_gastropay_sdk">YOL TARİFİ AL</string>
+    <!--endregion Merchants-->
 </resources>

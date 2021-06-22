@@ -14,6 +14,8 @@ import com.inventiv.gastropaysdk.data.model.response.Merchant
 import com.inventiv.gastropaysdk.databinding.FragmentMerchantsGastropaySdkBinding
 import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
+import com.inventiv.gastropaysdk.ui.MainActivity
+import com.inventiv.gastropaysdk.ui.merchants.detail.MerchantDetailFragment
 import com.inventiv.gastropaysdk.utils.CustomLoadingListItemCreator
 import com.inventiv.gastropaysdk.utils.LocationHelper
 import com.inventiv.gastropaysdk.utils.RecyclerMarginDecoration
@@ -79,8 +81,8 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         ViewModelProvider(this, viewModelFactory).get(MerchantsViewModel::class.java)
     }
 
-    override fun onViewCreated(view: View, bundle: Bundle?) {
-        super.onViewCreated(view, bundle)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setupObservers()
         setupClickListeners()
@@ -97,6 +99,9 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
     private fun setupMerchantAdapter() {
         merchantAdapter = MerchantAdapter(merchantsList) { merchant ->
             LogUtils.d("Clicked", merchant)
+            (requireActivity() as MainActivity).pushFragment(
+                MerchantDetailFragment.newInstance(merchant.merchantId)
+            )
         }
         binding.merchantsRecyclerViewGastroPaySdk.addItemDecoration(
             RecyclerMarginDecoration(
