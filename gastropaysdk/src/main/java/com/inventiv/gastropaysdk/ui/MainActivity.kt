@@ -97,8 +97,8 @@ internal class MainActivity : BaseActivity() {
         controller.switchTab(index)
     }
 
-    fun pushFragment(framgnet: BaseFragment) {
-        controller.pushFragment(framgnet)
+    fun pushFragment(fragment: BaseFragment) {
+        controller.pushFragment(fragment)
     }
 
     override fun onBackPressed() {

@@ -15,7 +15,6 @@ import com.inventiv.gastropaysdk.data.model.response.Merchant
 import com.inventiv.gastropaysdk.databinding.FragmentMerchantsGastropaySdkBinding
 import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
-import com.inventiv.gastropaysdk.ui.MainActivity
 import com.inventiv.gastropaysdk.ui.merchants.detail.MerchantDetailFragment
 import com.inventiv.gastropaysdk.utils.CustomLoadingListItemCreator
 import com.inventiv.gastropaysdk.utils.LocationHelper
@@ -101,7 +100,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
     private fun setupMerchantAdapter() {
         merchantAdapter = MerchantAdapter(merchantsList) { merchant ->
             LogUtils.d("Clicked", merchant)
-            (requireActivity() as MainActivity).pushFragment(
+            getMainActivity().pushFragment(
                 MerchantDetailFragment.newInstance(merchant.merchantId)
             )
         }

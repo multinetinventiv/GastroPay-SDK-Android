@@ -2,6 +2,7 @@ package com.inventiv.gastropaysdk.ui.merchants.detail
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.location.Location
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
@@ -15,11 +16,16 @@ import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
 import com.inventiv.gastropaysdk.data.model.Resource
 import com.inventiv.gastropaysdk.data.model.response.Address
+import com.inventiv.gastropaysdk.data.model.response.Tag
 import com.inventiv.gastropaysdk.databinding.FragmentMerchantDetailGastropaySdkBinding
+import com.inventiv.gastropaysdk.databinding.LayoutExpensivenessGastropaySdkBinding
 import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
+import com.inventiv.gastropaysdk.utils.formatPhoneNumber
+import com.inventiv.gastropaysdk.utils.openGoogleMap
+import com.inventiv.gastropaysdk.utils.openPhoneDialer
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import kotlinx.coroutines.flow.collect
 
@@ -40,6 +46,7 @@ internal class MerchantDetailFragment :
     private val binding by viewBinding(FragmentMerchantDetailGastropaySdkBinding::bind)
     private var merchantId = ""
     private var toolbarTitle = ""
+    private var merchantLocation = Location("")
 
     private val viewModel: MerchantDetailViewModel by lazy {
         val viewModelFactory = MerchantDetailViewModelFactory(
@@ -60,10 +67,18 @@ internal class MerchantDetailFragment :
     }
 
     private fun setListeners() {
-        binding.toolbar.setNavigationOnClickListener {
-            getMainActivity().onBackPressed()
+        binding.apply {
+            toolbar.setNavigationOnClickListener {
+                getMainActivity().onBackPressed()
+            }
+            appBarLayout.addOnOffsetChangedListener(getOffsetChangedListener())
+            navigationButton.setOnClickListener {
+                requireContext().openGoogleMap(
+                    merchantLocation.latitude,
+                    merchantLocation.longitude
+                )
+            }
         }
-        binding.appBarLayout.addOnOffsetChangedListener(getOffsetChangedListener())
     }
 
     private fun setupObservers() {
@@ -90,35 +105,15 @@ internal class MerchantDetailFragment :
                                 .circleCrop()
                                 .into(binding.merchantImageView)
                             toolbarTitle = name
+                            merchantLocation.provider = name
+                            merchantLocation.latitude = latitude
+                            merchantLocation.longitude = longitude
                             binding.merchantNameTextView.text = name
                             binding.merchantAddressTextView.setAddress(address)
-                            binding.merchantPhoneTextView.text =
-                                if (!phoneNumber.isNullOrEmpty()) phoneNumber else gsmNumber
-                            tags.forEach {
-                                addChipToGroup(it.tagName)
-                            }
-                            if (note.isNullOrEmpty().not()) {
-                                binding.descTextView.text = note
-                                binding.descTitleTextView.visibility = View.VISIBLE
-                                binding.descTextView.visibility = View.VISIBLE
-                            } else {
-                                binding.descTitleTextView.visibility = View.GONE
-                                binding.descTextView.visibility = View.GONE
-                            }
-                            binding.expensivenessLayout.apply {
-                                when {
-                                    rate() >= 1 -> {
-                                        expensivenessCheckBox1.isChecked = true
-                                    }
-                                    rate() >= 2 -> {
-                                        expensivenessCheckBox2.isChecked = true
-                                    }
-                                    rate() >= 3 -> {
-                                        expensivenessCheckBox3.isChecked = true
-                                    }
-                                }
-                            }
-
+                            binding.merchantPhoneTextView.setPhoneNumber(phoneNumber, gsmNumber)
+                            tags.setTags()
+                            note.setDescription()
+                            binding.expensivenessLayout.setExpensivenessLayout(rate())
                         }
                     }
                     is Resource.Error -> {
@@ -131,19 +126,6 @@ internal class MerchantDetailFragment :
         }
     }
 
-    private fun addChipToGroup(title: String) {
-        val chip = Chip(context).apply {
-            text = title
-            isChipIconVisible = false
-            isCloseIconVisible = false
-            isClickable = false
-            isCheckable = false
-            setTextColor(Color.BLACK)
-            setChipBackgroundColorResource(R.color.white_smoke_gastropay_sdk)
-        }
-        binding.merchantTagsChipGroup.addView(chip as View)
-    }
-
     @SuppressLint("SetTextI18n")
     private fun AppCompatTextView.setAddress(address: Address?) {
         if (address?.city != null && address.neighbourhood != null) {
@@ -151,6 +133,72 @@ internal class MerchantDetailFragment :
             this.visibility = View.VISIBLE
         } else {
             this.visibility = View.GONE
+        }
+    }
+
+    private fun AppCompatTextView.setPhoneNumber(phoneNumber: String?, gsmNumber: String?) {
+        var number = ""
+        if (!phoneNumber.isNullOrEmpty()) {
+            this.visibility = View.VISIBLE
+            number = "0$phoneNumber"
+            this.text = phoneNumber.formatPhoneNumber()
+        } else if (!gsmNumber.isNullOrEmpty()) {
+            this.visibility = View.VISIBLE
+            number = "0$gsmNumber"
+            this.text = gsmNumber.formatPhoneNumber()
+        } else {
+            this.visibility = View.GONE
+        }
+
+        binding.phoneNumberLinearLayout.setOnClickListener {
+            requireContext().openPhoneDialer(number)
+        }
+    }
+
+    private fun List<Tag>.setTags() {
+        if (this.isEmpty()) {
+            binding.merchantTagsChipGroup.visibility = View.GONE
+        } else {
+            binding.merchantTagsChipGroup.visibility = View.VISIBLE
+            this.forEach {
+                val chip = Chip(context).apply {
+                    text = it.tagName
+                    isChipIconVisible = false
+                    isCloseIconVisible = false
+                    isClickable = false
+                    isCheckable = false
+                    setTextColor(Color.BLACK)
+                    setChipBackgroundColorResource(R.color.white_smoke_gastropay_sdk)
+                }
+                binding.merchantTagsChipGroup.addView(chip as View)
+            }
+        }
+    }
+
+    private fun String?.setDescription() {
+        if (this.isNullOrEmpty().not()) {
+            binding.descTextView.text = this
+            binding.descTitleTextView.visibility = View.VISIBLE
+            binding.descTextView.visibility = View.VISIBLE
+        } else {
+            binding.descTitleTextView.visibility = View.GONE
+            binding.descTextView.visibility = View.GONE
+        }
+    }
+
+    private fun LayoutExpensivenessGastropaySdkBinding.setExpensivenessLayout(rate: Int) {
+        this.apply {
+            when {
+                rate >= 1 -> {
+                    expensivenessCheckBox1.isChecked = true
+                }
+                rate >= 2 -> {
+                    expensivenessCheckBox2.isChecked = true
+                }
+                rate >= 3 -> {
+                    expensivenessCheckBox3.isChecked = true
+                }
+            }
         }
     }
 
