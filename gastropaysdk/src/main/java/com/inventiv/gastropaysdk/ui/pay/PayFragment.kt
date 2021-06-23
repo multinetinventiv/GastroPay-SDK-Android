@@ -1,18 +1,18 @@
-package com.inventiv.gastropaysdk.ui.home
+package com.inventiv.gastropaysdk.ui.pay
 
 import android.os.Bundle
 import android.view.View
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
-import com.inventiv.gastropaysdk.databinding.FragmentHomeGastropaySdkBinding
+import com.inventiv.gastropaysdk.databinding.FragmentPayGastropaySdkBinding
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.constant.PermissionConstants
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.PermissionUtils
-import com.inventiv.gastropaysdk.utils.viewBinding
+import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 
-internal class HomeFragment : BaseFragment(R.layout.fragment_home_gastropay_sdk) {
+internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
 
-    private val binding by viewBinding(FragmentHomeGastropaySdkBinding::bind)
+    private val binding by viewBinding(FragmentPayGastropaySdkBinding::bind)
 
     override fun onViewCreated(view: View, bundle: Bundle?) {
         super.onViewCreated(view, bundle)
@@ -30,5 +30,9 @@ internal class HomeFragment : BaseFragment(R.layout.fragment_home_gastropay_sdk)
                     LogUtils.d("onDenied")
                 }
             }).request()
+    }
+
+    override fun initDynamicViewProperties() {
+        hideToolbar()
     }
 }

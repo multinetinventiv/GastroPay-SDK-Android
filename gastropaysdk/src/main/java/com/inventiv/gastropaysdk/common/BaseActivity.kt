@@ -18,4 +18,9 @@ internal abstract class BaseActivity : AppCompatActivity() {
             )
         }
     }
+
+    fun closeSdk() {
+        GastroPaySdk.getComponent().globalGastroPaySdkListener?.onSDKClosed()
+        finish()
+    }
 }

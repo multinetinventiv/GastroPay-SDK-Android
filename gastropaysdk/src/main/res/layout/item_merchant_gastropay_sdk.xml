@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="343:193"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/mainImageViewGastroPaySdk"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@drawable/debug_merchant_photo" />
+
+            <View
+                android:id="@+id/dimViewGastroPaySdk"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_merchant_item_dim_gastropay_sdk" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/nameTextViewGastroPaySdk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="4dp"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="5"
+                android:singleLine="true"
+                android:textColor="@android:color/white"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toTopOf="@+id/distanceTextViewGastroPaySdk"
+                app:layout_constraintEnd_toStartOf="@+id/imageBonusGastroPaySdk"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Starbucks" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/distanceTextViewGastroPaySdk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="1"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:singleLine="true"
+                android:textColor="@color/shamrock_gastropay_sdk"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageBonusGastroPaySdk"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Harcama Noktası" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageBonusGastroPaySdk"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_price_gastropay_sdk" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/priceTextViewGastroPaySdk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/celtic_gastropay_sdk"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imageBonusGastroPaySdk"
+                app:layout_constraintEnd_toEndOf="@+id/imageBonusGastroPaySdk"
+                app:layout_constraintStart_toStartOf="@+id/imageBonusGastroPaySdk"
+                app:layout_constraintTop_toTopOf="@+id/imageBonusGastroPaySdk"
+                tools:text="%10" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--region BlankjUtils-->
-    <style name="ActivityTranslucent" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="GastropaySdk.ActivityTranslucent" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:colorBackgroundCacheHint">@null</item>
         <item name="android:windowActionBar">false</item>
@@ -14,4 +14,5 @@
         <item name="android:windowDisablePreview">true</item>
     </style>
     <!--endregion BlankjUtils-->
+
 </resources>

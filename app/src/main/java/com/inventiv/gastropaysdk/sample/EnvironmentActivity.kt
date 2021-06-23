@@ -7,7 +7,9 @@ import com.google.android.material.textview.MaterialTextView
 import com.google.gson.Gson
 import com.inventiv.gastropaysdk.shared.Environment
 
-class EnvironmentActivity : AppCompatActivity() {
+class EnvironmentActivity : AppCompatActivity(), OnCredentialsEntered {
+
+    var selectedEnvironment: Environment? = null
 
     private val buttonDev: MaterialButton by lazy {
         findViewById(R.id.devEnvButton)
@@ -31,33 +33,48 @@ class EnvironmentActivity : AppCompatActivity() {
 
         textViewVersion.text = getVersionText()
         buttonDev.setOnClickListener {
-            saveAndGo(Environment.DEV)
+            selectedEnvironment = Environment.DEV
+            openCredentialDialog()
         }
         buttonPilot.setOnClickListener {
-            saveAndGo(Environment.PILOT)
+            selectedEnvironment = Environment.PILOT
+            openCredentialDialog()
         }
         buttonTest.setOnClickListener {
-            saveAndGo(Environment.TEST)
+            selectedEnvironment = Environment.TEST
+            openCredentialDialog()
         }
         buttonProduction.setOnClickListener {
-            saveAndGo(Environment.PRODUCTION)
+            selectedEnvironment = Environment.PRODUCTION
+            openCredentialDialog()
         }
 
         val sharedPref = getSharedPref()
         val strInfos = sharedPref.getString(PREF_INFOS, String())
         if (!strInfos.isNullOrEmpty()) {
             val info = Gson().fromJson(strInfos, InfoModel::class.java)
-            saveAndGo(info.environment)
+            saveAndGo(info)
         }
     }
 
-    private fun saveAndGo(environment: Environment) {
-        val infoModel = InfoModel(environment)
+    private fun openCredentialDialog() {
+        CredentialsDialogFragment.newInstance(selectedEnvironment!!).show(
+            supportFragmentManager,
+            CredentialsDialogFragment::class.java.simpleName
+        )
+    }
+
+    private fun saveAndGo(infoModel: InfoModel) {
+//        val infoModel = InfoModel(environment ?: selectedEnvironment!!)
         val info = Gson().toJson(infoModel)
         getSharedPref().edit().putString(PREF_INFOS, info).apply()
 
 
         startActivity(SdkStartActivity.newIntent(this, infoModel))
         finish()
+    }
+
+    override fun onCredentialsEntered(infoModel: InfoModel) {
+        saveAndGo(infoModel)
     }
 }

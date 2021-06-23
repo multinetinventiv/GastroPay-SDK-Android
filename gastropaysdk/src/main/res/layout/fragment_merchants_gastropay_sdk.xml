@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewNearMeGastroPaySdk"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/near_me_gastropay_sdk"
+        android:textColor="@color/celtic_gastropay_sdk"
+        android:textSize="16sp"
+        app:drawableEndCompat="@drawable/ic_search_gastropay_sdk"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/merchantsRecyclerViewGastroPaySdk"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNearMeGastroPaySdk"
+        tools:listitem="@layout/item_merchant_gastropay_sdk" />
+
+    <include
+        android:id="@+id/layoutLocationPermissionGastroPaySdk"
+        layout="@layout/layout_location_gastropay_sdk"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNearMeGastroPaySdk" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/emptyLayoutGastroPaySdk"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/warning_no_restaurant_found_gastropay_sdk"
+        android:textColor="#000000"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/merchantsRecyclerViewGastroPaySdk"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

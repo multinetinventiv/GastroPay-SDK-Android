@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="security_exception_message" translatable="false">Exception occurred on decryption process. Such issues can arise if bad salt key is used during decryption</string>
     <string name="digit_number_gastropay_sdk" translatable="false">0123456789</string>
     <string name="digit_number_with_space_gastropay_sdk" translatable="false">0123456789\u0020</string>
     <string name="digit_phone_number_gastropay_sdk" translatable="false">0123456789()\u0020</string>

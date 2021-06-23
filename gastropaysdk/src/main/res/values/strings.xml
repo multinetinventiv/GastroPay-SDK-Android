@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="test">TR</string>
+
+    <string name="bottom_nav_merchants_gastropay_sdk">Restoranlar</string>
+    <string name="bottom_nav_pay_gastropay_sdk">Ödeme Yap</string>
+    <string name="bottom_nav_wallet_gastropay_sdk">Cüzdan</string>
+
+
+    <!--region Merchants-->
+    <string name="near_me_gastropay_sdk">Yakınımdakiler</string>
+    <string name="merchant_distance_label_km_gastropay_sdk">%1$s km yakınında</string>
+    <string name="merchant_distance_label_mt_gastropay_sdk">%1$s m yakınında</string>
+    <string name="warning_location_permission_title_gastropay_sdk">Lokasyon izni gerekli</string>
+    <string name="warning_location_permission_description_gastropay_sdk">Yakınınızdaki Gastro restoranları görebilmeniz için lütfen lokasyon iznini kabul edin.</string>
+    <string name="warning_no_restaurant_found_gastropay_sdk">Aradığınız konumda restoran bulunamadı.</string>
+    <string name="restaurants_permission_dialog__button_text_gastropay_sdk">AYARLARA GİT</string>
+    <!--endregion Merchants-->
 </resources>

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <dimen name="padding_normal_gastropay_sdk">16dp</dimen>
+    <dimen name="padding_large_gastropay_sdk">24dp</dimen>
+
     <dimen name="button_height_gastropay_sdk">48dp</dimen>
     <dimen name="elevation_toolbar_gastropay_sdk">2dp</dimen>
+
+    <dimen name="toolbar_action_button_size_gastropay_sdk">48dp</dimen>
+    <dimen name="toolbar_logo_size_gastropay_sdk">72dp</dimen>
 
     <dimen name="text_appearance_size_body_1_gastropay_sdk">14sp</dimen>
     <dimen name="text_appearance_size_body_2_gastropay_sdk">12sp</dimen>

@@ -6,6 +6,7 @@ plugins {
 
 apply {
     from("$rootDir/versions.gradle")
+    from("$rootDir/variables.gradle")
 }
 
 android {
@@ -17,8 +18,11 @@ android {
         targetSdkVersion versions.sdkVersion
         versionCode versions.versionCode
         versionName maven.PUBLISH_VERSION
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "OBFUSCATION_KEY", "\"${credentials_obfuscationKey}\""
     }
 
     buildTypes {
@@ -37,6 +41,7 @@ dependencies {
     androidTestImplementation(androidTest.espressoCore)
     //
 
+    implementation(deps.multidex)
     implementation(deps.coreKtx)
     implementation(deps.appCompat)
     implementation(deps.material)

@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 
 apply {
@@ -60,6 +61,7 @@ dependencies {
     implementation(deps.appCompat)
     implementation(deps.material)
     implementation(deps.constraint)
+    implementation(deps.location)
     implementation(deps.coroutinesCore)
     implementation(deps.coroutinesAndroid)
     implementation(deps.lifecycleViewModel)
@@ -67,13 +69,15 @@ dependencies {
     implementation(deps.lifecycleRuntime)
     implementation(deps.retrofit)
     implementation(deps.retrofitConverter)
-    implementation(deps.okhttp)
+    implementation(deps.okhttp) {
+        force = true //API 19 support
+    }
     implementation(deps.okhttpInterceptor)
-    implementation(deps.okhttpUrlConnection)
 
     implementation(deps.glide)
     kapt(deps.glideKapt)
 
     implementation(deps.zxing)
     implementation(deps.fragnav)
+    implementation(deps.paginate)
 }

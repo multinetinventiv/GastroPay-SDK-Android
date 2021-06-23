@@ -1,4 +1,4 @@
-package com.inventiv.gastropaysdk.utils
+package com.inventiv.gastropaysdk.utils.delegate
 
 import android.view.View
 import androidx.fragment.app.Fragment

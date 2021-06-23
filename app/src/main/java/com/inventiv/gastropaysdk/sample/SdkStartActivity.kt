@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
@@ -16,7 +17,6 @@ class SdkStartActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_INFOS = "extra_infos"
-        const val TAG = "MultinetWalletActivity"
 
         fun newIntent(context: Context, infos: InfoModel) =
             Intent(context, SdkStartActivity::class.java).apply {
@@ -48,10 +48,12 @@ class SdkStartActivity : AppCompatActivity() {
         textViewVersion.text = getVersionText()
         try {
             GastroPaySdk.init(
-                application,
-                infoModel.environment,
-                Language.TR,
-                object : GastroPaySdkListener {
+                application = application,
+                environment = infoModel.environment,
+                obfuscationKey = infoModel.obfuscationKey,
+                language = Language.TR,
+                logging = true,
+                listener = object : GastroPaySdkListener {
                     override fun onInitialized(isInitialized: Boolean) {
                         super.onInitialized(isInitialized)
                         Log.d("isInitialized", isInitialized.toString())
@@ -59,16 +61,26 @@ class SdkStartActivity : AppCompatActivity() {
                 })
         } catch (e: GastroPaySdkException) {
             // Sdk couldn't be loaded successfully, check private key if its correct
+            Toast.makeText(
+                this@SdkStartActivity,
+                "GastroPaySdkError : ${e.message}",
+                Toast.LENGTH_LONG
+            ).show()
+            removeInfoAndReturn()
         }
 
         removeInfosButton.setOnClickListener {
-            getSharedPref().edit().clear().apply()
-            startActivity(Intent(this, EnvironmentActivity::class.java))
-            finish()
+            removeInfoAndReturn()
         }
 
         startSdkButton.setOnClickListener {
-            // GastroPaySdk.start
+            GastroPaySdk.start(this)
         }
+    }
+
+    private fun removeInfoAndReturn() {
+        getSharedPref().edit().clear().apply()
+        startActivity(Intent(this, EnvironmentActivity::class.java))
+        finish()
     }
 }
