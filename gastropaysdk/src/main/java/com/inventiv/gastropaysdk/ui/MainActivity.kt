@@ -1,7 +1,8 @@
 package com.inventiv.gastropaysdk.ui
 
 import android.os.Bundle
-import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.inventiv.gastropaysdk.R
@@ -12,7 +13,6 @@ import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.merchants.MerchantsFragment
 import com.inventiv.gastropaysdk.ui.pay.PayFragment
-import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.ncapdevi.fragnav.FragNavController
 import java.util.*
@@ -66,25 +66,30 @@ internal class MainActivity : BaseActivity() {
         controller.rootFragments = rootFragments
 
         controller.fragmentHideStrategy = FragNavController.DETACH_ON_NAVIGATE_HIDE_ON_SWITCH
-        controller.initialize(FragNavController.TAB1, savedInstanceState)
-
         controller.transactionListener = object : FragNavController.TransactionListener {
             override fun onFragmentTransaction(
                 fragment: Fragment?,
                 transactionType: FragNavController.TransactionType
             ) {
-
+                prepareCommonViews(fragment)
             }
 
             override fun onTabTransaction(fragment: Fragment?, index: Int) {
-                LogUtils.d("FRAGMENT_INDEX", index)
-                if (index == FragNavController.TAB2) {
-                    //TODO hide toolbar & bottom navigation
-                    binding.bottomNavigationViewGastroPaySdk.visibility = View.GONE
-                } else {
-                    binding.bottomNavigationViewGastroPaySdk.visibility = View.VISIBLE
-                }
+                prepareCommonViews(fragment)
             }
+        }
+        controller.initialize(FragNavController.TAB1, savedInstanceState)
+    }
+
+    private fun prepareCommonViews(fragment: Fragment?) {
+        if (fragment != null && fragment is BaseFragment) {
+            fragment.prepareToolbar(binding.toolbarGastroPaySdk, binding.imageMainLogoGastroPaySdk)
+            binding.bottomNavigationViewGastroPaySdk.visibility =
+                if (fragment.showBottomNavigation()) {
+                    VISIBLE
+                } else {
+                    GONE
+                }
         }
     }
 

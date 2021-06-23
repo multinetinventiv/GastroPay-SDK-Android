@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +20,7 @@ import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
+import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import kotlinx.coroutines.flow.collect
 
 internal class MerchantDetailFragment :
@@ -57,10 +59,6 @@ internal class MerchantDetailFragment :
         viewModel.getMerchantDetail(merchantId)
     }
 
-    override fun initDynamicViewProperties() {
-        hideToolbar()
-    }
-
     private fun setListeners() {
         binding.toolbar.setNavigationOnClickListener {
             getMainActivity().onBackPressed()
@@ -74,9 +72,9 @@ internal class MerchantDetailFragment :
                 when (uiState) {
                     is Resource.Loading -> {
                         LogUtils.d("Loading", uiState.isLoading)
-                        if(uiState.isLoading){
+                        if (uiState.isLoading) {
                             binding.loadingLayout.visibility = View.VISIBLE
-                        }else{
+                        } else {
                             binding.loadingLayout.visibility = View.GONE
                         }
                     }
@@ -175,4 +173,10 @@ internal class MerchantDetailFragment :
             }
         }
     }
+
+    override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
+        hideToolbar(toolbar, logo)
+    }
+
+    override fun showBottomNavigation() = false
 }

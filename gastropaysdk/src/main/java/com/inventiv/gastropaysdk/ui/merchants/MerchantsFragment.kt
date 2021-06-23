@@ -5,6 +5,7 @@ import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.inventiv.gastropaysdk.R
@@ -23,6 +24,7 @@ import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.ConvertUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.PermissionUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
+import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import com.paginate.Paginate
 import kotlinx.coroutines.flow.collect
 
@@ -119,12 +121,14 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
                 .build()
     }
 
-    override fun initDynamicViewProperties() {
-        showToolbar(true)
-        getToolbar()?.onRightIconClick {
+    override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
+        showToolbar(true, toolbar, logo)
+        toolbar.onRightIconClick {
             getMainActivity().closeSdk()
         }
     }
+
+    override fun showBottomNavigation() = true
 
     private fun setupObservers() {
         lifecycleScope.launchWhenStarted {
