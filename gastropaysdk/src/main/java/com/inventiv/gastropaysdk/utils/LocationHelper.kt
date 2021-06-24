@@ -76,9 +76,9 @@ class LocationHelper @JvmOverloads constructor(
                 } else if (deniedForever.isNotEmpty()) {
                     CommonInfoDialogFragment.newInstance(
                         R.drawable.ic_location_not_found_gastropay_sdk,
-                        StringUtils.getString(R.string.warning_location_permission_title_gastropay_sdk),
-                        StringUtils.getString(R.string.warning_location_permission_description_gastropay_sdk),
-                        StringUtils.getString(R.string.restaurants_permission_dialog__button_text_gastropay_sdk),
+                        StringUtils.getString(R.string.merchants_warning_location_permission_title_gastropay_sdk),
+                        StringUtils.getString(R.string.merchants_warning_location_permission_description_gastropay_sdk),
+                        StringUtils.getString(R.string.merchants_restaurants_permission_dialog_button_text_gastropay_sdk),
                         {
                         }
                     ) {

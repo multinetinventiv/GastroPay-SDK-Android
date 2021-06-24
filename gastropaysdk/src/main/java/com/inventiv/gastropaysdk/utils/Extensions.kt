@@ -12,11 +12,14 @@ internal fun Context.getDistanceAsMeters(distance: Int): String {
     return if (distanceDoubleValue > METER_THRESHOLD) {
         distanceDoubleValue /= METER_TO_KM_CONVERTER
         resources.getString(
-            R.string.merchant_distance_label_km_gastropay_sdk,
+            R.string.merchants_merchant_distance_label_km_gastropay_sdk,
             String.format("%.2f", distanceDoubleValue)
         )
     } else {
-        resources.getString(R.string.merchant_distance_label_mt_gastropay_sdk, distance.toString())
+        resources.getString(
+            R.string.merchants_merchant_distance_label_mt_gastropay_sdk,
+            distance.toString()
+        )
     }
 }
 

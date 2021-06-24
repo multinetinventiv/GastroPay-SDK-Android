@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="@string/earn_gastropay_sdk"
+                    android:text="@string/merchant_detail_earn_gastropay_sdk"
                     android:textAppearance="@style/TextAppearance.GastroPaySdk.Subtitle1"
                     android:textColor="@color/white_gastropay_sdk" />
             </LinearLayout>
@@ -188,7 +188,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="center|start"
-                android:text="@string/description_gastropay_sdk"
+                android:text="@string/merchant_detail_description_gastropay_sdk"
                 android:textColor="@color/celtic_gastropay_sdk"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -218,7 +218,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:gravity="center|start"
-                android:text="@string/value_degree_gastropay_sdk"
+                android:text="@string/merchant_detail_value_degree_gastropay_sdk"
                 android:textColor="@color/celtic_gastropay_sdk"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
