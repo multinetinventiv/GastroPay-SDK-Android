@@ -24,6 +24,7 @@ import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.formatPhoneNumber
+import com.inventiv.gastropaysdk.utils.markdownText
 import com.inventiv.gastropaysdk.utils.openGoogleMap
 import com.inventiv.gastropaysdk.utils.openPhoneDialer
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
@@ -177,7 +178,7 @@ internal class MerchantDetailFragment :
 
     private fun String?.setDescription() {
         if (this.isNullOrEmpty().not()) {
-            binding.descTextView.text = this
+            binding.descTextView.markdownText(this!!)
             binding.descTitleTextView.visibility = View.VISIBLE
             binding.descTextView.visibility = View.VISIBLE
         } else {

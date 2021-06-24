@@ -4,7 +4,13 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.util.Log
+import android.view.View
+import android.widget.TextView
 import com.inventiv.gastropaysdk.R
 
 internal fun Context.getDistanceAsMeters(distance: Int): String {
@@ -41,4 +47,34 @@ fun Context.openGoogleMap(latitude: Double, longitude: Double) {
     val uri = Uri.parse("http://maps.google.com/maps?daddr=${latitude},${longitude}")
     val intent = Intent(Intent.ACTION_VIEW, uri)
     startActivity(intent)
+}
+
+fun TextView.markdownText(
+    content: String
+) {
+    val spannable = SpannableStringBuilder()
+    var startIndex = 0
+    val matches = MARKDOWN_LINK_REGEX.toRegex().findAll(content)
+    for (match in matches) {
+        spannable.append(content.substring(startIndex, match.range.first))
+        val firstIndexBeforeLink = spannable.length
+        spannable.append(match.groupValues[1])
+        val link = match.groupValues[2]
+        val lastIndex = firstIndexBeforeLink + match.groupValues[1].length
+        spannable.setSpan(
+            object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+                    context.startActivity(browserIntent)
+                }
+            },
+            firstIndexBeforeLink,
+            lastIndex,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        startIndex = match.range.last + 1
+    }
+    spannable.append(content.substring(startIndex))
+    text = spannable
+    movementMethod = LinkMovementMethod.getInstance()
 }
