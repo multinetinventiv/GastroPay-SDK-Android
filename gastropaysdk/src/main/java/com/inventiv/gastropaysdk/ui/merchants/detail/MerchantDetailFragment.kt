@@ -106,7 +106,6 @@ internal class MerchantDetailFragment :
                                 .circleCrop()
                                 .into(binding.merchantImageView)
                             toolbarTitle = name
-                            merchantLocation.provider = name
                             merchantLocation.latitude = latitude
                             merchantLocation.longitude = longitude
                             binding.merchantNameTextView.text = name

@@ -43,7 +43,6 @@
         android:id="@+id/imageMainLogoGastroPaySdk"
         android:layout_width="@dimen/toolbar_logo_size_gastropay_sdk"
         android:layout_height="@dimen/toolbar_logo_size_gastropay_sdk"
-        android:layout_centerHorizontal="true"
         android:background="@drawable/shape_bg_logo_gastropay_sdk"
         android:padding="8dp"
         android:scaleType="fitCenter"
