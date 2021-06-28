@@ -103,7 +103,6 @@ internal class MerchantDetailFragment :
                                 .into(binding.merchantDetailImageView)
                             Glide.with(this@MerchantDetailFragment)
                                 .load(logoUrl)
-                                .circleCrop()
                                 .into(binding.merchantImageView)
                             toolbarTitle = name
                             merchantLocation.latitude = latitude

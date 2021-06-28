@@ -90,7 +90,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/merchantImageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -99,6 +99,7 @@
                 android:scaleType="fitCenter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/ShapeAppearance.App.CircleImageView"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -107,6 +108,7 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
                 android:ellipsize="end"
                 android:gravity="center|start"
                 android:textColor="@color/celtic_gastropay_sdk"
@@ -126,6 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:textAppearance="@style/TextAppearance.GastroPaySdk.Body1"
                 android:textColor="@color/celtic_gastropay_sdk"
                 android:textStyle="bold"
@@ -157,6 +160,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginEnd="16dp"
                     android:gravity="center|start"
                     android:textAppearance="@style/TextAppearance.GastroPaySdk.Body1"
                     android:textColor="@color/celtic_gastropay_sdk"

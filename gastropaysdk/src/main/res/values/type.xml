@@ -42,7 +42,7 @@
     </style>
 
     <style name="TextAppearance.GastroPaySdk.Button" parent="TextAppearance.MaterialComponents.Button">
-        <item name="android:textStyle">bold</item>
+        <!--Your custom type style here-->
     </style>
 
     <style name="TextAppearance.GastroPaySdk.Caption" parent="TextAppearance.MaterialComponents.Caption">
