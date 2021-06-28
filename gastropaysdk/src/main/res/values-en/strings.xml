@@ -18,6 +18,7 @@
 
     <!--region Merchant Detail-->
     <string name="merchant_detail_earn_gastropay_sdk">KAZAN</string>
+    <string name="merchant_detail_spend_gastropay_sdk">HARCA</string>
     <string name="merchant_detail_value_degree_gastropay_sdk">PAHALILIK DERECESİ</string>
     <string name="merchant_detail_description_gastropay_sdk">AÇIKLAMA</string>
     <string name="merchant_detail_navigation_button_gastropay_sdk">YOL TARİFİ AL</string>

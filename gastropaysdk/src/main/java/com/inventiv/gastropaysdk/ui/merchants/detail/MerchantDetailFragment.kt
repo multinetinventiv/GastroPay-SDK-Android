@@ -110,6 +110,7 @@ internal class MerchantDetailFragment :
                             merchantLocation.latitude = latitude
                             merchantLocation.longitude = longitude
                             binding.merchantNameTextView.text = name
+                            binding.earnOrSpendTextView.setEarnOrSpend(isBonusPoint)
                             binding.merchantAddressTextView.setAddress(address)
                             binding.merchantPhoneTextView.setPhoneNumber(phoneNumber, gsmNumber)
                             tags.setTags()
@@ -124,6 +125,14 @@ internal class MerchantDetailFragment :
                     }
                 }
             }
+        }
+    }
+
+    private fun AppCompatTextView.setEarnOrSpend(isBonusPoint: Boolean) {
+        if (isBonusPoint) {
+            this.text = getString(R.string.merchant_detail_earn_gastropay_sdk)
+        } else {
+            this.text = getString(R.string.merchant_detail_spend_gastropay_sdk)
         }
     }
 
@@ -177,13 +186,13 @@ internal class MerchantDetailFragment :
     }
 
     private fun String?.setDescription() {
-        if (this.isNullOrEmpty().not()) {
-            binding.descTextView.markdownText(this!!)
-            binding.descTitleTextView.visibility = View.VISIBLE
-            binding.descTextView.visibility = View.VISIBLE
-        } else {
+        if (this.isNullOrEmpty()) {
             binding.descTitleTextView.visibility = View.GONE
             binding.descTextView.visibility = View.GONE
+        } else {
+            binding.descTextView.markdownText(this)
+            binding.descTitleTextView.visibility = View.VISIBLE
+            binding.descTextView.visibility = View.VISIBLE
         }
     }
 

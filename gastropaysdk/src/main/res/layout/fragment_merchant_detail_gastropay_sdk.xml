@@ -47,12 +47,13 @@
                     app:srcCompat="@drawable/ic_point_gastropay_sdk" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/earnOrSpendTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="@string/merchant_detail_earn_gastropay_sdk"
                     android:textAppearance="@style/TextAppearance.GastroPaySdk.Subtitle1"
-                    android:textColor="@color/white_gastropay_sdk" />
+                    android:textColor="@color/white_gastropay_sdk"
+                    tools:text="@string/merchant_detail_earn_gastropay_sdk" />
             </LinearLayout>
 
             <com.google.android.material.appbar.MaterialToolbar
