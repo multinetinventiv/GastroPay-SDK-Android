@@ -1,5 +1,6 @@
 package com.inventiv.gastropaysdk.utils
 
+import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
@@ -78,3 +79,5 @@ fun TextView.markdownText(
     text = spannable
     movementMethod = LinkMovementMethod.getInstance()
 }
+
+fun Context.isValidGlideContext() = this !is Activity || (!this.isDestroyed && !this.isFinishing)

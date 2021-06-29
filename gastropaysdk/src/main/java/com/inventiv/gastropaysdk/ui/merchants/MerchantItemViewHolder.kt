@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.inventiv.gastropaysdk.data.model.response.Merchant
 import com.inventiv.gastropaysdk.databinding.ItemMerchantGastropaySdkBinding
 import com.inventiv.gastropaysdk.utils.getDistanceAsMeters
+import com.inventiv.gastropaysdk.utils.isValidGlideContext
 
 internal class MerchantItemViewHolder(
     val binding: ItemMerchantGastropaySdkBinding,
@@ -23,13 +24,16 @@ internal class MerchantItemViewHolder(
             distanceTextViewGastroPaySdk.text =
                 binding.root.context.getDistanceAsMeters(merchant.distance)
             priceTextViewGastroPaySdk.text = merchant.rewardPercentage
-            Glide.with(binding.root.context).load(merchant.showcaseImageUrl)
-                .into(mainImageViewGastroPaySdk)
-
-            if (merchant.isBonusPoint == true) {
-                imageBonusGastroPaySdk.visibility = VISIBLE
-            } else {
-                imageBonusGastroPaySdk.visibility = GONE
+            if (binding.root.context.isValidGlideContext()) {
+                Glide.with(binding.root.context).load(merchant.showcaseImageUrl)
+                    .into(mainImageViewGastroPaySdk)
+            }
+            imageBonusGastroPaySdk.visibility.apply {
+                if (merchant.isBonusPoint == true) {
+                    VISIBLE
+                } else {
+                    GONE
+                }
             }
         }
     }

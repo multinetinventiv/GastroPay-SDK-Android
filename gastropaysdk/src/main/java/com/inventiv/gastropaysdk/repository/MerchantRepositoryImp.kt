@@ -19,16 +19,23 @@ internal class MerchantRepositoryImp(private val gastroPayService: GastroPayServ
         page: Int
     ): Flow<Resource<MerchantPaging>> {
 
-        return safeFlow {
-            gastroPayService.merchantsInfo(
-                latitude,
-                longitude,
-                tags,
-                false,
-                merchantName,
-                page
-            )
-        }
+        return safeFlow(
+            suspendFun = {
+                gastroPayService.merchantsInfo(
+                    latitude,
+                    longitude,
+                    tags,
+                    false,
+                    merchantName,
+                    page
+                )
+            }, modifyFun = { resource ->
+                if (resource is Resource.Success) {
+                    resource.data.pageIndex = page
+                }
+                return@safeFlow resource
+            }
+        )
     }
 
     override fun getMerchantDetail(

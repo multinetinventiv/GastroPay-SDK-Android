@@ -87,7 +87,6 @@ internal class MerchantDetailFragment :
             viewModel.uiState.collect { uiState ->
                 when (uiState) {
                     is Resource.Loading -> {
-                        LogUtils.d("Loading", uiState.isLoading)
                         if (uiState.isLoading) {
                             binding.loadingLayout.visibility = View.VISIBLE
                         } else {
@@ -95,8 +94,6 @@ internal class MerchantDetailFragment :
                         }
                     }
                     is Resource.Success -> {
-                        LogUtils.d("Success", uiState.data)
-
                         uiState.data.apply {
                             Glide.with(this@MerchantDetailFragment)
                                 .load(showcaseImageUrl)
@@ -117,7 +114,7 @@ internal class MerchantDetailFragment :
                         }
                     }
                     is Resource.Error -> {
-                        LogUtils.d("Error", uiState.apiError)
+                        LogUtils.e("Error", uiState.apiError)
                     }
                     else -> {
                     }
