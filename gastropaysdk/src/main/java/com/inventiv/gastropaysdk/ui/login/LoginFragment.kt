@@ -89,7 +89,7 @@ internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sd
                     }
                     is Resource.Error -> {
                         LogUtils.e("Error", uiState.apiError)
-                        uiState.apiError.errorBody?.handleError(requireActivity())
+                        uiState.apiError.body?.handleError(requireActivity())
                     }
                     else -> {
                     }

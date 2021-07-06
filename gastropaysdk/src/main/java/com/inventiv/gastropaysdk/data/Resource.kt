@@ -7,7 +7,7 @@ import java.net.SocketException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-data class ApiError(var code: Int, var message: String, var errorBody: ResponseBody? = null)
+data class ApiError(var code: Int, var message: String, var body: ResponseBody? = null)
 
 sealed class Resource<out T> {
     class Success<T>(val data: T) : Resource<T>()
@@ -28,7 +28,7 @@ fun <T> safeFlow(
             val apiError = ApiError(
                 code = httpE.code(),
                 message = httpE.message(),
-                errorBody = httpE.response()?.errorBody()
+                body = httpE.response()?.errorBody()
             )
             emitError(apiError, modifyFun)
         } catch (unknownHostE: UnknownHostException) {
