@@ -13,6 +13,10 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.inventiv.gastropaysdk.R
+import com.inventiv.gastropaysdk.data.response.ErrorResponse
+import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.GsonUtils
+import com.tapadoo.alerter.Alerter
+import okhttp3.ResponseBody
 
 internal fun Context.getDistanceAsMeters(distance: Int): String {
     var distanceDoubleValue = distance.toDouble()
@@ -81,3 +85,12 @@ fun TextView.markdownText(
 }
 
 fun Context.isValidGlideContext() = this !is Activity || (!this.isDestroyed && !this.isFinishing)
+
+fun ResponseBody.handleError(activity: Activity) {
+    val errorResponse = GsonUtils.fromJson(this.charStream(), ErrorResponse::class.java)
+    Alerter.create(activity)
+        .setTitle("${errorResponse.resultCode}\n${errorResponse.resultMessage}")
+        .setIcon(R.drawable.ic_warning_gastropay_sdk)
+        .setBackgroundColorRes(R.color.reddish_orange_gastropay_sdk)
+        .show()
+}

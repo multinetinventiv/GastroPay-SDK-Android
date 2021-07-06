@@ -80,5 +80,5 @@ dependencies {
     implementation(deps.zxing)
     implementation(deps.fragnav)
     implementation(deps.paginate)
-    implementation project(":gastropaysdk:alerter")
+    implementation(deps.alerter)
 }

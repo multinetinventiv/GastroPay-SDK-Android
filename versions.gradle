@@ -37,7 +37,8 @@ ext.deps = [
 
         "zxing"             : "com.google.zxing:core:3.3.3",
         "fragnav"           : "com.ncapdevi:frag-nav:3.3.0",
-        "paginate"          : "com.github.markomilos:paginate:1.0.0"
+        "paginate"          : "com.github.markomilos:paginate:1.0.0",
+        "alerter"           : "com.github.tapadoo:alerter:7.1.0",
 ]
 
 ext.test = [

@@ -11,15 +11,11 @@ import com.inventiv.gastropaysdk.databinding.FragmentLoginGastropaySdkBinding
 import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.AuthenticationRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
-import com.inventiv.gastropaysdk.utils.MaskWatcherView
-import com.inventiv.gastropaysdk.utils.PhoneNumberTextWatcher
+import com.inventiv.gastropaysdk.utils.*
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.KeyboardUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
-import com.inventiv.gastropaysdk.utils.isValidPhone
-import com.inventiv.gastropaysdk.utils.toServicePhoneNumber
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
-import com.tapadoo.alerter.Alerter
 import kotlinx.coroutines.flow.collect
 
 internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sdk) {
@@ -93,11 +89,7 @@ internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sd
                     }
                     is Resource.Error -> {
                         LogUtils.e("Error", uiState.apiError)
-                        Alerter.create(requireActivity())
-                            .setTitle(uiState.apiError.message)
-                            .setIcon(R.drawable.ic_warning_gastropay_sdk)
-                            .setBackgroundColorRes(R.color.reddish_orange_gastropay_sdk)
-                            .show()
+                        uiState.apiError.errorBody?.handleError(requireActivity())
                     }
                     else -> {
                     }

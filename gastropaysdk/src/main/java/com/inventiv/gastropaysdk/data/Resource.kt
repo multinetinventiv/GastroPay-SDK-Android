@@ -1,12 +1,13 @@
 package com.inventiv.gastropaysdk.model
 
 import kotlinx.coroutines.flow.*
+import okhttp3.ResponseBody
 import retrofit2.HttpException
 import java.net.SocketException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-data class ApiError(var code: Int, var message: String)
+data class ApiError(var code: Int, var message: String, var errorBody: ResponseBody? = null)
 
 sealed class Resource<out T> {
     class Success<T>(val data: T) : Resource<T>()
@@ -26,7 +27,8 @@ fun <T> safeFlow(
         } catch (httpE: HttpException) {
             val apiError = ApiError(
                 code = httpE.code(),
-                message = httpE.message()
+                message = httpE.message(),
+                errorBody = httpE.response()?.errorBody()
             )
             emitError(apiError, modifyFun)
         } catch (unknownHostE: UnknownHostException) {
