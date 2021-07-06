@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="digit_phone_number" translatable="false">0123456789()\u0020</string>
+
     <!--region Bottom Navigation-->
     <string name="bottom_bar_merchants_gastropay_sdk">Restoranlar</string>
     <string name="bottom_bar_pay_gastropay_sdk">Ödeme Yap</string>
     <string name="bottom_bar_wallet_gastropay_sdk">Cüzdan</string>
-    <!--region Bottom Navigation-->
+    <!--endregion Bottom Navigation-->
+
+    <!--region Login-->
+    <string name="login_title_gastropay_sdk">Giriş Yap</string>
+    <!--endregion Login-->
 
     <!--region Merchants-->
     <string name="merchants_near_me_gastropay_sdk">Yakınımdakiler</string>

@@ -1,18 +1,15 @@
-package com.inventiv.gastropaysdk.data.model.response
+package com.inventiv.gastropaysdk.data.response
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
 import kotlin.math.roundToInt
 
-@Parcelize
-data class MerchantDetail(
+data class MerchantDetailResponse(
     val merchantId: String,
     val tags: List<Tag>,
     val pageContent: PageContent?,
     val address: Address?,
     val name: String,
     val logoUrl: String?,
-    val images: List<Image>,
+    val images: List<ImageResponse>,
     val isBonusPoint: Boolean,
     val rewardPercentage: String?,
     val distance: String?,
@@ -23,7 +20,7 @@ data class MerchantDetail(
     val showcaseImageUrl: String?,
     var phoneNumber: String?,
     var gsmNumber: String?
-) : Parcelable {
+) {
 
     fun rate(): Int = rate.roundToInt()
 
@@ -32,27 +29,24 @@ data class MerchantDetail(
     }
 }
 
-@Parcelize
 data class PageContent(
     val id: String?,
     val title: String?,
     val content: String?,
-    val icon: Image?
-) : Parcelable
+    val icon: ImageResponse?
+)
 
-@Parcelize
 data class Tag(
     val id: String,
     val tagName: String,
-    val icon: Image,
+    val icon: ImageResponse,
     var isSelected: Boolean = false
-) : Parcelable
+)
 
-@Parcelize
 data class Address(
     val id: String,
     val city: String?,
     val district: String?,
     val neighbourhood: String?,
     val fullAddress: String?
-) : Parcelable
+)

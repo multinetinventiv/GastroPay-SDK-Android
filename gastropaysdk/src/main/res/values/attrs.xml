@@ -1,11 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <declare-styleable name="GastroPaySdkToolbar">
-        <attr name="gastropay_sdk_toolbar_title" format="reference|string" />
-        <attr name="gastropay_sdk_toolbar_center_image" format="reference" />
-        <attr name="gastropay_sdk_toolbar_left_icon" format="reference" />
-        <attr name="gastropay_sdk_toolbar_right_icon" format="reference" />
-        <attr name="gastropay_sdk_toolbar_transparent_bg" format="boolean" />
-    </declare-styleable>
-
-</resources>
+<resources></resources>

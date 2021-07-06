@@ -10,9 +10,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
-import com.inventiv.gastropaysdk.data.model.Resource
-import com.inventiv.gastropaysdk.data.model.response.Merchant
+import com.inventiv.gastropaysdk.data.response.MerchantResponse
 import com.inventiv.gastropaysdk.databinding.FragmentMerchantsGastropaySdkBinding
+import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.merchants.detail.MerchantDetailFragment
@@ -56,7 +56,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
     }
     private lateinit var merchantAdapter: MerchantAdapter
     private var merchantPaginate: Paginate? = null
-    private var merchantsList = ArrayList<Merchant>()
+    private var merchantsList = ArrayList<MerchantResponse>()
     private var isLoadingPaging = false
     private var allItemsLoaded = false
     private var myLocation = Location("")
@@ -127,6 +127,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
     }
 
     override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
+        toolbar.changeToMainStyle()
         showToolbar(true, toolbar, logo)
         toolbar.onRightIconClick {
             getMainActivity().closeSdk()
@@ -146,7 +147,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
                         if (uiState.data.isLastPage) {
                             allItemsLoaded = true
                         }
-                        viewModel.currentPage = uiState.data.pageIndex + 1
+                        viewModel.currentPage++
                         if (uiState.data.merchants.isNullOrEmpty()) {
                             binding.emptyLayoutGastroPaySdk.visibility = View.VISIBLE
                         } else {

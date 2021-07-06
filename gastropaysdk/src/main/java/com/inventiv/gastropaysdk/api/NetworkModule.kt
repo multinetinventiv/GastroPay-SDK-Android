@@ -1,6 +1,7 @@
 package com.inventiv.gastropaysdk.api
 
 import com.inventiv.gastropaysdk.shared.Environment
+import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.utils.CONNECTION_TIMEOUT_IN_MINUTES
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import okhttp3.OkHttpClient
@@ -13,7 +14,11 @@ internal class NetworkModule(private val environment: Environment, private val l
 
     private fun gastroPayHttpLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor { message ->
-            LogUtils.json(message)
+            if (message.startsWith("{") || message.startsWith("[")) {
+                LogUtils.json(message)
+            } else if (GastroPaySdk.getComponent().logging()) {
+                println(message)
+            }
         }
     }
 

@@ -1,4 +1,4 @@
-package com.inventiv.gastropaysdk.data.model
+package com.inventiv.gastropaysdk.model
 
 import kotlinx.coroutines.flow.*
 import retrofit2.HttpException

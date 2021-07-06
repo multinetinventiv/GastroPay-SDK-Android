@@ -1,10 +1,10 @@
 package com.inventiv.gastropaysdk.merchants
 
 import com.google.common.truth.Truth
-import com.inventiv.gastropaysdk.data.model.Resource
-import com.inventiv.gastropaysdk.data.model.response.Merchant
-import com.inventiv.gastropaysdk.data.model.response.MerchantDetail
-import com.inventiv.gastropaysdk.data.model.response.MerchantPaging
+import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
+import com.inventiv.gastropaysdk.data.response.MerchantResponse
+import com.inventiv.gastropaysdk.data.response.MerchantsResponse
+import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.MerchantRepository
 import com.inventiv.gastropaysdk.utils.loadingFalseExpected
 import com.inventiv.gastropaysdk.utils.loadingTrueExpected
@@ -22,10 +22,9 @@ class MerchantRepositoryTest {
     @Test
     fun `getMerchants repository success test`() = runBlocking {
         // Given
-        val expected = MerchantPaging(
-            merchants = listOf(Merchant("", "", 0.0, 0.0, 0, null, null, null, null, null)),
-            isLastPage = true,
-            pageIndex = 1
+        val expected = MerchantsResponse(
+            merchants = listOf(MerchantResponse("", "", 0.0, 0.0, 0, null, null, null, null, null)),
+            isLastPage = true
         )
 
         val flow = flow {
@@ -57,7 +56,7 @@ class MerchantRepositoryTest {
     @Test
     fun `getMerchantDetail repository success test`() = runBlocking {
         // Given
-        val expected = MerchantDetail(
+        val expected = MerchantDetailResponse(
             merchantId = "1",
             tags = arrayListOf(),
             pageContent = null,

@@ -4,17 +4,17 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.inventiv.gastropaysdk.data.model.response.Merchant
+import com.inventiv.gastropaysdk.data.response.MerchantResponse
 import com.inventiv.gastropaysdk.databinding.ItemMerchantGastropaySdkBinding
 import com.inventiv.gastropaysdk.utils.getDistanceAsMeters
 import com.inventiv.gastropaysdk.utils.isValidGlideContext
 
 internal class MerchantItemViewHolder(
     val binding: ItemMerchantGastropaySdkBinding,
-    private val clickedListener: (merchant: Merchant) -> Unit
+    private val clickedListener: (merchant: MerchantResponse) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(merchant: Merchant) {
+    fun bind(merchant: MerchantResponse) {
         binding.apply {
             root.setOnClickListener {
                 clickedListener.invoke(merchant)
