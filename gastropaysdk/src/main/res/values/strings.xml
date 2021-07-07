@@ -9,7 +9,11 @@
     <!--endregion Bottom Navigation-->
 
     <!--region Login-->
-    <string name="login_title_gastropay_sdk">Giriş Yap</string>
+    <string name="login_toolbar_title_gastropay_sdk">Giriş Yap</string>
+    <string name="login_view_title_gastropay_sdk">Merhaba</string>
+    <string name="login_view_desc_gastropay_sdk">Üyeliğinize giriş yapmak için sistemde kayıtlı cep telefonu numaranızı aşağıdaki alana giriniz.</string>
+    <string name="login_view_phone_number_hint_gastropay_sdk">Cep Telefonunuz</string>
+    <string name="login_view_button_gastropay_sdk">Onay Kodunu Gönder</string>
     <!--endregion Login-->
 
     <!--region Merchants-->

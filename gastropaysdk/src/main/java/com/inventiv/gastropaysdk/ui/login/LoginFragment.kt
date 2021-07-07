@@ -43,7 +43,7 @@ internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sd
     override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
         toolbar.apply {
             changeToLoginStyle()
-            setTitle(R.string.login_title_gastropay_sdk, R.color.celtic_gastropay_sdk)
+            setTitle(R.string.login_toolbar_title_gastropay_sdk, R.color.celtic_gastropay_sdk)
             onLeftIconClick {
                 GastroPaySdk.getComponent().isUserLoggedIn = true
                 getMainActivity().initTab1()

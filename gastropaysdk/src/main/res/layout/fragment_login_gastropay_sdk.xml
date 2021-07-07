@@ -22,7 +22,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Merhaba"
+                android:text="@string/login_view_title_gastropay_sdk"
                 android:textColor="@color/celtic_gastropay_sdk"
                 android:textSize="27sp" />
 
@@ -30,7 +30,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Üyeliğinize giriş yapmak için sistemde kayıtlı cep telefonu numaranızı aşağıdaki alana giriniz."
+                android:text="@string/login_view_desc_gastropay_sdk"
                 android:textColor="@color/celtic_gastropay_sdk"
                 android:textSize="14sp" />
 
@@ -50,7 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:digits="@string/digit_phone_number"
-                    android:hint="Cep Telefonunuz"
+                    android:hint="@string/login_view_phone_number_hint_gastropay_sdk"
                     android:imeOptions="actionDone"
                     android:inputType="phone"
                     android:padding="16dp"
@@ -71,7 +71,7 @@
         android:layout_marginBottom="16dp"
         android:enabled="false"
         android:padding="16dp"
-        android:text="Onay Kodunu Gönder"
+        android:text="@string/login_view_button_gastropay_sdk"
         android:textAllCaps="true"
         android:textColor="@color/black_gastropay_sdk"
         android:textSize="16sp"
