@@ -49,7 +49,10 @@ class PhoneNumberTextWatcher(editText: EditText, maskWatcherView: MaskWatcherVie
             maskWatcherView.afterTextTriggered()
             return
         }
-        if (!isNumeric(editable.toString().substring(editable.length - 1))) {
+        if (editable.toString().isNotEmpty() && !isNumeric(
+                editable.toString().substring(editable.length - 1)
+            )
+        ) {
             editText.filters = defaultFilter
             editable.replace(editable.length - 1, editable.length, "")
         } else {
