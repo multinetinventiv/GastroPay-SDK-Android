@@ -22,12 +22,16 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true // for androidTest
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+
         }
     }
 
@@ -54,7 +58,12 @@ dependencies {
     testImplementation(test.turbine)
 
     androidTestImplementation(androidTest.junit)
+    androidTestImplementation(androidTest.core)
+    androidTestImplementation(androidTest.fragment)
     androidTestImplementation(androidTest.espressoCore)
+    androidTestImplementation(test.truth)
+    androidTestImplementation(test.mockwebserver)
+    androidTestImplementation(deps.okhttp)
     //
 
     implementation(deps.coreKtx)

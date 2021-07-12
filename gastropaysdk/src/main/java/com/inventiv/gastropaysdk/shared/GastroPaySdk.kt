@@ -9,6 +9,7 @@ import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.ui.MainActivity
 import com.inventiv.gastropaysdk.utils.AESHelper
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.Utils
+import org.jetbrains.annotations.TestOnly
 
 object GastroPaySdk {
 
@@ -60,6 +61,29 @@ object GastroPaySdk {
         Intent(context, MainActivity::class.java).apply {
             context.startActivity(this)
         }
+    }
+
+    @TestOnly
+    internal fun init(
+        application: Application,
+        language: Language? = null,
+        listener: GastroPaySdkListener? = null,
+    ) {
+        Utils.init(application)
+
+        val environment = Environment.TEST
+        environment.baseUrl = "http://localhost:8080"
+
+        this.gastroPaySdkComponent = GastroPaySdkComponent(
+            appContext = application,
+            environment = environment,
+            language = language,
+            logging = true
+        ).apply {
+            globalGastroPaySdkListener = listener
+        }
+
+        getComponent().globalGastroPaySdkListener?.onInitialized(true)
     }
 
 }
