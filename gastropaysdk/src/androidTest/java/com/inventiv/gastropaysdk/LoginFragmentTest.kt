@@ -11,7 +11,6 @@ import com.google.common.truth.Truth
 import com.inventiv.gastropaysdk.ui.MainActivity
 import com.inventiv.gastropaysdk.ui.login.LoginFragment
 import com.inventiv.gastropaysdk.utils.enqueueResponse
-import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import org.hamcrest.CoreMatchers.not
 import org.junit.After
@@ -78,6 +77,7 @@ class LoginFragmentTest {
     @Test
     fun enter_phone_mock_server_success() {
 
+        //TODO its fail now, but MainViewModel will be abstract pushFragment and this will be fixed
         mockWebServer.enqueueResponse("login-200.json", 200)
 
         val scenario =

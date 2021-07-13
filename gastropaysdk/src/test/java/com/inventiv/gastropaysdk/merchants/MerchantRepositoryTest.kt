@@ -10,7 +10,6 @@ import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.utils.loadingFalseExpected
 import com.inventiv.gastropaysdk.utils.loadingTrueExpected
 import kotlinx.coroutines.flow.collectIndexed
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.mockito.kotlin.mock
@@ -73,14 +72,8 @@ class MerchantRepositoryTest {
             gsmNumber = null
         )
 
-        val flow = flow {
-            emit(Resource.Loading(true))
-            emit(Resource.Success(expected))
-            emit(Resource.Loading(false))
-        }
-
         // When
-        whenever(repository.getMerchantDetail("1")).thenReturn(flow)
+        whenever(service.merchantDetail("1")).thenReturn(expected)
 
         // Then
         repository.getMerchantDetail("1").collectIndexed { index, response ->

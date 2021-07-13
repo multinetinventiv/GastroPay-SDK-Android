@@ -99,7 +99,7 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
         controller.pushFragment(fragment)
     }
 
-    fun initTab(tabIndex : Int) {
+    fun initTab(tabIndex: Int) {
         controller.initialize(tabIndex)
     }
 

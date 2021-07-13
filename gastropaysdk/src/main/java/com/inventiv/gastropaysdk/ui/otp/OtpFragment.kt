@@ -117,9 +117,14 @@ internal class OtpFragment : BaseFragment(R.layout.fragment_otp_gastropay_sdk) {
                     }
                     is Resource.Success -> {
                         LogUtils.d(uiState.data)
-                        if(!uiState.data.refreshToken.isNullOrEmpty() &&
-                            !uiState.data.userToken.isNullOrEmpty()){
-                            GastroPaySdk.getComponent().isUserLoggedIn = true
+                        KeyboardUtils.hideSoftInput(binding.pinEntryEditText)
+                        if (!uiState.data.refreshToken.isNullOrEmpty() &&
+                            !uiState.data.userToken.isNullOrEmpty()
+                        ) {
+                            GastroPaySdk.getComponent().apply {
+                                globalGastroPaySdkListener?.onAuthTokenReceived(uiState.data.userToken!!)
+                                isUserLoggedIn = true
+                            }
                             getMainActivity().initTab(FragNavController.TAB1)
                         }
                     }

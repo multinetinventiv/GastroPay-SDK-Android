@@ -58,6 +58,11 @@ class SdkStartActivity : AppCompatActivity() {
                         super.onInitialized(isInitialized)
                         Log.d("isInitialized", isInitialized.toString())
                     }
+
+                    override fun onAuthTokenReceived(authToken: String) {
+                        super.onAuthTokenReceived(authToken)
+                        Log.d("onAuthTokenReceived", authToken)
+                    }
                 })
         } catch (e: GastroPaySdkException) {
             // Sdk couldn't be loaded successfully, check private key if its correct
