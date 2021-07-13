@@ -5,7 +5,7 @@ import com.inventiv.gastropaysdk.data.request.OtpConfirmRequest
 import com.inventiv.gastropaysdk.data.response.AuthenticationResponse
 import com.inventiv.gastropaysdk.data.response.LoginResponse
 import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
-import com.inventiv.gastropaysdk.data.response.MerchantsResponse
+import com.inventiv.gastropaysdk.data.response.MerchantListResponse
 import retrofit2.http.*
 
 internal interface GastroPayService {
@@ -18,7 +18,7 @@ internal interface GastroPayService {
         @Query("isBonusPoint") isBonusPoint: Boolean? = false,
         @Query("merchantName") merchantName: String?,
         @Query("currentPage") pageIndex: Int
-    ): MerchantsResponse
+    ): MerchantListResponse
 
     @GET("merchant/merchant_detail/{merchantUid}")
     suspend fun merchantDetail(@Path("merchantUid") id: String): MerchantDetailResponse

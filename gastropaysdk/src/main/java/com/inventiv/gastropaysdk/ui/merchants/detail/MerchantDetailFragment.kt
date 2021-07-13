@@ -21,12 +21,8 @@ import com.inventiv.gastropaysdk.databinding.LayoutExpensivenessGastropaySdkBind
 import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
-import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
+import com.inventiv.gastropaysdk.utils.*
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
-import com.inventiv.gastropaysdk.utils.formatPhoneNumber
-import com.inventiv.gastropaysdk.utils.markdownText
-import com.inventiv.gastropaysdk.utils.openGoogleMap
-import com.inventiv.gastropaysdk.utils.openPhoneDialer
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import kotlinx.coroutines.flow.collect
 
@@ -114,7 +110,7 @@ internal class MerchantDetailFragment :
                         }
                     }
                     is Resource.Error -> {
-                        LogUtils.e("Error", uiState.apiError)
+                        uiState.apiError.handleError(requireActivity())
                     }
                     else -> {
                     }

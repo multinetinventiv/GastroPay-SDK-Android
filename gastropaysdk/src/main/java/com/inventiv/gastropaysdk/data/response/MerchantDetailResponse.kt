@@ -1,5 +1,6 @@
 package com.inventiv.gastropaysdk.data.response
 
+import com.inventiv.gastropaysdk.common.BaseResponse
 import kotlin.math.roundToInt
 
 data class MerchantDetailResponse(
@@ -20,7 +21,7 @@ data class MerchantDetailResponse(
     val showcaseImageUrl: String?,
     var phoneNumber: String?,
     var gsmNumber: String?
-) {
+) : BaseResponse() {
 
     fun rate(): Int = rate.roundToInt()
 

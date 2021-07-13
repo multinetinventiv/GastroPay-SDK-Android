@@ -1,4 +1,4 @@
-package com.inventiv.gastropaysdk.merchants.merchantdetail
+package com.inventiv.gastropaysdk.viewmodel
 
 import com.google.common.truth.Truth
 import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse

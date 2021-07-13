@@ -1,4 +1,4 @@
-package com.inventiv.gastropaysdk
+package com.inventiv.gastropaysdk.helper
 
 import com.inventiv.gastropaysdk.utils.AESHelper
 import org.junit.Assert

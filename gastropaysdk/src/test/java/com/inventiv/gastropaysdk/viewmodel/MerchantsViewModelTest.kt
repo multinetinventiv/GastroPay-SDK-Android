@@ -1,9 +1,9 @@
-package com.inventiv.gastropaysdk.merchants
+package com.inventiv.gastropaysdk.viewmodel
 
 import android.location.Location
 import com.google.common.truth.Truth
 import com.inventiv.gastropaysdk.api.GastroPayService
-import com.inventiv.gastropaysdk.data.response.MerchantsResponse
+import com.inventiv.gastropaysdk.data.response.MerchantListResponse
 import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.ui.merchants.MerchantsViewModel
@@ -47,7 +47,7 @@ class MerchantsViewModelTest {
     @Test
     fun `main viewmodel success test`() = runBlockingTest {
 
-        val expected = MerchantsResponse(
+        val expected = MerchantListResponse(
             merchants = listOf(),
             isLastPage = true
         )
@@ -56,7 +56,7 @@ class MerchantsViewModelTest {
         whenever(service.merchantsInfo(0.0, 0.0, null, false, null, 0)).thenReturn(expected)
 
         launch {
-            val list: List<Resource<MerchantsResponse>> = viewModel.uiState.take(4).toList()
+            val list: List<Resource<MerchantListResponse>> = viewModel.uiState.take(4).toList()
 
             list[0].emptyExpected()
             list[1].loadingTrueExpected()
