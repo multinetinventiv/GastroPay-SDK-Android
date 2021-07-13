@@ -40,3 +40,8 @@ internal fun dispatcherWithCustomBody() = object : Dispatcher() {
         }
     }
 }
+
+fun getResourceString(id: Int): String {
+    val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+    return appContext.resources.getString(id)
+}

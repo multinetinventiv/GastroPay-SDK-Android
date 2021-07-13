@@ -11,11 +11,13 @@ import com.inventiv.gastropaysdk.databinding.FragmentLoginGastropaySdkBinding
 import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.AuthenticationRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
+import com.inventiv.gastropaysdk.ui.otp.OtpFragment
 import com.inventiv.gastropaysdk.utils.*
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.KeyboardUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
+import com.ncapdevi.fragnav.FragNavController
 import kotlinx.coroutines.flow.collect
 
 internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sdk) {
@@ -45,8 +47,9 @@ internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sd
             changeToLoginStyle()
             setTitle(R.string.login_toolbar_title_gastropay_sdk, R.color.celtic_gastropay_sdk)
             onLeftIconClick {
+                //TODO fix after all done
                 GastroPaySdk.getComponent().isUserLoggedIn = true
-                getMainActivity().initTab1()
+                getMainActivity().initTab(FragNavController.TAB1)
             }
         }
         showToolbar(false, toolbar, logo)
@@ -86,6 +89,15 @@ internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sd
                     }
                     is Resource.Success -> {
                         LogUtils.d(uiState.data)
+                        val phoneNumber =
+                            binding.phoneTextInputEditText.text.toString().toServicePhoneNumber()
+                        getMainActivity().pushFragment(
+                            OtpFragment.newInstance(
+                                verificationCode = uiState.data.verificationCode,
+                                endTime = uiState.data.endTime,
+                                phoneNumber = phoneNumber
+                            )
+                        )
                     }
                     is Resource.Error -> {
                         LogUtils.e("Error", uiState.apiError)

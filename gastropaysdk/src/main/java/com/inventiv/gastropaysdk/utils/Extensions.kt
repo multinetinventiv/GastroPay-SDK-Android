@@ -18,6 +18,7 @@ import com.inventiv.gastropaysdk.model.ApiError
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.GsonUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.tapadoo.alerter.Alerter
+import java.util.concurrent.TimeUnit
 
 internal fun Context.getDistanceAsMeters(distance: Int): String {
     var distanceDoubleValue = distance.toDouble()
@@ -105,4 +106,12 @@ fun ApiError.handleError(activity: Activity) {
         .setIcon(R.drawable.ic_warning_gastropay_sdk)
         .setBackgroundColorRes(R.color.reddish_orange_gastropay_sdk)
         .show()
+}
+
+/**
+ * @return seconds
+ */
+fun Long.calculateDifferenceWithCurrentTime(): Long {
+    val currentTime = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())
+    return (this - currentTime)
 }

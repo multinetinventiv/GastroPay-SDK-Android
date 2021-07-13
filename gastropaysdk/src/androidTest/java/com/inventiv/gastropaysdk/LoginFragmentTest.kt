@@ -11,6 +11,7 @@ import com.google.common.truth.Truth
 import com.inventiv.gastropaysdk.ui.MainActivity
 import com.inventiv.gastropaysdk.ui.login.LoginFragment
 import com.inventiv.gastropaysdk.utils.enqueueResponse
+import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockWebServer
 import org.hamcrest.CoreMatchers.not
 import org.junit.After
@@ -117,7 +118,6 @@ class LoginFragmentTest {
 
         onView(withId(R.id.loginButton))
             .perform(click())
-
     }
 
     @Test
@@ -139,6 +139,8 @@ class LoginFragmentTest {
 
         onView(withId(R.id.loginButton))
             .perform(click())
+
+        //TODO must validate AlertView but there is an issue (https://github.com/Tapadoo/Alerter/issues/219)
     }
 
 }

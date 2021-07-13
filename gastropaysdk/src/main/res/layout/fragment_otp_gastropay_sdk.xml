@@ -22,47 +22,60 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/login_view_title_gastropay_sdk"
+                android:layout_marginEnd="40dp"
+                android:text="Cep Telefonunuzu Doğrulayın"
                 android:textColor="@color/celtic_gastropay_sdk"
                 android:textSize="27sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/infoTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/login_view_desc_gastropay_sdk"
                 android:textColor="@color/celtic_gastropay_sdk"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="Lütfen XXXX XXX XX XX numaralı cep telefonunuza gelen şifreyi girin" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/phoneTextInputLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/timerInfoTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/celtic_gastropay_sdk"
+                android:textSize="14sp"
+                tools:text="Kodu girmeniz için 30 saniye kaldı!" />
+
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:text="Onay Kodu"
+                android:textColor="@color/suva_grey_gastropay_sdk"
+                android:textSize="14sp"
+                app:textAllCaps="true" />
+
+            <com.inventiv.gastropaysdk.view.PinEntryEditText
+                android:id="@+id/pinEntryEditText"
+                android:layout_width="192dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:cursorVisible="false"
+                android:digits="@string/digit_number_gastropay_sdk"
+                android:focusable="true"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="6"
                 android:textColorHint="@color/black_gastropay_sdk"
-                app:boxStrokeColor="@color/black_gastropay_sdk"
-                app:hintEnabled="true"
-                app:hintTextColor="@color/black_gastropay_sdk">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/phoneTextInputEditText"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:digits="@string/digit_phone_number_gastropay_sdk"
-                    android:hint="@string/login_view_phone_number_hint_gastropay_sdk"
-                    android:imeOptions="actionDone"
-                    android:inputType="phone"
-                    android:padding="16dp"
-                    android:singleLine="true" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+                android:textIsSelectable="false"
+                android:textSize="14sp" />
 
         </LinearLayout>
     </ScrollView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/loginButton"
+        android:id="@+id/resendButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -71,7 +84,7 @@
         android:layout_marginBottom="16dp"
         android:enabled="false"
         android:padding="16dp"
-        android:text="@string/login_view_button_gastropay_sdk"
+        android:text="@string/otp_button_resend_gastropay_sdk"
         android:textAllCaps="true"
         android:textColor="@color/black_gastropay_sdk"
         android:textSize="16sp"

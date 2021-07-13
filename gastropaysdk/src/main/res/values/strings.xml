@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="digit_phone_number" translatable="false">0123456789()\u0020</string>
 
     <!--region Bottom Navigation-->
     <string name="bottom_bar_merchants_gastropay_sdk">Restoranlar</string>
@@ -14,7 +13,13 @@
     <string name="login_view_desc_gastropay_sdk">Üyeliğinize giriş yapmak için sistemde kayıtlı cep telefonu numaranızı aşağıdaki alana giriniz.</string>
     <string name="login_view_phone_number_hint_gastropay_sdk">Cep Telefonunuz</string>
     <string name="login_view_button_gastropay_sdk">Onay Kodunu Gönder</string>
+    <string name="otp_button_resend_gastropay_sdk">Tekrar Gönder</string>
     <!--endregion Login-->
+
+    <!--region OTP-->
+    <string name="otp_sms_label_gastropay_sdk">Lütfen %1$s numaralı cep telefonunuza SMS ile gelen onay kodunu girin.</string>
+    <string name="otp_timer_label_gastropay_sdk">Kodu girmeniz için %1$s saniye kaldı!</string>
+    <!--endregion OTP-->
 
     <!--region Merchants-->
     <string name="merchants_near_me_gastropay_sdk">Yakınımdakiler</string>

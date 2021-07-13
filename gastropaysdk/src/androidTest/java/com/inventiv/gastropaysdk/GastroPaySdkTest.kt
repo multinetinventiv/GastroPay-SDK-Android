@@ -5,6 +5,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.google.common.truth.Truth
 import com.inventiv.gastropaysdk.shared.Environment
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
+import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.Utils
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,5 +28,10 @@ class GastroPaySdkTest {
     @Test
     fun environmentIsTest() {
         Truth.assertThat(GastroPaySdk.getComponent().environment()).isEqualTo(Environment.TEST)
+    }
+
+    @Test
+    fun utils() {
+        Truth.assertThat(Utils.getApp()).isNotNull()
     }
 }

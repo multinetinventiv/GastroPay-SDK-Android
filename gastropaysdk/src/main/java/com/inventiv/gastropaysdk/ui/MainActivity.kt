@@ -99,8 +99,8 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
         controller.pushFragment(fragment)
     }
 
-    fun initTab1() {
-        controller.initialize(FragNavController.TAB1)
+    fun initTab(tabIndex : Int) {
+        controller.initialize(tabIndex)
     }
 
     override fun onBackPressed() {

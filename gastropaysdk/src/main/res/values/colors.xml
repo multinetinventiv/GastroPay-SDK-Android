@@ -6,8 +6,9 @@
     <color name="sunglow_gastropay_sdk">#FFCA28</color>
     <color name="white_gastropay_sdk">#FFFFFF</color>
     <color name="black_gastropay_sdk">#000000</color>
-    <color name="mercury_gastropay_sdk">#E3E3E3</color>
     <color name="shamrock_gastropay_sdk">#2ECC71</color>
     <color name="white_smoke_gastropay_sdk">#F8F8F8</color>
     <color name="reddish_orange_gastropay_sdk">#F15025</color>
+    <color name="mercury_gastropay_sdk">#E3E3E3</color>
+    <color name="suva_grey_gastropay_sdk">#909090</color>
 </resources>

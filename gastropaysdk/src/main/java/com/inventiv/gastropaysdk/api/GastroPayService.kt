@@ -1,6 +1,8 @@
 package com.inventiv.gastropaysdk.api
 
 import com.inventiv.gastropaysdk.data.request.LoginRequest
+import com.inventiv.gastropaysdk.data.request.OtpConfirmRequest
+import com.inventiv.gastropaysdk.data.response.AuthenticationResponse
 import com.inventiv.gastropaysdk.data.response.LoginResponse
 import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
 import com.inventiv.gastropaysdk.data.response.MerchantsResponse
@@ -23,4 +25,7 @@ internal interface GastroPayService {
 
     @POST("auth/login")
     suspend fun login(@Body login: LoginRequest): LoginResponse
+
+    @POST("auth/otp_confirm")
+    suspend fun otpConfirm(@Body login: OtpConfirmRequest): AuthenticationResponse
 }

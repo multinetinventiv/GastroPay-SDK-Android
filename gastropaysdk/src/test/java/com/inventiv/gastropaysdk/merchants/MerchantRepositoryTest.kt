@@ -18,7 +18,7 @@ import org.mockito.kotlin.whenever
 
 class MerchantRepositoryTest {
 
-    private val service : GastroPayService = mock()
+    private val service: GastroPayService = mock()
 
     private val repository = MerchantRepositoryImp(service)
 
