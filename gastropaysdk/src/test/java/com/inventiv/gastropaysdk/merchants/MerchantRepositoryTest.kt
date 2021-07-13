@@ -1,11 +1,12 @@
 package com.inventiv.gastropaysdk.merchants
 
 import com.google.common.truth.Truth
+import com.inventiv.gastropaysdk.api.GastroPayService
 import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
 import com.inventiv.gastropaysdk.data.response.MerchantResponse
 import com.inventiv.gastropaysdk.data.response.MerchantsResponse
 import com.inventiv.gastropaysdk.model.Resource
-import com.inventiv.gastropaysdk.repository.MerchantRepository
+import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.utils.loadingFalseExpected
 import com.inventiv.gastropaysdk.utils.loadingTrueExpected
 import kotlinx.coroutines.flow.collectIndexed
@@ -17,7 +18,9 @@ import org.mockito.kotlin.whenever
 
 class MerchantRepositoryTest {
 
-    private val repository: MerchantRepository = mock()
+    private val service : GastroPayService = mock()
+
+    private val repository = MerchantRepositoryImp(service)
 
     @Test
     fun `getMerchants repository success test`() = runBlocking {
@@ -27,17 +30,11 @@ class MerchantRepositoryTest {
             isLastPage = true
         )
 
-        val flow = flow {
-            emit(Resource.Loading(true))
-            emit(Resource.Success(expected))
-            emit(Resource.Loading(false))
-        }
-
         // When
-        whenever(repository.getMerchants(0.0, 0.0, null, null, 1)).thenReturn(flow)
+        whenever(service.merchantsInfo(0.0, 0.0, null, false, null, 0)).thenReturn(expected)
 
         // Then
-        repository.getMerchants(0.0, 0.0, null, null, 1).collectIndexed { index, response ->
+        repository.getMerchants(0.0, 0.0, null, null, 0).collectIndexed { index, response ->
             if (index == 0) {
                 response.loadingTrueExpected()
             }
