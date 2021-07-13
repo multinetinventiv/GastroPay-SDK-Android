@@ -3,6 +3,7 @@
     <dimen name="margin_huge_gastropay_sdk">32dp</dimen>
     <dimen name="margin_big_gastropay_sdk">24dp</dimen>
     <dimen name="margin_normal_gastropay_sdk">16dp</dimen>
+    <dimen name="margin_small_x_gastropay_sdk">12dp</dimen>
     <dimen name="margin_small_gastropay_sdk">8dp</dimen>
     <dimen name="margin_micro_gastropay_sdk">4dp</dimen>
 </resources>

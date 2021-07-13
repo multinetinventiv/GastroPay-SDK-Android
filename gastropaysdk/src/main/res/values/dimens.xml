@@ -12,4 +12,5 @@
 
     <dimen name="text_appearance_size_body_1_gastropay_sdk">14sp</dimen>
     <dimen name="text_appearance_size_body_2_gastropay_sdk">12sp</dimen>
+    <dimen name="text_size_normal_gastropay_sdk">16sp</dimen>
 </resources>

@@ -8,10 +8,13 @@
         <item name="android:insetRight">0dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
+        <item name="android:stateListAnimator">@null</item>
         <item name="android:singleLine">true</item>
+        <item name="android:elevation">2dp</item>
     </style>
 
     <style name="Base.Widget.Button.Yellow.GastroPaySdk" parent="Base.Widget.Button.GastroPaySdk">
+        <item name="android:backgroundTint">@color/selector_navigation_button_gastropay_sdk</item>
         <item name="cornerRadius">24dp</item>
         <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">wrap_content</item>

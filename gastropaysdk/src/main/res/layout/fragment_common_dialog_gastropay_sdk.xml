@@ -50,8 +50,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/materialButtonGastroPaySdk"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/Widget.Button.Yellow.GastroPaySdk"
         android:layout_gravity="center_horizontal"
         android:layout_margin="16dp"
         tools:text="OK" />

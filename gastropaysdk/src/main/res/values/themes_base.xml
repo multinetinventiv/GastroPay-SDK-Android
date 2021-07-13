@@ -15,7 +15,7 @@
             ?attr/colorPrimaryVariant
         </item>
 
-        <item name="android:textColor">?attr/colorSecondary</item>
+        <item name="android:textColor">@color/white_gastropay_sdk</item>
 
         <!--Material type attributes-->
         <item name="textAppearanceHeadline1">@style/TextAppearance.GastroPaySdk.Headline1</item>

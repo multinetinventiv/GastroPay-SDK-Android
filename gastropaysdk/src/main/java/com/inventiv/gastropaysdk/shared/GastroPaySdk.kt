@@ -6,6 +6,7 @@ import android.content.Intent
 import com.inventiv.gastropaysdk.BuildConfig
 import com.inventiv.gastropaysdk.GastroPaySdkComponent
 import com.inventiv.gastropaysdk.R
+import com.inventiv.gastropaysdk.data.GastroPayUser
 import com.inventiv.gastropaysdk.ui.MainActivity
 import com.inventiv.gastropaysdk.utils.AESHelper
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.Utils
@@ -57,9 +58,10 @@ object GastroPaySdk {
     }
 
     @JvmStatic
-    fun start(context: Context) {
+    fun start(context: Context, authToken: String? = null) {
         Intent(context, MainActivity::class.java).apply {
             context.startActivity(this)
+            GastroPayUser.authToken = authToken
         }
     }
 

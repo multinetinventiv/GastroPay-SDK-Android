@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
+import com.inventiv.gastropaysdk.data.GastroPayUser
 import com.inventiv.gastropaysdk.databinding.FragmentOtpGastropaySdkBinding
 import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.AuthenticationRepositoryImp
@@ -124,6 +125,7 @@ internal class OtpFragment : BaseFragment(R.layout.fragment_otp_gastropay_sdk) {
                             GastroPaySdk.getComponent().apply {
                                 globalGastroPaySdkListener?.onAuthTokenReceived(uiState.data.userToken!!)
                                 isUserLoggedIn = true
+                                GastroPayUser.authToken = uiState.data.userToken
                             }
                             getMainActivity().initTab(FragNavController.TAB1)
                         }

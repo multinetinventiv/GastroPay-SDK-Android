@@ -76,20 +76,13 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/resendButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        style="@style/Widget.Button.Yellow.GastroPaySdk"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:enabled="false"
-        android:padding="16dp"
         android:text="@string/otp_button_resend_gastropay_sdk"
         android:textAllCaps="true"
-        android:textColor="@color/black_gastropay_sdk"
-        android:textSize="16sp"
-        app:backgroundTint="@color/selector_navigation_button_gastropay_sdk"
-        app:cornerRadius="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
