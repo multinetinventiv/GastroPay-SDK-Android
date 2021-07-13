@@ -2,7 +2,6 @@ package com.inventiv.gastropaysdk.api
 
 import com.inventiv.gastropaysdk.shared.Environment
 import com.inventiv.gastropaysdk.utils.CONNECTION_TIMEOUT_IN_MINUTES
-import com.inventiv.gastropaysdk.utils.LIBRARY_GENERAL_LOG_TAG
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,7 +21,6 @@ internal class NetworkModule(private val environment: Environment, private val l
         val loggingInterceptor = gastroPayHttpLoggingInterceptor()
         loggingInterceptor.level =
             if (logging) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-        loggingInterceptor.redactHeader(LIBRARY_GENERAL_LOG_TAG)
 
         val okHttpClientBuilder = OkHttpClient.Builder()
             .connectTimeout(CONNECTION_TIMEOUT_IN_MINUTES, TimeUnit.MINUTES)

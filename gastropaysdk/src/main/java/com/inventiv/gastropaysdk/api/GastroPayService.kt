@@ -1,15 +1,12 @@
 package com.inventiv.gastropaysdk.api
 
-import com.inventiv.gastropaysdk.data.model.response.DummyResponse
+import com.inventiv.gastropaysdk.data.model.response.MerchantDetail
 import com.inventiv.gastropaysdk.data.model.response.MerchantPaging
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 internal interface GastroPayService {
-
-    @GET("/posts/{id}")
-    suspend fun getDummy(@Path("id") id: Int): DummyResponse
 
     @GET("merchant/merchants_info")
     suspend fun merchantsInfo(
@@ -20,4 +17,7 @@ internal interface GastroPayService {
         @Query("merchantName") merchantName: String?,
         @Query("currentPage") pageIndex: Int
     ): MerchantPaging
+
+    @GET("merchant/merchant_detail/{merchantUid}")
+    suspend fun merchantDetail(@Path("merchantUid") id: String): MerchantDetail
 }

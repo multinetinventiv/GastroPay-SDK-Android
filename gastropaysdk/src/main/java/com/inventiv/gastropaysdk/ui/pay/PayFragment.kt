@@ -2,6 +2,7 @@ package com.inventiv.gastropaysdk.ui.pay
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
 import com.inventiv.gastropaysdk.databinding.FragmentPayGastropaySdkBinding
@@ -9,6 +10,7 @@ import com.inventiv.gastropaysdk.utils.blankj.utilcode.constant.PermissionConsta
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.PermissionUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
+import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 
 internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
 
@@ -32,7 +34,10 @@ internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
             }).request()
     }
 
-    override fun initDynamicViewProperties() {
-        hideToolbar()
+    override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
+        hideToolbar(toolbar, logo)
     }
+
+    override fun showBottomNavigation() = false
+
 }

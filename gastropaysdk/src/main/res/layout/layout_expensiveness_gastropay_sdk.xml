@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/expensivenessCheckBox1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_expensiveness_gastropay_sdk"
+        android:button="@null"
+        android:clickable="false" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/expensivenessCheckBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/selector_expensiveness_gastropay_sdk"
+        android:button="@null"
+        android:clickable="false" />
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:id="@+id/expensivenessCheckBox3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/selector_expensiveness_gastropay_sdk"
+        android:button="@null"
+        android:clickable="false" />
+
+</LinearLayout>

@@ -65,7 +65,7 @@ class CredentialsDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
-    fun insertPreDefinedData() {
+    private fun insertPreDefinedData() {
         if (BuildConfig.OBFUSCATION_KEY.isNotEmpty()) {
             editTextObfuscationKey?.setText(BuildConfig.OBFUSCATION_KEY)
         }

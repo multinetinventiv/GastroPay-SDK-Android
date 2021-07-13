@@ -1,4 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="test">EN</string>
+    <!--region Bottom Navigation-->
+    <string name="bottom_bar_merchants_gastropay_sdk">Restoranlar</string>
+    <string name="bottom_bar_pay_gastropay_sdk">Ödeme Yap</string>
+    <string name="bottom_bar_wallet_gastropay_sdk">Cüzdan</string>
+    <!--region Bottom Navigation-->
+
+    <!--region Merchants-->
+    <string name="merchants_near_me_gastropay_sdk">Yakınımdakiler</string>
+    <string name="merchants_merchant_distance_label_km_gastropay_sdk">%1$s KM YAKININDA</string>
+    <string name="merchants_merchant_distance_label_mt_gastropay_sdk">%1$s M YAKININDA</string>
+    <string name="merchants_warning_location_permission_title_gastropay_sdk">Lokasyon izni gerekli</string>
+    <string name="merchants_warning_location_permission_description_gastropay_sdk">Yakınınızdaki Gastro restoranları görebilmeniz için lütfen lokasyon iznini kabul edin.</string>
+    <string name="merchants_warning_no_restaurant_found_gastropay_sdk">Aradığınız konumda restoran bulunamadı.</string>
+    <string name="merchants_restaurants_permission_dialog_button_text_gastropay_sdk">AYARLARA GİT</string>
+    <!--endregion Merchants-->
+
+    <!--region Merchant Detail-->
+    <string name="merchant_detail_earn_gastropay_sdk">KAZAN</string>
+    <string name="merchant_detail_spend_gastropay_sdk">HARCA</string>
+    <string name="merchant_detail_value_degree_gastropay_sdk">PAHALILIK DERECESİ</string>
+    <string name="merchant_detail_description_gastropay_sdk">AÇIKLAMA</string>
+    <string name="merchant_detail_navigation_button_gastropay_sdk">YOL TARİFİ AL</string>
+    <!--endregion Merchants-->
 </resources>

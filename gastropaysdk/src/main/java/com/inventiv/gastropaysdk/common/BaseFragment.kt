@@ -6,7 +6,6 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
-import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.ui.MainActivity
 import com.inventiv.gastropaysdk.utils.REFERENCE_UNDEFINED
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
@@ -17,23 +16,19 @@ internal abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
         return requireActivity() as MainActivity
     }
 
-    fun getToolbar(): GastroPaySdkToolbar? {
-        return getMainActivity().findViewById(R.id.toolbarGastroPaySdk)
-    }
+    abstract fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView)
 
-    fun getLogo(): AppCompatImageView? {
-        return getMainActivity().findViewById(R.id.imageMainLogoGastroPaySdk)
-    }
+    abstract fun showBottomNavigation(): Boolean
 
-    fun showToolbar(showLogo: Boolean) {
-        getToolbar()?.apply {
+    fun showToolbar(showLogo: Boolean, toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
+        toolbar.apply {
             visibility = VISIBLE
             if (showLogo) {
                 setCenterImage(REFERENCE_UNDEFINED)
                 setTitle(REFERENCE_UNDEFINED)
             }
         }
-        getLogo()?.visibility = if (showLogo) {
+        logo.visibility = if (showLogo) {
             VISIBLE
         } else {
             GONE
@@ -41,12 +36,12 @@ internal abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
 
     }
 
-    fun hideToolbar() {
-        getToolbar()?.visibility = GONE
-        getLogo()?.visibility = GONE
+    fun hideToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
+        toolbar.visibility = GONE
+        logo.visibility = GONE
     }
 
-    abstract fun initDynamicViewProperties()
+    open fun initDynamicViewProperties() {}
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)

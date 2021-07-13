@@ -5,6 +5,7 @@ import android.content.Intent
 import android.location.Location
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.inventiv.gastropaysdk.R
@@ -14,6 +15,7 @@ import com.inventiv.gastropaysdk.data.model.response.Merchant
 import com.inventiv.gastropaysdk.databinding.FragmentMerchantsGastropaySdkBinding
 import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
+import com.inventiv.gastropaysdk.ui.merchants.detail.MerchantDetailFragment
 import com.inventiv.gastropaysdk.utils.CustomLoadingListItemCreator
 import com.inventiv.gastropaysdk.utils.LocationHelper
 import com.inventiv.gastropaysdk.utils.RecyclerMarginDecoration
@@ -21,6 +23,7 @@ import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.ConvertUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.PermissionUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
+import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import com.paginate.Paginate
 import kotlinx.coroutines.flow.collect
 
@@ -36,7 +39,9 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
             globalLocationCallback = object : LocationHelper.GlobalLocationCallback {
                 override fun onLocationResult(location: Location) {
                     myLocation = location
-                    viewModel.getMerchants(myLocation)
+                    if (viewModel.currentPage == 0) {
+                        viewModel.getMerchants(myLocation)
+                    }
                 }
 
                 override fun onLocationSuccess() {
@@ -50,12 +55,12 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         )
     }
     private lateinit var merchantAdapter: MerchantAdapter
-    private lateinit var merchantPaginate: Paginate
+    private var merchantPaginate: Paginate? = null
     private var merchantsList = ArrayList<Merchant>()
     private var isLoadingPaging = false
     private var allItemsLoaded = false
     private var myLocation = Location("")
-    private val paginateWinCallbacks = object : Paginate.Callbacks {
+    private val paginateMerchantsCallbacks = object : Paginate.Callbacks {
         override fun onLoadMore() {
             if (viewModel.currentPage != 0) {
                 isLoadingPaging = true
@@ -79,12 +84,17 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         ViewModelProvider(this, viewModelFactory).get(MerchantsViewModel::class.java)
     }
 
-    override fun onViewCreated(view: View, bundle: Bundle?) {
-        super.onViewCreated(view, bundle)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         setupObservers()
         setupClickListeners()
         setupMerchantAdapter()
+
+        askLocationPermission()
+    }
+
+    private fun askLocationPermission() {
         if (PermissionUtils.isGranted(
                 permission.ACCESS_FINE_LOCATION,
                 permission.ACCESS_COARSE_LOCATION
@@ -96,7 +106,9 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
 
     private fun setupMerchantAdapter() {
         merchantAdapter = MerchantAdapter(merchantsList) { merchant ->
-            LogUtils.d("Clicked", merchant)
+            getMainActivity().pushFragment(
+                MerchantDetailFragment.newInstance(merchant.merchantId)
+            )
         }
         binding.merchantsRecyclerViewGastroPaySdk.addItemDecoration(
             RecyclerMarginDecoration(
@@ -107,30 +119,29 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         )
         binding.merchantsRecyclerViewGastroPaySdk.adapter = merchantAdapter
         merchantPaginate =
-            Paginate.with(binding.merchantsRecyclerViewGastroPaySdk, paginateWinCallbacks)
+            Paginate.with(binding.merchantsRecyclerViewGastroPaySdk, paginateMerchantsCallbacks)
                 .setLoadingTriggerThreshold(1)
                 .addLoadingListItem(true)
                 .setLoadingListItemCreator(CustomLoadingListItemCreator())
                 .build()
     }
 
-    override fun initDynamicViewProperties() {
-        showToolbar(true)
-        getToolbar()?.onRightIconClick {
+    override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
+        showToolbar(true, toolbar, logo)
+        toolbar.onRightIconClick {
             getMainActivity().closeSdk()
         }
     }
+
+    override fun showBottomNavigation() = true
 
     private fun setupObservers() {
         lifecycleScope.launchWhenStarted {
             viewModel.uiState.collect { uiState ->
                 when (uiState) {
                     is Resource.Loading -> {
-                        LogUtils.d("Loading", uiState.isLoading)
                     }
                     is Resource.Success -> {
-                        LogUtils.d("Success", uiState.data)
-
                         isLoadingPaging = false
                         if (uiState.data.isLastPage) {
                             allItemsLoaded = true
@@ -145,7 +156,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
                         merchantAdapter.notifyDataSetChanged()
                     }
                     is Resource.Error -> {
-                        LogUtils.d("Error", uiState.apiError)
+                        LogUtils.e("Error", uiState.apiError)
                     }
                     else -> {
                     }
@@ -154,10 +165,21 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         }
     }
 
+    private fun resetPaginate() {
+        viewModel.currentPage = 0
+        isLoadingPaging = false
+        allItemsLoaded = false
+    }
+
     private fun setupClickListeners() {
         binding.layoutLocationPermissionGastroPaySdk.root.setOnClickListener {
             locationHelper.requestLocation()
         }
+    }
+
+    override fun onDestroyView() {
+        merchantPaginate?.unbind()
+        super.onDestroyView()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
