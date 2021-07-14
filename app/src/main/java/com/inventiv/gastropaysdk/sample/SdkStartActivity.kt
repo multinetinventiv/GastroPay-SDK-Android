@@ -63,6 +63,11 @@ class SdkStartActivity : AppCompatActivity() {
                         super.onAuthTokenReceived(authToken)
                         Log.d("onAuthTokenReceived", authToken)
                     }
+
+                    override fun onSDKClosed() {
+                        super.onSDKClosed()
+                        Log.d("onSDKClosed", "sdk closed")
+                    }
                 })
         } catch (e: GastroPaySdkException) {
             // Sdk couldn't be loaded successfully, check private key if its correct

@@ -11,14 +11,15 @@ import com.inventiv.gastropaysdk.databinding.FragmentLoginGastropaySdkBinding
 import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.AuthenticationRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
+import com.inventiv.gastropaysdk.ui.otp.NavigatedScreenType
 import com.inventiv.gastropaysdk.ui.otp.OtpFragment
 import com.inventiv.gastropaysdk.utils.*
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.KeyboardUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
-import com.ncapdevi.fragnav.FragNavController
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sdk) {
 
@@ -47,9 +48,7 @@ internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sd
             changeToLoginStyle()
             setTitle(R.string.login_toolbar_title_gastropay_sdk, R.color.celtic_gastropay_sdk)
             onLeftIconClick {
-                //TODO fix after all done
-                GastroPaySdk.getComponent().isUserLoggedIn = true
-                getMainActivity().initTab(FragNavController.TAB1)
+                getMainActivity().onBackPressed()
             }
         }
         showToolbar(false, toolbar, logo)
@@ -77,7 +76,7 @@ internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sd
     }
 
     private fun setupObservers() {
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewModel.loginState.collect { uiState ->
                 when (uiState) {
                     is Resource.Loading -> {
@@ -88,19 +87,19 @@ internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sd
                         }
                     }
                     is Resource.Success -> {
-                        LogUtils.d(uiState.data)
                         val phoneNumber =
-                            binding.phoneTextInputEditText.text.toString().toServicePhoneNumber()
+                            binding.phoneTextInputEditText.text.toString()
+                                .toServicePhoneNumber()
                         getMainActivity().pushFragment(
                             OtpFragment.newInstance(
                                 verificationCode = uiState.data.verificationCode,
                                 endTime = uiState.data.endTime,
-                                phoneNumber = phoneNumber
+                                phoneNumber = phoneNumber,
+                                from = NavigatedScreenType.LOGIN
                             )
                         )
                     }
                     is Resource.Error -> {
-                        LogUtils.e("Error", uiState.apiError)
                         uiState.apiError.handleError(requireActivity())
                     }
                     else -> {
@@ -108,5 +107,10 @@ internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sd
                 }
             }
         }
+    }
+
+    override fun onDestroyView() {
+        LogUtils.d("LoginFragment", "onDestroyView")
+        super.onDestroyView()
     }
 }

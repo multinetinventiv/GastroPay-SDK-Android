@@ -10,6 +10,7 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.inventiv.gastropaysdk.ui.MainActivity
+import com.inventiv.gastropaysdk.ui.otp.NavigatedScreenType
 import com.inventiv.gastropaysdk.ui.otp.OtpFragment
 import com.inventiv.gastropaysdk.utils.enqueueResponse
 import com.inventiv.gastropaysdk.utils.formatPhoneNumber
@@ -118,7 +119,8 @@ class OtpFragmentTest {
                 OtpFragment.newInstance(
                     phoneNumber = phoneNumber,
                     verificationCode = "1234",
-                    endTime = tenSec.toString()
+                    endTime = tenSec.toString(),
+                    from = NavigatedScreenType.LOGIN
                 )
             )
         }

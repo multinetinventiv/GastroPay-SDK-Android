@@ -107,7 +107,7 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
         if (controller.isRootFragment.not()) {
             controller.popFragment()
         } else {
-            super.onBackPressed()
+            closeSdk()
         }
     }
 

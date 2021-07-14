@@ -137,7 +137,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
     override fun showBottomNavigation() = true
 
     private fun setupObservers() {
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.uiState.collect { uiState ->
                 when (uiState) {
                     is Resource.Loading -> {

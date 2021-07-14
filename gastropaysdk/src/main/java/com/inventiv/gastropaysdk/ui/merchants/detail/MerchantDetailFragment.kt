@@ -79,7 +79,7 @@ internal class MerchantDetailFragment :
     }
 
     private fun setupObservers() {
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.uiState.collect { uiState ->
                 when (uiState) {
                     is Resource.Loading -> {
