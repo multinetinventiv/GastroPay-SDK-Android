@@ -19,8 +19,11 @@ import com.inventiv.gastropaysdk.data.response.Tag
 import com.inventiv.gastropaysdk.databinding.FragmentMerchantDetailGastropaySdkBinding
 import com.inventiv.gastropaysdk.databinding.LayoutExpensivenessGastropaySdkBinding
 import com.inventiv.gastropaysdk.model.Resource
+import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
+import com.inventiv.gastropaysdk.ui.MainViewModel
+import com.inventiv.gastropaysdk.ui.MainViewModelFactory
 import com.inventiv.gastropaysdk.utils.*
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
@@ -51,6 +54,12 @@ internal class MerchantDetailFragment :
         )
         ViewModelProvider(this, viewModelFactory).get(MerchantDetailViewModel::class.java)
     }
+    private val sharedViewModel: MainViewModel by lazy {
+        val viewModelFactory = MainViewModelFactory(
+            MainRepositoryImp(GastroPaySdk.getComponent().gastroPayService)
+        )
+        ViewModelProvider(requireActivity(), viewModelFactory).get(MainViewModel::class.java)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,7 +75,7 @@ internal class MerchantDetailFragment :
     private fun setListeners() {
         binding.apply {
             toolbar.setNavigationOnClickListener {
-                getMainActivity().onBackPressed()
+                sharedViewModel.onBackPressed()
             }
             appBarLayout.addOnOffsetChangedListener(getOffsetChangedListener())
             navigationButton.setOnClickListener {

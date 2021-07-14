@@ -10,7 +10,10 @@ import com.inventiv.gastropaysdk.common.BaseFragment
 import com.inventiv.gastropaysdk.databinding.FragmentLoginGastropaySdkBinding
 import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.AuthenticationRepositoryImp
+import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
+import com.inventiv.gastropaysdk.ui.MainViewModel
+import com.inventiv.gastropaysdk.ui.MainViewModelFactory
 import com.inventiv.gastropaysdk.ui.otp.NavigatedScreenType
 import com.inventiv.gastropaysdk.ui.otp.OtpFragment
 import com.inventiv.gastropaysdk.utils.*
@@ -30,6 +33,12 @@ internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sd
         )
         ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
     }
+    private val sharedViewModel: MainViewModel by lazy {
+        val viewModelFactory = MainViewModelFactory(
+            MainRepositoryImp(GastroPaySdk.getComponent().gastroPayService)
+        )
+        ViewModelProvider(requireActivity(), viewModelFactory).get(MainViewModel::class.java)
+    }
     private val watcher: PhoneNumberTextWatcher by lazy {
         PhoneNumberTextWatcher(
             binding.phoneTextInputEditText,
@@ -48,7 +57,7 @@ internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sd
             changeToLoginStyle()
             setTitle(R.string.login_toolbar_title_gastropay_sdk, R.color.celtic_gastropay_sdk)
             onLeftIconClick {
-                getMainActivity().onBackPressed()
+                sharedViewModel.onBackPressed()
             }
         }
         showToolbar(false, toolbar, logo)
@@ -90,7 +99,7 @@ internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sd
                         val phoneNumber =
                             binding.phoneTextInputEditText.text.toString()
                                 .toServicePhoneNumber()
-                        getMainActivity().pushFragment(
+                        sharedViewModel.pushFragment(
                             OtpFragment.newInstance(
                                 verificationCode = uiState.data.verificationCode,
                                 endTime = uiState.data.endTime,

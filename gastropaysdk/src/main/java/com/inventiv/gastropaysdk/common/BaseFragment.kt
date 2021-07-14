@@ -6,15 +6,10 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
-import com.inventiv.gastropaysdk.ui.MainActivity
 import com.inventiv.gastropaysdk.utils.REFERENCE_UNDEFINED
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 
 internal abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
-
-    fun getMainActivity(): MainActivity {
-        return requireActivity() as MainActivity
-    }
 
     abstract fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView)
 
@@ -33,7 +28,6 @@ internal abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
         } else {
             GONE
         }
-
     }
 
     fun hideToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {

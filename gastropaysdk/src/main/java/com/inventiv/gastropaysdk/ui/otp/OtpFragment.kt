@@ -7,7 +7,6 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
 import com.inventiv.gastropaysdk.data.GastroPayUser
@@ -15,7 +14,10 @@ import com.inventiv.gastropaysdk.data.response.AuthenticationResponse
 import com.inventiv.gastropaysdk.databinding.FragmentOtpGastropaySdkBinding
 import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.AuthenticationRepositoryImp
+import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
+import com.inventiv.gastropaysdk.ui.MainViewModel
+import com.inventiv.gastropaysdk.ui.MainViewModelFactory
 import com.inventiv.gastropaysdk.utils.*
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.KeyboardUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
@@ -58,6 +60,12 @@ internal class OtpFragment : BaseFragment(R.layout.fragment_otp_gastropay_sdk) {
         )
         ViewModelProvider(this, viewModelFactory).get(OtpViewModel::class.java)
     }
+    private val sharedViewModel: MainViewModel by lazy {
+        val viewModelFactory = MainViewModelFactory(
+            MainRepositoryImp(GastroPaySdk.getComponent().gastroPayService)
+        )
+        ViewModelProvider(requireActivity(), viewModelFactory).get(MainViewModel::class.java)
+    }
 
     private var simpleTextWatcher: TextWatcher = object : SimpleTextWatcher {
         override fun afterTextChanged(s: Editable?) {
@@ -83,7 +91,7 @@ internal class OtpFragment : BaseFragment(R.layout.fragment_otp_gastropay_sdk) {
             changeToLoginStyle()
             setTitle(R.string.login_toolbar_title_gastropay_sdk, R.color.celtic_gastropay_sdk)
             onLeftIconClick {
-                getMainActivity().onBackPressed()
+                sharedViewModel.onBackPressed()
             }
         }
         showToolbar(false, toolbar, logo)
@@ -179,7 +187,7 @@ internal class OtpFragment : BaseFragment(R.layout.fragment_otp_gastropay_sdk) {
     }
 
     private fun setupTimer() {
-        viewModel.viewModelScope.launch {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             val totalSeconds = endTime.calculateDifferenceWithCurrentTime()
             val tickSeconds = 1
             for (second in totalSeconds downTo tickSeconds) {
@@ -211,7 +219,7 @@ internal class OtpFragment : BaseFragment(R.layout.fragment_otp_gastropay_sdk) {
                 isUserLoggedIn = true
                 GastroPayUser.authToken = data.userToken
             }
-            getMainActivity().initTab(FragNavController.TAB1)
+            sharedViewModel.initTab(FragNavController.TAB1)
         }
     }
 }

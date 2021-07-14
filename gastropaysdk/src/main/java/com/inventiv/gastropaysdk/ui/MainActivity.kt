@@ -15,7 +15,9 @@ import com.inventiv.gastropaysdk.ui.login.LoginFragment
 import com.inventiv.gastropaysdk.ui.merchants.MerchantsFragment
 import com.inventiv.gastropaysdk.ui.pay.PayFragment
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
+import com.inventiv.gastropaysdk.utils.observeInLifecycle
 import com.ncapdevi.fragnav.FragNavController
+import kotlinx.coroutines.flow.onEach
 import java.util.*
 
 internal class MainActivity : BaseActivity(), FragNavController.RootFragmentListener {
@@ -37,6 +39,28 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
 
         prepareNavigationViews(savedInstanceState)
         setupBottomNavigation()
+        subscribeNavigationEvents()
+    }
+
+    private fun subscribeNavigationEvents() {
+        viewModel.eventsFlow
+            .onEach {
+                when (it) {
+                    MainViewModel.Event.CloseSDK -> {
+                        closeSdk()
+                    }
+                    MainViewModel.Event.OnBackPressed -> {
+                        onBackPressed()
+                    }
+                    is MainViewModel.Event.InitTab -> {
+                        initTab(it.tabIndex)
+                    }
+                    is MainViewModel.Event.PushFragment -> {
+                        pushFragment(it.fragment)
+                    }
+                }
+            }
+            .observeInLifecycle(this)
     }
 
     private fun setupBottomNavigation() {
@@ -95,11 +119,11 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
         controller.switchTab(index)
     }
 
-    fun pushFragment(fragment: BaseFragment) {
+    private fun pushFragment(fragment: BaseFragment) {
         controller.pushFragment(fragment)
     }
 
-    fun initTab(tabIndex: Int) {
+    private fun initTab(tabIndex: Int) {
         controller.initialize(tabIndex)
     }
 
