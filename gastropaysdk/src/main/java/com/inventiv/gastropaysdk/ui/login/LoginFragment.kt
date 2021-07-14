@@ -18,7 +18,6 @@ import com.inventiv.gastropaysdk.ui.otp.NavigatedScreenType
 import com.inventiv.gastropaysdk.ui.otp.OtpFragment
 import com.inventiv.gastropaysdk.utils.*
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.KeyboardUtils
-import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import kotlinx.coroutines.flow.collect
@@ -116,10 +115,5 @@ internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sd
                 }
             }
         }
-    }
-
-    override fun onDestroyView() {
-        LogUtils.d("LoginFragment", "onDestroyView")
-        super.onDestroyView()
     }
 }
