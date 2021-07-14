@@ -33,9 +33,9 @@ internal class OtpViewModel(private val repository: AuthenticationRepository) :
         }
     }
 
-    fun resendCode(phoneNumber: String) {
+    fun resendCode(phoneNumber: String, mobileDeviceToken: String = DeviceUtils.getAndroidID()) {
         val request =
-            LoginRequest(gsmNumber = phoneNumber, mobileDeviceToken = DeviceUtils.getAndroidID())
+            LoginRequest(gsmNumber = phoneNumber, mobileDeviceToken = mobileDeviceToken)
         viewModelScope.launch {
             repository.login(request).collect { response ->
                 _resendCodeState.value = response

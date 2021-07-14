@@ -2,10 +2,9 @@ package com.inventiv.gastropaysdk.repository
 
 import com.google.common.truth.Truth
 import com.inventiv.gastropaysdk.api.GastroPayService
-import com.inventiv.gastropaysdk.data.request.LoginRequest
-import com.inventiv.gastropaysdk.data.request.OtpConfirmRequest
-import com.inventiv.gastropaysdk.data.response.AuthenticationResponse
-import com.inventiv.gastropaysdk.data.response.LoginResponse
+import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
+import com.inventiv.gastropaysdk.data.response.MerchantListResponse
+import com.inventiv.gastropaysdk.data.response.MerchantResponse
 import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.utils.ApiUtil
 import com.inventiv.gastropaysdk.utils.loadingFalseExpected
@@ -16,37 +15,32 @@ import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
-class AuthenticationRepositoryTest {
+class MerchantRepositoryImpTest {
 
     private val service: GastroPayService = mock()
 
-    private val repository = AuthenticationRepositoryImp(service)
+    private val repository = MerchantRepositoryImp(service)
 
     @Test
-    fun `login repository success test`() = runBlocking {
+    fun `getMerchants repository success test`() = runBlocking {
         // Given
-        val expected = LoginResponse(
-            verificationCode = "005DI+3FQIvuS6",
-            endTime = "1626193843"
-        )
-
-        val loginRequest = LoginRequest(
-            gsmNumber = "5555555555",
-            mobileDeviceToken = "9240203ab2eb3297"
+        val expected = MerchantListResponse(
+            merchants = listOf(MerchantResponse("", "", 0.0, 0.0, 0, null, null, null, null, null)),
+            isLastPage = true
         )
 
         // When
-        whenever(service.login(loginRequest)).thenReturn(expected)
+        whenever(service.merchantsInfo(0.0, 0.0, null, false, null, 0)).thenReturn(expected)
 
         // Then
-        repository.login(loginRequest).collectIndexed { index, response ->
+        repository.getMerchants(0.0, 0.0, null, null, 0).collectIndexed { index, response ->
             if (index == 0) {
                 response.loadingTrueExpected()
             }
             if (index == 1) {
                 Truth.assertThat(response is Resource.Success)
                 val success = response as Resource.Success
-                Truth.assertThat(success.data.endTime).isEqualTo("1626193843")
+                Truth.assertThat(success.data).isEqualTo(expected)
             }
             if (index == 2) {
                 response.loadingFalseExpected()
@@ -55,23 +49,33 @@ class AuthenticationRepositoryTest {
     }
 
     @Test
-    fun `login repository error test`() = runBlocking {
+    fun `getMerchants repository error test`() = runBlocking {
         // Given
         val expected = ApiUtil.dummyHttpException(
-            response = LoginResponse::class.java,
+            response = MerchantListResponse::class.java,
             code = 400
         )
 
-        val loginRequest = LoginRequest(
-            gsmNumber = "5555555555",
-            mobileDeviceToken = "9240203ab2eb3297"
-        )
-
         // When
-        whenever(service.login(loginRequest)).thenThrow(expected)
+        whenever(
+            service.merchantsInfo(
+                0.0,
+                0.0,
+                null,
+                false,
+                null,
+                0
+            )
+        ).thenThrow(expected)
 
         // Then
-        repository.login(loginRequest).collectIndexed { index, response ->
+        repository.getMerchants(
+            0.0,
+            0.0,
+            null,
+            null,
+            0
+        ).collectIndexed { index, response ->
             if (index == 0) {
                 response.loadingTrueExpected()
             }
@@ -87,32 +91,40 @@ class AuthenticationRepositoryTest {
     }
 
     @Test
-    fun `otpConfirm repository success test`() = runBlocking {
+    fun `getMerchantDetail repository success test`() = runBlocking {
         // Given
-        val expected = AuthenticationResponse(
-            userToken = "15dadb9da0e446",
-            refreshToken = "1dfd6237df124e",
-            expirationTime = "1657730517",
-            refreshTokenExpirationTime = "1657730517"
-        )
-
-        val otpConfirmRequest = OtpConfirmRequest(
-            smsCode = "123456",
-            verificationCode = "005DI+3FQIvuS6"
+        val expected = MerchantDetailResponse(
+            merchantId = "1",
+            tags = arrayListOf(),
+            pageContent = null,
+            address = null,
+            name = "Test",
+            logoUrl = null,
+            images = arrayListOf(),
+            isBonusPoint = false,
+            rewardPercentage = null,
+            distance = null,
+            latitude = 0.0,
+            longitude = 0.0,
+            note = null,
+            rate = 0f,
+            showcaseImageUrl = null,
+            phoneNumber = null,
+            gsmNumber = null
         )
 
         // When
-        whenever(service.otpConfirm(otpConfirmRequest)).thenReturn(expected)
+        whenever(service.merchantDetail("1")).thenReturn(expected)
 
         // Then
-        repository.otpConfirm(otpConfirmRequest).collectIndexed { index, response ->
+        repository.getMerchantDetail("1").collectIndexed { index, response ->
             if (index == 0) {
                 response.loadingTrueExpected()
             }
             if (index == 1) {
                 Truth.assertThat(response is Resource.Success)
                 val success = response as Resource.Success
-                Truth.assertThat(success.data.refreshToken).isEqualTo("1dfd6237df124e")
+                Truth.assertThat(success.data).isEqualTo(expected)
             }
             if (index == 2) {
                 response.loadingFalseExpected()
@@ -121,23 +133,18 @@ class AuthenticationRepositoryTest {
     }
 
     @Test
-    fun `otpConfirm repository error test`() = runBlocking {
+    fun `getMerchantDetail repository error test`() = runBlocking {
         // Given
         val expected = ApiUtil.dummyHttpException(
-            response = AuthenticationResponse::class.java,
+            response = MerchantDetailResponse::class.java,
             code = 400
         )
 
-        val otpConfirmRequest = OtpConfirmRequest(
-            smsCode = "123456",
-            verificationCode = "005DI+3FQIvuS6"
-        )
-
         // When
-        whenever(service.otpConfirm(otpConfirmRequest)).thenThrow(expected)
+        whenever(service.merchantDetail("1")).thenThrow(expected)
 
         // Then
-        repository.otpConfirm(otpConfirmRequest).collectIndexed { index, response ->
+        repository.getMerchantDetail("1").collectIndexed { index, response ->
             if (index == 0) {
                 response.loadingTrueExpected()
             }

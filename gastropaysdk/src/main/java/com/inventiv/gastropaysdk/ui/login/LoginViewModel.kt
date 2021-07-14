@@ -19,9 +19,9 @@ internal class LoginViewModel(private val repository: AuthenticationRepository) 
     private val _loginState = MutableStateFlow<Resource<LoginResponse>>(Resource.Empty)
     val loginState: StateFlow<Resource<LoginResponse>> get() = _loginState.asStateFlow()
 
-    fun login(phoneNumber: String) {
+    fun login(phoneNumber: String, mobileDeviceToken: String = DeviceUtils.getAndroidID()) {
         val request =
-            LoginRequest(gsmNumber = phoneNumber, mobileDeviceToken = DeviceUtils.getAndroidID())
+            LoginRequest(gsmNumber = phoneNumber, mobileDeviceToken = mobileDeviceToken)
         viewModelScope.launch {
             repository.login(request).collect { response ->
                 _loginState.value = response
