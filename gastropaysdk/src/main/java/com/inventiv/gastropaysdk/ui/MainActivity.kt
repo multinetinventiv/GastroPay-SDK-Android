@@ -58,6 +58,9 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
                     is MainViewModel.Event.PushFragment -> {
                         pushFragment(it.fragment)
                     }
+                    is MainViewModel.Event.PopFragment -> {
+                        popFragment(it.depth)
+                    }
                 }
             }
             .observeInLifecycle(this)
@@ -121,6 +124,10 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
 
     private fun pushFragment(fragment: BaseFragment) {
         controller.pushFragment(fragment)
+    }
+
+    private fun popFragment(depth: Int) {
+        controller.popFragments(depth)
     }
 
     private fun initTab(tabIndex: Int) {

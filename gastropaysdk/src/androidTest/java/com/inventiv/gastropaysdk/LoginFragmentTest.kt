@@ -77,7 +77,6 @@ class LoginFragmentTest {
     @Test
     fun enter_phone_mock_server_success() {
 
-        //TODO its fail now, but MainViewModel will be abstract pushFragment and this will be fixed
         mockWebServer.enqueueResponse("login-200.json", 200)
 
         val scenario =

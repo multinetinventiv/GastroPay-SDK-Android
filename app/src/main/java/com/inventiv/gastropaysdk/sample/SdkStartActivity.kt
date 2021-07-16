@@ -84,7 +84,10 @@ class SdkStartActivity : AppCompatActivity() {
         }
 
         startSdkButton.setOnClickListener {
-            GastroPaySdk.start(this)
+            GastroPaySdk.start(
+                context = this,
+                authToken = null
+            )
         }
     }
 

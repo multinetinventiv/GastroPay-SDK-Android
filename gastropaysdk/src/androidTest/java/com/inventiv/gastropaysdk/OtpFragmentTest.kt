@@ -2,15 +2,12 @@ package com.inventiv.gastropaysdk
 
 import android.os.Bundle
 import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.test.core.app.launchActivity
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.clearText
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.inventiv.gastropaysdk.ui.MainActivity
-import com.inventiv.gastropaysdk.ui.otp.NavigatedScreenType
 import com.inventiv.gastropaysdk.ui.otp.OtpFragment
 import com.inventiv.gastropaysdk.utils.enqueueResponse
 import com.inventiv.gastropaysdk.utils.formatPhoneNumber
@@ -109,20 +106,22 @@ class OtpFragmentTest {
     fun test_server_success() {
         mockWebServer.enqueueResponse("otp-confirm-200.json", 200)
 
-        val scenario = launchActivity<MainActivity>()
-
         val phoneNumber = "5071234450"
         val tenSec = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) + 10
 
-        scenario.onActivity {
-            it.pushFragment(
-                OtpFragment.newInstance(
-                    phoneNumber = phoneNumber,
-                    verificationCode = "1234",
-                    endTime = tenSec.toString(),
-                    from = NavigatedScreenType.LOGIN
-                )
+        val bundle = Bundle().apply {
+            putString(OtpFragment.PARAM_PHONE_NUMBER, phoneNumber)
+            putString(OtpFragment.PARAM_VERIFICATION_CODE, "1234")
+            putString(OtpFragment.PARAM_END_TIME, tenSec.toString())
+        }
+        val scenario =
+            launchFragmentInContainer<OtpFragment>(
+                fragmentArgs = bundle,
+                themeResId = R.style.Theme_GastroPaySdk
             )
+
+        scenario.onFragment { fragment ->
+
         }
 
         onView(ViewMatchers.withId(R.id.loadingLayout))

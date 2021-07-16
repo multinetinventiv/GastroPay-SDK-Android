@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+// https://proandroiddev.com/android-singleliveevent-redux-with-kotlin-flow-b755c70bb055
 class FlowObserver<T>(
     lifecycleOwner: LifecycleOwner,
     private val flow: Flow<T>,

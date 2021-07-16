@@ -17,6 +17,8 @@ import java.util.concurrent.TimeUnit
 
 internal class NetworkModule(private val environment: Environment, private val logging: Boolean) {
 
+    //TODO : set GastropaySdkComponent isUserLoggedIn value based on authToken valid state on Refresh token flow
+
     private fun provideUserToken(): String {
         return GastroPayUser.authToken ?: ""
     }

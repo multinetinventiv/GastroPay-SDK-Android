@@ -14,6 +14,7 @@ internal class MainViewModel(val mainRepository: MainRepository) : BaseViewModel
         object CloseSDK : Event()
         data class InitTab(val tabIndex: Int) : Event()
         data class PushFragment(val fragment: BaseFragment) : Event()
+        data class PopFragment(val depth: Int) : Event()
     }
 
     private val eventChannel = Channel<Event>(Channel.BUFFERED)
@@ -40,6 +41,12 @@ internal class MainViewModel(val mainRepository: MainRepository) : BaseViewModel
     fun pushFragment(fragment: BaseFragment) {
         viewModelScope.launch {
             eventChannel.send(Event.PushFragment(fragment))
+        }
+    }
+
+    fun popFragment(depth: Int) {
+        viewModelScope.launch {
+            eventChannel.send(Event.PopFragment(depth))
         }
     }
 }
