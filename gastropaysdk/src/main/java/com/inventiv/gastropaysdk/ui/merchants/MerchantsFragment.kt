@@ -10,11 +10,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
-import com.inventiv.gastropaysdk.data.model.Resource
-import com.inventiv.gastropaysdk.data.model.response.Merchant
+import com.inventiv.gastropaysdk.data.response.MerchantResponse
 import com.inventiv.gastropaysdk.databinding.FragmentMerchantsGastropaySdkBinding
+import com.inventiv.gastropaysdk.model.Resource
+import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
+import com.inventiv.gastropaysdk.ui.MainViewModel
+import com.inventiv.gastropaysdk.ui.MainViewModelFactory
 import com.inventiv.gastropaysdk.ui.merchants.detail.MerchantDetailFragment
 import com.inventiv.gastropaysdk.utils.CustomLoadingListItemCreator
 import com.inventiv.gastropaysdk.utils.LocationHelper
@@ -56,7 +59,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
     }
     private lateinit var merchantAdapter: MerchantAdapter
     private var merchantPaginate: Paginate? = null
-    private var merchantsList = ArrayList<Merchant>()
+    private var merchantsList = ArrayList<MerchantResponse>()
     private var isLoadingPaging = false
     private var allItemsLoaded = false
     private var myLocation = Location("")
@@ -83,6 +86,12 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         )
         ViewModelProvider(this, viewModelFactory).get(MerchantsViewModel::class.java)
     }
+    private val sharedViewModel: MainViewModel by lazy {
+        val viewModelFactory = MainViewModelFactory(
+            MainRepositoryImp(GastroPaySdk.getComponent().gastroPayService)
+        )
+        ViewModelProvider(requireActivity(), viewModelFactory).get(MainViewModel::class.java)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -106,7 +115,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
 
     private fun setupMerchantAdapter() {
         merchantAdapter = MerchantAdapter(merchantsList) { merchant ->
-            getMainActivity().pushFragment(
+            sharedViewModel.pushFragment(
                 MerchantDetailFragment.newInstance(merchant.merchantId)
             )
         }
@@ -127,16 +136,17 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
     }
 
     override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
+        toolbar.changeToMainStyle()
         showToolbar(true, toolbar, logo)
         toolbar.onRightIconClick {
-            getMainActivity().closeSdk()
+            sharedViewModel.closeSdk()
         }
     }
 
     override fun showBottomNavigation() = true
 
     private fun setupObservers() {
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.uiState.collect { uiState ->
                 when (uiState) {
                     is Resource.Loading -> {
@@ -146,7 +156,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
                         if (uiState.data.isLastPage) {
                             allItemsLoaded = true
                         }
-                        viewModel.currentPage = uiState.data.pageIndex + 1
+                        viewModel.currentPage++
                         if (uiState.data.merchants.isNullOrEmpty()) {
                             binding.emptyLayoutGastroPaySdk.visibility = View.VISIBLE
                         } else {

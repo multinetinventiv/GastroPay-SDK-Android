@@ -6,3 +6,6 @@ const val MARKDOWN_LINK_REGEX = "\\[([^\\[\\]]*)\\]\\((.*?)\\)"
 
 fun String.formatPhoneNumber() =
     this.replaceFirst(GSM_NUMBER_REGEX.toRegex(), GSM_NUMBER_REPLACEMENT)
+
+fun String.toServicePhoneNumber() =
+    this.replace("[^\\d]".toRegex(), "").substring(1)

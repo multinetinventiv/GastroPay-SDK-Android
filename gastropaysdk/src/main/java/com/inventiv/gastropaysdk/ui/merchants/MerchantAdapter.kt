@@ -3,12 +3,12 @@ package com.inventiv.gastropaysdk.ui.merchants
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.inventiv.gastropaysdk.data.model.response.Merchant
+import com.inventiv.gastropaysdk.data.response.MerchantResponse
 import com.inventiv.gastropaysdk.databinding.ItemMerchantGastropaySdkBinding
 
 internal class MerchantAdapter(
-    var merchants: MutableList<Merchant>,
-    private val clickedListener: (merchant: Merchant) -> Unit,
+    var merchants: MutableList<MerchantResponse>,
+    private val clickedListener: (merchant: MerchantResponse) -> Unit,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = merchants.size

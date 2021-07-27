@@ -1,10 +1,12 @@
 package com.inventiv.gastropaysdk.api
 
-import com.inventiv.gastropaysdk.data.model.response.MerchantDetail
-import com.inventiv.gastropaysdk.data.model.response.MerchantPaging
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import com.inventiv.gastropaysdk.data.request.LoginRequest
+import com.inventiv.gastropaysdk.data.request.OtpConfirmRequest
+import com.inventiv.gastropaysdk.data.response.AuthenticationResponse
+import com.inventiv.gastropaysdk.data.response.LoginResponse
+import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
+import com.inventiv.gastropaysdk.data.response.MerchantListResponse
+import retrofit2.http.*
 
 internal interface GastroPayService {
 
@@ -16,8 +18,14 @@ internal interface GastroPayService {
         @Query("isBonusPoint") isBonusPoint: Boolean? = false,
         @Query("merchantName") merchantName: String?,
         @Query("currentPage") pageIndex: Int
-    ): MerchantPaging
+    ): MerchantListResponse
 
     @GET("merchant/merchant_detail/{merchantUid}")
-    suspend fun merchantDetail(@Path("merchantUid") id: String): MerchantDetail
+    suspend fun merchantDetail(@Path("merchantUid") id: String): MerchantDetailResponse
+
+    @POST("auth/login")
+    suspend fun login(@Body login: LoginRequest): LoginResponse
+
+    @POST("auth/otp_confirm")
+    suspend fun otpConfirm(@Body login: OtpConfirmRequest): AuthenticationResponse
 }

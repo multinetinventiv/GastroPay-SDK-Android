@@ -49,8 +49,6 @@ internal class PinEntryEditText : AppCompatEditText {
         mLineStrokeSelected *= multi
         mLinesPaint = Paint(paint)
         mLinesPaint!!.strokeWidth = mLineStroke
-        if (!isInEditMode) {
-        }
         setBackgroundResource(
             attrs.getAttributeResourceValue(
                 XML_NAMESPACE_ANDROID,

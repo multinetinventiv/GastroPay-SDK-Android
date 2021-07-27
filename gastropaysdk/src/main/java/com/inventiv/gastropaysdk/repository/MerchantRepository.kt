@@ -1,8 +1,8 @@
 package com.inventiv.gastropaysdk.repository
 
-import com.inventiv.gastropaysdk.data.model.Resource
-import com.inventiv.gastropaysdk.data.model.response.MerchantDetail
-import com.inventiv.gastropaysdk.data.model.response.MerchantPaging
+import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
+import com.inventiv.gastropaysdk.data.response.MerchantListResponse
+import com.inventiv.gastropaysdk.model.Resource
 import kotlinx.coroutines.flow.Flow
 
 internal interface MerchantRepository {
@@ -12,9 +12,9 @@ internal interface MerchantRepository {
         tags: String? = null,
         merchantName: String? = null,
         page: Int
-    ): Flow<Resource<MerchantPaging>>
+    ): Flow<Resource<MerchantListResponse>>
 
     fun getMerchantDetail(
         id: String
-    ): Flow<Resource<MerchantDetail>>
+    ): Flow<Resource<MerchantDetailResponse>>
 }

@@ -58,6 +58,16 @@ class SdkStartActivity : AppCompatActivity() {
                         super.onInitialized(isInitialized)
                         Log.d("isInitialized", isInitialized.toString())
                     }
+
+                    override fun onAuthTokenReceived(authToken: String) {
+                        super.onAuthTokenReceived(authToken)
+                        Log.d("onAuthTokenReceived", authToken)
+                    }
+
+                    override fun onSDKClosed() {
+                        super.onSDKClosed()
+                        Log.d("onSDKClosed", "sdk closed")
+                    }
                 })
         } catch (e: GastroPaySdkException) {
             // Sdk couldn't be loaded successfully, check private key if its correct
@@ -74,7 +84,10 @@ class SdkStartActivity : AppCompatActivity() {
         }
 
         startSdkButton.setOnClickListener {
-            GastroPaySdk.start(this)
+            GastroPaySdk.start(
+                context = this,
+                authToken = null
+            )
         }
     }
 

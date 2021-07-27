@@ -16,8 +16,8 @@ internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
 
     private val binding by viewBinding(FragmentPayGastropaySdkBinding::bind)
 
-    override fun onViewCreated(view: View, bundle: Bundle?) {
-        super.onViewCreated(view, bundle)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         PermissionUtils.permission(PermissionConstants.CAMERA)
             .callback(object : PermissionUtils.FullCallback {

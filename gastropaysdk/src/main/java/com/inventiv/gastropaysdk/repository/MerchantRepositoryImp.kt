@@ -2,10 +2,10 @@ package com.inventiv.gastropaysdk.repository
 
 import com.inventiv.gastropaysdk.api.GastroPayService
 import com.inventiv.gastropaysdk.common.BaseRepository
-import com.inventiv.gastropaysdk.data.model.Resource
-import com.inventiv.gastropaysdk.data.model.response.MerchantDetail
-import com.inventiv.gastropaysdk.data.model.response.MerchantPaging
-import com.inventiv.gastropaysdk.data.model.safeFlow
+import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
+import com.inventiv.gastropaysdk.data.response.MerchantListResponse
+import com.inventiv.gastropaysdk.model.Resource
+import com.inventiv.gastropaysdk.model.safeFlow
 import kotlinx.coroutines.flow.Flow
 
 internal class MerchantRepositoryImp(private val gastroPayService: GastroPayService) :
@@ -17,7 +17,7 @@ internal class MerchantRepositoryImp(private val gastroPayService: GastroPayServ
         tags: String?,
         merchantName: String?,
         page: Int
-    ): Flow<Resource<MerchantPaging>> {
+    ): Flow<Resource<MerchantListResponse>> {
 
         return safeFlow(
             suspendFun = {
@@ -29,18 +29,13 @@ internal class MerchantRepositoryImp(private val gastroPayService: GastroPayServ
                     merchantName,
                     page
                 )
-            }, modifyFun = { resource ->
-                if (resource is Resource.Success) {
-                    resource.data.pageIndex = page
-                }
-                return@safeFlow resource
             }
         )
     }
 
     override fun getMerchantDetail(
         id: String
-    ): Flow<Resource<MerchantDetail>> {
+    ): Flow<Resource<MerchantDetailResponse>> {
         return safeFlow {
             gastroPayService.merchantDetail(id)
         }

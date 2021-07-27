@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="40dp"
+                android:text="Cep Telefonunuzu Doğrulayın"
+                android:textColor="@color/celtic_gastropay_sdk"
+                android:textSize="27sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/infoTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/celtic_gastropay_sdk"
+                android:textSize="14sp"
+                tools:text="Lütfen XXXX XXX XX XX numaralı cep telefonunuza gelen şifreyi girin" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/timerInfoTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/celtic_gastropay_sdk"
+                android:textSize="14sp"
+                tools:text="Kodu girmeniz için 30 saniye kaldı!" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:text="Onay Kodu"
+                android:textColor="@color/suva_grey_gastropay_sdk"
+                android:textSize="14sp"
+                app:textAllCaps="true" />
+
+            <com.inventiv.gastropaysdk.view.PinEntryEditText
+                android:id="@+id/pinEntryEditText"
+                android:layout_width="192dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:cursorVisible="false"
+                android:digits="@string/digit_number_gastropay_sdk"
+                android:focusable="true"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="6"
+                android:textColorHint="@color/black_gastropay_sdk"
+                android:textIsSelectable="false"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/resendButton"
+        style="@style/Widget.Button.Yellow.GastroPaySdk"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:enabled="false"
+        android:text="@string/otp_button_resend_gastropay_sdk"
+        android:textAllCaps="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/loadingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/celtic_overlay_gastropay_sdk"
+        android:clickable="true"
+        android:focusable="true"
+        android:translationZ="10dp"
+        android:visibility="gone"
+        tools:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/progressBarGastroPaySdk"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_margin="16dp" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

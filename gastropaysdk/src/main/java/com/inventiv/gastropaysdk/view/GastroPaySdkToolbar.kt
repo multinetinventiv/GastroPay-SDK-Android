@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.databinding.LayoutToolbarGastropaySdkBinding
 import com.inventiv.gastropaysdk.utils.REFERENCE_UNDEFINED
@@ -23,54 +25,6 @@ internal class GastroPaySdkToolbar @JvmOverloads constructor(
 
     init {
         addView(binding.root)
-        val a = context.obtainStyledAttributes(attrs, R.styleable.GastroPaySdkToolbar)
-        try {
-            val title = a.getString(R.styleable.GastroPaySdkToolbar_gastropay_sdk_toolbar_title)
-            val leftIconId = a.getResourceId(
-                R.styleable.GastroPaySdkToolbar_gastropay_sdk_toolbar_left_icon,
-                REFERENCE_UNDEFINED
-            )
-            val rightIconId = a.getResourceId(
-                R.styleable.GastroPaySdkToolbar_gastropay_sdk_toolbar_right_icon,
-                REFERENCE_UNDEFINED
-            )
-            val centerImageId = a.getResourceId(
-                R.styleable.GastroPaySdkToolbar_gastropay_sdk_toolbar_center_image,
-                REFERENCE_UNDEFINED
-            )
-            val isTransparentBg = a.getBoolean(
-                R.styleable.GastroPaySdkToolbar_gastropay_sdk_toolbar_transparent_bg,
-                false
-            )
-
-            if (centerImageId != REFERENCE_UNDEFINED) {
-                setCenterImage(centerImageId)
-            } else if (!title.isNullOrEmpty()) {
-                setTitle(title)
-            } else {
-                binding.imageLogoGastroPaySdk.visibility = GONE
-                binding.textTitleGastroPaySdk.visibility = GONE
-            }
-
-            if (leftIconId != REFERENCE_UNDEFINED) {
-                setLeftIcon(leftIconId)
-            } else {
-                binding.layoutLeftGastroPaySdk.visibility = GONE
-            }
-
-            if (rightIconId != REFERENCE_UNDEFINED) {
-                setRightIcon(rightIconId)
-            } else {
-                binding.layoutRightGastroPaySdk.visibility = GONE
-            }
-
-            if (isTransparentBg) {
-                setBackgroundTransparency(true)
-            }
-
-        } finally {
-            a.recycle()
-        }
     }
 
     fun onLeftIconClick(operation: () -> Unit) {
@@ -95,31 +49,42 @@ internal class GastroPaySdkToolbar @JvmOverloads constructor(
         binding.textTitleGastroPaySdk.visibility = GONE
     }
 
-    private fun setLeftIcon(resourceId: Int) {
+    fun setLeftIcon(resourceId: Int, @ColorRes color: Int? = null) {
         if (resourceId == REFERENCE_UNDEFINED) {
             binding.layoutLeftGastroPaySdk.visibility = GONE
             return
         }
         binding.layoutLeftGastroPaySdk.visibility = VISIBLE
         binding.imageToolbarLeftGastroPaySdk.setImageResource(resourceId)
+        if (color != null) {
+            binding.imageToolbarLeftGastroPaySdk.setColorFilter(
+                ContextCompat.getColor(context, color),
+                android.graphics.PorterDuff.Mode.SRC_IN
+            )
+        }
     }
 
-    private fun setRightIcon(resourceId: Int) {
+    fun setRightIcon(resourceId: Int, @ColorRes color: Int? = null) {
         if (resourceId == REFERENCE_UNDEFINED) {
             binding.layoutRightGastroPaySdk.visibility = GONE
             return
         }
         binding.layoutRightGastroPaySdk.visibility = VISIBLE
         binding.imageToolbarRightGastroPaySdk.setImageResource(resourceId)
+        if (color != null) {
+            binding.imageToolbarRightGastroPaySdk.setColorFilter(
+                ContextCompat.getColor(context, color),
+                android.graphics.PorterDuff.Mode.SRC_IN
+            )
+        }
     }
 
-    private fun setBackgroundTransparency(transparent: Boolean) {
-        binding.rootLayoutToolbarGastroPaySdk.setBackgroundResource(
-            if (transparent) {
-                android.R.color.transparent
-            } else {
-                R.color.celtic_gastropay_sdk
-            }
+    fun _setBackgroundColor(@ColorRes color: Int) {
+        binding.rootLayoutToolbarGastroPaySdk.setBackgroundColor(
+            ContextCompat.getColor(
+                context,
+                color
+            )
         )
     }
 
@@ -133,7 +98,7 @@ internal class GastroPaySdkToolbar @JvmOverloads constructor(
         binding.textTitleGastroPaySdk.text = title
     }
 
-    fun setTitle(resourceId: Int) {
+    fun setTitle(resourceId: Int, @ColorRes color: Int? = null) {
         if (resourceId == REFERENCE_UNDEFINED) {
             binding.textTitleGastroPaySdk.visibility = GONE
             return
@@ -141,6 +106,22 @@ internal class GastroPaySdkToolbar @JvmOverloads constructor(
         binding.imageLogoGastroPaySdk.visibility = GONE
         binding.textTitleGastroPaySdk.visibility = VISIBLE
         binding.textTitleGastroPaySdk.text = context.getText(resourceId)
+
+        if (color != null) {
+            binding.textTitleGastroPaySdk.setTextColor(ContextCompat.getColor(context, color))
+        }
+    }
+
+    fun changeToMainStyle() {
+        _setBackgroundColor(R.color.celtic_gastropay_sdk)
+        setRightIcon(R.drawable.ic_close_gastropay_sdk, android.R.color.white)
+        setLeftIcon(R.drawable.ic_settings_gastropay_sdk, android.R.color.white)
+    }
+
+    fun changeToLoginStyle() {
+        _setBackgroundColor(android.R.color.transparent)
+        setLeftIcon(R.drawable.ic_arrow_back_gastropay_sdk, android.R.color.black)
+        setRightIcon(REFERENCE_UNDEFINED)
     }
 
 }

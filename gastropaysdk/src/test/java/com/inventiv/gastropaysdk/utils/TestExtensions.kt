@@ -1,7 +1,7 @@
 package com.inventiv.gastropaysdk.utils
 
 import com.google.common.truth.Truth
-import com.inventiv.gastropaysdk.data.model.Resource
+import com.inventiv.gastropaysdk.model.Resource
 
 
 fun <T> Resource<T>.emptyExpected() {

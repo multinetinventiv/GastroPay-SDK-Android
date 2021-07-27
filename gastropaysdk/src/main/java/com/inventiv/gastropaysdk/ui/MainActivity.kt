@@ -11,18 +11,20 @@ import com.inventiv.gastropaysdk.common.BaseFragment
 import com.inventiv.gastropaysdk.databinding.ActivityMainGastropaySdkBinding
 import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
+import com.inventiv.gastropaysdk.ui.login.LoginFragment
 import com.inventiv.gastropaysdk.ui.merchants.MerchantsFragment
 import com.inventiv.gastropaysdk.ui.pay.PayFragment
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
+import com.inventiv.gastropaysdk.utils.observeInLifecycle
 import com.ncapdevi.fragnav.FragNavController
+import kotlinx.coroutines.flow.onEach
 import java.util.*
 
-internal class MainActivity : BaseActivity() {
+internal class MainActivity : BaseActivity(), FragNavController.RootFragmentListener {
 
     private val binding by viewBinding(ActivityMainGastropaySdkBinding::inflate)
 
     private lateinit var controller: FragNavController
-    private val rootFragments = ArrayList<Fragment>()
 
     private val viewModel: MainViewModel by lazy {
         val viewModelFactory = MainViewModelFactory(
@@ -37,6 +39,31 @@ internal class MainActivity : BaseActivity() {
 
         prepareNavigationViews(savedInstanceState)
         setupBottomNavigation()
+        subscribeNavigationEvents()
+    }
+
+    private fun subscribeNavigationEvents() {
+        viewModel.eventsFlow
+            .onEach {
+                when (it) {
+                    MainViewModel.Event.CloseSDK -> {
+                        closeSdk()
+                    }
+                    MainViewModel.Event.OnBackPressed -> {
+                        onBackPressed()
+                    }
+                    is MainViewModel.Event.InitTab -> {
+                        initTab(it.tabIndex)
+                    }
+                    is MainViewModel.Event.PushFragment -> {
+                        pushFragment(it.fragment)
+                    }
+                    is MainViewModel.Event.PopFragment -> {
+                        popFragment(it.depth)
+                    }
+                }
+            }
+            .observeInLifecycle(this)
     }
 
     private fun setupBottomNavigation() {
@@ -58,12 +85,9 @@ internal class MainActivity : BaseActivity() {
     }
 
     private fun prepareNavigationViews(savedInstanceState: Bundle?) {
-        rootFragments.add(MerchantsFragment())
-        rootFragments.add(PayFragment())
-        rootFragments.add(MerchantsFragment())
 
         controller = FragNavController(supportFragmentManager, R.id.mainContainerGastroPaySdk)
-        controller.rootFragments = rootFragments
+        controller.rootFragmentListener = this
 
         controller.fragmentHideStrategy = FragNavController.DETACH_ON_NAVIGATE_HIDE_ON_SWITCH
         controller.transactionListener = object : FragNavController.TransactionListener {
@@ -78,6 +102,7 @@ internal class MainActivity : BaseActivity() {
                 prepareCommonViews(fragment)
             }
         }
+
         controller.initialize(FragNavController.TAB1, savedInstanceState)
     }
 
@@ -97,15 +122,50 @@ internal class MainActivity : BaseActivity() {
         controller.switchTab(index)
     }
 
-    fun pushFragment(fragment: BaseFragment) {
+    private fun pushFragment(fragment: BaseFragment) {
         controller.pushFragment(fragment)
+    }
+
+    private fun popFragment(depth: Int) {
+        controller.popFragments(depth)
+    }
+
+    private fun initTab(tabIndex: Int) {
+        controller.initialize(tabIndex)
     }
 
     override fun onBackPressed() {
         if (controller.isRootFragment.not()) {
             controller.popFragment()
         } else {
-            super.onBackPressed()
+            closeSdk()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        controller.onSaveInstanceState(outState)
+    }
+
+    override val numberOfRootFragments: Int
+        get() = if (GastroPaySdk.getComponent().isUserLoggedIn) 3 else 1
+
+    override fun getRootFragment(index: Int): Fragment {
+        return when (index) {
+            FragNavController.TAB1 -> {
+                if (GastroPaySdk.getComponent().isUserLoggedIn) {
+                    MerchantsFragment()
+                } else {
+                    LoginFragment()
+                }
+            }
+            FragNavController.TAB2 -> {
+                PayFragment()
+            }
+            FragNavController.TAB3 -> {
+                MerchantsFragment()
+            }
+            else -> throw Exception("Not valid")
         }
     }
 }

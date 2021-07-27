@@ -19,14 +19,14 @@
         <activity
             android:name=".utils.blankj.utilcode.util.UtilsTransActivity4MainProcess"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:theme="@style/GastropaySdk.ActivityTranslucent"
+            android:theme="@style/ActivityTranslucent.GastroPaySdk"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
 
         <activity
             android:name=".utils.blankj.utilcode.util.UtilsTransActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:multiprocess="true"
-            android:theme="@style/GastropaySdk.ActivityTranslucent"
+            android:theme="@style/ActivityTranslucent.GastroPaySdk"
             android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <!--endregion BlankjUtils-->
 

@@ -32,8 +32,6 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:contentInsetStart="0dp"
-        app:gastropay_sdk_toolbar_left_icon="@drawable/ic_settings_gastropay_sdk"
-        app:gastropay_sdk_toolbar_right_icon="@drawable/ic_close_gastropay_sdk"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

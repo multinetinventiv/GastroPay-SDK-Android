@@ -1,8 +1,8 @@
-package com.inventiv.gastropaysdk.merchants.merchantdetail
+package com.inventiv.gastropaysdk.viewmodel
 
 import com.google.common.truth.Truth
-import com.inventiv.gastropaysdk.data.model.Resource
-import com.inventiv.gastropaysdk.data.model.response.MerchantDetail
+import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
+import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.MerchantRepository
 import com.inventiv.gastropaysdk.ui.merchants.detail.MerchantDetailViewModel
 import com.inventiv.gastropaysdk.utils.MainCoroutineScopeRule
@@ -41,7 +41,7 @@ class MerchantDetailViewModelTest {
     @Test
     fun `viewmodel success test`() = runBlockingTest {
 
-        val expected = MerchantDetail(
+        val expected = MerchantDetailResponse(
             merchantId = "1",
             tags = arrayListOf(),
             pageContent = null,
@@ -71,7 +71,7 @@ class MerchantDetailViewModelTest {
         whenever(repository.getMerchantDetail("1")).thenReturn(flow)
 
         launch {
-            val list: List<Resource<MerchantDetail>> = viewModel.uiState.take(4).toList()
+            val list: List<Resource<MerchantDetailResponse>> = viewModel.uiState.take(4).toList()
 
             list[0].emptyExpected()
             list[1].loadingTrueExpected()
