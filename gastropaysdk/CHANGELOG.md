@@ -9,6 +9,7 @@ Tags: [Added, Changed, Deprecated, Removed, Fixed, Security]
 ## [Unreleased](https://github.com/multinetinventiv/GastroPay-SDK-Android/compare/)
 
 ### Added
+- Wallet [#120638](http://isttfs02:8080/tfs/MultinetCollection/Prj%20-%20%C4%B0sfanbul/_workitems/edit/120638)
 - Login [#117933](http://isttfs02:8080/tfs/MultinetCollection/Prj%20-%20%C4%B0sfanbul/_workitems/edit/117933)
 - Restaurant Detail [#120635](http://isttfs02:8080/tfs/MultinetCollection/Prj%20-%20%C4%B0sfanbul/_workitems/edit/120635)
 - List Restaurants [#120634](http://isttfs02:8080/tfs/MultinetCollection/Prj%20-%20%C4%B0sfanbul/_workitems/edit/120634)

@@ -14,6 +14,7 @@ import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.login.LoginFragment
 import com.inventiv.gastropaysdk.ui.merchants.MerchantsFragment
 import com.inventiv.gastropaysdk.ui.pay.PayFragment
+import com.inventiv.gastropaysdk.ui.wallet.WalletFragment
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.observeInLifecycle
 import com.ncapdevi.fragnav.FragNavController
@@ -163,7 +164,7 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
                 PayFragment()
             }
             FragNavController.TAB3 -> {
-                MerchantsFragment()
+                WalletFragment()
             }
             else -> throw Exception("Not valid")
         }

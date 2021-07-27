@@ -33,6 +33,16 @@ import kotlinx.coroutines.flow.collect
 
 internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gastropay_sdk) {
 
+    override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
+        toolbar.changeToMainStyle()
+        showToolbar(true, toolbar, logo)
+        toolbar.onRightIconClick {
+            sharedViewModel.closeSdk()
+        }
+    }
+
+    override fun showBottomNavigation() = true
+
     private val binding by viewBinding(FragmentMerchantsGastropaySdkBinding::bind)
 
     private val locationHelper: LocationHelper by lazy {
@@ -134,16 +144,6 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
                 .setLoadingListItemCreator(CustomLoadingListItemCreator())
                 .build()
     }
-
-    override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
-        toolbar.changeToMainStyle()
-        showToolbar(true, toolbar, logo)
-        toolbar.onRightIconClick {
-            sharedViewModel.closeSdk()
-        }
-    }
-
-    override fun showBottomNavigation() = true
 
     private fun setupObservers() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
