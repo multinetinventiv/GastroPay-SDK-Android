@@ -3,9 +3,8 @@ package com.inventiv.gastropaysdk.ui.wallet
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.inventiv.gastropaysdk.data.TransactionModel
 import com.inventiv.gastropaysdk.databinding.ItemWalletTransactionGastropaySdkBinding
-
-data class TransactionModel(val price : String, val date : String, val name : String, val isEarn : Boolean)
 
 internal class TransactionsAdapter(
     var transactions: MutableList<TransactionModel>,
@@ -24,7 +23,7 @@ internal class TransactionsAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is TransactionItemViewHolder -> holder.bind(transactions[position])
+            is TransactionItemViewHolder -> holder.bind(transactions[position], position)
         }
     }
 }

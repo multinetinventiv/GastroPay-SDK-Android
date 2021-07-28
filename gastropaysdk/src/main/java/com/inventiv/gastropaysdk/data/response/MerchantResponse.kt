@@ -1,6 +1,6 @@
 package com.inventiv.gastropaysdk.data.response
 
-data class MerchantResponse(
+internal data class MerchantResponse(
     val merchantId: String,
     val name: String,
     val latitude: Double,

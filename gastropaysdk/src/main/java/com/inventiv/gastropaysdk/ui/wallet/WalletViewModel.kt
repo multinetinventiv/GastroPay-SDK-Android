@@ -2,29 +2,55 @@ package com.inventiv.gastropaysdk.ui.wallet
 
 import androidx.lifecycle.viewModelScope
 import com.inventiv.gastropaysdk.common.BaseViewModel
-import com.inventiv.gastropaysdk.data.request.LoginRequest
-import com.inventiv.gastropaysdk.data.response.LoginResponse
+import com.inventiv.gastropaysdk.data.response.LastTransactionsResponse
+import com.inventiv.gastropaysdk.data.response.TransactionSummaryResponse
+import com.inventiv.gastropaysdk.data.response.WalletResponse
 import com.inventiv.gastropaysdk.model.Resource
-import com.inventiv.gastropaysdk.repository.AuthenticationRepository
-import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.DeviceUtils
+import com.inventiv.gastropaysdk.repository.WalletRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-internal class WalletViewModel(private val repository: AuthenticationRepository) :
+internal class WalletViewModel(private val repository: WalletRepository) :
     BaseViewModel() {
 
-    private val _loginState = MutableStateFlow<Resource<LoginResponse>>(Resource.Empty)
-    val loginState: StateFlow<Resource<LoginResponse>> get() = _loginState.asStateFlow()
+    private val _walletState =
+        MutableStateFlow<Resource<WalletResponse>>(Resource.Empty)
+    val wallet: StateFlow<Resource<WalletResponse>>
+        get() = _walletState.asStateFlow()
 
-    fun login(phoneNumber: String, mobileDeviceToken: String = DeviceUtils.getAndroidID()) {
-        val request =
-            LoginRequest(gsmNumber = phoneNumber, mobileDeviceToken = mobileDeviceToken)
+    private val _lastTransactionsState =
+        MutableStateFlow<Resource<List<LastTransactionsResponse>>>(Resource.Empty)
+    val lastTransactions: StateFlow<Resource<List<LastTransactionsResponse>>>
+        get() = _lastTransactionsState.asStateFlow()
+
+    private val _summaryState =
+        MutableStateFlow<Resource<TransactionSummaryResponse>>(Resource.Empty)
+    val summary: StateFlow<Resource<TransactionSummaryResponse>>
+        get() = _summaryState.asStateFlow()
+
+    fun lastTransactions(id: String) {
         viewModelScope.launch {
-            repository.login(request).collect { response ->
-                _loginState.value = response
+            repository.lastTransactions(id).collect { response ->
+                _lastTransactionsState.value = response
+            }
+        }
+    }
+
+    fun getWallet() {
+        viewModelScope.launch {
+            repository.wallet().collect { response ->
+                _walletState.value = response
+            }
+        }
+    }
+
+    fun getSummary() {
+        viewModelScope.launch {
+            repository.transactionSummary().collect { response ->
+                _summaryState.value = response
             }
         }
     }

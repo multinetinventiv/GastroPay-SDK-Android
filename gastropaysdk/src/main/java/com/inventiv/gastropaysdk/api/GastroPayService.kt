@@ -2,11 +2,9 @@ package com.inventiv.gastropaysdk.api
 
 import com.inventiv.gastropaysdk.data.request.LoginRequest
 import com.inventiv.gastropaysdk.data.request.OtpConfirmRequest
-import com.inventiv.gastropaysdk.data.response.AuthenticationResponse
-import com.inventiv.gastropaysdk.data.response.LoginResponse
-import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
-import com.inventiv.gastropaysdk.data.response.MerchantListResponse
+import com.inventiv.gastropaysdk.data.response.*
 import retrofit2.http.*
+import java.util.concurrent.TimeUnit
 
 internal interface GastroPayService {
 
@@ -28,4 +26,17 @@ internal interface GastroPayService {
 
     @POST("auth/otp_confirm")
     suspend fun otpConfirm(@Body login: OtpConfirmRequest): AuthenticationResponse
+
+    @GET("wallet/transactions/{id}/{end_time}")
+    suspend fun getLastTransactions(
+        @Path("id") id: String,
+        @Path("end_time") endTime: String = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())
+            .toString()
+    ): List<LastTransactionsResponse>
+
+    @GET("wallet/wallets")
+    suspend fun getWallet(): WalletResponse
+
+    @GET("wallet/transaction_summary")
+    suspend fun getTransactionSummary(): TransactionSummaryResponse
 }

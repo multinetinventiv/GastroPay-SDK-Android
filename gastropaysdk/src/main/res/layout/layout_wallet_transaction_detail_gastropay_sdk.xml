@@ -45,9 +45,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/wallet_point_gastropay_sdk"
-            android:textStyle="bold"
             android:textColor="@color/celtic_gastropay_sdk"
-            android:textSize="17sp" />
+            android:textSize="17sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <com.google.android.material.textview.MaterialTextView
