@@ -114,7 +114,7 @@ internal class WalletFragment : BaseFragment(R.layout.fragment_wallet_gastropay_
                     }
                     is Resource.Success -> {
                         viewModel.getSummary()
-                        viewModel.lastTransactions(
+                        viewModel.getLastTransactions(
                             uiState.data.walletUId,
                             TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()).toString()
                         )
