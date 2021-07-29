@@ -31,9 +31,9 @@ internal class WalletViewModel(private val repository: WalletRepository) :
     val summary: StateFlow<Resource<TransactionSummaryResponse>>
         get() = _summaryState.asStateFlow()
 
-    fun lastTransactions(id: String) {
+    fun lastTransactions(id: String, endTime: String) {
         viewModelScope.launch {
-            repository.lastTransactions(id).collect { response ->
+            repository.lastTransactions(id, endTime).collect { response ->
                 _lastTransactionsState.value = response
             }
         }

@@ -18,9 +18,12 @@ internal class WalletRepositoryImp(private val gastroPayService: GastroPayServic
         }
     }
 
-    override fun lastTransactions(id: String): Flow<Resource<List<LastTransactionsResponse>>> {
+    override fun lastTransactions(
+        id: String,
+        endTime: String
+    ): Flow<Resource<List<LastTransactionsResponse>>> {
         return safeFlow {
-            gastroPayService.getLastTransactions(id)
+            gastroPayService.getLastTransactions(id, endTime)
         }
     }
 

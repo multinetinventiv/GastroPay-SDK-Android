@@ -20,6 +20,7 @@ import com.inventiv.gastropaysdk.utils.handleError
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 internal class WalletFragment : BaseFragment(R.layout.fragment_wallet_gastropay_sdk) {
 
@@ -113,7 +114,10 @@ internal class WalletFragment : BaseFragment(R.layout.fragment_wallet_gastropay_
                     }
                     is Resource.Success -> {
                         viewModel.getSummary()
-                        viewModel.lastTransactions(uiState.data.walletUId)
+                        viewModel.lastTransactions(
+                            uiState.data.walletUId,
+                            TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()).toString()
+                        )
                     }
                     is Resource.Error -> {
                         uiState.apiError.handleError(requireActivity())

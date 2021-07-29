@@ -10,7 +10,10 @@ internal interface WalletRepository {
 
     fun wallet(): Flow<Resource<WalletResponse>>
 
-    fun lastTransactions(id: String): Flow<Resource<List<LastTransactionsResponse>>>
+    fun lastTransactions(
+        id: String,
+        endTime: String
+    ): Flow<Resource<List<LastTransactionsResponse>>>
 
     fun transactionSummary(): Flow<Resource<TransactionSummaryResponse>>
 
