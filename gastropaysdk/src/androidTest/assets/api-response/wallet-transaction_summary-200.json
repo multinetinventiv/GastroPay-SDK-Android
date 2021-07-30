@@ -1,0 +1,17 @@
+{
+  "totalCashback": {
+    "value": 801.07,
+    "currency": "Puan",
+    "sign": "Puan",
+    "displayValue": "801,07 Puan",
+    "moneyString": "801.07TRY"
+  },
+  "currentMonthCashBack": {
+    "value": 0,
+    "currency": "Puan",
+    "sign": "Puan",
+    "displayValue": "0 Puan",
+    "moneyString": "0TRY"
+  },
+  "monthlyInfo": []
+}

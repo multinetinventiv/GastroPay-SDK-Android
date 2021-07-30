@@ -139,7 +139,7 @@ internal class WalletFragment : BaseFragment(R.layout.fragment_wallet_gastropay_
                     }
                     is Resource.Success -> {
                         binding.layoutWalletTransactionDetail.apply {
-                            valueTextView.text = uiState.data.totalCashback.value.toString()
+                            myTotalPointsTextView.text = uiState.data.totalCashback.value.toString()
                         }
                     }
                     is Resource.Error -> {
