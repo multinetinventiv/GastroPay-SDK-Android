@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="padding_small_gastropay_sdk">8dp</dimen>
     <dimen name="padding_normal_gastropay_sdk">16dp</dimen>
     <dimen name="padding_large_gastropay_sdk">24dp</dimen>
 

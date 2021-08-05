@@ -71,81 +71,97 @@ internal class WalletFragment : BaseFragment(R.layout.fragment_wallet_gastropay_
     }
 
     private fun setupObservers() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.lastTransactions.collect { uiState ->
-                when (uiState) {
-                    is Resource.Loading -> {
-                        if (uiState.isLoading) {
-                            binding.loadingLayout.visibility = View.VISIBLE
-                        } else {
-                            binding.loadingLayout.visibility = View.GONE
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            launch {
+                viewModel.lastTransactions.collect { uiState ->
+                    when (uiState) {
+                        is Resource.Loading -> {
+                            if (uiState.isLoading) {
+                                binding.loadingLayout.visibility = View.VISIBLE
+                            } else {
+                                binding.loadingLayout.visibility = View.GONE
+                            }
+                        }
+                        is Resource.Success -> {
+                            if (uiState.data.isNullOrEmpty()) {
+                                binding.textNoTransactions.visibility = View.VISIBLE
+                                binding.transactionsRecyclerViewGastroPaySdk.visibility = View.GONE
+                            } else {
+                                binding.textNoTransactions.visibility = View.GONE
+                                binding.transactionsRecyclerViewGastroPaySdk.visibility =
+                                    View.VISIBLE
+
+                                transactionsList.clear()
+                                uiState.data.forEach {
+                                    transactionsList.add(
+                                        TransactionModel(
+                                            name = it.merchantName,
+                                            date = it.transactionDate,
+                                            price = it.transactionAmount.displayValue,
+                                            isEarn = it.transactionAmount.value >= 0
+                                        )
+                                    )
+                                }
+                                transactionsAdapter.notifyDataSetChanged()
+                            }
+                        }
+                        is Resource.Error -> {
+                            uiState.apiError.handleError(requireActivity())
+                        }
+                        else -> {
                         }
                     }
-                    is Resource.Success -> {
-                        uiState.data.forEach {
-                            transactionsList.add(
-                                TransactionModel(
-                                    name = it.merchantName,
-                                    date = it.transactionDate,
-                                    price = it.transactionAmount.displayValue,
-                                    isEarn = it.transactionAmount.value >= 0
-                                )
+                }
+            }
+
+            launch {
+                viewModel.summary.collect { uiState ->
+                    when (uiState) {
+                        is Resource.Loading -> {
+                            if (uiState.isLoading) {
+                                binding.loadingLayout.visibility = View.VISIBLE
+                            } else {
+                                binding.loadingLayout.visibility = View.GONE
+                            }
+                        }
+                        is Resource.Success -> {
+                            binding.layoutWalletTransactionDetail.apply {
+                                myTotalPointsTextView.text =
+                                    uiState.data.totalCashback.value.toString()
+                            }
+                        }
+                        is Resource.Error -> {
+                            uiState.apiError.handleError(requireActivity())
+                        }
+                        else -> {
+                        }
+                    }
+                }
+            }
+
+            launch {
+                viewModel.wallet.collect { uiState ->
+                    when (uiState) {
+                        is Resource.Loading -> {
+                            if (uiState.isLoading) {
+                                binding.loadingLayout.visibility = View.VISIBLE
+                            } else {
+                                binding.loadingLayout.visibility = View.GONE
+                            }
+                        }
+                        is Resource.Success -> {
+                            viewModel.getSummary()
+                            viewModel.getLastTransactions(
+                                uiState.data.walletUId,
+                                TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())
+                                    .toString()
                             )
                         }
-                        transactionsAdapter.notifyDataSetChanged()
-                    }
-                    is Resource.Error -> {
-                        uiState.apiError.handleError(requireActivity())
-                    }
-                    else -> {
-                    }
-                }
-            }
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.wallet.collect { uiState ->
-                when (uiState) {
-                    is Resource.Loading -> {
-                        if (uiState.isLoading) {
-                            binding.loadingLayout.visibility = View.VISIBLE
-                        } else {
-                            binding.loadingLayout.visibility = View.GONE
+                        is Resource.Error -> {
+                            uiState.apiError.handleError(requireActivity())
                         }
-                    }
-                    is Resource.Success -> {
-                        viewModel.getSummary()
-                        viewModel.getLastTransactions(
-                            uiState.data.walletUId,
-                            TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()).toString()
-                        )
-                    }
-                    is Resource.Error -> {
-                        uiState.apiError.handleError(requireActivity())
-                    }
-                    else -> {
-                    }
-                }
-            }
-        }
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.summary.collect { uiState ->
-                when (uiState) {
-                    is Resource.Loading -> {
-                        if (uiState.isLoading) {
-                            binding.loadingLayout.visibility = View.VISIBLE
-                        } else {
-                            binding.loadingLayout.visibility = View.GONE
+                        else -> {
                         }
-                    }
-                    is Resource.Success -> {
-                        binding.layoutWalletTransactionDetail.apply {
-                            myTotalPointsTextView.text = uiState.data.totalCashback.value.toString()
-                        }
-                    }
-                    is Resource.Error -> {
-                        uiState.apiError.handleError(requireActivity())
-                    }
-                    else -> {
                     }
                 }
             }

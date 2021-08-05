@@ -16,6 +16,8 @@ import kotlinx.coroutines.launch
 internal class WalletViewModel(private val repository: WalletRepository) :
     BaseViewModel() {
 
+    private var progressCount = 0
+
     private val _walletState =
         MutableStateFlow<Resource<WalletResponse>>(Resource.Empty)
     val wallet: StateFlow<Resource<WalletResponse>>
@@ -34,7 +36,13 @@ internal class WalletViewModel(private val repository: WalletRepository) :
     fun getLastTransactions(id: String, endTime: String) {
         viewModelScope.launch {
             repository.lastTransactions(id, endTime).collect { response ->
-                _lastTransactionsState.value = response
+                var transferFlowState = true
+                if (response is Resource.Loading) {
+                    transferFlowState = prepareProgressVisibilityState(response)
+                }
+                if (transferFlowState) {
+                    _lastTransactionsState.value = response
+                }
             }
         }
     }
@@ -42,7 +50,13 @@ internal class WalletViewModel(private val repository: WalletRepository) :
     fun getWallet() {
         viewModelScope.launch {
             repository.wallet().collect { response ->
-                _walletState.value = response
+                var transferFlowState = true
+                if (response is Resource.Loading) {
+                    transferFlowState = prepareProgressVisibilityState(response)
+                }
+                if (transferFlowState) {
+                    _walletState.value = response
+                }
             }
         }
     }
@@ -50,8 +64,33 @@ internal class WalletViewModel(private val repository: WalletRepository) :
     fun getSummary() {
         viewModelScope.launch {
             repository.transactionSummary().collect { response ->
-                _summaryState.value = response
+                var transferFlowState = true
+                if (response is Resource.Loading) {
+                    transferFlowState = prepareProgressVisibilityState(response)
+                }
+                if (transferFlowState) {
+                    _summaryState.value = response
+                }
             }
         }
+    }
+
+    private fun prepareProgressVisibilityState(resource: Resource.Loading): Boolean {
+        progressCount = when {
+            resource.isLoading -> {
+                progressCount.plus(1)
+            }
+            progressCount > 0 -> {
+                progressCount.minus(1)
+            }
+            else -> {
+                progressCount
+            }
+        }
+        var transferFlowState = true
+        if (!resource.isLoading && progressCount > 0) {
+            transferFlowState = false
+        }
+        return transferFlowState
     }
 }
