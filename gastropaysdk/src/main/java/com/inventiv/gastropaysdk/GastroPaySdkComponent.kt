@@ -18,7 +18,7 @@ internal class GastroPaySdkComponent(
     private val logging: Boolean?
 ) {
     val gastroPayService: GastroPayService
-    var isUserLoggedIn: Boolean = false
+    var isUserLoggedIn: Boolean = true
     var globalGastroPaySdkListener: GastroPaySdkListener? = null
 
     init {

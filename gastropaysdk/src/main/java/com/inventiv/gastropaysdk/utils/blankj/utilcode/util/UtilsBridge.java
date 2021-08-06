@@ -1,5 +1,7 @@
 package com.inventiv.gastropaysdk.utils.blankj.utilcode.util;
 
+import static android.Manifest.permission.CALL_PHONE;
+
 import android.app.Activity;
 import android.app.Application;
 import android.app.Notification;
@@ -34,8 +36,6 @@ import java.lang.reflect.Type;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import static android.Manifest.permission.CALL_PHONE;
 
 /**
  * <pre>

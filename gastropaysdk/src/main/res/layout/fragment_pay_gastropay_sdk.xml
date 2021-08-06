@@ -4,6 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <fragment
+        android:id="@+id/qrCodeReaderFragment"
+        android:name="com.inventiv.gastropaysdk.utils.qrreader.QRReaderFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/testTextView"
         android:layout_width="0dp"
@@ -14,5 +24,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.inventiv.gastropaysdk.utils.qrreader.QROverlayView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar_gastropay_sdk" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,7 @@
 package com.inventiv.gastropaysdk.utils.blankj.utilcode.util;
 
+import static android.Manifest.permission.EXPAND_STATUS_BAR;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -26,8 +28,6 @@ import androidx.annotation.RequiresPermission;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import java.lang.reflect.Method;
-
-import static android.Manifest.permission.EXPAND_STATUS_BAR;
 
 /**
  * <pre>

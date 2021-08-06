@@ -81,16 +81,19 @@ dependencies {
     implementation(deps.lifecycleRuntime)
     implementation(deps.retrofit)
     implementation(deps.retrofitConverter)
-    implementation(deps.okhttp) {
-        force = true //API 19 support
-    }
+    implementation(deps.okhttp)
     implementation(deps.okhttpInterceptor)
 
     implementation(deps.glide)
     kapt(deps.glideKapt)
 
-    implementation(deps.zxing)
     implementation(deps.fragnav)
     implementation(deps.paginate)
     implementation(deps.alerter)
+
+    implementation(deps.camera_core)
+    implementation(deps.camera_2)
+    implementation(deps.camera_lifecycle)
+    implementation(deps.camera_view)
+    implementation(deps.camera_ml)
 }

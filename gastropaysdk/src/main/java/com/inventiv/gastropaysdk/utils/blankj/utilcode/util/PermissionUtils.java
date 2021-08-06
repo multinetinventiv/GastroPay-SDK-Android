@@ -1,5 +1,7 @@
 package com.inventiv.gastropaysdk.utils.blankj.utilcode.util;
 
+import static com.inventiv.gastropaysdk.utils.blankj.utilcode.constant.PermissionConstants.PermissionGroup;
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -27,8 +29,6 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-import static com.inventiv.gastropaysdk.utils.blankj.utilcode.constant.PermissionConstants.PermissionGroup;
 
 /**
  * <pre>

@@ -1,5 +1,7 @@
 package com.inventiv.gastropaysdk.utils.blankj.utilcode.util;
 
+import static android.Manifest.permission.KILL_BACKGROUND_PROCESSES;
+
 import android.app.ActivityManager;
 import android.app.AppOpsManager;
 import android.app.Application;
@@ -27,8 +29,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static android.Manifest.permission.KILL_BACKGROUND_PROCESSES;
 
 /**
  * <pre>
