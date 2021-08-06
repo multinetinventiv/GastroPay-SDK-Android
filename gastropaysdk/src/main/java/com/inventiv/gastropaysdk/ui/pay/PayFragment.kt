@@ -6,11 +6,14 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.camera.core.CameraSelector
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.google.mlkit.vision.barcode.Barcode
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
 import com.inventiv.gastropaysdk.databinding.FragmentPayGastropaySdkBinding
+import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.MainRepositoryImp
+import com.inventiv.gastropaysdk.repository.PaymentRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.ui.MainViewModelFactory
@@ -18,10 +21,13 @@ import com.inventiv.gastropaysdk.utils.blankj.utilcode.constant.PermissionConsta
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.PermissionUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
+import com.inventiv.gastropaysdk.utils.handleError
 import com.inventiv.gastropaysdk.utils.qrreader.QRCameraConfiguration
 import com.inventiv.gastropaysdk.utils.qrreader.QRReaderFragment
 import com.inventiv.gastropaysdk.utils.qrreader.QRReaderListener
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
 
@@ -40,6 +46,13 @@ internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
         ViewModelProvider(requireActivity(), viewModelFactory).get(MainViewModel::class.java)
     }
 
+    private val viewModel: PayViewModel by lazy {
+        val viewModelFactory = PayViewModelFactory(
+            PaymentRepositoryImp(GastroPaySdk.getComponent().gastroPayService)
+        )
+        ViewModelProvider(this, viewModelFactory).get(PayViewModel::class.java)
+    }
+
     private val qrCodeReader: QRReaderFragment by lazy {
         childFragmentManager.findFragmentById(R.id.qrCodeReaderFragment) as QRReaderFragment
     }
@@ -48,11 +61,19 @@ internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
         super.onViewCreated(view, savedInstanceState)
 
         setupToolbar()
+        setupObservers()
 
         qrCodeReader.setListener(object : QRReaderListener {
 
             override fun onRead(barcode: Barcode, barcodes: List<Barcode>) {
                 binding.testTextView.text = barcode.displayValue
+
+                barcode.displayValue?.apply {
+                    if (viewModel.requestInProgress.not()) {
+                        viewModel.requestInProgress = true
+                        viewModel.provisionInformation(this)
+                    }
+                }
             }
 
             override fun onError(exception: Exception) {
@@ -85,7 +106,36 @@ internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
             textTitleGastroPaySdk.visibility = View.VISIBLE
             layoutLeftGastroPaySdk.visibility = View.VISIBLE
             layoutLeftGastroPaySdk.setOnClickListener {
+                //TODO must back
                 sharedViewModel.onBackPressed()
+            }
+        }
+    }
+
+    private fun setupObservers() {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            launch {
+                viewModel.provisionInformationState.collect { uiState ->
+                    when (uiState) {
+                        is Resource.Loading -> {
+                            if (uiState.isLoading) {
+                                binding.loadingLayout.visibility = View.VISIBLE
+                            } else {
+                                binding.loadingLayout.visibility = View.GONE
+                            }
+                        }
+                        is Resource.Success -> {
+                            viewModel.requestInProgress = false
+                            LogUtils.d(uiState.data)
+                        }
+                        is Resource.Error -> {
+                            viewModel.requestInProgress = false
+                            uiState.apiError.handleError(requireActivity())
+                        }
+                        else -> {
+                        }
+                    }
+                }
             }
         }
     }
