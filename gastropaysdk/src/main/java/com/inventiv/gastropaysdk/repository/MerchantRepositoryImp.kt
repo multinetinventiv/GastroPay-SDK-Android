@@ -2,10 +2,10 @@ package com.inventiv.gastropaysdk.repository
 
 import com.inventiv.gastropaysdk.api.GastroPayService
 import com.inventiv.gastropaysdk.common.BaseRepository
+import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
 import com.inventiv.gastropaysdk.data.response.MerchantListResponse
-import com.inventiv.gastropaysdk.model.Resource
-import com.inventiv.gastropaysdk.model.safeFlow
+import com.inventiv.gastropaysdk.data.safeFlow
 import kotlinx.coroutines.flow.Flow
 
 internal class MerchantRepositoryImp(private val gastroPayService: GastroPayService) :

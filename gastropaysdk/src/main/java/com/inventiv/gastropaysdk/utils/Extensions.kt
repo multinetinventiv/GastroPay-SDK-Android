@@ -13,8 +13,8 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import com.inventiv.gastropaysdk.R
+import com.inventiv.gastropaysdk.data.ApiError
 import com.inventiv.gastropaysdk.data.response.ErrorResponse
-import com.inventiv.gastropaysdk.model.ApiError
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.GsonUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.tapadoo.alerter.Alerter

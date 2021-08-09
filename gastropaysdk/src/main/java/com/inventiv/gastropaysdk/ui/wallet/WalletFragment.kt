@@ -7,9 +7,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
+import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.TransactionModel
 import com.inventiv.gastropaysdk.databinding.FragmentWalletGastropaySdkBinding
-import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.repository.WalletRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk

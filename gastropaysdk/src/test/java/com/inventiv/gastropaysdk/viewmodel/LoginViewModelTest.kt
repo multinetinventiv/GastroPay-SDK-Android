@@ -2,9 +2,9 @@ package com.inventiv.gastropaysdk.viewmodel
 
 import com.google.common.truth.Truth
 import com.inventiv.gastropaysdk.api.GastroPayService
+import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.request.LoginRequest
 import com.inventiv.gastropaysdk.data.response.LoginResponse
-import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.AuthenticationRepositoryImp
 import com.inventiv.gastropaysdk.ui.login.LoginViewModel
 import com.inventiv.gastropaysdk.utils.MainCoroutineScopeRule

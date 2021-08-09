@@ -2,11 +2,11 @@ package com.inventiv.gastropaysdk.viewmodel
 
 import com.google.common.truth.Truth
 import com.inventiv.gastropaysdk.api.GastroPayService
+import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.response.AmountModel
 import com.inventiv.gastropaysdk.data.response.LastTransactionsResponse
 import com.inventiv.gastropaysdk.data.response.TransactionSummaryResponse
 import com.inventiv.gastropaysdk.data.response.WalletResponse
-import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.WalletRepositoryImp
 import com.inventiv.gastropaysdk.ui.wallet.WalletViewModel
 import com.inventiv.gastropaysdk.utils.MainCoroutineScopeRule

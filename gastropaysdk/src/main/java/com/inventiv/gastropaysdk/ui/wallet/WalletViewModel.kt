@@ -2,10 +2,10 @@ package com.inventiv.gastropaysdk.ui.wallet
 
 import androidx.lifecycle.viewModelScope
 import com.inventiv.gastropaysdk.common.BaseViewModel
+import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.response.LastTransactionsResponse
 import com.inventiv.gastropaysdk.data.response.TransactionSummaryResponse
 import com.inventiv.gastropaysdk.data.response.WalletResponse
-import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.WalletRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

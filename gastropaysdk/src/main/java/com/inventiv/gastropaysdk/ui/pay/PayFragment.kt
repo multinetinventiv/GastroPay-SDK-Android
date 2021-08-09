@@ -10,8 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import com.google.mlkit.vision.barcode.Barcode
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
+import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.databinding.FragmentPayGastropaySdkBinding
-import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.repository.PaymentRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk

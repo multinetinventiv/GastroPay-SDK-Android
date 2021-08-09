@@ -2,8 +2,8 @@ package com.inventiv.gastropaysdk.ui.merchants.detail
 
 import androidx.lifecycle.viewModelScope
 import com.inventiv.gastropaysdk.common.BaseViewModel
+import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
-import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.MerchantRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

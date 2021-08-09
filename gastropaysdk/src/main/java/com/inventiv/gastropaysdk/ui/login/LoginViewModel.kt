@@ -2,9 +2,9 @@ package com.inventiv.gastropaysdk.ui.login
 
 import androidx.lifecycle.viewModelScope
 import com.inventiv.gastropaysdk.common.BaseViewModel
+import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.request.LoginRequest
 import com.inventiv.gastropaysdk.data.response.LoginResponse
-import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.AuthenticationRepository
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.DeviceUtils
 import kotlinx.coroutines.flow.MutableStateFlow
