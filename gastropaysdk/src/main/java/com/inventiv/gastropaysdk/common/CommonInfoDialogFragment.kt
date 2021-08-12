@@ -26,7 +26,7 @@ class CommonInfoDialogFragment(
         fun newInstance(
             resImageId: Int,
             title: String,
-            description: String,
+            description: String?,
             buttonText: String,
             dismissed: () -> Unit,
             buttonClick: (dialog: CommonInfoDialogFragment) -> Unit
@@ -52,8 +52,8 @@ class CommonInfoDialogFragment(
             getInt(PARAM_IMAGE_RESID).let { binding.imageInfoDialogGastroPaySdk.setImageResource(it) }
             getString(PARAM_TITLE)?.let { binding.titleTextViewGastroPaySdk.text = it }
             getString(PARAM_BUTTON_TEXT).let { binding.materialButtonGastroPaySdk.text = it }
-            getString(PARAM_DESCRIPTION).let {
-                if (!it.isNullOrEmpty()) {
+            getString(PARAM_DESCRIPTION, null)?.let {
+                if (it.isNotEmpty()) {
                     binding.descTextViewGastroPaySdk.visibility = View.VISIBLE
                     binding.descTextViewGastroPaySdk.text = it
                 }

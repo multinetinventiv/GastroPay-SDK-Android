@@ -12,6 +12,7 @@ import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.data.ApiError
 import com.inventiv.gastropaysdk.data.response.ErrorResponse
@@ -104,6 +105,14 @@ internal fun ApiError.handleError(activity: Activity) {
     Alerter.create(activity)
         .setTitle(title)
         .setText(message)
+        .setIcon(R.drawable.ic_warning_gastropay_sdk)
+        .setBackgroundColorRes(R.color.reddish_orange_gastropay_sdk)
+        .show()
+}
+
+internal fun Fragment.showError(message: String?) {
+    Alerter.create(requireActivity())
+        .setTitle(message ?: String())
         .setIcon(R.drawable.ic_warning_gastropay_sdk)
         .setBackgroundColorRes(R.color.reddish_orange_gastropay_sdk)
         .show()

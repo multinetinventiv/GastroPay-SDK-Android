@@ -50,5 +50,8 @@
 
     <!--region QR-->
     <string name="qr_scan_qrcode_gastropay_sdk">Kare Kod Okut</string>
-    <!--endregion Wallet-->
+    <string name="qr_scan_popup_camera_permission_body_gastropay_sdk">"Bu özellik için gerekli kamera izni devre dışı! Ayarlardan izinlerinizi ayarlayabilirsiniz."</string>
+    <string name="qr_scan_popup_camera_permission_action_button_gastropay_sdk">"AYARLARA GİT"</string>
+    <string name="qr_scan_qrcode_reading_error">"QR Kod okuma işleminde bir sorun yaşandı. Lütfen tekrar deneyiniz."</string>
+    <!--endregion QR-->
 </resources>
