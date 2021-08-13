@@ -1,3 +1,3 @@
 package com.inventiv.gastropaysdk.common
 
-abstract class BaseRequest
+internal abstract class BaseRequest

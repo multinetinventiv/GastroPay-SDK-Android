@@ -37,4 +37,13 @@
     <string name="merchant_detail_description_gastropay_sdk">AÇIKLAMA</string>
     <string name="merchant_detail_navigation_button_gastropay_sdk">YOL TARİFİ AL</string>
     <!--endregion Merchants-->
+
+    <!--region Wallet-->
+    <string name="wallet_last_transactions_gastropay_sdk">Son İşlemler</string>
+    <string name="wallet_my_saved_points_gastropay_sdk">Biriken TL Puanlarım</string>
+    <string name="wallet_point_gastropay_sdk">Puan</string>
+    <string name="wallet_spend_gastropay_sdk">Harcama</string>
+    <string name="wallet_earn_gastropay_sdk">Kazanım</string>
+    <string name="wallet_no_transactions">"Son yapılan işleminiz bulunmamaktadır"</string>
+    <!--endregion Wallet-->
 </resources>

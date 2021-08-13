@@ -63,7 +63,7 @@ fun <T> safeFlow(
     }
 }
 
-suspend fun <T> FlowCollector<Resource<T>>.emitError(
+internal suspend fun <T> FlowCollector<Resource<T>>.emitError(
     apiError: ApiError,
     modifyFun: ((Resource<T>) -> Resource<T>)? = null
 ) {
@@ -75,7 +75,7 @@ suspend fun <T> FlowCollector<Resource<T>>.emitError(
     }
 }
 
-suspend fun <T> FlowCollector<Resource<T>>.emitSuccess(
+internal suspend fun <T> FlowCollector<Resource<T>>.emitSuccess(
     result: T,
     modifyFun: ((Resource<T>) -> Resource<T>)? = null
 ) {

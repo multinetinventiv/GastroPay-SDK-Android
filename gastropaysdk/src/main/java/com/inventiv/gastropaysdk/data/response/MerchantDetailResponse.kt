@@ -3,7 +3,7 @@ package com.inventiv.gastropaysdk.data.response
 import com.inventiv.gastropaysdk.common.BaseResponse
 import kotlin.math.roundToInt
 
-data class MerchantDetailResponse(
+internal data class MerchantDetailResponse(
     val merchantId: String,
     val tags: List<Tag>,
     val pageContent: PageContent?,
@@ -30,21 +30,21 @@ data class MerchantDetailResponse(
     }
 }
 
-data class PageContent(
+internal data class PageContent(
     val id: String?,
     val title: String?,
     val content: String?,
     val icon: ImageResponse?
 )
 
-data class Tag(
+internal data class Tag(
     val id: String,
     val tagName: String,
     val icon: ImageResponse,
     var isSelected: Boolean = false
 )
 
-data class Address(
+internal data class Address(
     val id: String,
     val city: String?,
     val district: String?,

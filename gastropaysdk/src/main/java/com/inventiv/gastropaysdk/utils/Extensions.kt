@@ -40,7 +40,7 @@ internal fun Context.getDistanceAsMeters(distance: Int): String {
  * This shows a UI with the number being dialed, allowing the user to explicitly initiate the call.
  * @return false if exception exist
  */
-fun Context.openPhoneDialer(phoneNumber: String): Boolean = try {
+internal fun Context.openPhoneDialer(phoneNumber: String): Boolean = try {
     val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null))
     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
     startActivity(intent)
@@ -50,13 +50,13 @@ fun Context.openPhoneDialer(phoneNumber: String): Boolean = try {
     false
 }
 
-fun Context.openGoogleMap(latitude: Double, longitude: Double) {
+internal fun Context.openGoogleMap(latitude: Double, longitude: Double) {
     val uri = Uri.parse("http://maps.google.com/maps?daddr=${latitude},${longitude}")
     val intent = Intent(Intent.ACTION_VIEW, uri)
     startActivity(intent)
 }
 
-fun TextView.markdownText(
+internal fun TextView.markdownText(
     content: String
 ) {
     val spannable = SpannableStringBuilder()
@@ -86,9 +86,10 @@ fun TextView.markdownText(
     movementMethod = LinkMovementMethod.getInstance()
 }
 
-fun Context.isValidGlideContext() = this !is Activity || (!this.isDestroyed && !this.isFinishing)
+internal fun Context.isValidGlideContext() =
+    this !is Activity || (!this.isDestroyed && !this.isFinishing)
 
-fun ApiError.handleError(activity: Activity) {
+internal fun ApiError.handleError(activity: Activity) {
     var title = this.code.toString()
     var message = this.message
 
@@ -111,7 +112,7 @@ fun ApiError.handleError(activity: Activity) {
 /**
  * @return seconds
  */
-fun Long.calculateDifferenceWithCurrentTime(): Long {
+internal fun Long.calculateDifferenceWithCurrentTime(): Long {
     val currentTime = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())
     return (this - currentTime)
 }

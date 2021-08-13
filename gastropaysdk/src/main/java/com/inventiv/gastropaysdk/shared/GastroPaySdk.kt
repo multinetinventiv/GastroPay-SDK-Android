@@ -62,6 +62,8 @@ object GastroPaySdk {
         Intent(context, MainActivity::class.java).apply {
             context.startActivity(this)
             GastroPayUser.authToken = authToken
+            //TODO : logout users on sdk start - this code should be removed on refresh token setup
+            this@GastroPaySdk.getComponent().isUserLoggedIn = false
         }
     }
 

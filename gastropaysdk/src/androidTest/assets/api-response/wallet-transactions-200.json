@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "transactionAmount": {
+      "value": 15,
+      "currency": "TRY",
+      "sign": "₺",
+      "displayValue": "+ 15,00 ₺"
+    },
+    "lastWalletBalance": {
+      "value": 0,
+      "currency": "TRY",
+      "sign": "₺",
+      "displayValue": "0,00 ₺"
+    },
+    "lastCashBackBalance": {
+      "value": 327.19,
+      "currency": "TRY",
+      "sign": "₺",
+      "displayValue": "327,19 ₺"
+    },
+    "transactionDate": "1627560452",
+    "walletTransactionType": "10",
+    "isCancelled": false,
+    "card": {
+      "number": "",
+      "alias": ""
+    },
+    "merchantName": "Merchant Name Here",
+    "invoiceNumber": null,
+    "walletTransactionDetails": [
+      {
+        "id": 1,
+        "transactionAmount": {
+          "value": 15,
+          "currency": "TRY",
+          "sign": "₺",
+          "displayValue": "+ 15,00 ₺"
+        },
+        "type": 20
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "transactionAmount": {
+      "value": 5,
+      "currency": "TRY",
+      "sign": "₺",
+      "displayValue": "+ 5,00 ₺"
+    },
+    "lastWalletBalance": {
+      "value": 0,
+      "currency": "TRY",
+      "sign": "₺",
+      "displayValue": "0,00 ₺"
+    },
+    "lastCashBackBalance": {
+      "value": 27.19,
+      "currency": "TRY",
+      "sign": "₺",
+      "displayValue": "27,19 ₺"
+    },
+    "transactionDate": "1627560453",
+    "walletTransactionType": "10",
+    "isCancelled": false,
+    "card": {
+      "number": "",
+      "alias": ""
+    },
+    "merchantName": "Merchant Name Here 2",
+    "invoiceNumber": null,
+    "walletTransactionDetails": [
+      {
+        "id": 2,
+        "transactionAmount": {
+          "value": 5,
+          "currency": "TRY",
+          "sign": "₺",
+          "displayValue": "+ 5,00 ₺"
+        },
+        "type": 20
+      }
+    ]
+  }
+]
