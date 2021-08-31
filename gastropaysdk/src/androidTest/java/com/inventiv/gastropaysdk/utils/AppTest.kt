@@ -1,12 +1,12 @@
 package com.inventiv.gastropaysdk.utils
 
+import android.app.Application
 import android.util.Log
-import androidx.multidex.MultiDexApplication
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.shared.GastroPaySdkListener
 import com.inventiv.gastropaysdk.shared.Language
 
-class AppTest : MultiDexApplication() {
+class AppTest : Application() {
     override fun onCreate() {
         super.onCreate()
 

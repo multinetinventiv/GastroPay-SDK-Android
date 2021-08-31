@@ -1,4 +1,4 @@
-package com.inventiv.gastropaysdk.model
+package com.inventiv.gastropaysdk.data
 
 import kotlinx.coroutines.flow.*
 import okhttp3.ResponseBody

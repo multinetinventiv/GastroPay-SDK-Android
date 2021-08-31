@@ -2,10 +2,10 @@ package com.inventiv.gastropaysdk.repository
 
 import com.google.common.truth.Truth
 import com.inventiv.gastropaysdk.api.GastroPayService
+import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
 import com.inventiv.gastropaysdk.data.response.MerchantListResponse
 import com.inventiv.gastropaysdk.data.response.MerchantResponse
-import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.utils.ApiUtil
 import com.inventiv.gastropaysdk.utils.loadingFalseExpected
 import com.inventiv.gastropaysdk.utils.loadingTrueExpected

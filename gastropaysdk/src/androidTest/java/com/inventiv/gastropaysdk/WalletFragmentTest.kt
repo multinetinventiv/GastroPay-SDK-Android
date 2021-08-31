@@ -27,9 +27,9 @@ class WalletFragmentTest {
     @Throws(IOException::class, InterruptedException::class)
     fun setup() {
         mockWebServer.start(8080)
-        mockWebServer.setDispatcher(object : Dispatcher() {
+        mockWebServer.dispatcher = (object : Dispatcher() {
             override fun dispatch(request: RecordedRequest): MockResponse {
-                with(request.path.replace("http://localhost:8080", "")) {
+                with(request.path!!.replace("http://localhost:8080", "")) {
                     val response = MockResponse().setResponseCode(200)
                     if (startsWith("/wallet/transactions/")) { //2
                         return response.setBody(readTestResourceFile("wallet-transactions-200.json"))

@@ -14,11 +14,11 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.chip.Chip
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
+import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.response.Address
 import com.inventiv.gastropaysdk.data.response.Tag
 import com.inventiv.gastropaysdk.databinding.FragmentMerchantDetailGastropaySdkBinding
 import com.inventiv.gastropaysdk.databinding.LayoutExpensivenessGastropaySdkBinding
-import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk

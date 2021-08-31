@@ -2,6 +2,7 @@ package com.inventiv.gastropaysdk.api
 
 import com.inventiv.gastropaysdk.data.request.LoginRequest
 import com.inventiv.gastropaysdk.data.request.OtpConfirmRequest
+import com.inventiv.gastropaysdk.data.request.ProvisionInformationRequest
 import com.inventiv.gastropaysdk.data.response.*
 import retrofit2.http.*
 
@@ -37,4 +38,7 @@ internal interface GastroPayService {
 
     @GET("wallet/transaction_summary")
     suspend fun getTransactionSummary(): TransactionSummaryResponse
+
+    @POST("pos/provision_information")
+    suspend fun provisionInformation(@Body request: ProvisionInformationRequest): ProvisionInformationResponse
 }

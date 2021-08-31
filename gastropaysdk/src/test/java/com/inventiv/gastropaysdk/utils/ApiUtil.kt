@@ -1,6 +1,6 @@
 package com.inventiv.gastropaysdk.utils
 
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody
 import retrofit2.HttpException
 import retrofit2.Response
@@ -21,7 +21,7 @@ object ApiUtil {
         val dummyErrorResponse = Response.error<T>(
             code,
             ResponseBody.create(
-                MediaType.parse(errorContent ?: dummyErrorContent),
+                (errorContent ?: dummyErrorContent).toMediaTypeOrNull(),
                 "application/json; charset=utf-8"
             )
         )

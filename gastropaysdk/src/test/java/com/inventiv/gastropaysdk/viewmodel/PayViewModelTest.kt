@@ -3,10 +3,11 @@ package com.inventiv.gastropaysdk.viewmodel
 import com.google.common.truth.Truth
 import com.inventiv.gastropaysdk.api.GastroPayService
 import com.inventiv.gastropaysdk.data.Resource
-import com.inventiv.gastropaysdk.data.request.LoginRequest
-import com.inventiv.gastropaysdk.data.response.LoginResponse
-import com.inventiv.gastropaysdk.repository.AuthenticationRepositoryImp
-import com.inventiv.gastropaysdk.ui.login.LoginViewModel
+import com.inventiv.gastropaysdk.data.request.ProvisionInformationRequest
+import com.inventiv.gastropaysdk.data.request.TokenType
+import com.inventiv.gastropaysdk.data.response.ProvisionInformationResponse
+import com.inventiv.gastropaysdk.repository.PaymentRepositoryImp
+import com.inventiv.gastropaysdk.ui.pay.PayViewModel
 import com.inventiv.gastropaysdk.utils.MainCoroutineScopeRule
 import com.inventiv.gastropaysdk.utils.emptyExpected
 import com.inventiv.gastropaysdk.utils.loadingFalseExpected
@@ -25,41 +26,52 @@ import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
 @ExperimentalCoroutinesApi
-class LoginViewModelTest {
+class PayViewModelTest {
 
     @get:Rule
     val coroutineRule = MainCoroutineScopeRule()
 
-    private lateinit var viewModel: LoginViewModel
+    private lateinit var viewModel: PayViewModel
 
     private var service: GastroPayService = mock()
 
-    private val repository = AuthenticationRepositoryImp(service)
+    private val repository = PaymentRepositoryImp(service)
 
     @Before
     fun setUp() {
-        viewModel = LoginViewModel(repository)
+        viewModel = PayViewModel(repository)
     }
 
     @Test
-    fun `login viewmodel success test`() = runBlockingTest {
+    fun `provisionInformation viewmodel success test`() = runBlockingTest {
 
         // Given
-        val expected = LoginResponse(
-            verificationCode = "005DI+3FQIvuS6",
-            endTime = "1626193843"
+        val expected = ProvisionInformationResponse(
+            "1",
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
         )
 
-        val loginRequest = LoginRequest(
-            gsmNumber = "5555555555",
-            mobileDeviceToken = "9240203ab2eb3297"
+        val request = ProvisionInformationRequest(
+            token = "123456",
+            isBonusUsed = false,
+            tokenType = TokenType.QR.value
         )
 
         // When
-        whenever(service.login(loginRequest)).thenReturn(expected)
+        whenever(service.provisionInformation(request)).thenReturn(expected)
 
         launch {
-            val list: List<Resource<LoginResponse>> = viewModel.loginState.take(4).toList()
+            val list: List<Resource<ProvisionInformationResponse>> =
+                viewModel.provisionInformationState.take(4).toList()
 
             list[0].emptyExpected()
             list[1].loadingTrueExpected()
@@ -70,10 +82,8 @@ class LoginViewModelTest {
             list[3].loadingFalseExpected()
         }
 
-        viewModel.login(
-            phoneNumber = "5555555555",
-            mobileDeviceToken = "9240203ab2eb3297"
-        )
+        viewModel.provisionInformation("123456")
     }
+
 
 }

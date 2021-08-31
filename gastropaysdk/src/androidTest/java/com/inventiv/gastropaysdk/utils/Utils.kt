@@ -29,7 +29,7 @@ internal fun readTestResourceFile(fileName: String): String {
 
 internal fun dispatcherWithCustomBody() = object : Dispatcher() {
     override fun dispatch(request: RecordedRequest): MockResponse {
-        with(request.path.replace("http://localhost:8080", "")) {
+        with(request.path!!.replace("http://localhost:8080", "")) {
             val response = MockResponse().setResponseCode(200)
             return when (this) {
                 "/auth/login" -> {

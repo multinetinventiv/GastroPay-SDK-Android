@@ -1,10 +1,10 @@
 package com.inventiv.gastropaysdk.repository
 
+import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.request.LoginRequest
 import com.inventiv.gastropaysdk.data.request.OtpConfirmRequest
 import com.inventiv.gastropaysdk.data.response.AuthenticationResponse
 import com.inventiv.gastropaysdk.data.response.LoginResponse
-import com.inventiv.gastropaysdk.model.Resource
 import kotlinx.coroutines.flow.Flow
 
 internal interface AuthenticationRepository {

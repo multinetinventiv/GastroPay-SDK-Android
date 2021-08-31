@@ -1,5 +1,7 @@
 package com.inventiv.gastropaysdk.utils.blankj.utilcode.util;
 
+import static android.Manifest.permission.EXPAND_STATUS_BAR;
+
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -17,8 +19,6 @@ import androidx.core.app.NotificationManagerCompat;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Method;
-
-import static android.Manifest.permission.EXPAND_STATUS_BAR;
 
 /**
  * <pre>

@@ -74,11 +74,11 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
                     switchTab(FragNavController.TAB1)
                 }
                 R.id.navigation_pay -> {
-                    switchTab(FragNavController.TAB2)
+                    pushFragment(PayFragment())
                     return@setOnNavigationItemSelectedListener false
                 }
                 R.id.navigation_wallet -> {
-                    switchTab(FragNavController.TAB3)
+                    switchTab(FragNavController.TAB2)
                 }
             }
             true
@@ -149,7 +149,7 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
     }
 
     override val numberOfRootFragments: Int
-        get() = if (GastroPaySdk.getComponent().isUserLoggedIn) 3 else 1
+        get() = if (GastroPaySdk.getComponent().isUserLoggedIn) 2 else 1
 
     override fun getRootFragment(index: Int): Fragment {
         return when (index) {
@@ -161,9 +161,6 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
                 }
             }
             FragNavController.TAB2 -> {
-                PayFragment()
-            }
-            FragNavController.TAB3 -> {
                 WalletFragment()
             }
             else -> throw Exception("Not valid")

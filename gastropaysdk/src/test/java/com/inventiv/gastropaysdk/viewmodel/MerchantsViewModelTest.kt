@@ -3,8 +3,8 @@ package com.inventiv.gastropaysdk.viewmodel
 import android.location.Location
 import com.google.common.truth.Truth
 import com.inventiv.gastropaysdk.api.GastroPayService
+import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.response.MerchantListResponse
-import com.inventiv.gastropaysdk.model.Resource
 import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.ui.merchants.MerchantsViewModel
 import com.inventiv.gastropaysdk.utils.MainCoroutineScopeRule
