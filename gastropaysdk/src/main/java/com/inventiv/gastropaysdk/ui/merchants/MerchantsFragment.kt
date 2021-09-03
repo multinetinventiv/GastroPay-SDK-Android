@@ -49,16 +49,13 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         LocationHelper(
             activity = requireActivity(),
             fragment = this,
-            globalLocationCallback = object : LocationHelper.GlobalLocationCallback {
+            callback = object : LocationHelper.GlobalLocationCallback {
                 override fun onLocationResult(location: Location) {
+                    binding.layoutLocationPermissionGastroPaySdk.root.visibility = View.GONE
                     myLocation = location
                     if (viewModel.currentPage == 0) {
                         viewModel.getMerchants(myLocation)
                     }
-                }
-
-                override fun onLocationSuccess() {
-                    binding.layoutLocationPermissionGastroPaySdk.root.visibility = View.GONE
                 }
 
                 override fun onLocationFailed() {

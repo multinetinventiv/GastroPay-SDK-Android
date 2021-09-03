@@ -65,14 +65,14 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/text_last_transactions"
         android:layout_marginLeft="@dimen/margin_normal_gastropay_sdk"
-        tools:layout_marginTop="210dp"
         android:layout_marginRight="@dimen/margin_normal_gastropay_sdk"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:gravity="center"
         android:text="@string/wallet_no_transactions"
         android:textColor="@color/suva_grey_gastropay_sdk"
         android:textSize="22sp"
         android:visibility="gone"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:layout_marginTop="210dp"
         tools:visibility="visible" />
 
     <FrameLayout

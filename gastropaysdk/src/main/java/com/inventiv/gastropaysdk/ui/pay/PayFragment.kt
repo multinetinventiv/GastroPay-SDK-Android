@@ -21,6 +21,7 @@ import com.inventiv.gastropaysdk.repository.PaymentRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.ui.MainViewModelFactory
+import com.inventiv.gastropaysdk.ui.pay.validate.PayValidateFragment
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.constant.PermissionConstants
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.AppUtils.getAppPackageName
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
@@ -146,6 +147,9 @@ internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
                         is Resource.Success -> {
                             viewModel.requestInProgress = false
                             LogUtils.d(uiState.data)
+                            sharedViewModel.pushFragment(
+                                PayValidateFragment.newInstance(uiState.data)
+                            )
                         }
                         is Resource.Error -> {
                             viewModel.requestInProgress = false

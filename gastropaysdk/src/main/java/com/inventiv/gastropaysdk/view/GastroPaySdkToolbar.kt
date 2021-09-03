@@ -98,14 +98,14 @@ internal class GastroPaySdkToolbar @JvmOverloads constructor(
         binding.textTitleGastroPaySdk.text = title
     }
 
-    fun setTitle(resourceId: Int, @ColorRes color: Int? = null) {
-        if (resourceId == REFERENCE_UNDEFINED) {
+    fun setTitle(toolbarTitle: String?, @ColorRes color: Int? = null) {
+        if (toolbarTitle.isNullOrEmpty()) {
             binding.textTitleGastroPaySdk.visibility = GONE
             return
         }
         binding.imageLogoGastroPaySdk.visibility = GONE
         binding.textTitleGastroPaySdk.visibility = VISIBLE
-        binding.textTitleGastroPaySdk.text = context.getText(resourceId)
+        binding.textTitleGastroPaySdk.text = toolbarTitle
 
         if (color != null) {
             binding.textTitleGastroPaySdk.setTextColor(ContextCompat.getColor(context, color))

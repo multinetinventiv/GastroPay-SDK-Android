@@ -18,6 +18,7 @@ import com.inventiv.gastropaysdk.ui.otp.NavigatedScreenType
 import com.inventiv.gastropaysdk.ui.otp.OtpFragment
 import com.inventiv.gastropaysdk.utils.*
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.KeyboardUtils
+import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import kotlinx.coroutines.flow.collect
@@ -54,7 +55,10 @@ internal class LoginFragment : BaseFragment(R.layout.fragment_login_gastropay_sd
     override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
         toolbar.apply {
             changeToLoginStyle()
-            setTitle(R.string.login_toolbar_title_gastropay_sdk, R.color.celtic_gastropay_sdk)
+            setTitle(
+                StringUtils.getString(R.string.login_toolbar_title_gastropay_sdk),
+                R.color.celtic_gastropay_sdk
+            )
             onLeftIconClick {
                 sharedViewModel.onBackPressed()
             }
