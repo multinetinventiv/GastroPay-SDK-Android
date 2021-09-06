@@ -19,6 +19,7 @@ import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.ui.MainViewModelFactory
 import com.inventiv.gastropaysdk.ui.merchants.detail.MerchantDetailFragment
+import com.inventiv.gastropaysdk.ui.merchants.searchmerchant.SearchMerchantFragment
 import com.inventiv.gastropaysdk.utils.CustomLoadingListItemCreator
 import com.inventiv.gastropaysdk.utils.LocationHelper
 import com.inventiv.gastropaysdk.utils.RecyclerMarginDecoration
@@ -178,9 +179,14 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         allItemsLoaded = false
     }
 
-    private fun setupListeners() {
-        binding.layoutLocationPermissionGastroPaySdk.root.setOnClickListener {
-            locationHelper.requestLocation()
+    private fun setupClickListeners() {
+        binding.apply {
+            layoutLocationPermissionGastroPaySdk.root.setOnClickListener {
+                locationHelper.requestLocation()
+            }
+            textViewNearMeGastroPaySdk.setOnClickListener {
+                sharedViewModel.pushFragment(SearchMerchantFragment.newInstance())
+            }
         }
     }
 

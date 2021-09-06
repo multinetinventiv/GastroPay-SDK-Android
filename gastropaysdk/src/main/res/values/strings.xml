@@ -78,4 +78,13 @@
     <string name="payment_success_done_button_text_gastropay_sdk">BİTİR</string>
     <string name="payment_success_navigation_title_gastropay_sdk">ÖDEME BAŞARILI</string>
     <!--endregion Payment Result-->
+
+    <!--region Search Merchant-->
+    <string name="search_merchant_spinner_area_title_gastropay_sdk">"Konum"</string>
+    <string name="search_merchant_spinner_city_gastropay_sdk">"Tüm İller"</string>
+    <string name="search_merchant_spinner_region_gastropay_sdk">"Tüm Bölgeler"</string>
+    <string name="search_merchant_button_filter_gastropay_sdk">"FİLTRELE"</string>
+    <string name="search_merchant_button_clear_filter_gastropay_sdk">"FİLTRE TEMİZLE"</string>
+    <string name="search_merchant_searchview_hint_text">"Restoran Ara"</string>
+    <!--endregion QR-->
 </resources>

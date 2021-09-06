@@ -15,8 +15,6 @@
             ?attr/colorPrimaryVariant
         </item>
 
-        <item name="android:textColor">@color/white_gastropay_sdk</item>
-
         <!--Material type attributes-->
         <item name="textAppearanceHeadline1">@style/TextAppearance.GastroPaySdk.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.GastroPaySdk.Headline2</item>
@@ -47,5 +45,13 @@
         <item name="colorOnSurface">@color/white_gastropay_sdk</item>
         <item name="colorOnError">@color/shamrock_gastropay_sdk</item>
         <item name="colorControlHighlight">@color/white_smoke_gastropay_sdk</item>
+        <item name="colorAccent">@color/sunglow_gastropay_sdk</item>
+    </style>
+
+    <style name="Base.Theme.SearchToolbar.GastroPaySdk" parent="Base.Theme.GastroPaySdk">
+        <!--This line changes the color of text in Toolbar-->
+        <item name="android:textColorPrimary">@color/arsenic_gastropay_sdk</item>
+        <!--This line changes the color of icons in toolbar (back, overflow menu icons)-->
+        <item name="android:textColorSecondary">@color/arsenic_gastropay_sdk</item>
     </style>
 </resources>

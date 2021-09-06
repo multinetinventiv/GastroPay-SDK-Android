@@ -2,4 +2,5 @@
 <resources>
 
     <style name="Theme.GastroPaySdk" parent="Base.Theme.GastroPaySdk" />
+    <style name="Theme.SearchToolbar.GastroPaySdk" parent="Base.Theme.SearchToolbar.GastroPaySdk" />
 </resources>

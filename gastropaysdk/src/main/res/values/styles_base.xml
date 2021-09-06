@@ -22,4 +22,27 @@
         <item name="android:paddingBottom">@dimen/margin_small_x_gastropay_sdk</item>
         <item name="android:textSize">@dimen/text_size_normal_gastropay_sdk</item>
     </style>
+
+    <style name="BaseDividerGastroPaySdk">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:background">@color/celtic_gastropay_sdk</item>
+    </style>
+
+    <style name="BaseSectionTitleStyleGastroPaySdk">
+        <item name="android:textSize">@dimen/text_size_normal_gastropay_sdk</item>
+        <item name="android:textColor">@color/dark_grayish_blue_gastropay_sdk</item>
+    </style>
+
+    <style name="BaseSpinnerTagStyleGastroPaySdk">
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:background">@drawable/shape_gray_rounded_gastropay_sdk</item>
+    </style>
+
+
 </resources>

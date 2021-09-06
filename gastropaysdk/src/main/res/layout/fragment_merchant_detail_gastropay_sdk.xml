@@ -256,7 +256,6 @@
 
     </androidx.core.widget.NestedScrollView>
 
-
     <FrameLayout
         android:id="@+id/loadingLayout"
         android:layout_width="match_parent"
