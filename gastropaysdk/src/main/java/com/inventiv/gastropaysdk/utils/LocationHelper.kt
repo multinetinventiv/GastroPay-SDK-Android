@@ -96,12 +96,11 @@ class LocationHelper @JvmOverloads constructor(
 
     @SuppressLint("MissingPermission")
     private fun requestLocationUpdates() {
-        fusedLocationClient.lastLocation.addOnSuccessListener {
+        fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null).addOnSuccessListener {
             callback.onLocationResult(it)
         }.addOnFailureListener {
             callback.onLocationFailed()
         }
-        fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
