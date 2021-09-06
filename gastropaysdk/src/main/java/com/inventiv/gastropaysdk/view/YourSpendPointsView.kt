@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import com.inventiv.gastropaysdk.R
-import com.inventiv.gastropaysdk.databinding.LayoutYourSpendPointsBinding
+import com.inventiv.gastropaysdk.databinding.LayoutYourSpendPointsGastropaySdkBinding
 
 class YourSpendPointsView(context: Context, attrs: AttributeSet?) : RelativeLayout(context, attrs) {
 
@@ -16,7 +16,7 @@ class YourSpendPointsView(context: Context, attrs: AttributeSet?) : RelativeLayo
         fun buttonClicked(isSpendSelected : Boolean)
     }
 
-    private lateinit var binding: LayoutYourSpendPointsBinding
+    private lateinit var binding: LayoutYourSpendPointsGastropaySdkBinding
     private lateinit var listener: Listener
     private var isSpendSelected = false
     private var availableAmount = 0.0
@@ -27,7 +27,7 @@ class YourSpendPointsView(context: Context, attrs: AttributeSet?) : RelativeLayo
     }
 
     private fun init(context: Context, attrs: AttributeSet?) {
-        binding = LayoutYourSpendPointsBinding.inflate(LayoutInflater.from(context), this, true)
+        binding = LayoutYourSpendPointsGastropaySdkBinding.inflate(LayoutInflater.from(context), this, true)
         binding.button.setOnClickListener {
             isSpendSelected = !isSpendSelected
             set()

@@ -5,6 +5,7 @@ import com.inventiv.gastropaysdk.api.GastroPayService
 import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.request.ProvisionInformationRequest
 import com.inventiv.gastropaysdk.data.request.TokenType
+import com.inventiv.gastropaysdk.data.response.AmountModel
 import com.inventiv.gastropaysdk.data.response.ProvisionInformationResponse
 import com.inventiv.gastropaysdk.utils.loadingFalseExpected
 import com.inventiv.gastropaysdk.utils.loadingTrueExpected
@@ -25,14 +26,14 @@ class PayRepositoryImpTest {
         // Given
         val expected = ProvisionInformationResponse(
             "1",
+            "",
+            AmountModel(0.0, "", "", ""),
             null,
             null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            AmountModel(0.0, "", "", ""),
+            AmountModel(0.0, "", "", ""),
+            AmountModel(0.0, "", "", ""),
+            "",
             null,
             null,
         )

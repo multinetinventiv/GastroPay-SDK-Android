@@ -2,6 +2,8 @@ package com.inventiv.gastropaysdk.utils.qrreader
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.os.Bundle
+import android.view.View
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
@@ -11,7 +13,8 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import com.google.common.util.concurrent.ListenableFuture
 import com.inventiv.gastropaysdk.R
-import java.util.concurrent.Executor
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 
 internal class QRReaderFragment : Fragment(R.layout.fragment_qrreader_gastropaysdk) {
@@ -19,7 +22,7 @@ internal class QRReaderFragment : Fragment(R.layout.fragment_qrreader_gastropays
     private lateinit var config: QRCameraConfiguration
     private var preview: Preview? = null
     private var imageAnalyzer: ImageAnalysis? = null
-    private lateinit var mainExecutor: Executor
+    private lateinit var cameraExecutor: ExecutorService
     private lateinit var cameraProvider: ProcessCameraProvider
     private lateinit var cameraSelector: CameraSelector
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
@@ -28,12 +31,15 @@ internal class QRReaderFragment : Fragment(R.layout.fragment_qrreader_gastropays
 
     private lateinit var qrReaderListener: QRReaderListener
 
-    private val previewView: PreviewView by lazy {
-        requireView().findViewById(R.id.previewView)
-    }
+    private lateinit var previewView: PreviewView
 
     fun setListener(listener: QRReaderListener) {
         qrReaderListener = listener
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        previewView = requireView().findViewById(R.id.previewView)
     }
 
     private fun buildUseCases() {
@@ -53,7 +59,7 @@ internal class QRReaderFragment : Fragment(R.layout.fragment_qrreader_gastropays
                 .build()
 
 
-            imageAnalyzer!!.setAnalyzer(mainExecutor, QRAnalyzer(config.options).apply {
+            imageAnalyzer!!.setAnalyzer(cameraExecutor, QRAnalyzer(config.options).apply {
                 onFrameAnalyzed { qrStatus, barcode, barcodes, exception ->
                     if (qrStatus == QRStatus.Success) {
                         qrReaderListener.onRead(barcode!!, barcodes!!)
@@ -80,7 +86,7 @@ internal class QRReaderFragment : Fragment(R.layout.fragment_qrreader_gastropays
 
             preview!!.setSurfaceProvider(previewView.surfaceProvider)
 
-        }, mainExecutor)
+        }, ContextCompat.getMainExecutor(requireContext()))
     }
 
     fun startCamera(
@@ -97,7 +103,7 @@ internal class QRReaderFragment : Fragment(R.layout.fragment_qrreader_gastropays
 
                 cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
                 cameraProvider = cameraProviderFuture.get()
-                mainExecutor = ContextCompat.getMainExecutor(requireContext())
+                cameraExecutor = Executors.newSingleThreadExecutor()
 
                 buildUseCases()
 
@@ -124,5 +130,10 @@ internal class QRReaderFragment : Fragment(R.layout.fragment_qrreader_gastropays
 
     fun isTorchAvailable(): Boolean {
         return camera?.cameraInfo?.hasFlashUnit() == true
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        cameraExecutor.shutdown()
     }
 }

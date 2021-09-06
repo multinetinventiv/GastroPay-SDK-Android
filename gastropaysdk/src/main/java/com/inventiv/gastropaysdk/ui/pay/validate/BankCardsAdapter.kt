@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.inventiv.gastropaysdk.data.response.BankCardResponse
-import com.inventiv.gastropaysdk.databinding.ItemBankCardBinding
+import com.inventiv.gastropaysdk.databinding.ItemBankCardGastropaySdkBinding
 
 internal class BankCardsAdapter(
     var cards: MutableList<BankCardResponse>,
@@ -16,7 +16,7 @@ internal class BankCardsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return BankCardItemViewHolder(
-            ItemBankCardBinding.inflate(inflater, parent, false),
+            ItemBankCardGastropaySdkBinding.inflate(inflater, parent, false),
             clickedListener
         )
     }

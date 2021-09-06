@@ -227,9 +227,6 @@ internal class PayValidateFragment : BaseFragment(R.layout.fragment_payvalidate_
         }
 
         binding.payButton.setOnClickListener {
-            //TODO profile pinCode enabled ???
-            //TODO profile pin limit ???
-
             viewModel.confirmProvision(
                 ConfirmProvisionRequest(
                     token = provision.token,

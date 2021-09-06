@@ -5,10 +5,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.data.response.BankCardResponse
-import com.inventiv.gastropaysdk.databinding.ItemBankCardBinding
+import com.inventiv.gastropaysdk.databinding.ItemBankCardGastropaySdkBinding
 
 internal class BankCardItemViewHolder(
-    val binding: ItemBankCardBinding,
+    val binding: ItemBankCardGastropaySdkBinding,
     private val clickedListener: (merchant: BankCardResponse, position : Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
