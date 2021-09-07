@@ -49,4 +49,8 @@ internal interface GastroPayService {
 
     @GET("wallet/cards")
     suspend fun getBankCards(): List<BankCardResponse>
+
+    @GET("merchant/cities")
+    suspend fun cities(): CitiesResponse
+
 }

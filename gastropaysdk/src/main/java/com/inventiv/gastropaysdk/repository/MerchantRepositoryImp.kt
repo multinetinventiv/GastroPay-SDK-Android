@@ -3,6 +3,7 @@ package com.inventiv.gastropaysdk.repository
 import com.inventiv.gastropaysdk.api.GastroPayService
 import com.inventiv.gastropaysdk.common.BaseRepository
 import com.inventiv.gastropaysdk.data.Resource
+import com.inventiv.gastropaysdk.data.response.CitiesResponse
 import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
 import com.inventiv.gastropaysdk.data.response.MerchantListResponse
 import com.inventiv.gastropaysdk.data.safeFlow
@@ -38,6 +39,12 @@ internal class MerchantRepositoryImp(private val gastroPayService: GastroPayServ
     ): Flow<Resource<MerchantDetailResponse>> {
         return safeFlow {
             gastroPayService.merchantDetail(id)
+        }
+    }
+
+    override fun cities(): Flow<Resource<CitiesResponse>> {
+        return safeFlow {
+            gastroPayService.cities()
         }
     }
 }

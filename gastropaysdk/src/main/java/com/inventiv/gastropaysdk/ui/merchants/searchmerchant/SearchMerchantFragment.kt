@@ -9,20 +9,29 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
+import com.inventiv.gastropaysdk.data.Resource
+import com.inventiv.gastropaysdk.data.response.CitiesResponse
+import com.inventiv.gastropaysdk.data.response.City
 import com.inventiv.gastropaysdk.databinding.FragmentSearchMerchantGastropaySdkBinding
 import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.ui.MainViewModelFactory
+import com.inventiv.gastropaysdk.ui.common.singleselectiondialog.CommonSingleItemSelectionDialogFragment
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
+import com.inventiv.gastropaysdk.utils.handleError
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 internal class SearchMerchantFragment :
     BaseFragment(R.layout.fragment_search_merchant_gastropay_sdk) {
 
     companion object {
         fun newInstance() = SearchMerchantFragment()
+        const val TAG_SINGLE_SELECT_CITY_FRAGMENT = "tag_single_select_city_fragment"
+        const val TAG_SINGLE_SELECT_REGION_FRAGMENT = "tag_single_select_region_fragment"
     }
 
     private val binding by viewBinding(FragmentSearchMerchantGastropaySdkBinding::bind)
@@ -41,6 +50,10 @@ internal class SearchMerchantFragment :
     }
 
     private lateinit var searchView: SearchView
+    private lateinit var citiesBottomSheetDialog: CommonSingleItemSelectionDialogFragment<City>
+
+    private var selectedCity: City? = null
+//    private var selectedRegion: Tag? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -49,7 +62,7 @@ internal class SearchMerchantFragment :
         setListeners()
         setupObservers()
 
-//        viewModel.getMerchantDetail(merchantId)
+        viewModel.getCities()
     }
 
     private fun setupSearchToolbar() {
@@ -71,99 +84,62 @@ internal class SearchMerchantFragment :
 
     private fun setListeners() {
         binding.apply {
-            // TODO : setup listeners
+            spinnerCity.setOnClickListener {
+                citiesBottomSheetDialog.show(childFragmentManager, TAG_SINGLE_SELECT_CITY_FRAGMENT)
+            }
         }
     }
 
     private fun setupObservers() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            /*viewModel.uiState.collect { uiState ->
-                when (uiState) {
-                    is Resource.Loading -> {
-                        if (uiState.isLoading) {
-                            binding.loadingLayout.visibility = View.VISIBLE
-                        } else {
-                            binding.loadingLayout.visibility = View.GONE
+            launch {
+                viewModel.uiStateCities.collect { resource ->
+                    when (resource) {
+                        is Resource.Loading -> {
+                            if (resource.isLoading) {
+                                binding.loading.loadingLayout.visibility = View.VISIBLE
+                            } else {
+                                binding.loading.loadingLayout.visibility = View.GONE
+                            }
                         }
-                    }
-                    is Resource.Success -> {
-                        uiState.data.apply {
-                            Glide.with(this@SearchMerchantFragment)
-                                .load(showcaseImageUrl)
-                                .into(binding.merchantDetailImageView)
-                            Glide.with(this@SearchMerchantFragment)
-                                .load(logoUrl)
-                                .into(binding.merchantImageView)
-                            toolbarTitle = name
-                            merchantLocation.latitude = latitude
-                            merchantLocation.longitude = longitude
-                            binding.merchantNameTextView.text = name
-                            binding.earnOrSpendTextView.setEarnOrSpend(isBonusPoint)
-                            binding.merchantAddressTextView.setAddress(address)
-                            binding.merchantPhoneTextView.setPhoneNumber(phoneNumber, gsmNumber)
-                            tags.setTags()
-                            note.setDescription()
-                            binding.expensivenessLayout.setExpensivenessLayout(rate())
+                        is Resource.Success -> {
+                            prepareCitiesBottomSheet(resource)
                         }
-                    }
-                    is Resource.Error -> {
-                        uiState.apiError.handleError(requireActivity())
-                    }
-                    else -> {
+                        is Resource.Error -> {
+                            resource.apiError.handleError(requireActivity())
+                        }
+                        else -> {
+                        }
                     }
                 }
-            }*/
+            }
+            launch {
+                viewModel.selectedCity.collect { city ->
+                    selectedCity = city
+                    binding.spinnerCity.text = city.title
+//                    viewModel.resetRegionSelection()
+                }
+            }
         }
     }
 
-    /*private fun AppCompatTextView.setEarnOrSpend(isBonusPoint: Boolean) {
-        if (isBonusPoint) {
-            this.text = getString(R.string.merchant_detail_earn_gastropay_sdk)
-        } else {
-            this.text = getString(R.string.merchant_detail_spend_gastropay_sdk)
+    private fun prepareCitiesBottomSheet(resource: Resource.Success<CitiesResponse>) {
+        citiesBottomSheetDialog = CommonSingleItemSelectionDialogFragment.newInstance(
+            if (!resource.data.cities.isNullOrEmpty()) {
+                binding.spinnerCity.isClickable = true
+                binding.spinnerCity.isEnabled = true
+                resource.data.cities.apply {
+                    add(0, City.getDefaultItem())
+                }
+            } else {
+                binding.spinnerCity.isClickable = false
+                binding.spinnerCity.isEnabled = false
+                arrayListOf()
+            }
+        ) { item, _ ->
+            viewModel.selectCity(item)
         }
     }
-
-    @SuppressLint("SetTextI18n")
-    private fun AppCompatTextView.setAddress(address: Address?) {
-        if (address?.city != null && address.neighbourhood != null) {
-            this.text = "${address.city}, ${address.neighbourhood}"
-            this.visibility = View.VISIBLE
-        } else {
-            this.visibility = View.GONE
-        }
-    }*/
-
-    /*private fun AppCompatTextView.setPhoneNumber(phoneNumber: String?, gsmNumber: String?) {
-        var number = ""
-        if (!phoneNumber.isNullOrEmpty()) {
-            this.visibility = View.VISIBLE
-            number = "0$phoneNumber"
-            this.text = phoneNumber.formatPhoneNumber()
-        } else if (!gsmNumber.isNullOrEmpty()) {
-            this.visibility = View.VISIBLE
-            number = "0$gsmNumber"
-            this.text = gsmNumber.formatPhoneNumber()
-        } else {
-            this.visibility = View.GONE
-        }
-
-        binding.phoneNumberLinearLayout.setOnClickListener {
-            requireContext().openPhoneDialer(number)
-        }
-    }*/
-
-
-    /*private fun String?.setDescription() {
-        if (this.isNullOrEmpty()) {
-            binding.descTitleTextView.visibility = View.GONE
-            binding.descTextView.visibility = View.GONE
-        } else {
-            binding.descTextView.markdownText(this)
-            binding.descTitleTextView.visibility = View.VISIBLE
-            binding.descTextView.visibility = View.VISIBLE
-        }
-    }*/
 
     override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
         hideToolbar(toolbar, logo)

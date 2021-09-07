@@ -9,6 +9,6 @@ internal class SearchMerchantViewModelFactory(private val merchantRepository: Me
     ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return SearchMerchantViewModelFactory(merchantRepository) as T
+        return SearchMerchantViewModel(merchantRepository) as T
     }
 }
