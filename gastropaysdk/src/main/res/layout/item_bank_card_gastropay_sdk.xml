@@ -74,7 +74,7 @@
             android:drawableEnd="@drawable/ic_bank_card_selected_gastropay_sdk"
             android:drawablePadding="8dp"
             android:padding="8dp"
-            android:text="Seçili Kart"
+            android:text="@string/payment_confirmation_selected_bank_card_text_gastropay_sdk"
             android:textColor="@color/celtic_gastropay_sdk"
             android:textSize="12sp"
             android:visibility="invisible"

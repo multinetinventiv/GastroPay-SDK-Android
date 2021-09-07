@@ -1,0 +1,47 @@
+[
+  {
+    "id": 730,
+    "number": "589004******0016",
+    "alias": "Naci Nacioğlu",
+    "binNumber": "1234",
+    "isDefault": false,
+    "bankLogoUrl": "",
+    "paymentBrandLogoUrl": ""
+  },
+  {
+    "id": 665,
+    "number": "493837******0437",
+    "alias": "John Doe",
+    "binNumber": "4567",
+    "isDefault": false,
+    "bankLogoUrl": "",
+    "paymentBrandLogoUrl": ""
+  },
+  {
+    "id": 593,
+    "number": "425669******0581",
+    "alias": "Emma Yuan",
+    "binNumber": "7890",
+    "isDefault": false,
+    "bankLogoUrl": "",
+    "paymentBrandLogoUrl": ""
+  },
+  {
+    "id": 590,
+    "number": "474853******3234",
+    "alias": "Sarı Çizmeli Mehmet Ağa",
+    "binNumber": "01234",
+    "isDefault": true,
+    "bankLogoUrl": "",
+    "paymentBrandLogoUrl": ""
+  },
+  {
+    "id": 587,
+    "number": "493837******5257",
+    "alias": "No Name",
+    "binNumber": "23456",
+    "isDefault": false,
+    "bankLogoUrl": "",
+    "paymentBrandLogoUrl": ""
+  }
+]

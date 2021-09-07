@@ -1,0 +1,41 @@
+{
+  "merchantId": 1,
+  "resultCode": 0,
+  "resultMessage": null,
+  "token": "123456",
+  "expireDate": "1631018070",
+  "amount": {
+    "value": 1,
+    "currency": "TRY",
+    "sign": "₺",
+    "displayValue": "1,00 ₺"
+  },
+  "transactionCompleted": false,
+  "confirmed": false,
+  "transactionDate": "0",
+  "transactionRefNo": null,
+  "merchantTitle": "Panda Team",
+  "merchantName": "Panda",
+  "merchantUid": "987654321",
+  "availableAmount": {
+    "value": 492.21,
+    "currency": "Puan",
+    "sign": "Puan",
+    "displayValue": "492,21 Puan",
+    "moneyString": "492.21TRY"
+  },
+  "usingAvailableAmount": {
+    "value": 0,
+    "currency": "TRY",
+    "sign": "₺",
+    "displayValue": "0,00 ₺"
+  },
+  "totalAmount": {
+    "value": 1,
+    "currency": "TRY",
+    "sign": "₺",
+    "displayValue": "1,00 ₺"
+  },
+  "callType": 0,
+  "terminalUid": "333444555"
+}

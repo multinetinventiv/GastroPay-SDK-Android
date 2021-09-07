@@ -142,13 +142,13 @@ internal class OtpFragment : BaseFragment(R.layout.fragment_otp_gastropay_sdk) {
                     when (uiState) {
                         is Resource.Loading -> {
                             if (uiState.isLoading) {
+                                KeyboardUtils.hideSoftInput(binding.pinEntryEditText)
                                 binding.loadingLayout.visibility = View.VISIBLE
                             } else {
                                 binding.loadingLayout.visibility = View.GONE
                             }
                         }
                         is Resource.Success -> {
-                            KeyboardUtils.hideSoftInput(binding.pinEntryEditText)
                             when (from) {
                                 NavigatedScreenType.LOGIN.id -> {
                                     loginToOtpSuccess(uiState.data)

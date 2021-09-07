@@ -43,6 +43,7 @@ class PayViewModelTest {
         viewModel = PayViewModel(repository)
     }
 
+    //region provisionInformation
     @Test
     fun `provisionInformation viewmodel success test`() = runBlockingTest {
 
@@ -85,6 +86,5 @@ class PayViewModelTest {
 
         viewModel.provisionInformation("123456")
     }
-
-
+    //endregion provisionInformation
 }

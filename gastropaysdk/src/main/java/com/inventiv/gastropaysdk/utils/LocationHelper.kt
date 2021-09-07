@@ -20,7 +20,7 @@ import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 class LocationHelper @JvmOverloads constructor(
     private val activity: FragmentActivity,
     private val fragment: Fragment? = null,
-    private val callback: GlobalLocationCallback
+    private var callback: GlobalLocationCallback
 ) {
 
     private val DEFAULT_REQUEST_CODE = 9999
@@ -96,11 +96,12 @@ class LocationHelper @JvmOverloads constructor(
 
     @SuppressLint("MissingPermission")
     private fun requestLocationUpdates() {
-        fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null).addOnSuccessListener {
-            callback.onLocationResult(it)
-        }.addOnFailureListener {
-            callback.onLocationFailed()
-        }
+        fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
+            .addOnSuccessListener {
+                callback.onLocationResult(it)
+            }.addOnFailureListener {
+                callback.onLocationFailed()
+            }
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {

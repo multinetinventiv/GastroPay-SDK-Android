@@ -43,9 +43,9 @@ class OtpFragmentTest {
         val phoneNumber = "5071234450"
         val tenSec = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) + 10
         val bundle = Bundle().apply {
-            putString(OtpFragment.PARAM_PHONE_NUMBER, phoneNumber)
-            putString(OtpFragment.PARAM_VERIFICATION_CODE, "1234")
-            putString(OtpFragment.PARAM_END_TIME, tenSec.toString())
+            putString("PARAM_PHONE_NUMBER", phoneNumber)
+            putString("PARAM_VERIFICATION_CODE", "1234")
+            putString("PARAM_END_TIME", tenSec.toString())
         }
         val scenario =
             launchFragmentInContainer<OtpFragment>(
@@ -72,9 +72,9 @@ class OtpFragmentTest {
         val phoneNumber = "5071234450"
         val tenSec = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) + waitSec
         val bundle = Bundle().apply {
-            putString(OtpFragment.PARAM_PHONE_NUMBER, phoneNumber)
-            putString(OtpFragment.PARAM_VERIFICATION_CODE, "1234")
-            putString(OtpFragment.PARAM_END_TIME, tenSec.toString())
+            putString("PARAM_PHONE_NUMBER", phoneNumber)
+            putString("PARAM_VERIFICATION_CODE", "1234")
+            putString("PARAM_END_TIME", tenSec.toString())
         }
         val scenario =
             launchFragmentInContainer<OtpFragment>(
@@ -110,9 +110,9 @@ class OtpFragmentTest {
         val tenSec = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis()) + 10
 
         val bundle = Bundle().apply {
-            putString(OtpFragment.PARAM_PHONE_NUMBER, phoneNumber)
-            putString(OtpFragment.PARAM_VERIFICATION_CODE, "1234")
-            putString(OtpFragment.PARAM_END_TIME, tenSec.toString())
+            putString("PARAM_PHONE_NUMBER", phoneNumber)
+            putString("PARAM_VERIFICATION_CODE", "1234")
+            putString("PARAM_END_TIME", tenSec.toString())
         }
         val scenario =
             launchFragmentInContainer<OtpFragment>(

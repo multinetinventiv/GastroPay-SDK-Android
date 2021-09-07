@@ -21,6 +21,7 @@ import com.inventiv.gastropaysdk.utils.REFERENCE_UNDEFINED
 import com.inventiv.gastropaysdk.utils.RecyclerMarginDecoration
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.ConvertUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
+import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.handleError
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
@@ -32,12 +33,15 @@ import kotlinx.coroutines.launch
 internal class PayValidateFragment : BaseFragment(R.layout.fragment_payvalidate_gastropay_sdk) {
 
     companion object {
+        private const val PARAM_TOOLBAR_TITLE = "PARAM_TOOLBAR_TITLE"
         private const val PARAM_PROVISION_DATA = "PARAM_PROVISION_DATA"
 
         fun newInstance(
+            toolbarTitle: String?,
             data: ProvisionInformationResponse
         ) = PayValidateFragment().apply {
             val args = Bundle().apply {
+                putString(PARAM_TOOLBAR_TITLE, toolbarTitle)
                 putParcelable(PARAM_PROVISION_DATA, data)
             }
             arguments = args
@@ -45,10 +49,10 @@ internal class PayValidateFragment : BaseFragment(R.layout.fragment_payvalidate_
     }
 
     override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
-        requireArguments().apply {
-            provision = getParcelable(PARAM_PROVISION_DATA)!!
-        }
-        val toolbarTitle = provision.merchantName ?: "ÖDEME AL"
+        val toolbarTitle = requireArguments().getString(
+            PARAM_TOOLBAR_TITLE,
+            StringUtils.getString(R.string.payment_confirmation_navigation_title_gastropay_sdk)
+        )
         toolbar.apply {
             changeToMainStyle()
             setTitle(toolbarTitle, R.color.white_gastropay_sdk)
@@ -88,12 +92,13 @@ internal class PayValidateFragment : BaseFragment(R.layout.fragment_payvalidate_
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        provision = requireArguments().getParcelable(PARAM_PROVISION_DATA)!!
+
         setupObservers()
         setupCardsAdapter()
+        setupUI()
 
         viewModel.getBankCards()
-
-        setupUI()
     }
 
     private fun setupUI() {

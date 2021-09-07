@@ -39,7 +39,7 @@ internal class PayValidateViewModel(private val repository: PaymentRepository) :
         }
     }
 
-    fun provisionInformation(qrCode: String, isBonusUsed : Boolean) {
+    fun provisionInformation(qrCode: String, isBonusUsed: Boolean) {
         val request = ProvisionInformationRequest(token = qrCode, isBonusUsed = isBonusUsed)
         viewModelScope.launch {
             repository.provisionInformation(request).collect { response ->

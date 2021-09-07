@@ -148,7 +148,10 @@ internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
                             viewModel.requestInProgress = false
                             LogUtils.d(uiState.data)
                             sharedViewModel.pushFragment(
-                                PayValidateFragment.newInstance(uiState.data)
+                                PayValidateFragment.newInstance(
+                                    toolbarTitle = uiState.data.merchantName,
+                                    data = uiState.data
+                                )
                             )
                         }
                         is Resource.Error -> {

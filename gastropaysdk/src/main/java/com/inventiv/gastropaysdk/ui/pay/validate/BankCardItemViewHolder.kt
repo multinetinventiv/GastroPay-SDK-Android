@@ -9,7 +9,7 @@ import com.inventiv.gastropaysdk.databinding.ItemBankCardGastropaySdkBinding
 
 internal class BankCardItemViewHolder(
     val binding: ItemBankCardGastropaySdkBinding,
-    private val clickedListener: (merchant: BankCardResponse, position : Int) -> Unit
+    private val clickedListener: (merchant: BankCardResponse, position: Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(card: BankCardResponse, position: Int) {
@@ -21,12 +21,13 @@ internal class BankCardItemViewHolder(
             nameTextView.text = card.alias
             numberTextView.text = card.number
             Glide.with(binding.root.context).load(card.bankImageUrl).into(iconImageView)
-            Glide.with(binding.root.context).load(card.paymentSourceImageUrl).into(cardTypeImageView)
+            Glide.with(binding.root.context).load(card.paymentSourceImageUrl)
+                .into(cardTypeImageView)
 
-            if(card.isDefault){
+            if (card.isDefault) {
                 selectedBadgeTextView.visibility = View.VISIBLE
                 cardView.setBackgroundResource(R.drawable.background_bank_card_selected_gastropay_sdk)
-            }else{
+            } else {
                 selectedBadgeTextView.visibility = View.INVISIBLE
                 cardView.setBackgroundResource(R.drawable.background_bank_card_unselected_gastropay_sdk)
             }

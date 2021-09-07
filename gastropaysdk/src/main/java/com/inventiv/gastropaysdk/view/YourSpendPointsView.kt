@@ -9,11 +9,12 @@ import android.widget.RelativeLayout
 import androidx.core.content.ContextCompat
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.databinding.LayoutYourSpendPointsGastropaySdkBinding
+import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 
 class YourSpendPointsView(context: Context, attrs: AttributeSet?) : RelativeLayout(context, attrs) {
 
     interface Listener {
-        fun buttonClicked(isSpendSelected : Boolean)
+        fun buttonClicked(isSpendSelected: Boolean)
     }
 
     private lateinit var binding: LayoutYourSpendPointsGastropaySdkBinding
@@ -27,8 +28,12 @@ class YourSpendPointsView(context: Context, attrs: AttributeSet?) : RelativeLayo
     }
 
     private fun init(context: Context, attrs: AttributeSet?) {
-        binding = LayoutYourSpendPointsGastropaySdkBinding.inflate(LayoutInflater.from(context), this, true)
-        binding.button.setOnClickListener {
+        binding = LayoutYourSpendPointsGastropaySdkBinding.inflate(
+            LayoutInflater.from(context),
+            this,
+            true
+        )
+        binding.useButton.setOnClickListener {
             isSpendSelected = !isSpendSelected
             set()
             listener.buttonClicked(isSpendSelected)
@@ -66,23 +71,27 @@ class YourSpendPointsView(context: Context, attrs: AttributeSet?) : RelativeLayo
             binding.apply {
                 layoutSpendAmount.setBackgroundColor(resIdCeltic)
                 pointImageView.setBackgroundResource(R.drawable.ic_point_gastropay_sdk)
-                valueTitleTextView.text = "Harcanan TL Puan"
+                valueTitleTextView.text =
+                    StringUtils.getString(R.string.payment_confirmation_spended_amount_label_gastropay_sdk)
                 valueTitleTextView.setTextColor(Color.WHITE)
                 valueTextView.setTextColor(resIdSunglow)
-                button.setTextColor(resIdSunglow)
-                button.setStrokeColorResource(R.color.celtic_gastropay_sdk)
-                button.text = "İPTAL"
+                useButton.setTextColor(resIdSunglow)
+                useButton.setStrokeColorResource(R.color.celtic_gastropay_sdk)
+                useButton.text =
+                    StringUtils.getString(R.string.payment_confirmation_spendable_amount_button_cancel_text_gastropay_sdk)
             }
         } else {
             binding.apply {
                 layoutSpendAmount.setBackgroundColor(Color.WHITE)
                 pointImageView.setBackgroundResource(R.drawable.ic_point_black_gastropay_sdk)
-                valueTitleTextView.text = "Harcayabileceğin TL Puan"
+                valueTitleTextView.text =
+                    StringUtils.getString(R.string.payment_confirmation_spendable_amount_label_gastropay_sdk)
                 valueTitleTextView.setTextColor(resIdCeltic)
                 valueTextView.setTextColor(resIdCeltic)
-                button.setTextColor(resIdCeltic)
-                button.setStrokeColorResource(R.color.celtic_gastropay_sdk)
-                button.text = "HARCA"
+                useButton.setTextColor(resIdCeltic)
+                useButton.setStrokeColorResource(R.color.celtic_gastropay_sdk)
+                useButton.text =
+                    StringUtils.getString(R.string.payment_confirmation_spendable_amount_button_text_gastropay_sdk)
             }
         }
     }

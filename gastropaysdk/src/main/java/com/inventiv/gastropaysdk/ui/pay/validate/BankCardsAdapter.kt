@@ -8,7 +8,7 @@ import com.inventiv.gastropaysdk.databinding.ItemBankCardGastropaySdkBinding
 
 internal class BankCardsAdapter(
     var cards: MutableList<BankCardResponse>,
-    private val clickedListener: (card: BankCardResponse, position : Int) -> Unit,
+    private val clickedListener: (card: BankCardResponse, position: Int) -> Unit,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = cards.size

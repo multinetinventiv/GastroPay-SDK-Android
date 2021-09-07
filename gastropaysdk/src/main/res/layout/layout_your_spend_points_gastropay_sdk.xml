@@ -32,7 +32,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/button"
+            app:layout_constraintEnd_toStartOf="@+id/useButton"
             app:layout_constraintStart_toEndOf="@+id/pointImageView"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -56,7 +56,7 @@
         </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button"
+            android:id="@+id/useButton"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
