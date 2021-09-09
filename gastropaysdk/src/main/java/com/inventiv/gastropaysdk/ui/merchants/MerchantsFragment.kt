@@ -22,11 +22,11 @@ import com.inventiv.gastropaysdk.ui.merchants.detail.MerchantDetailFragment
 import com.inventiv.gastropaysdk.ui.merchants.searchmerchant.SearchMerchantFragment
 import com.inventiv.gastropaysdk.utils.CustomLoadingListItemCreator
 import com.inventiv.gastropaysdk.utils.LocationHelper
-import com.inventiv.gastropaysdk.utils.RecyclerMarginDecoration
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.ConvertUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.PermissionUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
+import com.inventiv.gastropaysdk.utils.itemdecorator.RecyclerMarginDecoration
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import com.paginate.Paginate
 import kotlinx.coroutines.flow.collect

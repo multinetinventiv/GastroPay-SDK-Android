@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/text_item_title"
+            android:id="@+id/textItemTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
@@ -27,7 +27,7 @@
             tools:text="Item1" />
 
         <View
-            android:id="@+id/view_divider"
+            android:id="@+id/viewDivider"
             style="@style/DividerStyleGastroPaySdk"
             android:layout_marginHorizontal="8dp"
             android:alpha="0.3" />

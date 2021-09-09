@@ -6,6 +6,7 @@ import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.response.CitiesResponse
 import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
 import com.inventiv.gastropaysdk.data.response.MerchantListResponse
+import com.inventiv.gastropaysdk.data.response.TagGroupResponse
 import com.inventiv.gastropaysdk.data.safeFlow
 import kotlinx.coroutines.flow.Flow
 
@@ -45,6 +46,12 @@ internal class MerchantRepositoryImp(private val gastroPayService: GastroPayServ
     override fun cities(): Flow<Resource<CitiesResponse>> {
         return safeFlow {
             gastroPayService.cities()
+        }
+    }
+
+    override fun searchCriteria(cityId: String?): Flow<Resource<List<TagGroupResponse>>> {
+        return safeFlow {
+            gastroPayService.searchCriterias(cityId)
         }
     }
 }

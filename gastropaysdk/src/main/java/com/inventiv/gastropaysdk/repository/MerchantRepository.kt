@@ -4,6 +4,7 @@ import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.response.CitiesResponse
 import com.inventiv.gastropaysdk.data.response.MerchantDetailResponse
 import com.inventiv.gastropaysdk.data.response.MerchantListResponse
+import com.inventiv.gastropaysdk.data.response.TagGroupResponse
 import kotlinx.coroutines.flow.Flow
 
 internal interface MerchantRepository {
@@ -20,4 +21,6 @@ internal interface MerchantRepository {
     ): Flow<Resource<MerchantDetailResponse>>
 
     fun cities(): Flow<Resource<CitiesResponse>>
+
+    fun searchCriteria(cityId: String?): Flow<Resource<List<TagGroupResponse>>>
 }

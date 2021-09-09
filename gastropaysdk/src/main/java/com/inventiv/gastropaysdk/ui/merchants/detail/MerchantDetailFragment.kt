@@ -9,7 +9,6 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.chip.Chip
 import com.inventiv.gastropaysdk.R
@@ -100,12 +99,14 @@ internal class MerchantDetailFragment :
                     }
                     is Resource.Success -> {
                         uiState.data.apply {
-                            Glide.with(this@MerchantDetailFragment)
-                                .load(showcaseImageUrl)
-                                .into(binding.merchantDetailImageView)
-                            Glide.with(this@MerchantDetailFragment)
-                                .load(logoUrl)
-                                .into(binding.merchantImageView)
+                            binding.merchantDetailImageView.loadImage(
+                                this@MerchantDetailFragment,
+                                showcaseImageUrl
+                            )
+                            binding.merchantImageView.loadImage(
+                                this@MerchantDetailFragment,
+                                logoUrl
+                            )
                             toolbarTitle = name
                             merchantLocation.latitude = latitude
                             merchantLocation.longitude = longitude

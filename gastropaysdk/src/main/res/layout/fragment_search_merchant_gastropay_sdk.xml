@@ -36,12 +36,13 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/viewDivider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="0dp"
         android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewDivider">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -64,8 +65,8 @@
                 style="@style/SpinnerTagStyleGastroPaySdk"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_normal_gastropay_sdk"
                 android:layout_marginStart="@dimen/margin_normal_gastropay_sdk"
+                android:layout_marginTop="@dimen/margin_normal_gastropay_sdk"
                 android:text="@string/search_merchant_spinner_city_gastropay_sdk"
                 app:drawableEndCompat="@drawable/ic_chevron_right_gastropay_sdk"
                 app:layout_constraintEnd_toStartOf="@+id/spinnerRegion"
@@ -86,7 +87,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/spinnerCity"
                 app:layout_constraintTop_toTopOf="@+id/spinnerCity" />
-
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/textSecondTag"
@@ -126,8 +126,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/recyclerSecondTag"
                 tools:text="Etiketler" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerThirdTag"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupThirdTag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipChildren="false"
@@ -135,7 +135,8 @@
                 android:padding="@dimen/margin_normal_gastropay_sdk"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textThirdTag" />
+                app:layout_constraintTop_toBottomOf="@+id/textThirdTag"
+                tools:orientation="horizontal" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/materialButtonFilter"
@@ -145,7 +146,7 @@
                 android:text="@string/search_merchant_button_filter_gastropay_sdk"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerThirdTag" />
+                app:layout_constraintTop_toBottomOf="@+id/chipGroupThirdTag" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/materialButtonClearFilter"

@@ -1,4 +1,4 @@
-package com.inventiv.gastropaysdk.utils
+package com.inventiv.gastropaysdk.utils.itemdecorator
 
 import android.graphics.Rect
 import android.view.View

@@ -1,5 +1,6 @@
 package com.inventiv.gastropaysdk.ui.merchants.searchmerchant
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
@@ -7,11 +8,11 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.chip.Chip
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
 import com.inventiv.gastropaysdk.data.Resource
-import com.inventiv.gastropaysdk.data.response.CitiesResponse
-import com.inventiv.gastropaysdk.data.response.City
+import com.inventiv.gastropaysdk.data.response.*
 import com.inventiv.gastropaysdk.databinding.FragmentSearchMerchantGastropaySdkBinding
 import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
@@ -19,8 +20,11 @@ import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.ui.MainViewModelFactory
 import com.inventiv.gastropaysdk.ui.common.singleselectiondialog.CommonSingleItemSelectionDialogFragment
+import com.inventiv.gastropaysdk.utils.COMMA
+import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.ConvertUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.handleError
+import com.inventiv.gastropaysdk.utils.itemdecorator.RecyclerHorizontalMarginDecoration
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -51,17 +55,28 @@ internal class SearchMerchantFragment :
 
     private lateinit var searchView: SearchView
     private lateinit var citiesBottomSheetDialog: CommonSingleItemSelectionDialogFragment<City>
+    private var regionBottomSheetDialog: CommonSingleItemSelectionDialogFragment<Tag>? = null
 
     private var selectedCity: City? = null
-//    private var selectedRegion: Tag? = null
+    private var selectedRegion: Tag? = null
+
+    private var adapterSecondTag: TagAdapter? = null
+
+    override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
+        hideToolbar(toolbar, logo)
+    }
+
+    override fun showBottomNavigation() = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupSearchToolbar()
+        setupRecyclerView()
         setListeners()
         setupObservers()
 
+        viewModel.getSearchCriteria(null)
         viewModel.getCities()
     }
 
@@ -82,16 +97,76 @@ internal class SearchMerchantFragment :
         )
     }
 
+    private fun setupRecyclerView() {
+        binding.recyclerSecondTag.addItemDecoration(
+            RecyclerHorizontalMarginDecoration(ConvertUtils.dp2px(16f))
+        )
+
+        adapterSecondTag = TagAdapter()
+        binding.recyclerSecondTag.adapter = adapterSecondTag
+    }
+
     private fun setListeners() {
         binding.apply {
             spinnerCity.setOnClickListener {
                 citiesBottomSheetDialog.show(childFragmentManager, TAG_SINGLE_SELECT_CITY_FRAGMENT)
+            }
+            spinnerRegion.setOnClickListener {
+                regionBottomSheetDialog?.show(
+                    childFragmentManager,
+                    TAG_SINGLE_SELECT_REGION_FRAGMENT
+                )
+            }
+            materialButtonFilter.setOnClickListener {
+                getChipGroupTagIds()
+            }
+            materialButtonClearFilter.setOnClickListener {
+                adapterSecondTag?.clearTags()
+//                adapterThirdTag?.clearTags()
+                selectedCity = null
+                selectedRegion = null
+                viewModel.resetRegionSelection()
+                viewModel.resetCitySelection()
             }
         }
     }
 
     private fun setupObservers() {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            launch {
+                viewModel.uiStateSearchCriteria.collect { resource ->
+                    when (resource) {
+                        is Resource.Loading -> {
+                            if (resource.isLoading) {
+                                binding.loading.loadingLayout.visibility = View.VISIBLE
+                            } else {
+                                binding.loading.loadingLayout.visibility = View.GONE
+                            }
+                        }
+                        is Resource.Success -> {
+                            val tagGroups = resource.data
+                            tagGroups.forEach {
+                                when (it.tagGroupKey) {
+                                    TagGroupType.REGIONS.value -> {
+                                        prepareRegionsBottomSheet(it)
+                                    }
+                                    TagGroupType.CATEGORIES.value -> {
+                                        populateCategoriesTagGroup(it)
+                                    }
+                                    TagGroupType.OTHERS.value -> {
+                                        populateOthersTagGroup(it)
+                                    }
+                                }
+                            }
+                        }
+                        is Resource.Error -> {
+                            resource.apiError.handleError(requireActivity())
+                        }
+                        else -> {
+                        }
+                    }
+                }
+            }
             launch {
                 viewModel.uiStateCities.collect { resource ->
                     when (resource) {
@@ -117,7 +192,13 @@ internal class SearchMerchantFragment :
                 viewModel.selectedCity.collect { city ->
                     selectedCity = city
                     binding.spinnerCity.text = city.title
-//                    viewModel.resetRegionSelection()
+                    viewModel.resetRegionSelection()
+                }
+            }
+            launch {
+                viewModel.selectedRegion.collect { region ->
+                    selectedRegion = region
+                    binding.spinnerRegion.text = region.title
                 }
             }
         }
@@ -141,9 +222,78 @@ internal class SearchMerchantFragment :
         }
     }
 
-    override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
-        hideToolbar(toolbar, logo)
+    private fun prepareRegionsBottomSheet(tagGroup: TagGroupResponse) {
+        regionBottomSheetDialog = CommonSingleItemSelectionDialogFragment.newInstance(
+            if (tagGroup.tags?.isNullOrEmpty() == false) {
+                binding.spinnerRegion.isClickable = true
+                binding.spinnerRegion.isEnabled = true
+                tagGroup.tags.apply {
+                    add(0, Tag.getDefaultRegionItem())
+                }
+            } else {
+                binding.spinnerRegion.isClickable = false
+                binding.spinnerRegion.isEnabled = false
+                arrayListOf()
+            }
+        ) { item, _ ->
+            viewModel.selectRegion(item)
+        }
     }
 
-    override fun showBottomNavigation() = false
+    private fun populateCategoriesTagGroup(tagGroup: TagGroupResponse) {
+        setCategoriesTagGroupVisibility(tagGroup.tags.isNullOrEmpty().not())
+
+        binding.textSecondTag.text = tagGroup.tagGroupName
+        tagGroup.tags?.let { adapterSecondTag?.setTags(it) }
+    }
+
+    private fun populateOthersTagGroup(tagGroup: TagGroupResponse) {
+        setOthersTagGroupVisibility(tagGroup.tags.isNullOrEmpty().not())
+
+        binding.textThirdTag.text = tagGroup.tagGroupName
+        tagGroup.tags?.let { tagList ->
+            binding.chipGroupThirdTag.removeAllViews()
+            tagList.forEach {
+                val chip = Chip(context).apply {
+                    text = it.tagName
+                    tag = it.id
+                    isChipIconVisible = false
+                    isCloseIconVisible = false
+                    isCheckedIconVisible = false
+                    isClickable = true
+                    isCheckable = true
+                    setTextColor(Color.BLACK)
+                    setChipBackgroundColorResource(R.color.selector_background_color_chip_gastropay_sdk)
+                }
+                binding.chipGroupThirdTag.addView(chip)
+            }
+        }
+    }
+
+    private fun getChipGroupTagIds(): String {
+        val checkedChipIds = binding.chipGroupThirdTag.checkedChipIds
+        return checkedChipIds.map { viewId ->
+            binding.chipGroupThirdTag.findViewById<Chip>(viewId).tag
+        }.joinToString(separator = COMMA)
+    }
+
+    private fun setCategoriesTagGroupVisibility(isVisible: Boolean) {
+        if (isVisible) {
+            binding.textSecondTag.visibility = View.VISIBLE
+            binding.recyclerSecondTag.visibility = View.VISIBLE
+        } else {
+            binding.textSecondTag.visibility = View.GONE
+            binding.recyclerSecondTag.visibility = View.GONE
+        }
+    }
+
+    private fun setOthersTagGroupVisibility(isVisible: Boolean) {
+        if (isVisible) {
+            binding.textThirdTag.visibility = View.VISIBLE
+            binding.chipGroupThirdTag.visibility = View.VISIBLE
+        } else {
+            binding.textThirdTag.visibility = View.GONE
+            binding.chipGroupThirdTag.visibility = View.GONE
+        }
+    }
 }

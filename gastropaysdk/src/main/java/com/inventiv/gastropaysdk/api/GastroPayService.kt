@@ -53,4 +53,10 @@ internal interface GastroPayService {
     @GET("merchant/cities")
     suspend fun cities(): CitiesResponse
 
+    @GET("merchant/search_criteria_tag_groups")
+    suspend fun searchCriterias(
+        @Query("cityId") cityId: String? = null,
+        @Query("newFiltering") newFiltering: Boolean = true,
+    ): List<TagGroupResponse>
+
 }
