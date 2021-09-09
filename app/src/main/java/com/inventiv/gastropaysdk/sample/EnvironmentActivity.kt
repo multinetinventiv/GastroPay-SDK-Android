@@ -65,10 +65,8 @@ class EnvironmentActivity : AppCompatActivity(), OnCredentialsEntered {
     }
 
     private fun saveAndGo(infoModel: InfoModel) {
-//        val infoModel = InfoModel(environment ?: selectedEnvironment!!)
         val info = Gson().toJson(infoModel)
         getSharedPref().edit().putString(PREF_INFOS, info).apply()
-
 
         startActivity(SdkStartActivity.newIntent(this, infoModel))
         finish()

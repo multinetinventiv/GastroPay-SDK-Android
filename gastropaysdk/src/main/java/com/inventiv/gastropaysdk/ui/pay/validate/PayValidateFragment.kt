@@ -11,12 +11,13 @@ import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.request.ConfirmProvisionRequest
 import com.inventiv.gastropaysdk.data.response.BankCardResponse
 import com.inventiv.gastropaysdk.data.response.ProvisionInformationResponse
-import com.inventiv.gastropaysdk.databinding.FragmentPayvalidateGastropaySdkBinding
+import com.inventiv.gastropaysdk.databinding.FragmentPayValidateGastropaySdkBinding
 import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.repository.PaymentRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.ui.MainViewModelFactory
+import com.inventiv.gastropaysdk.ui.pay.result.PayResultFragment
 import com.inventiv.gastropaysdk.utils.REFERENCE_UNDEFINED
 import com.inventiv.gastropaysdk.utils.RecyclerMarginDecoration
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.ConvertUtils
@@ -26,11 +27,10 @@ import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.handleError
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import com.inventiv.gastropaysdk.view.YourSpendPointsView
-import com.tapadoo.alerter.Alerter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-internal class PayValidateFragment : BaseFragment(R.layout.fragment_payvalidate_gastropay_sdk) {
+internal class PayValidateFragment : BaseFragment(R.layout.fragment_pay_validate_gastropay_sdk) {
 
     companion object {
         private const val PARAM_TOOLBAR_TITLE = "PARAM_TOOLBAR_TITLE"
@@ -67,7 +67,7 @@ internal class PayValidateFragment : BaseFragment(R.layout.fragment_payvalidate_
 
     override fun showBottomNavigation() = false
 
-    private val binding by viewBinding(FragmentPayvalidateGastropaySdkBinding::bind)
+    private val binding by viewBinding(FragmentPayValidateGastropaySdkBinding::bind)
 
     private lateinit var provision: ProvisionInformationResponse
     private var isPointSpendSelected = false
@@ -214,12 +214,11 @@ internal class PayValidateFragment : BaseFragment(R.layout.fragment_payvalidate_
                         }
                         is Resource.Success -> {
                             LogUtils.d(uiState.data)
-                            Alerter.create(requireActivity())
-                                .setTitle("Ödeme Başarılı")
-                                .setText("Ödeme başarıyla alındı")
-                                .setIcon(R.drawable.ic_bank_card_selected_gastropay_sdk)
-                                .setBackgroundColorRes(R.color.shamrock_gastropay_sdk)
-                                .show()
+                            sharedViewModel.pushFragment(
+                                PayResultFragment.newInstance(provision.merchantName, provision)
+                            )
+                            //TODO is true?
+                            GastroPaySdk.getComponent().globalGastroPaySdkListener?.onPaymentSuccess()
                         }
                         is Resource.Error -> {
                             uiState.apiError.handleError(requireActivity())
