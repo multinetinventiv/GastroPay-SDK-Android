@@ -7,9 +7,12 @@ import com.inventiv.gastropaysdk.data.response.*
 import com.inventiv.gastropaysdk.repository.MerchantRepositoryImp
 import com.inventiv.gastropaysdk.ui.merchants.searchmerchant.SearchMerchantViewModel
 import com.inventiv.gastropaysdk.utils.MainCoroutineScopeRule
+import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 import com.inventiv.gastropaysdk.utils.emptyExpected
 import com.inventiv.gastropaysdk.utils.loadingFalseExpected
 import com.inventiv.gastropaysdk.utils.loadingTrueExpected
+import io.mockk.every
+import io.mockk.mockkStatic
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
@@ -38,6 +41,8 @@ class SearchMerchantViewModelTest {
 
     @Before
     fun setUp() {
+        mockkStatic(StringUtils::class)
+        every { StringUtils.getString(any()) }.returns("")
         viewModel = SearchMerchantViewModel(repository)
     }
 
