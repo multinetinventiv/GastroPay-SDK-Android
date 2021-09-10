@@ -200,6 +200,7 @@ internal class SearchMerchantFragment :
                                     }
                                 }
                             }
+//                            KeyboardUtils.hideSoftInput(requireActivity())
                         }
                         is Resource.Error -> {
                             resource.apiError.handleError(requireActivity())
@@ -260,6 +261,7 @@ internal class SearchMerchantFragment :
                 arrayListOf()
             }
         ) { item, _ ->
+            binding.toolbarSearchMerchant.clearFocus()
             viewModel.selectCity(item)
         }
     }

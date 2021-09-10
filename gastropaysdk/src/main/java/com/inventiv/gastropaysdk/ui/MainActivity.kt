@@ -93,7 +93,7 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
         controller = FragNavController(supportFragmentManager, R.id.mainContainerGastroPaySdk)
         controller.rootFragmentListener = this
 
-        controller.fragmentHideStrategy = FragNavController.HIDE
+        controller.fragmentHideStrategy = FragNavController.DETACH_ON_NAVIGATE_HIDE_ON_SWITCH
         controller.transactionListener = object : FragNavController.TransactionListener {
             override fun onFragmentTransaction(
                 fragment: Fragment?,
@@ -145,9 +145,9 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
     }
 
     override fun onBackPressed() {
-        if(controller.currentFrag is PayResultFragment){
+        if (controller.currentFrag is PayResultFragment) {
             //Ignore onBackPressed
-        }else{
+        } else {
             if (controller.isRootFragment.not()) {
                 controller.popFragment()
             } else {

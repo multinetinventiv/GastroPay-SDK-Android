@@ -2,10 +2,10 @@ package com.inventiv.gastropaysdk.ui.pay.validate
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.data.response.BankCardResponse
 import com.inventiv.gastropaysdk.databinding.ItemBankCardGastropaySdkBinding
+import com.inventiv.gastropaysdk.utils.loadImage
 
 internal class BankCardItemViewHolder(
     val binding: ItemBankCardGastropaySdkBinding,
@@ -20,9 +20,8 @@ internal class BankCardItemViewHolder(
 
             nameTextView.text = card.alias
             numberTextView.text = card.number
-            Glide.with(binding.root.context).load(card.bankImageUrl).into(iconImageView)
-            Glide.with(binding.root.context).load(card.paymentSourceImageUrl)
-                .into(cardTypeImageView)
+            iconImageView.loadImage(card.bankImageUrl)
+            cardTypeImageView.loadImage(card.paymentSourceImageUrl)
 
             if (card.isDefault) {
                 selectedBadgeTextView.visibility = View.VISIBLE

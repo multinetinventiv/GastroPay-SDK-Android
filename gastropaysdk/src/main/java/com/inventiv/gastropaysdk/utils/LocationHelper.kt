@@ -9,18 +9,21 @@ import android.net.Uri
 import android.provider.Settings
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.Lifecycle
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.CommonInfoDialogFragment
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.constant.PermissionConstants
+import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.PermissionUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 
 class LocationHelper @JvmOverloads constructor(
     private val activity: FragmentActivity,
     private val fragment: Fragment? = null,
-    private var callback: GlobalLocationCallback
+    private var callback: GlobalLocationCallback,
+    private val lifecycle: Lifecycle
 ) {
 
     private val DEFAULT_REQUEST_CODE = 9999
@@ -96,12 +99,22 @@ class LocationHelper @JvmOverloads constructor(
 
     @SuppressLint("MissingPermission")
     private fun requestLocationUpdates() {
+        LogUtils.d("Location Helper requestLocationUpdates lifecycle:${lifecycle.currentState}")
+        if (!lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+            return
+        }
         callback.onLocationRequest()
         fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
             .addOnSuccessListener {
-                callback.onLocationResult(it)
+                LogUtils.d("Location Helper onSuccess lifecycle:${lifecycle.currentState}")
+                if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                    callback.onLocationResult(it)
+                }
             }.addOnFailureListener {
-                callback.onLocationFailed()
+                LogUtils.d("Location Helper onFail lifecycle:${lifecycle.currentState}")
+                if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                    callback.onLocationFailed()
+                }
             }
     }
 

@@ -39,9 +39,11 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNearMeGastroPaySdk" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNearMeGastroPaySdk"
+        tools:visibility="visible" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/emptyLayoutGastroPaySdk"

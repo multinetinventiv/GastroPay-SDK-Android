@@ -59,36 +59,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         ViewModelProvider(requireActivity(), viewModelFactory).get(MainViewModel::class.java)
     }
 
-    private val locationHelper: LocationHelper by lazy {
-        LocationHelper(
-            activity = requireActivity(),
-            fragment = this,
-            callback = object : LocationHelper.GlobalLocationCallback {
-                override fun onLocationRequest() {
-                    binding.layoutLocationPermissionGastroPaySdk.root.visibility = View.GONE
-                    binding.loading.loadingLayout.visibility = View.VISIBLE
-                }
-
-                override fun onLocationResult(location: Location) {
-                    binding.loading.loadingLayout.visibility = View.GONE
-                    myLocation = location
-                    if (viewModel.currentPage == 0) {
-                        viewModel.getMerchants(
-                            location = myLocation,
-                            merchantName = merchantName,
-                            tags = tags,
-                            cityId = cityId
-                        )
-                    }
-                }
-
-                override fun onLocationFailed() {
-                    binding.loading.loadingLayout.visibility = View.GONE
-                    LogUtils.e("onLocationFailed")
-                }
-            }
-        )
-    }
+    private lateinit var locationHelper: LocationHelper
 
     private val paginateMerchantsCallbacks = object : Paginate.Callbacks {
         override fun onLoadMore() {
@@ -125,12 +96,45 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initLocationHelper()
         subscribeNavigationEvents()
         setupObservers()
         setupClickListeners()
         setupMerchantAdapter()
 
         askLocationPermission()
+    }
+
+    private fun initLocationHelper() {
+        locationHelper = LocationHelper(
+            activity = requireActivity(),
+            fragment = this,
+            lifecycle = viewLifecycleOwner.lifecycle,
+            callback = object : LocationHelper.GlobalLocationCallback {
+                override fun onLocationRequest() {
+                    binding.layoutLocationPermissionGastroPaySdk.root.visibility = View.GONE
+                    binding.loading.loadingLayout.visibility = View.VISIBLE
+                }
+
+                override fun onLocationResult(location: Location) {
+                    binding.loading.loadingLayout.visibility = View.GONE
+                    myLocation = location
+                    if (viewModel.currentPage == 0) {
+                        viewModel.getMerchants(
+                            location = myLocation,
+                            merchantName = merchantName,
+                            tags = tags,
+                            cityId = cityId
+                        )
+                    }
+                }
+
+                override fun onLocationFailed() {
+                    binding.loading.loadingLayout.visibility = View.GONE
+                    LogUtils.e("onLocationFailed")
+                }
+            }
+        )
     }
 
     private fun askLocationPermission() {
@@ -140,6 +144,8 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
             )
         ) {
             locationHelper.requestLocation()
+        } else {
+            binding.layoutLocationPermissionGastroPaySdk.root.visibility = View.VISIBLE
         }
     }
 
