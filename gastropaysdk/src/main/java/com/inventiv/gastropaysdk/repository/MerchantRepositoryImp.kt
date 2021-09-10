@@ -18,6 +18,7 @@ internal class MerchantRepositoryImp(private val gastroPayService: GastroPayServ
         longitude: Double,
         tags: String?,
         merchantName: String?,
+        cityId: String?,
         page: Int
     ): Flow<Resource<MerchantListResponse>> {
 
@@ -29,6 +30,7 @@ internal class MerchantRepositoryImp(private val gastroPayService: GastroPayServ
                     tags,
                     false,
                     merchantName,
+                    cityId,
                     page
                 )
             }

@@ -63,6 +63,8 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
                     is MainViewModel.Event.PopFragment -> {
                         popFragment(it.depth)
                     }
+                    else -> {
+                    }
                 }
             }
             .observeInLifecycle(this)

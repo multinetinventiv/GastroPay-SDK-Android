@@ -12,6 +12,7 @@ import com.google.android.material.chip.Chip
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
 import com.inventiv.gastropaysdk.data.Resource
+import com.inventiv.gastropaysdk.data.request.SearchCriteria
 import com.inventiv.gastropaysdk.data.response.*
 import com.inventiv.gastropaysdk.databinding.FragmentSearchMerchantGastropaySdkBinding
 import com.inventiv.gastropaysdk.repository.MainRepositoryImp
@@ -118,11 +119,52 @@ internal class SearchMerchantFragment :
                 )
             }
             materialButtonFilter.setOnClickListener {
-                getChipGroupTagIds()
+                var searchName: String? = null
+
+                val query = searchView.query.toString()
+                if (query.isNotEmpty()) {
+                    searchName = query
+                }
+
+                val cityId = if (selectedCity?.isDefaultItem() == true || selectedCity == null) {
+                    null
+                } else {
+                    selectedCity?.id?.toString()
+                }
+
+                val tagRegion = selectedRegion?.getRegionTagId()
+                val tagCategories = adapterSecondTag?.getTagIds()
+                val tagOthers = getChipGroupTagIds()
+
+                val stringBuilder = StringBuilder()
+
+                if (!tagRegion.isNullOrEmpty()) {
+                    stringBuilder.append(tagRegion)
+                    stringBuilder.append(COMMA)
+                }
+                if (!tagCategories.isNullOrEmpty()) {
+                    stringBuilder.append(tagCategories)
+                    stringBuilder.append(COMMA)
+                }
+                if (tagOthers.isNotEmpty()) {
+                    stringBuilder.append(tagOthers)
+                    stringBuilder.append(COMMA)
+                }
+
+                var strTags = stringBuilder.toString()
+
+                val searchCriteria: SearchCriteria = if (strTags.isNotEmpty()) {
+                    strTags = strTags.substring(0, strTags.length - 1)
+                    SearchCriteria(tags = strTags, searchName = searchName, cityId = cityId)
+                } else {
+                    SearchCriteria(searchName = searchName, cityId = cityId)
+                }
+
+                sharedViewModel.popFragment(1)
+                sharedViewModel.searchFilteredMerchants(searchCriteria)
             }
             materialButtonClearFilter.setOnClickListener {
                 adapterSecondTag?.clearTags()
-//                adapterThirdTag?.clearTags()
                 selectedCity = null
                 selectedRegion = null
                 viewModel.resetRegionSelection()

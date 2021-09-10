@@ -17,6 +17,7 @@ internal interface GastroPayService {
         @Query("tags") tags: String?,
         @Query("isBonusPoint") isBonusPoint: Boolean? = false,
         @Query("merchantName") merchantName: String?,
+        @Query("cityId") cityId: String? = null,
         @Query("currentPage") pageIndex: Int
     ): MerchantListResponse
 

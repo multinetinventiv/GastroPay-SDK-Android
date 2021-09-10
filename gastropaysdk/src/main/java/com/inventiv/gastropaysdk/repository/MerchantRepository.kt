@@ -13,6 +13,7 @@ internal interface MerchantRepository {
         longitude: Double,
         tags: String? = null,
         merchantName: String? = null,
+        cityId: String? = null,
         page: Int
     ): Flow<Resource<MerchantListResponse>>
 

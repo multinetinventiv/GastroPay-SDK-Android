@@ -23,7 +23,8 @@ internal class MerchantsViewModel(private val merchantRepository: MerchantReposi
     fun getMerchants(
         location: Location,
         tags: String? = null,
-        merchantName: String? = null
+        merchantName: String? = null,
+        cityId: String? = null
     ) {
         viewModelScope.launch {
             merchantRepository.getMerchants(
@@ -31,6 +32,7 @@ internal class MerchantsViewModel(private val merchantRepository: MerchantReposi
                 longitude = location.longitude,
                 tags = tags,
                 merchantName = merchantName,
+                cityId = cityId,
                 page = currentPage
             ).collect { response ->
                 _uiState.value = response

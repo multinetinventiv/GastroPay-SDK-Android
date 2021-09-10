@@ -34,58 +34,17 @@ import kotlinx.coroutines.flow.collect
 
 internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gastropay_sdk) {
 
-    override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
-        toolbar.changeToMainStyle()
-        showToolbar(true, toolbar, logo)
-        toolbar.onRightIconClick {
-            sharedViewModel.closeSdk()
-        }
-    }
-
-    override fun showBottomNavigation() = true
-
     private val binding by viewBinding(FragmentMerchantsGastropaySdkBinding::bind)
 
-    private val locationHelper: LocationHelper by lazy {
-        LocationHelper(
-            activity = requireActivity(),
-            fragment = this,
-            callback = object : LocationHelper.GlobalLocationCallback {
-                override fun onLocationResult(location: Location) {
-                    myLocation = location
-                    if (viewModel.currentPage == 0) {
-                        viewModel.getMerchants(myLocation)
-                    }
-                }
-
-                override fun onLocationFailed() {
-                    LogUtils.e("onLocationFailed")
-                }
-            }
-        )
-    }
     private lateinit var merchantAdapter: MerchantAdapter
     private var merchantPaginate: Paginate? = null
     private var merchantsList = ArrayList<MerchantResponse>()
     private var isLoadingPaging = false
     private var allItemsLoaded = false
     private var myLocation = Location("")
-    private val paginateMerchantsCallbacks = object : Paginate.Callbacks {
-        override fun onLoadMore() {
-            if (viewModel.currentPage != 0) {
-                isLoadingPaging = true
-                viewModel.getMerchants(myLocation)
-            }
-        }
-
-        override fun isLoading(): Boolean {
-            return isLoadingPaging
-        }
-
-        override fun hasLoadedAllItems(): Boolean {
-            return allItemsLoaded
-        }
-    }
+    private var tags: String? = String()
+    private var merchantName: String? = null
+    private var cityId: String? = null
 
     private val viewModel: MerchantsViewModel by lazy {
         val viewModelFactory = MerchantsViewModelFactory(
@@ -100,11 +59,74 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         ViewModelProvider(requireActivity(), viewModelFactory).get(MainViewModel::class.java)
     }
 
+    private val locationHelper: LocationHelper by lazy {
+        LocationHelper(
+            activity = requireActivity(),
+            fragment = this,
+            callback = object : LocationHelper.GlobalLocationCallback {
+                override fun onLocationRequest() {
+                    binding.loading.loadingLayout.visibility = View.VISIBLE
+                }
+
+                override fun onLocationResult(location: Location) {
+                    binding.loading.loadingLayout.visibility = View.GONE
+                    myLocation = location
+                    if (viewModel.currentPage == 0) {
+                        viewModel.getMerchants(
+                            location = myLocation,
+                            merchantName = merchantName,
+                            tags = tags,
+                            cityId = cityId
+                        )
+                    }
+                }
+
+                override fun onLocationFailed() {
+                    binding.loading.loadingLayout.visibility = View.GONE
+                    LogUtils.e("onLocationFailed")
+                }
+            }
+        )
+    }
+
+    private val paginateMerchantsCallbacks = object : Paginate.Callbacks {
+        override fun onLoadMore() {
+            if (viewModel.currentPage != 0) {
+                isLoadingPaging = true
+                viewModel.getMerchants(
+                    location = myLocation,
+                    merchantName = merchantName,
+                    tags = tags,
+                    cityId = cityId
+                )
+            }
+        }
+
+        override fun isLoading(): Boolean {
+            return isLoadingPaging
+        }
+
+        override fun hasLoadedAllItems(): Boolean {
+            return allItemsLoaded
+        }
+    }
+
+    override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
+        toolbar.changeToMainStyle()
+        showToolbar(true, toolbar, logo)
+        toolbar.onRightIconClick {
+            sharedViewModel.closeSdk()
+        }
+    }
+
+    override fun showBottomNavigation() = true
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        subscribeNavigationEvents()
         setupObservers()
-        setupListeners()
+        setupClickListeners()
         setupMerchantAdapter()
 
         askLocationPermission()
@@ -128,11 +150,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
             )
         }
         binding.merchantsRecyclerViewGastroPaySdk.addItemDecoration(
-            RecyclerMarginDecoration(
-                ConvertUtils.dp2px(
-                    16f
-                )
-            )
+            RecyclerMarginDecoration(ConvertUtils.dp2px(16f))
         )
         binding.merchantsRecyclerViewGastroPaySdk.adapter = merchantAdapter
         merchantPaginate =
@@ -148,6 +166,11 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
             viewModel.uiState.collect { uiState ->
                 when (uiState) {
                     is Resource.Loading -> {
+                        if (uiState.isLoading && viewModel.currentPage == 0) {
+                            binding.loading.loadingLayout.visibility = View.VISIBLE
+                        } else {
+                            binding.loading.loadingLayout.visibility = View.GONE
+                        }
                     }
                     is Resource.Success -> {
                         isLoadingPaging = false
@@ -173,7 +196,22 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         }
     }
 
+    private fun subscribeNavigationEvents() {
+        sharedViewModel.searchMerchants.observe(viewLifecycleOwner) { searchCriteria ->
+            if (searchCriteria != null) {
+                resetPaginate()
+
+                tags = searchCriteria.tags
+                cityId = searchCriteria.cityId
+                merchantName = searchCriteria.searchName
+
+                sharedViewModel.clearSearchFilteredMerchants()
+            }
+        }
+    }
+
     private fun resetPaginate() {
+        merchantsList.clear()
         viewModel.currentPage = 0
         isLoadingPaging = false
         allItemsLoaded = false

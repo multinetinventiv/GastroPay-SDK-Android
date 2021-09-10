@@ -96,6 +96,7 @@ class LocationHelper @JvmOverloads constructor(
 
     @SuppressLint("MissingPermission")
     private fun requestLocationUpdates() {
+        callback.onLocationRequest()
         fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
             .addOnSuccessListener {
                 callback.onLocationResult(it)
@@ -115,5 +116,6 @@ class LocationHelper @JvmOverloads constructor(
     interface GlobalLocationCallback {
         fun onLocationResult(location: Location)
         fun onLocationFailed()
+        fun onLocationRequest()
     }
 }

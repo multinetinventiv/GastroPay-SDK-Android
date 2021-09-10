@@ -3,6 +3,7 @@ package com.inventiv.gastropaysdk.data.response
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.inventiv.gastropaysdk.R
+import com.inventiv.gastropaysdk.common.BaseResponse
 import com.inventiv.gastropaysdk.ui.common.singleselectiondialog.SingleItemSelectionModel
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 import kotlinx.parcelize.Parcelize
@@ -10,7 +11,7 @@ import kotlinx.parcelize.Parcelize
 internal data class CitiesResponse(
     @field:SerializedName("cities")
     val cities: ArrayList<City>,
-)
+) : BaseResponse()
 
 @Parcelize
 internal data class City(

@@ -1,8 +1,11 @@
 package com.inventiv.gastropaysdk.ui
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.inventiv.gastropaysdk.common.BaseFragment
 import com.inventiv.gastropaysdk.common.BaseViewModel
+import com.inventiv.gastropaysdk.data.request.SearchCriteria
 import com.inventiv.gastropaysdk.repository.MainRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -19,6 +22,17 @@ internal class MainViewModel(val mainRepository: MainRepository) : BaseViewModel
 
     private val eventChannel = Channel<Event>(Channel.BUFFERED)
     val eventsFlow = eventChannel.receiveAsFlow()
+
+    private val _searchMerchants = MutableLiveData<SearchCriteria>()
+    val searchMerchants: LiveData<SearchCriteria> get() = _searchMerchants
+
+    fun searchFilteredMerchants(searchCriteria: SearchCriteria) {
+        _searchMerchants.value = searchCriteria
+    }
+
+    fun clearSearchFilteredMerchants() {
+        _searchMerchants.value = null
+    }
 
     fun closeSdk() {
         viewModelScope.launch {
