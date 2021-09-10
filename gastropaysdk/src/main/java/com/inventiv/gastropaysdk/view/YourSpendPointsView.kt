@@ -49,6 +49,11 @@ class YourSpendPointsView(context: Context, attrs: AttributeSet?) : RelativeLayo
 
     private fun set() {
 
+        if (availableAmount <= 0.0) {
+            binding.layoutRoot.visibility = View.GONE
+            return
+        }
+
         val resIdSunglow = ContextCompat.getColor(
             context,
             R.color.sunglow_gastropay_sdk

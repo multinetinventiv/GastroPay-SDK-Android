@@ -16,6 +16,7 @@ import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okhttp3.mockwebserver.RecordedRequest
+import org.hamcrest.Matchers
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -47,6 +48,16 @@ class PayValidateFragmentTest {
                 }
             }
         })
+    }
+
+    @After
+    @Throws(IOException::class)
+    fun teardown() {
+        mockWebServer.shutdown()
+    }
+
+    @Test
+    fun view_titles_check() {
 
         val bundle = Bundle().apply {
             putParcelable(
@@ -74,16 +85,6 @@ class PayValidateFragmentTest {
         scenario.onFragment { fragment ->
 
         }
-    }
-
-    @After
-    @Throws(IOException::class)
-    fun teardown() {
-        mockWebServer.shutdown()
-    }
-
-    @Test
-    fun view_titles_check() {
 
         val title =
             getResourceString(R.string.payment_confirmation_amount_payable_title_gastropay_sdk)
@@ -110,6 +111,32 @@ class PayValidateFragmentTest {
 
     @Test
     fun view_points_click_check() {
+        val bundle = Bundle().apply {
+            putParcelable(
+                "PARAM_PROVISION_DATA", ProvisionInformationResponse(
+                    merchantId = "1234",
+                    token = "3456",
+                    amount = AmountModel(2.0, "", "", "₺2"),
+                    merchantName = "Bağcılar Sturbucks",
+                    imageUrl = "https://google.com/test.png",
+                    totalAmount = AmountModel(2.0, "", "", "₺2"),
+                    availableAmount = AmountModel(3.0, "", "", "₺3"),
+                    usingAvailableAmount = AmountModel(4.0, "", "", "₺4"),
+                    merchantUid = "6789",
+                    callType = null,
+                    terminalUid = "0"
+                )
+            )
+        }
+
+        val scenario =
+            launchFragmentInContainer<PayValidateFragment>(
+                fragmentArgs = bundle,
+                themeResId = R.style.Theme_GastroPaySdk
+            )
+        scenario.onFragment { fragment ->
+
+        }
         //Before Click
         Espresso.onView(ViewMatchers.withId(R.id.useButton))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
@@ -129,5 +156,38 @@ class PayValidateFragmentTest {
         Espresso.onView(ViewMatchers.withId(R.id.valueTitleTextView))
             .check(ViewAssertions.matches(ViewMatchers.withText(getResourceString(R.string.payment_confirmation_spended_amount_label_gastropay_sdk))))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    }
+
+    @Test
+    fun if_availableAmount_0_hide_points_view() {
+        val bundle = Bundle().apply {
+            putParcelable(
+                "PARAM_PROVISION_DATA", ProvisionInformationResponse(
+                    merchantId = "1234",
+                    token = "3456",
+                    amount = AmountModel(2.0, "", "", "₺2"),
+                    merchantName = "Bağcılar Sturbucks",
+                    imageUrl = "https://google.com/test.png",
+                    totalAmount = AmountModel(2.0, "", "", "₺2"),
+                    availableAmount = AmountModel(0.0, "", "", "₺0"),
+                    usingAvailableAmount = AmountModel(4.0, "", "", "₺4"),
+                    merchantUid = "6789",
+                    callType = null,
+                    terminalUid = "0"
+                )
+            )
+        }
+
+        val scenario =
+            launchFragmentInContainer<PayValidateFragment>(
+                fragmentArgs = bundle,
+                themeResId = R.style.Theme_GastroPaySdk
+            )
+        scenario.onFragment { fragment ->
+
+        }
+
+        Espresso.onView(ViewMatchers.withId(R.id.yourSpendPointsView))
+            .check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())))
     }
 }
