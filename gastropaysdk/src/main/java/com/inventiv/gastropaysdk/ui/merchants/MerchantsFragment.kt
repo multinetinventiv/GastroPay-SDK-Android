@@ -49,16 +49,12 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         LocationHelper(
             activity = requireActivity(),
             fragment = this,
-            globalLocationCallback = object : LocationHelper.GlobalLocationCallback {
+            callback = object : LocationHelper.GlobalLocationCallback {
                 override fun onLocationResult(location: Location) {
                     myLocation = location
                     if (viewModel.currentPage == 0) {
                         viewModel.getMerchants(myLocation)
                     }
-                }
-
-                override fun onLocationSuccess() {
-                    binding.layoutLocationPermissionGastroPaySdk.root.visibility = View.GONE
                 }
 
                 override fun onLocationFailed() {
@@ -107,7 +103,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         super.onViewCreated(view, savedInstanceState)
 
         setupObservers()
-        setupClickListeners()
+        setupListeners()
         setupMerchantAdapter()
 
         askLocationPermission()
@@ -119,6 +115,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
                 permission.ACCESS_COARSE_LOCATION
             )
         ) {
+            binding.layoutLocationPermissionGastroPaySdk.root.visibility = View.GONE
             locationHelper.requestLocation()
         }
     }
@@ -181,7 +178,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         allItemsLoaded = false
     }
 
-    private fun setupClickListeners() {
+    private fun setupListeners() {
         binding.layoutLocationPermissionGastroPaySdk.root.setOnClickListener {
             locationHelper.requestLocation()
         }

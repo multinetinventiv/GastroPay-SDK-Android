@@ -5,6 +5,7 @@ import com.inventiv.gastropaysdk.api.GastroPayService
 import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.request.ProvisionInformationRequest
 import com.inventiv.gastropaysdk.data.request.TokenType
+import com.inventiv.gastropaysdk.data.response.AmountModel
 import com.inventiv.gastropaysdk.data.response.ProvisionInformationResponse
 import com.inventiv.gastropaysdk.repository.PaymentRepositoryImp
 import com.inventiv.gastropaysdk.ui.pay.PayViewModel
@@ -42,20 +43,21 @@ class PayViewModelTest {
         viewModel = PayViewModel(repository)
     }
 
+    //region provisionInformation
     @Test
     fun `provisionInformation viewmodel success test`() = runBlockingTest {
 
         // Given
         val expected = ProvisionInformationResponse(
             "1",
+            "",
+            AmountModel(0.0, "", "", ""),
             null,
             null,
-            null,
-            null,
-            null,
-            null,
-            null,
-            null,
+            AmountModel(0.0, "", "", ""),
+            AmountModel(0.0, "", "", ""),
+            AmountModel(0.0, "", "", ""),
+            "",
             null,
             null,
         )
@@ -84,6 +86,5 @@ class PayViewModelTest {
 
         viewModel.provisionInformation("123456")
     }
-
-
+    //endregion provisionInformation
 }

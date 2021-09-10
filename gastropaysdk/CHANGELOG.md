@@ -9,6 +9,8 @@ Tags: [Added, Changed, Deprecated, Removed, Fixed, Security]
 ## [Unreleased](https://github.com/multinetinventiv/GastroPay-SDK-Android/compare/)
 
 ### Added
+- QR Payment Result [#125922](http://isttfs02:8080/tfs/MultinetCollection/Prj%20-%20%C4%B0sfanbul/_workitems/edit/125922)
+- QR Payment Validate [#125888](http://isttfs02:8080/tfs/MultinetCollection/Prj%20-%20%C4%B0sfanbul/_workitems/edit/125888)
 - QR Payment [#126050](http://isttfs02:8080/tfs/MultinetCollection/Prj%20-%20%C4%B0sfanbul/_workitems/edit/126050)
 - Wallet [#120638](http://isttfs02:8080/tfs/MultinetCollection/Prj%20-%20%C4%B0sfanbul/_workitems/edit/120638)
 - Login [#117933](http://isttfs02:8080/tfs/MultinetCollection/Prj%20-%20%C4%B0sfanbul/_workitems/edit/117933)

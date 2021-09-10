@@ -20,6 +20,7 @@ import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.ui.MainViewModelFactory
 import com.inventiv.gastropaysdk.utils.*
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.KeyboardUtils
+import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import com.ncapdevi.fragnav.FragNavController
@@ -31,10 +32,10 @@ import java.util.concurrent.TimeUnit
 internal class OtpFragment : BaseFragment(R.layout.fragment_otp_gastropay_sdk) {
 
     companion object {
-        const val PARAM_PHONE_NUMBER = "PARAM_PHONE_NUMBER"
-        const val PARAM_VERIFICATION_CODE = "PARAM_VERIFICATION_CODE"
-        const val PARAM_END_TIME = "PARAM_END_TIME"
-        const val PARAM_FROM = "PARAM_FROM"
+        private const val PARAM_PHONE_NUMBER = "PARAM_PHONE_NUMBER"
+        private const val PARAM_VERIFICATION_CODE = "PARAM_VERIFICATION_CODE"
+        private const val PARAM_END_TIME = "PARAM_END_TIME"
+        private const val PARAM_FROM = "PARAM_FROM"
 
         fun newInstance(
             phoneNumber: String,
@@ -89,7 +90,10 @@ internal class OtpFragment : BaseFragment(R.layout.fragment_otp_gastropay_sdk) {
     override fun prepareToolbar(toolbar: GastroPaySdkToolbar, logo: AppCompatImageView) {
         toolbar.apply {
             changeToLoginStyle()
-            setTitle(R.string.login_toolbar_title_gastropay_sdk, R.color.celtic_gastropay_sdk)
+            setTitle(
+                StringUtils.getString(R.string.login_toolbar_title_gastropay_sdk),
+                R.color.celtic_gastropay_sdk
+            )
             onLeftIconClick {
                 sharedViewModel.onBackPressed()
             }
@@ -138,13 +142,13 @@ internal class OtpFragment : BaseFragment(R.layout.fragment_otp_gastropay_sdk) {
                     when (uiState) {
                         is Resource.Loading -> {
                             if (uiState.isLoading) {
+                                KeyboardUtils.hideSoftInput(binding.pinEntryEditText)
                                 binding.loadingLayout.visibility = View.VISIBLE
                             } else {
                                 binding.loadingLayout.visibility = View.GONE
                             }
                         }
                         is Resource.Success -> {
-                            KeyboardUtils.hideSoftInput(binding.pinEntryEditText)
                             when (from) {
                                 NavigatedScreenType.LOGIN.id -> {
                                     loginToOtpSuccess(uiState.data)

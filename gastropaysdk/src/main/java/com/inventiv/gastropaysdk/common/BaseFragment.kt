@@ -20,7 +20,7 @@ internal abstract class BaseFragment(layoutId: Int) : Fragment(layoutId) {
             visibility = VISIBLE
             if (showLogo) {
                 setCenterImage(REFERENCE_UNDEFINED)
-                setTitle(REFERENCE_UNDEFINED)
+                setTitle(null)
             }
         }
         logo.visibility = if (showLogo) {

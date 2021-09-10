@@ -53,4 +53,28 @@
     <string name="qr_scan_popup_camera_permission_action_button_gastropay_sdk">"AYARLARA GİT"</string>
     <string name="qr_scan_qrcode_reading_error">"QR Kod okuma işleminde bir sorun yaşandı. Lütfen tekrar deneyiniz."</string>
     <!--endregion QR-->
+
+    <!--region Payment Confirmation-->
+    <string name="payment_confirmation_navigation_title_gastropay_sdk">ÖDEME YAP</string>
+    <string name="payment_confirmation_order_gastropay_sdk">Sipariş</string>
+    <string name="payment_confirmation_amount_to_earn_gastropay_sdk">Kazanılan TL Puan</string>
+    <string name="payment_confirmation_button_pay_gastropay_sdk">ÖDEME YAP</string>
+    <string name="payment_confirmation_amount_payable_title_gastropay_sdk">ÖDENECEK TUTAR</string>
+    <string name="payment_confirmation_spendable_amount_label_gastropay_sdk">Harcayabileceğiniz Bakiye</string>
+    <string name="payment_confirmation_spended_amount_label_gastropay_sdk">Harcanan TL Puan</string>
+    <string name="payment_confirmation_total_amount_gastropay_sdk">Ödenecek Tutar</string>
+    <string name="payment_confirmation_spendable_amount_button_text_gastropay_sdk">HARCA</string>
+    <string name="payment_confirmation_spendable_amount_button_cancel_text_gastropay_sdk">İPTAL</string>
+    <string name="payment_confirmation_select_bank_card_label_gastropay_sdk">Kart Seçiniz</string>
+    <string name="payment_confirmation_selected_bank_card_text_gastropay_sdk">Seçili Kart</string>
+    <!--endregion Payment Confirmation-->
+
+    <!--region Payment Result-->
+    <string name="payment_success_contact_us_header_gastropay_sdk">GastroPay ile ödeme deneyiminiz nasıldı?</string>
+    <string name="payment_success_contact_us_info_gastropay_sdk">Her türlü yorum, görüş ve öneri için bize ulaşabilirsiniz.</string>
+    <string name="payment_success_button_contact_us_gastropay_sdk">BİZE ULAŞIN</string>
+    <string name="payment_success_payment_success_label_gastropay_sdk">Ödemeniz Başarılı</string>
+    <string name="payment_success_done_button_text_gastropay_sdk">BİTİR</string>
+    <string name="payment_success_navigation_title_gastropay_sdk">ÖDEME BAŞARILI</string>
+    <!--endregion Payment Result-->
 </resources>

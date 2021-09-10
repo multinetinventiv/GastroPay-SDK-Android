@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.IntentSender.SendIntentException
 import android.location.Location
 import android.net.Uri
-import android.os.Looper
 import android.provider.Settings
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -21,8 +20,8 @@ import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 class LocationHelper @JvmOverloads constructor(
     private val activity: FragmentActivity,
     private val fragment: Fragment? = null,
-    private val globalLocationCallback: GlobalLocationCallback
-) : LocationCallback() {
+    private var callback: GlobalLocationCallback
+) {
 
     private val DEFAULT_REQUEST_CODE = 9999
 
@@ -97,33 +96,12 @@ class LocationHelper @JvmOverloads constructor(
 
     @SuppressLint("MissingPermission")
     private fun requestLocationUpdates() {
-        globalLocationCallback.onLocationSuccess()
-        fusedLocationClient.requestLocationUpdates(
-            locationRequest,
-            this,
-            Looper.getMainLooper()
-        )
-    }
-
-    override fun onLocationResult(locationResult: LocationResult?) {
-        locationResult?.let { locationResultData ->
-            for (location in locationResultData.locations) {
-                if (location != null) {
-                    globalLocationCallback.onLocationResult(location)
-                    fusedLocationClient.removeLocationUpdates(this)
-                    break
-                }
+        fusedLocationClient.getCurrentLocation(LocationRequest.PRIORITY_HIGH_ACCURACY, null)
+            .addOnSuccessListener {
+                callback.onLocationResult(it)
+            }.addOnFailureListener {
+                callback.onLocationFailed()
             }
-        }
-    }
-
-    override fun onLocationAvailability(locationAvailability: LocationAvailability?) {
-        locationAvailability?.let {
-            val isLocationAvailable = it.isLocationAvailable
-            if (!isLocationAvailable) {
-                globalLocationCallback.onLocationFailed()
-            }
-        }
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
@@ -136,7 +114,6 @@ class LocationHelper @JvmOverloads constructor(
 
     interface GlobalLocationCallback {
         fun onLocationResult(location: Location)
-        fun onLocationSuccess()
         fun onLocationFailed()
     }
 }

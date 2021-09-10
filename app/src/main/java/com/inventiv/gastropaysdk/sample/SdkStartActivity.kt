@@ -64,6 +64,10 @@ class SdkStartActivity : AppCompatActivity() {
                         Log.d("onAuthTokenReceived", authToken)
                     }
 
+                    override fun onPaymentSuccess() {
+                        Log.d("GastroPaySdk" , "onPaymentSuccess")
+                    }
+
                     override fun onSDKClosed() {
                         super.onSDKClosed()
                         Log.d("onSDKClosed", "sdk closed")

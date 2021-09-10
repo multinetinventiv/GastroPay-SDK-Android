@@ -14,6 +14,7 @@ import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.login.LoginFragment
 import com.inventiv.gastropaysdk.ui.merchants.MerchantsFragment
 import com.inventiv.gastropaysdk.ui.pay.PayFragment
+import com.inventiv.gastropaysdk.ui.pay.result.PayResultFragment
 import com.inventiv.gastropaysdk.ui.wallet.WalletFragment
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.observeInLifecycle
@@ -90,7 +91,7 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
         controller = FragNavController(supportFragmentManager, R.id.mainContainerGastroPaySdk)
         controller.rootFragmentListener = this
 
-        controller.fragmentHideStrategy = FragNavController.DETACH_ON_NAVIGATE_HIDE_ON_SWITCH
+        controller.fragmentHideStrategy = FragNavController.HIDE
         controller.transactionListener = object : FragNavController.TransactionListener {
             override fun onFragmentTransaction(
                 fragment: Fragment?,
@@ -133,13 +134,23 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
 
     private fun initTab(tabIndex: Int) {
         controller.initialize(tabIndex)
+        val selectedTabId = when (tabIndex) {
+            FragNavController.TAB1 -> R.id.navigation_merchants
+            FragNavController.TAB2 -> R.id.navigation_wallet
+            else -> 0
+        }
+        binding.bottomNavigationViewGastroPaySdk.selectedItemId = selectedTabId
     }
 
     override fun onBackPressed() {
-        if (controller.isRootFragment.not()) {
-            controller.popFragment()
-        } else {
-            closeSdk()
+        if(controller.currentFrag is PayResultFragment){
+            //Ignore onBackPressed
+        }else{
+            if (controller.isRootFragment.not()) {
+                controller.popFragment()
+            } else {
+                closeSdk()
+            }
         }
     }
 
