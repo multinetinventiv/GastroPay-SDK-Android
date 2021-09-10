@@ -19,12 +19,12 @@ import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.ui.MainViewModelFactory
 import com.inventiv.gastropaysdk.ui.pay.result.PayResultFragment
 import com.inventiv.gastropaysdk.utils.REFERENCE_UNDEFINED
-import com.inventiv.gastropaysdk.utils.RecyclerMarginDecoration
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.ConvertUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.handleError
+import com.inventiv.gastropaysdk.utils.itemdecorator.RecyclerMarginDecoration
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import com.inventiv.gastropaysdk.view.YourSpendPointsView
 import kotlinx.coroutines.flow.collect

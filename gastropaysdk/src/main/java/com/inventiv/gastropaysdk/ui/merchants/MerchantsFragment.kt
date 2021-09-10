@@ -65,6 +65,7 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
             fragment = this,
             callback = object : LocationHelper.GlobalLocationCallback {
                 override fun onLocationRequest() {
+                    binding.layoutLocationPermissionGastroPaySdk.root.visibility = View.GONE
                     binding.loading.loadingLayout.visibility = View.VISIBLE
                 }
 
@@ -138,7 +139,6 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
                 permission.ACCESS_COARSE_LOCATION
             )
         ) {
-            binding.layoutLocationPermissionGastroPaySdk.root.visibility = View.GONE
             locationHelper.requestLocation()
         }
     }
