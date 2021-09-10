@@ -33,7 +33,7 @@ internal class SearchMerchantViewModel(private val merchantRepository: MerchantR
 
     fun getSearchCriteria(cityId: String?) {
         viewModelScope.launch {
-            merchantRepository.searchCriteria(cityId = cityId).collect { response ->
+            merchantRepository.getSearchCriteria(cityId = cityId).collect { response ->
                 _uiStateSearchCriteria.value = response
             }
         }
@@ -41,7 +41,7 @@ internal class SearchMerchantViewModel(private val merchantRepository: MerchantR
 
     fun getCities() {
         viewModelScope.launch {
-            merchantRepository.cities().collect { response ->
+            merchantRepository.getCities().collect { response ->
                 _uiStateCities.value = response
             }
         }

@@ -53,7 +53,7 @@ class MerchantsViewModelTest {
         )
 
         // When
-        whenever(service.merchantsInfo(0.0, 0.0, null, false, null, 0)).thenReturn(expected)
+        whenever(service.merchantsInfo(0.0, 0.0, null, false, null, null,0)).thenReturn(expected)
 
         launch {
             val list: List<Resource<MerchantListResponse>> = viewModel.uiState.take(4).toList()

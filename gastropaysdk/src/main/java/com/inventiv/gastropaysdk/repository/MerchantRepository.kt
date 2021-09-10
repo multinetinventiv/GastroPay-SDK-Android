@@ -21,7 +21,7 @@ internal interface MerchantRepository {
         id: String
     ): Flow<Resource<MerchantDetailResponse>>
 
-    fun cities(): Flow<Resource<CitiesResponse>>
+    fun getCities(): Flow<Resource<CitiesResponse>>
 
-    fun searchCriteria(cityId: String?): Flow<Resource<List<TagGroupResponse>>>
+    fun getSearchCriteria(cityId: String?): Flow<Resource<List<TagGroupResponse>>>
 }

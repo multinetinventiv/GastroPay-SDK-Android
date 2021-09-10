@@ -45,13 +45,13 @@ internal class MerchantRepositoryImp(private val gastroPayService: GastroPayServ
         }
     }
 
-    override fun cities(): Flow<Resource<CitiesResponse>> {
+    override fun getCities(): Flow<Resource<CitiesResponse>> {
         return safeFlow {
             gastroPayService.cities()
         }
     }
 
-    override fun searchCriteria(cityId: String?): Flow<Resource<List<TagGroupResponse>>> {
+    override fun getSearchCriteria(cityId: String?): Flow<Resource<List<TagGroupResponse>>> {
         return safeFlow {
             gastroPayService.searchCriterias(cityId)
         }
