@@ -11,4 +11,8 @@
     <color name="reddish_orange_gastropay_sdk">#F15025</color>
     <color name="mercury_gastropay_sdk">#E3E3E3</color>
     <color name="suva_grey_gastropay_sdk">#909090</color>
+    <color name="arsenic_gastropay_sdk">#3B444E</color>
+    <color name="dark_grayish_blue_gastropay_sdk">#2B2E36</color>
+    <color name="light_grey_gastropay_sdk">#D5D5D5</color>
+    <color name="zircon_gastropay_sdk">#EDF0F1</color>
 </resources>

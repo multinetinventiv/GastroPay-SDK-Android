@@ -77,9 +77,9 @@ internal class WalletFragment : BaseFragment(R.layout.fragment_wallet_gastropay_
                     when (uiState) {
                         is Resource.Loading -> {
                             if (uiState.isLoading) {
-                                binding.loadingLayout.visibility = View.VISIBLE
+                                binding.loading.loadingLayout.visibility = View.VISIBLE
                             } else {
-                                binding.loadingLayout.visibility = View.GONE
+                                binding.loading.loadingLayout.visibility = View.GONE
                             }
                         }
                         is Resource.Success -> {
@@ -119,9 +119,9 @@ internal class WalletFragment : BaseFragment(R.layout.fragment_wallet_gastropay_
                     when (uiState) {
                         is Resource.Loading -> {
                             if (uiState.isLoading) {
-                                binding.loadingLayout.visibility = View.VISIBLE
+                                binding.loading.loadingLayout.visibility = View.VISIBLE
                             } else {
-                                binding.loadingLayout.visibility = View.GONE
+                                binding.loading.loadingLayout.visibility = View.GONE
                             }
                         }
                         is Resource.Success -> {
@@ -144,9 +144,9 @@ internal class WalletFragment : BaseFragment(R.layout.fragment_wallet_gastropay_
                     when (uiState) {
                         is Resource.Loading -> {
                             if (uiState.isLoading) {
-                                binding.loadingLayout.visibility = View.VISIBLE
+                                binding.loading.loadingLayout.visibility = View.VISIBLE
                             } else {
-                                binding.loadingLayout.visibility = View.GONE
+                                binding.loading.loadingLayout.visibility = View.GONE
                             }
                         }
                         is Resource.Success -> {

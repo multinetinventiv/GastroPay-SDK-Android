@@ -1,8 +1,8 @@
 package com.inventiv.gastropaysdk.data.response
 
 import android.os.Parcelable
+import com.inventiv.gastropaysdk.common.BaseResponse
 import kotlinx.parcelize.Parcelize
-
 
 @Parcelize
 internal data class ProvisionInformationResponse(
@@ -17,4 +17,4 @@ internal data class ProvisionInformationResponse(
     val merchantUid: String,
     val callType: Int?,
     val terminalUid: String?,
-) : Parcelable
+) : Parcelable, BaseResponse()

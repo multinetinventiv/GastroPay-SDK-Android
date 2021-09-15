@@ -37,13 +37,6 @@ internal data class PageContent(
     val icon: ImageResponse?
 )
 
-internal data class Tag(
-    val id: String,
-    val tagName: String,
-    val icon: ImageResponse,
-    var isSelected: Boolean = false
-)
-
 internal data class Address(
     val id: String,
     val city: String?,

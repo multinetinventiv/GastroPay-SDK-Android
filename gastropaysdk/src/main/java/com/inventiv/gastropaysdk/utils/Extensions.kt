@@ -12,7 +12,9 @@ import android.text.style.ClickableSpan
 import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.data.ApiError
 import com.inventiv.gastropaysdk.data.response.ErrorResponse
@@ -21,6 +23,7 @@ import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.tapadoo.alerter.Alerter
 import java.util.concurrent.TimeUnit
 
+// region Context Extensions
 internal fun Context.getDistanceAsMeters(distance: Int): String {
     var distanceDoubleValue = distance.toDouble()
     return if (distanceDoubleValue > METER_THRESHOLD) {
@@ -57,6 +60,11 @@ internal fun Context.openGoogleMap(latitude: Double, longitude: Double) {
     startActivity(intent)
 }
 
+internal fun Context.isValidGlideContext() =
+    this !is Activity || (!this.isDestroyed && !this.isFinishing)
+// endregion ImageView Extensions
+
+// region TextView Extensions
 internal fun TextView.markdownText(
     content: String
 ) {
@@ -86,10 +94,9 @@ internal fun TextView.markdownText(
     text = spannable
     movementMethod = LinkMovementMethod.getInstance()
 }
+// endregion TextView Extensions
 
-internal fun Context.isValidGlideContext() =
-    this !is Activity || (!this.isDestroyed && !this.isFinishing)
-
+// region Api Extensions
 internal fun ApiError.handleError(activity: Activity) {
     var title = this.code.toString()
     var message = this.message
@@ -109,7 +116,9 @@ internal fun ApiError.handleError(activity: Activity) {
         .setBackgroundColorRes(R.color.reddish_orange_gastropay_sdk)
         .show()
 }
+// endregion Api Extensions
 
+// region Fragment Extensions
 internal fun Fragment.showError(message: String?) {
     Alerter.create(requireActivity())
         .setTitle(message ?: String())
@@ -117,6 +126,23 @@ internal fun Fragment.showError(message: String?) {
         .setBackgroundColorRes(R.color.reddish_orange_gastropay_sdk)
         .show()
 }
+// endregion ImageView Extensions
+
+// region ImageView Extensions
+internal fun AppCompatImageView.loadImage(imageUrl: String?) {
+    if (this.context.isValidGlideContext()) {
+        Glide.with(this.context).load(imageUrl).into(this)
+    }
+}
+
+internal fun AppCompatImageView.loadImage(fragment: Fragment, imageUrl: String?) {
+    Glide.with(fragment).load(imageUrl).into(this)
+}
+
+internal fun AppCompatImageView.loadImage(activity: Activity, imageUrl: String?) {
+    Glide.with(activity).load(imageUrl).into(this)
+}
+// endregion ImageView Extensions
 
 /**
  * @return seconds

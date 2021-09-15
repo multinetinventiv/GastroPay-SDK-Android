@@ -17,6 +17,7 @@ internal interface GastroPayService {
         @Query("tags") tags: String?,
         @Query("isBonusPoint") isBonusPoint: Boolean? = false,
         @Query("merchantName") merchantName: String?,
+        @Query("cityId") cityId: String? = null,
         @Query("currentPage") pageIndex: Int
     ): MerchantListResponse
 
@@ -49,4 +50,14 @@ internal interface GastroPayService {
 
     @GET("wallet/cards")
     suspend fun getBankCards(): List<BankCardResponse>
+
+    @GET("merchant/cities")
+    suspend fun cities(): CitiesResponse
+
+    @GET("merchant/search_criteria_tag_groups")
+    suspend fun searchCriterias(
+        @Query("cityId") cityId: String? = null,
+        @Query("newFiltering") newFiltering: Boolean = true,
+    ): List<TagGroupResponse>
+
 }

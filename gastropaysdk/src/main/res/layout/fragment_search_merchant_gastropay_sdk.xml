@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarSearchMerchant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:fitsSystemWindows="true"
+        app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarSearchMerchant"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            android:focusableInTouchMode="true"
+            app:contentInsetEnd="0dp"
+            app:contentInsetStart="0dp"
+            app:theme="@style/Theme.SearchToolbar.GastroPaySdk" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <View
+        android:id="@+id/viewDivider"
+        style="@style/DividerStyleGastroPaySdk"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appbarSearchMerchant" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewDivider">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textFirstTag"
+                style="@style/SectionTitleStyleGastroPaySdk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_normal_gastropay_sdk"
+                android:layout_marginTop="@dimen/margin_normal_gastropay_sdk"
+                android:layout_marginEnd="@dimen/margin_normal_gastropay_sdk"
+                android:text="@string/search_merchant_spinner_area_title_gastropay_sdk"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/spinnerCity"
+                style="@style/SpinnerTagStyleGastroPaySdk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_normal_gastropay_sdk"
+                android:layout_marginTop="@dimen/margin_normal_gastropay_sdk"
+                android:text="@string/search_merchant_spinner_city_gastropay_sdk"
+                app:drawableEndCompat="@drawable/ic_chevron_right_gastropay_sdk"
+                app:layout_constraintEnd_toStartOf="@+id/spinnerRegion"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textFirstTag" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/spinnerRegion"
+                style="@style/SpinnerTagStyleGastroPaySdk"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small_gastropay_sdk"
+                android:layout_marginEnd="@dimen/margin_normal_gastropay_sdk"
+                android:clickable="false"
+                android:enabled="false"
+                android:text="@string/search_merchant_spinner_region_gastropay_sdk"
+                app:drawableEndCompat="@drawable/ic_chevron_right_gastropay_sdk"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/spinnerCity"
+                app:layout_constraintTop_toTopOf="@+id/spinnerCity" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textSecondTag"
+                style="@style/SectionTitleStyleGastroPaySdk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal_gastropay_sdk"
+                android:layout_marginTop="@dimen/margin_normal_gastropay_sdk"
+                android:layout_marginRight="@dimen/margin_normal_gastropay_sdk"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerCity"
+                tools:text="Kategoriler" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerSecondTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_normal_gastropay_sdk"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textSecondTag" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textThirdTag"
+                style="@style/SectionTitleStyleGastroPaySdk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal_gastropay_sdk"
+                android:layout_marginRight="@dimen/margin_normal_gastropay_sdk"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerSecondTag"
+                tools:text="Etiketler" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupThirdTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:padding="@dimen/margin_normal_gastropay_sdk"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textThirdTag"
+                tools:orientation="horizontal" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/materialButtonFilter"
+                style="@style/Widget.Button.Yellow.GastroPaySdk"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_normal_gastropay_sdk"
+                android:text="@string/search_merchant_button_filter_gastropay_sdk"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chipGroupThirdTag" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/materialButtonClearFilter"
+                style="@style/Widget.Button.Yellow.GastroPaySdk"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_big_gastropay_sdk"
+                android:layout_marginBottom="@dimen/margin_normal_gastropay_sdk"
+                android:backgroundTint="@color/zircon_gastropay_sdk"
+                android:text="@string/search_merchant_button_clear_filter_gastropay_sdk"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialButtonFilter" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/layout_loading_gastropay_sdk" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

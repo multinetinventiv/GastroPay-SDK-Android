@@ -1,5 +1,9 @@
 package com.inventiv.gastropaysdk.utils
 
+
+internal const val EMPTY = ""
+internal const val COMMA = ","
+
 internal const val AUTHORIZATION = "Authorization"
 internal const val REFERENCE_UNDEFINED = -1
 internal const val CONNECTION_TIMEOUT_IN_MINUTES = 2L

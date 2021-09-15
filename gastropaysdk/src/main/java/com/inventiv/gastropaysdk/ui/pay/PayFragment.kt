@@ -8,6 +8,7 @@ import android.provider.Settings
 import android.view.View
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.camera.core.CameraSelector
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.google.mlkit.vision.barcode.Barcode
@@ -125,6 +126,12 @@ internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
             rootLayoutToolbarGastroPaySdk.setBackgroundColor(Color.TRANSPARENT)
             imageToolbarLeftGastroPaySdk.setImageResource(R.drawable.ic_close_gastropay_sdk)
             textTitleGastroPaySdk.visibility = View.VISIBLE
+            textTitleGastroPaySdk.setTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.white_gastropay_sdk
+                )
+            )
             layoutLeftGastroPaySdk.visibility = View.VISIBLE
             layoutLeftGastroPaySdk.setOnClickListener {
                 sharedViewModel.onBackPressed()
@@ -139,9 +146,9 @@ internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
                     when (uiState) {
                         is Resource.Loading -> {
                             if (uiState.isLoading) {
-                                binding.loadingLayout.visibility = View.VISIBLE
+                                binding.loading.loadingLayout.visibility = View.VISIBLE
                             } else {
-                                binding.loadingLayout.visibility = View.GONE
+                                binding.loading.loadingLayout.visibility = View.GONE
                             }
                         }
                         is Resource.Success -> {

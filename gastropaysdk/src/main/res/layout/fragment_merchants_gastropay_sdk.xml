@@ -10,7 +10,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:paddingVertical="8dp"
         android:layout_marginEnd="16dp"
         android:text="@string/merchants_near_me_gastropay_sdk"
         android:textColor="@color/celtic_gastropay_sdk"
@@ -24,7 +25,6 @@
         android:id="@+id/merchantsRecyclerViewGastroPaySdk"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,9 +39,11 @@
         android:layout_height="wrap_content"
         android:clickable="true"
         android:focusable="true"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNearMeGastroPaySdk" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNearMeGastroPaySdk"
+        tools:visibility="visible" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/emptyLayoutGastroPaySdk"
@@ -55,5 +57,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/merchantsRecyclerViewGastroPaySdk"
         tools:visibility="visible" />
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/layout_loading_gastropay_sdk" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

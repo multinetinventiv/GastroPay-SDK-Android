@@ -22,4 +22,10 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="DividerStyleGastroPaySdk" parent="BaseDividerGastroPaySdk" />
+
+    <style name="SectionTitleStyleGastroPaySdk" parent="BaseSectionTitleStyleGastroPaySdk" />
+
+    <style name="SpinnerTagStyleGastroPaySdk" parent="BaseSpinnerTagStyleGastroPaySdk" />
+
 </resources>
