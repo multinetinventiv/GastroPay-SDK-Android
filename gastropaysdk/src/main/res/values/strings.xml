@@ -87,4 +87,9 @@
     <string name="search_merchant_button_clear_filter_gastropay_sdk">"FİLTRE TEMİZLE"</string>
     <string name="search_merchant_searchview_hint_text">"Restoran Ara"</string>
     <!--endregion QR-->
+
+    <!--region Generic WebView-->
+    <string name="generic_webview_cancel_gastropay_sdk">Vazgeç</string>
+    <string name="generic_webview_ok_gastropay_sdk">Tamam</string>
+    <!--endregion Payment Result-->
 </resources>

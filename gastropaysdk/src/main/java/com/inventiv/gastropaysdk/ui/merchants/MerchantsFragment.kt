@@ -203,15 +203,23 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
     }
 
     private fun subscribeNavigationEvents() {
-        sharedViewModel.searchMerchants.observe(viewLifecycleOwner) { searchCriteria ->
-            if (searchCriteria != null) {
-                resetPaginate()
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            sharedViewModel.coldEvent.collect {
+                when (it) {
+                    is MainViewModel.ColdEvent.SearchMerchant -> {
+                        sharedViewModel.resetColdEvent()
+                        val searchCriteria = it.data
+                        LogUtils.d("SEARCH_CRITERIA", searchCriteria)
 
-                tags = searchCriteria.tags
-                cityId = searchCriteria.cityId
-                merchantName = searchCriteria.searchName
+                        resetPaginate()
 
-                sharedViewModel.clearSearchFilteredMerchants()
+                        tags = searchCriteria.tags
+                        cityId = searchCriteria.cityId
+                        merchantName = searchCriteria.searchName
+                    }
+                    else -> {
+                    }
+                }
             }
         }
     }

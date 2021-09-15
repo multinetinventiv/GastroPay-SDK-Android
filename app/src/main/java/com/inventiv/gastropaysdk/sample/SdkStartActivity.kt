@@ -65,7 +65,7 @@ class SdkStartActivity : AppCompatActivity() {
                     }
 
                     override fun onPaymentSuccess() {
-                        Log.d("GastroPaySdk" , "onPaymentSuccess")
+                        Log.d("GastroPaySdk", "onPaymentSuccess")
                     }
 
                     override fun onSDKClosed() {

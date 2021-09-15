@@ -166,6 +166,26 @@ internal class WalletFragment : BaseFragment(R.layout.fragment_wallet_gastropay_
                 }
             }
         }
+        /* TODO Sample for WebViewFragment
+
+                    sharedViewModel.pushFragment(
+                WebViewFragment.newInstance(
+                    "Toolbar Title",
+                    "https://www.google.com"
+                )
+            )
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            sharedViewModel.coldEvent.collect {
+                when (it) {
+                    is MainViewModel.ColdEvent.OnGenericWebViewClick -> {
+                        sharedViewModel.resetColdEvent()
+                        LogUtils.d("GENERIC_WEBVIEW_IS_ACCEPT", it.isAccept)
+                    }
+                    else -> {
+                    }
+                }
+            }
+        }*/
     }
 
 }

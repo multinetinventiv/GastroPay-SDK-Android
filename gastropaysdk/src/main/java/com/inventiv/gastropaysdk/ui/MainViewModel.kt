@@ -1,66 +1,81 @@
 package com.inventiv.gastropaysdk.ui
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.inventiv.gastropaysdk.common.BaseFragment
 import com.inventiv.gastropaysdk.common.BaseViewModel
 import com.inventiv.gastropaysdk.data.request.SearchCriteria
 import com.inventiv.gastropaysdk.repository.MainRepository
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 internal class MainViewModel(val mainRepository: MainRepository) : BaseViewModel() {
-    sealed class Event {
-        object OnBackPressed : Event()
-        object CloseSDK : Event()
-        data class InitTab(val tabIndex: Int) : Event()
-        data class PushFragment(val fragment: BaseFragment) : Event()
-        data class PopFragment(val depth: Int) : Event()
+
+    sealed class HotEvent {
+        object OnBackPressed : HotEvent()
+        object CloseSDK : HotEvent()
+        data class InitTab(val tabIndex: Int) : HotEvent()
+        data class PushFragment(val fragment: BaseFragment) : HotEvent()
+        data class PopFragment(val depth: Int) : HotEvent()
     }
 
-    private val eventChannel = Channel<Event>(Channel.BUFFERED)
-    val eventsFlow = eventChannel.receiveAsFlow()
+    sealed class ColdEvent {
+        object Empty : ColdEvent()
+        data class OnGenericWebViewClick(val isAccept: Boolean) : ColdEvent()
+        data class SearchMerchant(val data: SearchCriteria) : ColdEvent()
+    }
 
-    private val _searchMerchants = MutableLiveData<SearchCriteria>()
-    val searchMerchants: LiveData<SearchCriteria> get() = _searchMerchants
+    private val hotEvent = Channel<HotEvent>(Channel.BUFFERED)
+    val hotFlow = hotEvent.receiveAsFlow()
+
+    private val _coldEvent = MutableStateFlow<ColdEvent>(ColdEvent.Empty)
+    val coldEvent: StateFlow<ColdEvent> = _coldEvent
 
     fun searchFilteredMerchants(searchCriteria: SearchCriteria) {
-        _searchMerchants.value = searchCriteria
-    }
-
-    fun clearSearchFilteredMerchants() {
-        _searchMerchants.value = null
+        _coldEvent.value = ColdEvent.SearchMerchant(searchCriteria)
     }
 
     fun closeSdk() {
         viewModelScope.launch {
-            eventChannel.send(Event.CloseSDK)
+            hotEvent.send(HotEvent.CloseSDK)
         }
     }
 
     fun onBackPressed() {
         viewModelScope.launch {
-            eventChannel.send(Event.OnBackPressed)
+            hotEvent.send(HotEvent.OnBackPressed)
         }
     }
 
     fun initTab(tabIndex: Int) {
         viewModelScope.launch {
-            eventChannel.send(Event.InitTab(tabIndex))
+            hotEvent.send(HotEvent.InitTab(tabIndex))
         }
     }
 
     fun pushFragment(fragment: BaseFragment) {
         viewModelScope.launch {
-            eventChannel.send(Event.PushFragment(fragment))
+            hotEvent.send(HotEvent.PushFragment(fragment))
         }
     }
 
     fun popFragment(depth: Int) {
         viewModelScope.launch {
-            eventChannel.send(Event.PopFragment(depth))
+            hotEvent.send(HotEvent.PopFragment(depth))
+        }
+    }
+
+    fun resetColdEvent() {
+        viewModelScope.launch {
+            _coldEvent.value = ColdEvent.Empty
+        }
+    }
+
+    fun onGenericWebViewClicked(isAccept: Boolean) {
+        viewModelScope.launch {
+            _coldEvent.value = ColdEvent.OnGenericWebViewClick(isAccept)
         }
     }
 }

@@ -60,4 +60,7 @@ internal interface GastroPayService {
         @Query("newFiltering") newFiltering: Boolean = true,
     ): List<TagGroupResponse>
 
+    @GET("auth/term_and_condition/1")
+    suspend fun getTermsAndCondition(): TermsAndConditionResponse
+
 }
