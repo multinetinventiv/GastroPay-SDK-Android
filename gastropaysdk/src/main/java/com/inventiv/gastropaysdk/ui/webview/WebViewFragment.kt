@@ -23,14 +23,17 @@ internal class WebViewFragment : BaseFragment(R.layout.fragment_webview_gastropa
     companion object {
         private const val PARAM_TOOLBAR_TITLE = "PARAM_TOOLBAR_TITLE"
         private const val PARAM_URL = "PARAM_URL"
+        private const val PARAM_SHOW_BOTTOM_BUTTONS = "PARAM_SHOW_BOTTOM_BUTTONS"
 
         fun newInstance(
             toolbarTitle: String,
-            url: String
+            url: String,
+            showBottomButtons: Boolean = false
         ) = WebViewFragment().apply {
             val args = Bundle().apply {
                 putString(PARAM_TOOLBAR_TITLE, toolbarTitle)
                 putString(PARAM_URL, url)
+                putBoolean(PARAM_SHOW_BOTTOM_BUTTONS, showBottomButtons)
             }
             arguments = args
         }
@@ -70,6 +73,9 @@ internal class WebViewFragment : BaseFragment(R.layout.fragment_webview_gastropa
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         webViewUrl = requireArguments().getString(PARAM_URL)!!
+        if (requireArguments().getBoolean(PARAM_SHOW_BOTTOM_BUTTONS)) {
+            binding.bottomButtons.visibility = View.VISIBLE
+        }
         setupListeners()
         setupWebView()
     }

@@ -15,6 +15,7 @@ import com.inventiv.gastropaysdk.repository.WalletRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.ui.MainViewModelFactory
+import com.inventiv.gastropaysdk.ui.settings.SettingsFragment
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.handleError
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
@@ -29,6 +30,9 @@ internal class WalletFragment : BaseFragment(R.layout.fragment_wallet_gastropay_
         showToolbar(true, toolbar, logo)
         toolbar.onRightIconClick {
             sharedViewModel.closeSdk()
+        }
+        toolbar.onLeftIconClick {
+            sharedViewModel.pushFragment(SettingsFragment())
         }
     }
 
@@ -166,26 +170,6 @@ internal class WalletFragment : BaseFragment(R.layout.fragment_wallet_gastropay_
                 }
             }
         }
-        /* TODO Sample for WebViewFragment
-
-                    sharedViewModel.pushFragment(
-                WebViewFragment.newInstance(
-                    "Toolbar Title",
-                    "https://www.google.com"
-                )
-            )
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            sharedViewModel.coldEvent.collect {
-                when (it) {
-                    is MainViewModel.ColdEvent.OnGenericWebViewClick -> {
-                        sharedViewModel.resetColdEvent()
-                        LogUtils.d("GENERIC_WEBVIEW_IS_ACCEPT", it.isAccept)
-                    }
-                    else -> {
-                    }
-                }
-            }
-        }*/
     }
 
 }

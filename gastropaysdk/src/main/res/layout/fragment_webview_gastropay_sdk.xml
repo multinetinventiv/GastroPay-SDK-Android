@@ -43,6 +43,14 @@
         app:layout_constraintStart_toEndOf="@+id/cancelButton"
         app:layout_constraintTop_toTopOf="@+id/cancelButton" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/bottomButtons"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:constraint_referenced_ids="acceptButton,cancelButton"
+        tools:visibility="visible" />
+
     <FrameLayout
         android:id="@+id/loadingLayout"
         android:layout_width="match_parent"

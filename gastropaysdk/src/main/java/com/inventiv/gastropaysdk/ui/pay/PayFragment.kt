@@ -100,7 +100,7 @@ internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
                 ) {
                     if (deniedForever.isNotEmpty()) {
                         CommonInfoDialogFragment.newInstance(
-                            R.drawable.ic_camera_permission,
+                            R.drawable.ic_camera_permission_gastropay_sdk,
                             getString(R.string.qr_scan_popup_camera_permission_body_gastropay_sdk),
                             null,
                             getString(R.string.qr_scan_popup_camera_permission_action_button_gastropay_sdk),

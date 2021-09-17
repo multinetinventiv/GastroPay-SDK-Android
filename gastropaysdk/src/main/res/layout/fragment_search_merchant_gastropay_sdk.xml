@@ -69,7 +69,7 @@
                 android:layout_marginStart="@dimen/margin_normal_gastropay_sdk"
                 android:layout_marginTop="@dimen/margin_normal_gastropay_sdk"
                 android:text="@string/search_merchant_spinner_city_gastropay_sdk"
-                app:drawableEndCompat="@drawable/ic_chevron_right_gastropay_sdk"
+                app:drawableEndCompat="@drawable/ic_chevron_down_gastropay_sdk"
                 app:layout_constraintEnd_toStartOf="@+id/spinnerRegion"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textFirstTag" />
@@ -84,7 +84,7 @@
                 android:clickable="false"
                 android:enabled="false"
                 android:text="@string/search_merchant_spinner_region_gastropay_sdk"
-                app:drawableEndCompat="@drawable/ic_chevron_right_gastropay_sdk"
+                app:drawableEndCompat="@drawable/ic_chevron_down_gastropay_sdk"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/spinnerCity"
                 app:layout_constraintTop_toTopOf="@+id/spinnerCity" />
