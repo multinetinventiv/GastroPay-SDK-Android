@@ -92,4 +92,11 @@
     <string name="generic_webview_cancel_gastropay_sdk">Vazgeç</string>
     <string name="generic_webview_ok_gastropay_sdk">Tamam</string>
     <!--endregion Payment Result-->
+
+    <!--region Settings-->
+    <string name="settings_button_user_terms_gastropay_sdk">Kullanıcı Koşulları</string>
+    <string name="settings_button_communication_permissions_gastropay_sdk">İletişim İzinleri</string>
+    <string name="settings_button_frequently_asked_questions_gastropay_sdk">Sıkça Sorulan Sorular</string>
+    <string name="settings_button_contact_us_gastropay_sdk">Bize Ulaşın</string>
+    <!--endregion Settings-->
 </resources>
