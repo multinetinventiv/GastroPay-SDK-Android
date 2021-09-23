@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <WebView
+        android:id="@+id/genericWebView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancelButton"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@color/white_gastropay_sdk"
+        android:gravity="center"
+        android:text="@string/generic_webview_cancel_gastropay_sdk"
+        android:textColor="@color/black_gastropay_sdk"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/acceptButton"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/genericWebView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/acceptButton"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@color/white_gastropay_sdk"
+        android:gravity="center"
+        android:text="@string/generic_webview_ok_gastropay_sdk"
+        android:textColor="@color/black_gastropay_sdk"
+        app:layout_constraintBottom_toBottomOf="@+id/cancelButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/cancelButton"
+        app:layout_constraintTop_toTopOf="@+id/cancelButton" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/bottomButtons"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:constraint_referenced_ids="acceptButton,cancelButton"
+        tools:visibility="visible" />
+
+    <FrameLayout
+        android:id="@+id/loadingLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/celtic_overlay_gastropay_sdk"
+        android:clickable="true"
+        android:focusable="true"
+        tools:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/progressBarGastroPaySdk"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_margin="16dp" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

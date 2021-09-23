@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:fitsSystemWindows="true"
+            app:contentScrim="?colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/topImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_settings_top_gastropay_sdk"
+                app:layout_collapseMode="parallax" />
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/transparent"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_arrow_back_gastropay_sdk"
+                app:navigationIconTint="@color/white_gastropay_sdk">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/titleToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="72dp"
+                    android:gravity="center"
+                    android:text="@string/settings_navigation_title_gastropay_sdk"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:behavior_overlapTop="44dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:padding="16dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="?android:listDivider"
+                    android:orientation="vertical"
+                    android:showDividers="middle">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/termsButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_terms_gastropay_sdk"
+                        android:drawableEnd="@drawable/ic_chevron_right_gastropay_sdk"
+                        android:drawablePadding="8dp"
+                        android:gravity="center|start"
+                        android:padding="16dp"
+                        android:text="@string/settings_terms_of_use_gastropay_sdk"
+                        android:textColor="@color/celtic_gastropay_sdk"
+                        android:textSize="16sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/permissionsButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_contact_permissions_gastropay_sdk"
+                        android:drawableEnd="@drawable/ic_chevron_right_gastropay_sdk"
+                        android:drawablePadding="8dp"
+                        android:gravity="center|start"
+                        android:padding="16dp"
+                        android:text="@string/settings_contact_permissions_gastropay_sdk"
+                        android:textColor="@color/celtic_gastropay_sdk"
+                        android:textSize="16sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/faqButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_faq_gastropay_sdk"
+                        android:drawableEnd="@drawable/ic_chevron_right_gastropay_sdk"
+                        android:drawablePadding="8dp"
+                        android:gravity="center|start"
+                        android:padding="16dp"
+                        android:text="@string/settings_faq_gastropay_sdk"
+                        android:textColor="@color/celtic_gastropay_sdk"
+                        android:textSize="16sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/contactUsButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_contact_us_gastropay_sdk"
+                        android:drawableEnd="@drawable/ic_chevron_right_gastropay_sdk"
+                        android:drawablePadding="8dp"
+                        android:gravity="center|start"
+                        android:padding="16dp"
+                        android:text="@string/settings_contact_us_gastropay_sdk"
+                        android:textColor="@color/celtic_gastropay_sdk"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/layout_loading_gastropay_sdk" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

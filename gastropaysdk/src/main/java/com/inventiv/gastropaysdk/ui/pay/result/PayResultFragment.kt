@@ -92,7 +92,7 @@ internal class PayResultFragment : BaseFragment(R.layout.fragment_pay_result_gas
         binding.amountTextView.text = provision.totalAmount.displayValue
     }
 
-    private fun closeFragment(){
+    private fun closeFragment() {
         sharedViewModel.initTab(FragNavController.TAB2)
     }
 }

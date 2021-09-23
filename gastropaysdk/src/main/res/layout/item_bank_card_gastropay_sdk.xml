@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/background_bank_card_selected_icon"
+            android:background="@drawable/background_bank_card_selected_icon_gastropay_sdk"
             android:backgroundTint="#FFCA28"
             android:drawableEnd="@drawable/ic_bank_card_selected_gastropay_sdk"
             android:drawablePadding="8dp"

@@ -45,22 +45,22 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
     }
 
     private fun subscribeNavigationEvents() {
-        viewModel.eventsFlow
+        viewModel.hotFlow
             .onEach {
                 when (it) {
-                    MainViewModel.Event.CloseSDK -> {
+                    MainViewModel.HotEvent.CloseSDK -> {
                         closeSdk()
                     }
-                    MainViewModel.Event.OnBackPressed -> {
+                    MainViewModel.HotEvent.OnBackPressed -> {
                         onBackPressed()
                     }
-                    is MainViewModel.Event.InitTab -> {
+                    is MainViewModel.HotEvent.InitTab -> {
                         initTab(it.tabIndex)
                     }
-                    is MainViewModel.Event.PushFragment -> {
+                    is MainViewModel.HotEvent.PushFragment -> {
                         pushFragment(it.fragment)
                     }
-                    is MainViewModel.Event.PopFragment -> {
+                    is MainViewModel.HotEvent.PopFragment -> {
                         popFragment(it.depth)
                     }
                     else -> {

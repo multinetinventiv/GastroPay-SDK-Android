@@ -20,6 +20,7 @@ import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.ui.MainViewModelFactory
 import com.inventiv.gastropaysdk.ui.merchants.detail.MerchantDetailFragment
 import com.inventiv.gastropaysdk.ui.merchants.searchmerchant.SearchMerchantFragment
+import com.inventiv.gastropaysdk.ui.settings.SettingsFragment
 import com.inventiv.gastropaysdk.utils.CustomLoadingListItemCreator
 import com.inventiv.gastropaysdk.utils.LocationHelper
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.ConvertUtils
@@ -88,6 +89,9 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
         showToolbar(true, toolbar, logo)
         toolbar.onRightIconClick {
             sharedViewModel.closeSdk()
+        }
+        toolbar.onLeftIconClick {
+            sharedViewModel.pushFragment(SettingsFragment())
         }
     }
 
@@ -203,15 +207,23 @@ internal class MerchantsFragment : BaseFragment(R.layout.fragment_merchants_gast
     }
 
     private fun subscribeNavigationEvents() {
-        sharedViewModel.searchMerchants.observe(viewLifecycleOwner) { searchCriteria ->
-            if (searchCriteria != null) {
-                resetPaginate()
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            sharedViewModel.coldEvent.collect {
+                when (it) {
+                    is MainViewModel.ColdEvent.SearchMerchant -> {
+                        sharedViewModel.resetColdEvent()
+                        val searchCriteria = it.data
+                        LogUtils.d("SEARCH_CRITERIA", searchCriteria)
 
-                tags = searchCriteria.tags
-                cityId = searchCriteria.cityId
-                merchantName = searchCriteria.searchName
+                        resetPaginate()
 
-                sharedViewModel.clearSearchFilteredMerchants()
+                        tags = searchCriteria.tags
+                        cityId = searchCriteria.cityId
+                        merchantName = searchCriteria.searchName
+                    }
+                    else -> {
+                    }
+                }
             }
         }
     }
