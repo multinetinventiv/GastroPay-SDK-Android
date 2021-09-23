@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white_gastropay_sdk">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/suva_grey_gastropay_sdk" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/merchantNameTitleTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/transaction_detail_merchant_label_gastropay_sdk"
+                            android:textColor="@color/kashmir_blue_gastropay_sdk"
+                            android:textSize="14sp"
+                            tools:text="Firma" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/merchantNameValueTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/celtic_gastropay_sdk"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            tools:text="Bağcılar Starbucks" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/amountTitleTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/transaction_detail_amount_label_gastropay_sdk"
+                            android:textColor="@color/kashmir_blue_gastropay_sdk"
+                            android:textSize="14sp"
+                            tools:text="Firma" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/amountValueTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/celtic_gastropay_sdk"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            tools:text="26,60 TL" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/transactionTypeTitleTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/transaction_detail_transaction_type_label_gastropay_sdk"
+                            android:textColor="@color/kashmir_blue_gastropay_sdk"
+                            android:textSize="14sp"
+                            tools:text="Firma" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/transactionTypeValueTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/background_bank_card_unselected_gastropay_sdk"
+                            android:gravity="end"
+                            android:paddingStart="6dp"
+                            android:paddingTop="4dp"
+                            android:paddingEnd="6dp"
+                            android:paddingBottom="4dp"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            tools:backgroundTint="@color/shamrock_gastropay_sdk"
+                            tools:text="İptal"
+                            tools:textColor="@color/white_gastropay_sdk" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/suva_grey_gastropay_sdk" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/dateTitleTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/transaction_detail_date_label_gastropay_sdk"
+                            android:textColor="@color/kashmir_blue_gastropay_sdk"
+                            android:textSize="14sp"
+                            tools:text="Firma" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/dateValueTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="end"
+                            android:textColor="@color/celtic_gastropay_sdk"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            tools:text="26-05-1453 14:00" />
+                    </LinearLayout>
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/invoiceNumberLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="16dp"
+                android:visibility="gone"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="4dp"
+                tools:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/invoiceNumberTitleTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/transaction_detail_bill_label_gastropay_sdk"
+                        android:textColor="@color/kashmir_blue_gastropay_sdk"
+                        android:textSize="14sp"
+                        tools:text="Firma" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/invoiceNumberValueTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableEnd="@drawable/ic_invoice_share_gastropay_sdk"
+                        android:drawablePadding="8dp"
+                        android:gravity="end"
+                        android:textColor="@color/celtic_gastropay_sdk"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="GA12345678901234" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/layout_loading_gastropay_sdk" />
+</androidx.constraintlayout.widget.ConstraintLayout>

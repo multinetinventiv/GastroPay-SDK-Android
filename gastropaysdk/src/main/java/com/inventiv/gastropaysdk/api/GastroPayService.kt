@@ -1,9 +1,6 @@
 package com.inventiv.gastropaysdk.api
 
-import com.inventiv.gastropaysdk.data.request.ConfirmProvisionRequest
-import com.inventiv.gastropaysdk.data.request.LoginRequest
-import com.inventiv.gastropaysdk.data.request.OtpConfirmRequest
-import com.inventiv.gastropaysdk.data.request.ProvisionInformationRequest
+import com.inventiv.gastropaysdk.data.request.*
 import com.inventiv.gastropaysdk.data.response.*
 import retrofit2.Response
 import retrofit2.http.*
@@ -62,5 +59,8 @@ internal interface GastroPayService {
 
     @GET("auth/term_and_condition/1")
     suspend fun getTermsAndCondition(): TermsAndConditionResponse
+
+    @POST("notify/invoice_send")
+    suspend fun invoiceSend(@Body request: InvoiceSendRequest): Response<Unit>
 
 }

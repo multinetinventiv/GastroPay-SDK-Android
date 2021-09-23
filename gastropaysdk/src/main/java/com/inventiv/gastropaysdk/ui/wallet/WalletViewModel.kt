@@ -3,6 +3,7 @@ package com.inventiv.gastropaysdk.ui.wallet
 import androidx.lifecycle.viewModelScope
 import com.inventiv.gastropaysdk.common.BaseViewModel
 import com.inventiv.gastropaysdk.data.Resource
+import com.inventiv.gastropaysdk.data.request.InvoiceSendRequest
 import com.inventiv.gastropaysdk.data.response.LastTransactionsResponse
 import com.inventiv.gastropaysdk.data.response.TransactionSummaryResponse
 import com.inventiv.gastropaysdk.data.response.WalletResponse
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 internal class WalletViewModel(private val repository: WalletRepository) :
     BaseViewModel() {
@@ -32,6 +34,11 @@ internal class WalletViewModel(private val repository: WalletRepository) :
         MutableStateFlow<Resource<TransactionSummaryResponse>>(Resource.Empty)
     val summary: StateFlow<Resource<TransactionSummaryResponse>>
         get() = _summaryState.asStateFlow()
+
+    private val _invoiceSendState =
+        MutableStateFlow<Resource<Response<Unit>>>(Resource.Empty)
+    val invoiceSend: StateFlow<Resource<Response<Unit>>>
+        get() = _invoiceSendState.asStateFlow()
 
     fun getLastTransactions(id: String, endTime: String) {
         viewModelScope.launch {
@@ -70,6 +77,21 @@ internal class WalletViewModel(private val repository: WalletRepository) :
                 }
                 if (transferFlowState) {
                     _summaryState.value = response
+                }
+            }
+        }
+    }
+
+    fun sendInvoice(walletTransactionId: Int) {
+        viewModelScope.launch {
+            val request = InvoiceSendRequest(walletTransactionId)
+            repository.invoiceSend(request).collect { response ->
+                var transferFlowState = true
+                if (response is Resource.Loading) {
+                    transferFlowState = prepareProgressVisibilityState(response)
+                }
+                if (transferFlowState) {
+                    _invoiceSendState.value = response
                 }
             }
         }
