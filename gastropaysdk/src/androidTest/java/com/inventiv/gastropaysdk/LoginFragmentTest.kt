@@ -85,7 +85,7 @@ class LoginFragmentTest {
 
         }
 
-        onView(withId(R.id.loadingLayout))
+        onView(withId(R.id.loading))
             .check(matches(not(isDisplayed())))
 
         onView(withId(R.id.loginButton))
@@ -106,7 +106,7 @@ class LoginFragmentTest {
         val scenario =
             launchFragmentInContainer<LoginFragment>(themeResId = R.style.Theme_GastroPaySdk)
 
-        onView(withId(R.id.loadingLayout))
+        onView(withId(R.id.loading))
             .check(matches(not(isDisplayed())))
 
         onView(withId(R.id.loginButton))
@@ -127,7 +127,7 @@ class LoginFragmentTest {
         val scenario =
             launchFragmentInContainer<LoginFragment>(themeResId = R.style.Theme_GastroPaySdk)
 
-        onView(withId(R.id.loadingLayout))
+        onView(withId(R.id.loading))
             .check(matches(not(isDisplayed())))
 
         onView(withId(R.id.loginButton))

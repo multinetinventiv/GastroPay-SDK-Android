@@ -11,7 +11,6 @@ import com.inventiv.gastropaysdk.data.TransactionModel
 import com.inventiv.gastropaysdk.ui.wallet.detail.WalletDetailFragment
 import com.inventiv.gastropaysdk.utils.TransactionType
 import com.inventiv.gastropaysdk.utils.getResourceString
-import com.inventiv.gastropaysdk.utils.readTestResourceFile
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer

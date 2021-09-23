@@ -81,10 +81,12 @@ class WalletRepositoryImpTest {
         // Given
         val expected = listOf(
             LastTransactionsResponse(
-                1,
-                "name",
-                AmountModel(1.0, "", "", ""),
-                1
+                id = 1,
+                merchantName = "merchantName",
+                transactionAmount = AmountModel(1.0, "", "", ""),
+                walletTransactionType = 10,
+                transactionDate = 1627560452,
+                invoiceNumber = null
             )
         )
 
