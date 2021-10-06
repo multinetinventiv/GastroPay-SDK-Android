@@ -3,11 +3,13 @@ package com.inventiv.gastropaysdk.repository
 import com.inventiv.gastropaysdk.api.GastroPayService
 import com.inventiv.gastropaysdk.common.BaseRepository
 import com.inventiv.gastropaysdk.data.Resource
+import com.inventiv.gastropaysdk.data.request.InvoiceSendRequest
 import com.inventiv.gastropaysdk.data.response.LastTransactionsResponse
 import com.inventiv.gastropaysdk.data.response.TransactionSummaryResponse
 import com.inventiv.gastropaysdk.data.response.WalletResponse
 import com.inventiv.gastropaysdk.data.safeFlow
 import kotlinx.coroutines.flow.Flow
+import retrofit2.Response
 
 internal class WalletRepositoryImp(private val gastroPayService: GastroPayService) :
     WalletRepository, BaseRepository() {
@@ -30,6 +32,12 @@ internal class WalletRepositoryImp(private val gastroPayService: GastroPayServic
     override fun transactionSummary(): Flow<Resource<TransactionSummaryResponse>> {
         return safeFlow {
             gastroPayService.getTransactionSummary()
+        }
+    }
+
+    override fun invoiceSend(request: InvoiceSendRequest): Flow<Resource<Response<Unit>>> {
+        return safeFlow {
+            gastroPayService.invoiceSend(request)
         }
     }
 }

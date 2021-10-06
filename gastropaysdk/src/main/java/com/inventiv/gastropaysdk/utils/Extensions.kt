@@ -21,6 +21,7 @@ import com.inventiv.gastropaysdk.data.response.ErrorResponse
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.GsonUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.tapadoo.alerter.Alerter
+import okhttp3.ResponseBody
 import java.util.concurrent.TimeUnit
 
 // region Context Extensions
@@ -101,13 +102,10 @@ internal fun ApiError.handleError(activity: Activity) {
     var title = this.code.toString()
     var message = this.message
 
-    try {
-        val errorResponse = GsonUtils.fromJson(this.body!!.charStream(), ErrorResponse::class.java)
-        title = errorResponse.resultCode
-        message = errorResponse.resultMessage
-    } catch (e: Exception) {
-        LogUtils.e(e)
-    }
+    val errorResponse = this.body.bodyToErrorResponse(title, message)
+
+    title = errorResponse.first
+    message = errorResponse.second
 
     Alerter.create(activity)
         .setTitle(title)
@@ -115,6 +113,20 @@ internal fun ApiError.handleError(activity: Activity) {
         .setIcon(R.drawable.ic_warning_gastropay_sdk)
         .setBackgroundColorRes(R.color.reddish_orange_gastropay_sdk)
         .show()
+}
+
+internal fun ResponseBody?.bodyToErrorResponse(
+    defaultTitle: String = "Error",
+    defaultMessage: String = "Error occurred."
+): Pair<String, String> {
+    var pair = Pair(defaultTitle, defaultMessage)
+    try {
+        val errorResponse = GsonUtils.fromJson(this!!.charStream(), ErrorResponse::class.java)
+        pair = Pair(errorResponse.resultCode, errorResponse.resultMessage)
+    } catch (e: Exception) {
+        LogUtils.e(e)
+    }
+    return pair
 }
 // endregion Api Extensions
 

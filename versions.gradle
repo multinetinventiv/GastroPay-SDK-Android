@@ -38,7 +38,7 @@ ext.deps = [
 
         "fragnav"           : "com.ncapdevi:frag-nav:3.3.0",
         "paginate"          : "com.github.markomilos:paginate:1.0.0",
-        "alerter"           : "com.github.tapadoo:alerter:7.1.0",
+        "alerter"           : "com.github.tapadoo:alerter:7.2.4",
 
         "camera_core"       : "androidx.camera:camera-core:$cameraxVersion",
         "camera_2"          : "androidx.camera:camera-camera2:$cameraxVersion",

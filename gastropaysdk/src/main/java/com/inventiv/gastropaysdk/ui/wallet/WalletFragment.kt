@@ -16,6 +16,8 @@ import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.ui.MainViewModelFactory
 import com.inventiv.gastropaysdk.ui.settings.SettingsFragment
+import com.inventiv.gastropaysdk.ui.wallet.detail.WalletDetailFragment
+import com.inventiv.gastropaysdk.utils.TransactionType
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.handleError
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
@@ -67,9 +69,9 @@ internal class WalletFragment : BaseFragment(R.layout.fragment_wallet_gastropay_
 
     private fun setupMerchantAdapter() {
         transactionsAdapter = TransactionsAdapter(transactionsList) { transaction ->
-            /*sharedViewModel.pushFragment(
-                MerchantDetailFragment.newInstance(merchant.merchantId)
-            )*/
+            sharedViewModel.pushFragment(
+                WalletDetailFragment.newInstance(transaction)
+            )
         }
         binding.transactionsRecyclerViewGastroPaySdk.adapter = transactionsAdapter
     }
@@ -99,10 +101,12 @@ internal class WalletFragment : BaseFragment(R.layout.fragment_wallet_gastropay_
                                 uiState.data.forEach {
                                     transactionsList.add(
                                         TransactionModel(
+                                            id = it.id,
                                             name = it.merchantName,
                                             date = it.transactionDate,
                                             price = it.transactionAmount.displayValue,
-                                            isEarn = it.transactionAmount.value >= 0
+                                            transactionType = TransactionType.find(it.walletTransactionType),
+                                            invoiceNumber = it.invoiceNumber
                                         )
                                     )
                                 }

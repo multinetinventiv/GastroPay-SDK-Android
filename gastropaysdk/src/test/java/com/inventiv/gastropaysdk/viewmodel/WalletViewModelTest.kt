@@ -104,10 +104,12 @@ class WalletViewModelTest {
 
         val expected = listOf(
             LastTransactionsResponse(
-                1,
-                "",
-                AmountModel(1.0, "", "", ""),
-                1L
+                id = 1,
+                merchantName = "merchantName",
+                transactionAmount = AmountModel(1.0, "", "", ""),
+                walletTransactionType = 10,
+                transactionDate = 1627560452,
+                invoiceNumber = null
             )
         )
 

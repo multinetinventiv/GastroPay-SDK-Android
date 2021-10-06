@@ -124,7 +124,7 @@ class OtpFragmentTest {
 
         }
 
-        onView(ViewMatchers.withId(R.id.loadingLayout))
+        onView(ViewMatchers.withId(R.id.loading))
             .check(ViewAssertions.matches(not(ViewMatchers.isDisplayed())))
 
         onView(ViewMatchers.withId(R.id.pinEntryEditText))

@@ -7,7 +7,9 @@ internal data class LastTransactionsResponse(
     val id: Int,
     val merchantName: String,
     val transactionAmount: AmountModel,
+    val walletTransactionType: Int,
     val transactionDate: Long,
+    val invoiceNumber: String?,
 )
 
 @Parcelize
