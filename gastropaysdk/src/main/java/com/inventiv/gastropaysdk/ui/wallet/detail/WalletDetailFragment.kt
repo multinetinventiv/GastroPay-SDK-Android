@@ -26,7 +26,6 @@ import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import com.tapadoo.alerter.Alerter
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import java.net.HttpURLConnection
 
 internal class WalletDetailFragment : BaseFragment(R.layout.fragment_wallet_detail_gastropay_sdk) {
 
@@ -170,7 +169,7 @@ internal class WalletDetailFragment : BaseFragment(R.layout.fragment_wallet_deta
                             }
                         }
                         is Resource.Success -> {
-                            if (uiState.data.code() == HttpURLConnection.HTTP_OK) {
+                            if (uiState.data.isSuccessful) {
                                 Alerter.create(requireActivity())
                                     .setTitle(StringUtils.getString(R.string.transaction_detail_navigation_title_gastropay_sdk))
                                     .setText(StringUtils.getString(R.string.transaction_detail_invoice_send_gastropay_sdk))
@@ -178,8 +177,7 @@ internal class WalletDetailFragment : BaseFragment(R.layout.fragment_wallet_deta
                                     .setBackgroundColorRes(R.color.shamrock_gastropay_sdk)
                                     .show()
                             } else {
-                                val errorResponse =
-                                    uiState.data.errorBody().bodyToErrorResponse("error", "error")
+                                val errorResponse = uiState.data.errorBody().bodyToErrorResponse()
                                 showError(errorResponse.second)
                             }
                         }

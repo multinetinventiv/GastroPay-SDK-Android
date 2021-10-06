@@ -116,8 +116,8 @@ internal fun ApiError.handleError(activity: Activity) {
 }
 
 internal fun ResponseBody?.bodyToErrorResponse(
-    defaultTitle: String,
-    defaultMessage: String
+    defaultTitle: String = "Error",
+    defaultMessage: String = "Error occurred."
 ): Pair<String, String> {
     var pair = Pair(defaultTitle, defaultMessage)
     try {

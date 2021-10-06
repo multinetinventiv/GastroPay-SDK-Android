@@ -49,8 +49,7 @@
                             android:layout_weight="1"
                             android:text="@string/transaction_detail_merchant_label_gastropay_sdk"
                             android:textColor="@color/kashmir_blue_gastropay_sdk"
-                            android:textSize="14sp"
-                            tools:text="Firma" />
+                            android:textSize="14sp" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/merchantNameValueTextView"
@@ -77,8 +76,7 @@
                             android:layout_weight="1"
                             android:text="@string/transaction_detail_amount_label_gastropay_sdk"
                             android:textColor="@color/kashmir_blue_gastropay_sdk"
-                            android:textSize="14sp"
-                            tools:text="Firma" />
+                            android:textSize="14sp" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/amountValueTextView"
@@ -105,8 +103,7 @@
                             android:layout_weight="1"
                             android:text="@string/transaction_detail_transaction_type_label_gastropay_sdk"
                             android:textColor="@color/kashmir_blue_gastropay_sdk"
-                            android:textSize="14sp"
-                            tools:text="Firma" />
+                            android:textSize="14sp" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/transactionTypeValueTextView"
@@ -143,8 +140,7 @@
                             android:layout_weight="1"
                             android:text="@string/transaction_detail_date_label_gastropay_sdk"
                             android:textColor="@color/kashmir_blue_gastropay_sdk"
-                            android:textSize="14sp"
-                            tools:text="Firma" />
+                            android:textSize="14sp" />
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/dateValueTextView"
@@ -182,23 +178,27 @@
                         android:id="@+id/invoiceNumberTitleTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_weight="1"
+                        android:gravity="center_vertical"
                         android:text="@string/transaction_detail_bill_label_gastropay_sdk"
                         android:textColor="@color/kashmir_blue_gastropay_sdk"
-                        android:textSize="14sp"
-                        tools:text="Firma" />
+                        android:textSize="14sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/invoiceNumberValueTextView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_vertical"
                         android:layout_weight="1"
                         android:drawableEnd="@drawable/ic_invoice_share_gastropay_sdk"
                         android:drawablePadding="8dp"
-                        android:gravity="end"
+                        android:gravity="end|center"
                         android:textColor="@color/celtic_gastropay_sdk"
-                        android:textSize="14sp"
                         android:textStyle="bold"
+                        app:autoSizeMaxTextSize="14sp"
+                        app:autoSizeMinTextSize="12sp"
+                        app:autoSizeTextType="uniform"
                         tools:text="GA12345678901234" />
                 </LinearLayout>
 
