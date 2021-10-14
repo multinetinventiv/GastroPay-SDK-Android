@@ -64,6 +64,14 @@ internal class SettingsFragment : BaseFragment(R.layout.fragment_settings_gastro
         binding.contactUsButton.setOnClickListener {
             sharedViewModel.pushFragment(ContactUsFragment())
         }
+        binding.faqButton.setOnClickListener{
+            sharedViewModel.pushFragment(
+                WebViewFragment.newInstance(
+                    toolbarTitle = StringUtils.getString(R.string.settings_faq_gastropay_sdk),
+                    url = getSettings().faq
+                )
+            )
+        }
     }
 
     private fun setupObservers() {
