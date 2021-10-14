@@ -105,7 +105,7 @@ class WalletFragmentTest {
                 themeResId = R.style.Theme_GastroPaySdk
             )
         scenario.onFragment { fragment ->
-            Thread.sleep(500)
+            Thread.sleep(1500)
         }
 
         onView(withId(R.id.myTotalPointsTextView))
