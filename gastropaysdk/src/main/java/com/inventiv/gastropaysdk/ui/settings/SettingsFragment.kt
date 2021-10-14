@@ -19,6 +19,7 @@ import com.inventiv.gastropaysdk.ui.webview.WebViewFragment
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
+import com.inventiv.gastropaysdk.utils.getSettings
 import com.inventiv.gastropaysdk.utils.handleError
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import kotlinx.coroutines.flow.collect
@@ -65,12 +66,14 @@ internal class SettingsFragment : BaseFragment(R.layout.fragment_settings_gastro
             sharedViewModel.pushFragment(ContactUsFragment())
         }
         binding.faqButton.setOnClickListener{
-            sharedViewModel.pushFragment(
-                WebViewFragment.newInstance(
-                    toolbarTitle = StringUtils.getString(R.string.settings_faq_gastropay_sdk),
-                    url = getSettings().faq
+            getSettings().faq?.let { url ->
+                sharedViewModel.pushFragment(
+                    WebViewFragment.newInstance(
+                        toolbarTitle = StringUtils.getString(R.string.settings_faq_gastropay_sdk),
+                        url = url
+                    )
                 )
-            )
+            }
         }
     }
 
