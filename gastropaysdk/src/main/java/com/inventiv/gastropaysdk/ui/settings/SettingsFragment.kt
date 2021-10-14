@@ -14,6 +14,7 @@ import com.inventiv.gastropaysdk.repository.SettingsRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.ui.MainViewModelFactory
+import com.inventiv.gastropaysdk.ui.contactus.ContactUsFragment
 import com.inventiv.gastropaysdk.ui.webview.WebViewFragment
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
@@ -59,6 +60,9 @@ internal class SettingsFragment : BaseFragment(R.layout.fragment_settings_gastro
         }
         binding.termsButton.setOnClickListener {
             viewModel.getTerms()
+        }
+        binding.contactUsButton.setOnClickListener {
+            sharedViewModel.pushFragment(ContactUsFragment())
         }
     }
 

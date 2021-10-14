@@ -11,3 +11,6 @@ internal const val LIBRARY_GENERAL_LOG_TAG = "GastroPaySdk"
 internal const val METER_THRESHOLD = 900
 internal const val METER_TO_KM_CONVERTER = 1000
 internal const val OTP_LENGHT = 6
+
+internal const val SP_INIT_NAME = "SP_GASTROPAY_SDK"
+internal const val SP_PARAM_SETTINGS = "SP_PARAM_SETTINGS"

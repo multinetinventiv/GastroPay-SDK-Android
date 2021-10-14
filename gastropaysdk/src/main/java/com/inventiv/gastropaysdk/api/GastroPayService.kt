@@ -27,6 +27,9 @@ internal interface GastroPayService {
     @POST("auth/otp_confirm")
     suspend fun otpConfirm(@Body login: OtpConfirmRequest): AuthenticationResponse
 
+    @GET("auth/settings")
+    suspend fun settings(): SettingsResponse
+
     @GET("wallet/transactions/{id}/{end_time}")
     suspend fun getLastTransactions(
         @Path("id") id: String,

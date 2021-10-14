@@ -3,15 +3,18 @@ package com.inventiv.gastropaysdk.ui
 import androidx.lifecycle.viewModelScope
 import com.inventiv.gastropaysdk.common.BaseFragment
 import com.inventiv.gastropaysdk.common.BaseViewModel
+import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.request.SearchCriteria
 import com.inventiv.gastropaysdk.repository.MainRepository
+import com.inventiv.gastropaysdk.utils.saveSettings
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
-internal class MainViewModel(val mainRepository: MainRepository) : BaseViewModel() {
+internal class MainViewModel(val repository: MainRepository) : BaseViewModel() {
 
     sealed class HotEvent {
         object OnBackPressed : HotEvent()
@@ -76,6 +79,18 @@ internal class MainViewModel(val mainRepository: MainRepository) : BaseViewModel
     fun onGenericWebViewClicked(isAccept: Boolean) {
         viewModelScope.launch {
             _coldEvent.value = ColdEvent.OnGenericWebViewClick(isAccept)
+        }
+    }
+
+    fun getSettings() {
+        viewModelScope.launch {
+            repository.getSettings().collect { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        response.data.saveSettings()
+                    }
+                }
+            }
         }
     }
 }
