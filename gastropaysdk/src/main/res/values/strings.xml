@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="default_phone_number_gastropay_sdk" translatable="false">08503041083</string>
+    <string name="default_email_gastropay_sdk" translatable="false">destek@gastroclub.com.tr</string>
+
 
     <!--region Bottom Navigation-->
     <string name="bottom_bar_merchants_gastropay_sdk">Restoranlar</string>
@@ -111,4 +114,10 @@
     <string name="transaction_detail_bill_label_gastropay_sdk">Fatura Numarası</string>
     <string name="transaction_detail_invoice_send_gastropay_sdk">Faturanız başarıyla gönderildi.</string>
     <!--endregion Settings-->
+
+    <!--region ContactUs-->
+    <string name="contact_us_title_gastropay_sdk">Bize Ulaşın</string>
+    <string name="contact_us_call_gastropay_sdk">Bizi Arayın</string>
+    <string name="contact_us_write_gastropay_sdk">Bize Yazın</string>
+    <!--endregion ContactUs-->
 </resources>

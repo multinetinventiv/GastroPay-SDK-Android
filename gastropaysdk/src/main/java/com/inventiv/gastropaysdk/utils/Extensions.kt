@@ -18,8 +18,10 @@ import com.bumptech.glide.Glide
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.data.ApiError
 import com.inventiv.gastropaysdk.data.response.ErrorResponse
+import com.inventiv.gastropaysdk.data.response.SettingsResponse
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.GsonUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
+import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.SPUtils
 import com.tapadoo.alerter.Alerter
 import okhttp3.ResponseBody
 import java.util.concurrent.TimeUnit
@@ -162,4 +164,15 @@ internal fun AppCompatImageView.loadImage(activity: Activity, imageUrl: String?)
 internal fun Long.calculateDifferenceWithCurrentTime(): Long {
     val currentTime = TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())
     return (this - currentTime)
+}
+
+internal fun SettingsResponse.saveSettings() {
+    SPUtils.getInstance(SP_INIT_NAME).put(SP_PARAM_SETTINGS, GsonUtils.toJson(this))
+}
+
+internal fun getSettings(): SettingsResponse {
+    return GsonUtils.fromJson(
+        SPUtils.getInstance(SP_INIT_NAME).getString(SP_PARAM_SETTINGS, ""),
+        SettingsResponse::class.java
+    )
 }

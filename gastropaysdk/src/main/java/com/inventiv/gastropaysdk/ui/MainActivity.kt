@@ -39,6 +39,7 @@ internal class MainActivity : BaseActivity(), FragNavController.RootFragmentList
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        viewModel.getSettings()
         prepareNavigationViews(savedInstanceState)
         setupBottomNavigation()
         subscribeNavigationEvents()

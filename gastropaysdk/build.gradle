@@ -68,6 +68,7 @@ dependencies {
     androidTestImplementation(test.truth)
     androidTestImplementation(test.mockwebserver)
     androidTestImplementation(deps.okhttp)
+    androidTestImplementation(androidTest.mockK)
     //
 
     implementation(deps.coreKtx)
