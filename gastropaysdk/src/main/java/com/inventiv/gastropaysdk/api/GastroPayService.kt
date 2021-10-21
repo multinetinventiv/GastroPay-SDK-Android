@@ -2,6 +2,7 @@ package com.inventiv.gastropaysdk.api
 
 import com.inventiv.gastropaysdk.data.request.*
 import com.inventiv.gastropaysdk.data.response.*
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -66,4 +67,12 @@ internal interface GastroPayService {
     @POST("notify/invoice_send")
     suspend fun invoiceSend(@Body request: InvoiceSendRequest): Response<Unit>
 
+    @PUT("auth/update_notification_preferences/{id}")
+    suspend fun updateNotificationPreferences(
+        @Path("id") id: Int,
+        @Body notificationPreferenceValue: NotificationPreferencesRequest
+    ): Response<Unit>
+
+    @POST("auth/notification_preferences")
+    suspend fun notificationPreferences(): List<NotificationPreferencesResponse>
 }

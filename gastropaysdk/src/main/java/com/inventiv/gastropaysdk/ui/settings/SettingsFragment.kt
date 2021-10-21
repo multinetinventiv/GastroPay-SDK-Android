@@ -22,6 +22,7 @@ import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.getSettings
 import com.inventiv.gastropaysdk.utils.handleError
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
+import com.multinetinventiv.gastropay.ui.profile.settings.notification.NotificationPreferencesFragment
 import kotlinx.coroutines.flow.collect
 
 internal class SettingsFragment : BaseFragment(R.layout.fragment_settings_gastropay_sdk) {
@@ -61,6 +62,10 @@ internal class SettingsFragment : BaseFragment(R.layout.fragment_settings_gastro
         }
         binding.termsButton.setOnClickListener {
             viewModel.getTerms()
+        }
+        binding.permissionsButton.setOnClickListener {
+            sharedViewModel.pushFragment(NotificationPreferencesFragment())
+
         }
         binding.contactUsButton.setOnClickListener {
             sharedViewModel.pushFragment(ContactUsFragment())
