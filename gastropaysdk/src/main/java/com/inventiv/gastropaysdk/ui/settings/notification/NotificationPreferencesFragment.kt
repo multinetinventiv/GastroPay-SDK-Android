@@ -30,7 +30,7 @@ internal class NotificationPreferencesFragment :
         toolbar.apply {
             changeToLoginStyle()
             setTitle(
-                StringUtils.getString(R.string.settings_contact_permissions_gastropay_sdk),
+                StringUtils.getString(R.string.settings_notification_toolbar_title_gastropay_sdk),
                 R.color.celtic_gastropay_sdk
             )
             setLeftIcon(R.drawable.ic_arrow_back_gastropay_sdk)

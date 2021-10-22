@@ -4,8 +4,8 @@ import com.inventiv.gastropaysdk.ui.settings.notification.NotificationPreference
 import com.inventiv.gastropaysdk.ui.settings.notification.NotificationPreferencesStateType
 
 internal data class NotificationPreferencesResponse(
-    var id: Int?,
-    var label: String?,
-    var channel: NotificationPreferencesChannelType?,
-    var state: NotificationPreferencesStateType?
+    var id: Int,
+    var label: String,
+    var channel: NotificationPreferencesChannelType,
+    var state: NotificationPreferencesStateType
 )

@@ -9,9 +9,9 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.inventiv.gastropaysdk.ui.settings.notification.NotificationPreferencesChannelType
 import com.inventiv.gastropaysdk.ui.settings.notification.NotificationPreferencesFragment
 import com.inventiv.gastropaysdk.utils.ChildViewAction
+import com.inventiv.gastropaysdk.utils.getResourceString
 import com.inventiv.gastropaysdk.utils.readTestResourceFile
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
@@ -68,8 +68,8 @@ class NotificationPreferencesFragmentTest {
 
         }
 
-        val smsTitle = NotificationPreferencesChannelType.SMS.name
-        val emailTitle = NotificationPreferencesChannelType.MAIL.name
+        val smsTitle = getResourceString(R.string.settings_notification_channel_1_gastropay_sdk)
+        val emailTitle = getResourceString(R.string.settings_notification_channel_2_gastropay_sdk)
 
         Espresso.onView(ViewMatchers.withId(R.id.notificationPreferencesRecyclerView))
             .check(

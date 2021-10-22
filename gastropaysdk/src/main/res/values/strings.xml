@@ -113,13 +113,17 @@
     <string name="transaction_detail_date_label_gastropay_sdk">Tarih</string>
     <string name="transaction_detail_bill_label_gastropay_sdk">Fatura Numarası</string>
     <string name="transaction_detail_invoice_send_gastropay_sdk">Faturanız başarıyla gönderildi.</string>
-    <string name="settings_notification_channel_1_gastropay_sdk">Sms</string>
-    <string name="settings_notification_channel_2_gastropay_sdk">E-posta</string>
     <!--endregion Settings-->
 
     <!--region ContactUs-->
     <string name="contact_us_title_gastropay_sdk">Bize Ulaşın</string>
     <string name="contact_us_call_gastropay_sdk">Bizi Arayın</string>
     <string name="contact_us_write_gastropay_sdk">Bize Yazın</string>
+    <!--endregion ContactUs-->
+
+    <!--region Notification Preferences-->
+    <string name="settings_notification_toolbar_title_gastropay_sdk">Bildirim</string>
+    <string name="settings_notification_channel_1_gastropay_sdk">Sms</string>
+    <string name="settings_notification_channel_2_gastropay_sdk">E-posta</string>
     <!--endregion ContactUs-->
 </resources>

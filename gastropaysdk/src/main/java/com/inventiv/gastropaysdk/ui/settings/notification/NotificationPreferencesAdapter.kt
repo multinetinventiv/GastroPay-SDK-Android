@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.inventiv.gastropaysdk.databinding.ItemNotificationPermissionHeaderGastropaySdkBinding
 import com.inventiv.gastropaysdk.databinding.ItemSwitchGastropaySdkBinding
+import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 
 internal class NotificationPreferencesAdapter(
     private val notifications: ArrayList<NotificationPreferencesBase>,
@@ -76,19 +77,18 @@ class NotificationItemViewHolder(
         notificationItem: NotificationPreferencesBase.NotificationPreferencesItem,
         isLastIndex: Boolean
     ) {
-        binding.switchNotification.text = notificationItem.preferencesChannel?.name
-        binding.switchNotification.isChecked =
-            notificationItem.preferencesState?.equals(NotificationPreferencesStateType.ON)!!
+        binding.switchNotification.text = StringUtils.getString(notificationItem.preferencesChannel.resourceId)
+        binding.switchNotification.isChecked = notificationItem.preferencesState == NotificationPreferencesStateType.ON
         if (isLastIndex) {
             binding.viewDivider.visibility = View.GONE
         }
         binding.switchNotification.setOnCheckedChangeListener { buttonView, isChecked ->
             val stateValue =
                 if (isChecked) NotificationPreferencesStateType.ON else NotificationPreferencesStateType.OFF
-            val channelValue = notificationItem.preferencesChannel?.value
+            val channelValue = notificationItem.preferencesChannel.value
             channelStatedChanged.invoke(
-                notificationItem.id!!,
-                channelValue?.toInt()!!,
+                notificationItem.id,
+                channelValue.toInt(),
                 stateValue.value.toInt()
             )
         }
