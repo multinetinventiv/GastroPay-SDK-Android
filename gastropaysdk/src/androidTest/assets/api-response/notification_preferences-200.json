@@ -1,0 +1,38 @@
+[
+  {
+    "id": 11,
+    "label": "Puan Bildirimleri",
+    "channel": 2,
+    "state": 1
+  },
+  {
+    "id": 11,
+    "label": "Puan Bildirimleri",
+    "channel": 3,
+    "state": 1
+  },
+  {
+    "id": 11,
+    "label": "Puan Bildirimleri",
+    "channel": 1,
+    "state": 1
+  },
+  {
+    "id": 12,
+    "label": "Kampanya Bildirimleri",
+    "channel": 2,
+    "state": 1
+  },
+  {
+    "id": 12,
+    "label": "Kampanya Bildirimleri",
+    "channel": 3,
+    "state": 1
+  },
+  {
+    "id": 12,
+    "label": "Kampanya Bildirimleri",
+    "channel": 1,
+    "state": 1
+  }
+]

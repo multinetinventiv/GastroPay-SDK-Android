@@ -20,7 +20,6 @@ import com.inventiv.gastropaysdk.ui.MainViewModelFactory
 import com.inventiv.gastropaysdk.ui.pay.result.PayResultFragment
 import com.inventiv.gastropaysdk.utils.REFERENCE_UNDEFINED
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.ConvertUtils
-import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.handleError
@@ -154,13 +153,12 @@ internal class PayValidateFragment : BaseFragment(R.layout.fragment_pay_validate
                     when (uiState) {
                         is Resource.Loading -> {
                             if (uiState.isLoading) {
-                                binding.loadingLayout.visibility = View.VISIBLE
+                                binding.loading.loadingLayout.visibility = View.VISIBLE
                             } else {
-                                binding.loadingLayout.visibility = View.GONE
+                                binding.loading.loadingLayout.visibility = View.GONE
                             }
                         }
                         is Resource.Success -> {
-                            LogUtils.d(uiState.data)
                             bankCardsList.clear()
                             bankCardsList.addAll(uiState.data)
                             bankCardsAdapter.notifyDataSetChanged()
@@ -181,13 +179,12 @@ internal class PayValidateFragment : BaseFragment(R.layout.fragment_pay_validate
                     when (uiState) {
                         is Resource.Loading -> {
                             if (uiState.isLoading) {
-                                binding.loadingLayout.visibility = View.VISIBLE
+                                binding.loading.loadingLayout.visibility = View.VISIBLE
                             } else {
-                                binding.loadingLayout.visibility = View.GONE
+                                binding.loading.loadingLayout.visibility = View.GONE
                             }
                         }
                         is Resource.Success -> {
-                            LogUtils.d(uiState.data)
                             provision = uiState.data
                             setupUI()
                         }
@@ -207,13 +204,12 @@ internal class PayValidateFragment : BaseFragment(R.layout.fragment_pay_validate
                     when (uiState) {
                         is Resource.Loading -> {
                             if (uiState.isLoading) {
-                                binding.loadingLayout.visibility = View.VISIBLE
+                                binding.loading.loadingLayout.visibility = View.VISIBLE
                             } else {
-                                binding.loadingLayout.visibility = View.GONE
+                                binding.loading.loadingLayout.visibility = View.GONE
                             }
                         }
                         is Resource.Success -> {
-                            LogUtils.d(uiState.data)
                             sharedViewModel.pushFragment(
                                 PayResultFragment.newInstance(provision.merchantName, provision)
                             )

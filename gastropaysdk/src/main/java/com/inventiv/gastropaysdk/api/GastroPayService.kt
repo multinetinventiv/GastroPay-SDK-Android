@@ -66,4 +66,12 @@ internal interface GastroPayService {
     @POST("notify/invoice_send")
     suspend fun invoiceSend(@Body request: InvoiceSendRequest): Response<Unit>
 
+    @PUT("auth/update_notification_preferences/{id}")
+    suspend fun updateNotificationPreferences(
+        @Path("id") id: Int,
+        @Body notificationPreferenceValue: NotificationPreferencesRequest
+    ): Response<Unit>
+
+    @POST("auth/notification_preferences")
+    suspend fun notificationPreferences(): List<NotificationPreferencesResponse>
 }
