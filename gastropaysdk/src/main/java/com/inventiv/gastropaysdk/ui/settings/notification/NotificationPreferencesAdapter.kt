@@ -8,7 +8,7 @@ import com.inventiv.gastropaysdk.databinding.ItemNotificationPermissionHeaderGas
 import com.inventiv.gastropaysdk.databinding.ItemSwitchGastropaySdkBinding
 
 internal class NotificationPreferencesAdapter(
-    private val notifications: ArrayList<NotificationPreferencesBases>,
+    private val notifications: ArrayList<NotificationPreferencesBase>,
     private val channelStatedChanged: (id: Int, channel: Int, newState: Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -43,9 +43,9 @@ internal class NotificationPreferencesAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is NotificationHeaderViewHolder -> holder.bind(notifications[position] as NotificationPreferencesBases.NotificationPreferencesHeader)
+            is NotificationHeaderViewHolder -> holder.bind(notifications[position] as NotificationPreferencesBase.NotificationPreferencesHeader)
             is NotificationItemViewHolder -> holder.bind(
-                notifications[position] as NotificationPreferencesBases.NotificationPreferencesItem,
+                notifications[position] as NotificationPreferencesBase.NotificationPreferencesItem,
                 position == notifications.lastIndex
             )
         }
@@ -53,14 +53,14 @@ internal class NotificationPreferencesAdapter(
 
 
     override fun getItemViewType(position: Int): Int {
-        return if (notifications[position] is NotificationPreferencesBases.NotificationPreferencesHeader) TYPE_HEADER else TYPE_ITEM
+        return if (notifications[position] is NotificationPreferencesBase.NotificationPreferencesHeader) TYPE_HEADER else TYPE_ITEM
     }
 }
 
 class NotificationHeaderViewHolder(val binding: ItemNotificationPermissionHeaderGastropaySdkBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(notificationHeader: NotificationPreferencesBases.NotificationPreferencesHeader) {
+    fun bind(notificationHeader: NotificationPreferencesBase.NotificationPreferencesHeader) {
         binding.textNotificationHeaderGastroPaySdk.text = notificationHeader.label
     }
 
@@ -73,17 +73,18 @@ class NotificationItemViewHolder(
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(
-        notificationItem: NotificationPreferencesBases.NotificationPreferencesItem,
+        notificationItem: NotificationPreferencesBase.NotificationPreferencesItem,
         isLastIndex: Boolean
     ) {
-        binding.switchNotificationGastroPaySdk.text = notificationItem.preferencesChannel?.name
-        binding.switchNotificationGastroPaySdk.isChecked =
+        binding.switchNotification.text = notificationItem.preferencesChannel?.name
+        binding.switchNotification.isChecked =
             notificationItem.preferencesState?.equals(NotificationPreferencesStateType.ON)!!
         if (isLastIndex) {
             binding.viewDivider.visibility = View.GONE
         }
-        binding.switchNotificationGastroPaySdk.setOnCheckedChangeListener { buttonView, isChecked ->
-            val stateValue = if (isChecked) NotificationPreferencesStateType.ON else NotificationPreferencesStateType.OFF
+        binding.switchNotification.setOnCheckedChangeListener { buttonView, isChecked ->
+            val stateValue =
+                if (isChecked) NotificationPreferencesStateType.ON else NotificationPreferencesStateType.OFF
             val channelValue = notificationItem.preferencesChannel?.value
             channelStatedChanged.invoke(
                 notificationItem.id!!,

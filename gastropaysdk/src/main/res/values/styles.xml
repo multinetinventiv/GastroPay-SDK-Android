@@ -33,6 +33,7 @@
         <item name="android:layout_height">0.5dp</item>
         <item name="android:background">#273C2F</item>
     </style>
+
     <style name="DividerStyle" parent="BaseDividerStyle" />
 
 </resources>

@@ -70,7 +70,7 @@ internal class SettingsFragment : BaseFragment(R.layout.fragment_settings_gastro
         binding.contactUsButton.setOnClickListener {
             sharedViewModel.pushFragment(ContactUsFragment())
         }
-        binding.faqButton.setOnClickListener{
+        binding.faqButton.setOnClickListener {
             getSettings().faq?.let { url ->
                 sharedViewModel.pushFragment(
                     WebViewFragment.newInstance(

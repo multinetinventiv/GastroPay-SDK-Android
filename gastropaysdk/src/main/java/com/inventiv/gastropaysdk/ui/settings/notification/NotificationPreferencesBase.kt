@@ -3,18 +3,18 @@ package com.inventiv.gastropaysdk.ui.settings.notification
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
-sealed class NotificationPreferencesBases {
+sealed class NotificationPreferencesBase {
     @Parcelize
     data class NotificationPreferencesHeader(
         val id: Int?,
         var label: String?
-    ) : NotificationPreferencesBases(), Parcelable
+    ) : NotificationPreferencesBase(), Parcelable
 
     @Parcelize
     data class NotificationPreferencesItem(
         val id: Int?,
         var preferencesChannel: NotificationPreferencesChannelType?,
         var preferencesState: NotificationPreferencesStateType?
-    ) : NotificationPreferencesBases(), Parcelable
+    ) : NotificationPreferencesBase(), Parcelable
 }
 
