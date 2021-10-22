@@ -8,5 +8,8 @@ import retrofit2.Response
 
 internal interface ProfileRepository {
     fun notificationPreferences(): Flow<Resource<ArrayList<NotificationPreferencesResponse>>>
-    fun updateNotificationPreferences(id : Int, request: NotificationPreferencesRequest): Flow<Resource<Response<Unit>>>
+    fun updateNotificationPreferences(
+        id: Int,
+        request: NotificationPreferencesRequest
+    ): Flow<Resource<Response<Unit>>>
 }
