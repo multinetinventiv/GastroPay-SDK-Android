@@ -97,12 +97,12 @@ internal class WebViewFragment : BaseFragment(R.layout.fragment_webview_gastropa
             webViewClient = object : WebViewClient() {
                 override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                     super.onPageStarted(view, url, favicon)
-                    binding.loadingLayout.visibility = View.VISIBLE
+                    binding.loading.loadingLayout.visibility = View.VISIBLE
                 }
 
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
-                    binding.loadingLayout.visibility = View.GONE
+                    binding.loading.loadingLayout.visibility = View.GONE
                 }
             }
             loadUrl(webViewUrl)

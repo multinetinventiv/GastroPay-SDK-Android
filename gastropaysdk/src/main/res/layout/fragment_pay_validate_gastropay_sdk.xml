@@ -184,23 +184,8 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <FrameLayout
-        android:id="@+id/loadingLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/celtic_overlay_gastropay_sdk"
-        android:clickable="true"
-        android:elevation="5dp"
-        android:focusable="true"
-        android:visibility="gone"
-        tools:visibility="gone">
-
-        <ProgressBar
-            android:id="@+id/progressBarGastroPaySdk"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center"
-            android:layout_margin="16dp" />
-    </FrameLayout>
+    <include
+        android:id="@+id/loading"
+        layout="@layout/layout_loading_gastropay_sdk" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

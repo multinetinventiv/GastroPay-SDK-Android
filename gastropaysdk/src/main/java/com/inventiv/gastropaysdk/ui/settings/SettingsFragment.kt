@@ -17,7 +17,6 @@ import com.inventiv.gastropaysdk.ui.MainViewModelFactory
 import com.inventiv.gastropaysdk.ui.contactus.ContactUsFragment
 import com.inventiv.gastropaysdk.ui.settings.notification.NotificationPreferencesFragment
 import com.inventiv.gastropaysdk.ui.webview.WebViewFragment
-import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.getSettings
@@ -117,7 +116,6 @@ internal class SettingsFragment : BaseFragment(R.layout.fragment_settings_gastro
                 when (it) {
                     is MainViewModel.ColdEvent.OnGenericWebViewClick -> {
                         sharedViewModel.resetColdEvent()
-                        LogUtils.d("GENERIC_WEBVIEW_IS_ACCEPT", it.isAccept)
                     }
                     else -> {
                     }

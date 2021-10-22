@@ -25,7 +25,6 @@ import com.inventiv.gastropaysdk.ui.MainViewModelFactory
 import com.inventiv.gastropaysdk.ui.pay.validate.PayValidateFragment
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.constant.PermissionConstants
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.AppUtils.getAppPackageName
-import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.PermissionUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.handleError
@@ -153,7 +152,6 @@ internal class PayFragment : BaseFragment(R.layout.fragment_pay_gastropay_sdk) {
                         }
                         is Resource.Success -> {
                             viewModel.requestInProgress = false
-                            LogUtils.d(uiState.data)
                             sharedViewModel.pushFragment(
                                 PayValidateFragment.newInstance(
                                     toolbarTitle = uiState.data.merchantName,

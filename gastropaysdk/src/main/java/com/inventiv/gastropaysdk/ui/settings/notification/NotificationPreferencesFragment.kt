@@ -15,7 +15,6 @@ import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.ui.MainViewModelFactory
 import com.inventiv.gastropaysdk.utils.REFERENCE_UNDEFINED
-import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.handleError
@@ -94,7 +93,6 @@ internal class NotificationPreferencesFragment :
                             }
                         }
                         is Resource.Success -> {
-                            LogUtils.d(uiState.data)
                             notificationPreferencesList.clear()
                             notificationPreferencesList.addAll(uiState.data)
                             notificationPreferencesAdapter.notifyDataSetChanged()
