@@ -63,6 +63,54 @@ fun <T> safeFlow(
     }
 }
 
+fun <T, R> transformFlow(
+    transformFun: ((T) -> R),
+    suspendFun: suspend () -> T
+): Flow<Resource<R>> {
+    return flow {
+        try {
+            val result = suspendFun()
+            val transformed = transformFun(result)
+            emit(Resource.Success(transformed))
+        } catch (httpE: HttpException) {
+            val apiError = ApiError(
+                code = httpE.code(),
+                message = httpE.message(),
+                body = httpE.response()?.errorBody()
+            )
+            emit(Resource.Error(apiError))
+        } catch (unknownHostE: UnknownHostException) {
+            val apiError = ApiError(
+                code = -101,
+                message = unknownHostE.message.toString()
+            )
+            emit(Resource.Error(apiError))
+        } catch (socketE: SocketException) {
+            val apiError = ApiError(
+                code = -102,
+                message = socketE.message.toString()
+            )
+            emit(Resource.Error(apiError))
+        } catch (socketTimeoutE: SocketTimeoutException) {
+            val apiError = ApiError(
+                code = -103,
+                message = socketTimeoutE.message.toString()
+            )
+            emit(Resource.Error(apiError))
+        } catch (e: Exception) {
+            val apiError = ApiError(
+                code = -100,
+                message = e.message.toString()
+            )
+            emit(Resource.Error(apiError))
+        }
+    }.onStart {
+        emit(Resource.Loading(true))
+    }.onCompletion {
+        emit(Resource.Loading(false))
+    }
+}
+
 internal suspend fun <T> FlowCollector<Resource<T>>.emitError(
     apiError: ApiError,
     modifyFun: ((Resource<T>) -> Resource<T>)? = null

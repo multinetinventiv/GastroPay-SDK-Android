@@ -15,6 +15,7 @@ import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.ui.MainViewModelFactory
 import com.inventiv.gastropaysdk.ui.contactus.ContactUsFragment
+import com.inventiv.gastropaysdk.ui.settings.notification.NotificationPreferencesFragment
 import com.inventiv.gastropaysdk.ui.webview.WebViewFragment
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
@@ -22,7 +23,6 @@ import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.getSettings
 import com.inventiv.gastropaysdk.utils.handleError
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
-import com.multinetinventiv.gastropay.ui.profile.settings.notification.NotificationPreferencesFragment
 import kotlinx.coroutines.flow.collect
 
 internal class SettingsFragment : BaseFragment(R.layout.fragment_settings_gastropay_sdk) {

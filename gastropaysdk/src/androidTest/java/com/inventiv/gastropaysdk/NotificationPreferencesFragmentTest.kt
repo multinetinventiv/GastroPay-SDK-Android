@@ -10,9 +10,9 @@ import androidx.test.espresso.matcher.ViewMatchers.hasDescendant
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.inventiv.gastropaysdk.ui.settings.notification.NotificationPreferencesChannelType
+import com.inventiv.gastropaysdk.ui.settings.notification.NotificationPreferencesFragment
 import com.inventiv.gastropaysdk.utils.ChildViewAction
 import com.inventiv.gastropaysdk.utils.readTestResourceFile
-import com.multinetinventiv.gastropay.ui.profile.settings.notification.NotificationPreferencesFragment
 import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer

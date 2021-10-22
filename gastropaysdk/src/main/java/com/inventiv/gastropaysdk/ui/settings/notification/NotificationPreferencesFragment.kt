@@ -1,4 +1,4 @@
-package com.multinetinventiv.gastropay.ui.profile.settings.notification
+package com.inventiv.gastropaysdk.ui.settings.notification
 
 import android.os.Bundle
 import android.view.View
@@ -7,23 +7,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.inventiv.gastropaysdk.R
 import com.inventiv.gastropaysdk.common.BaseFragment
+import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.databinding.FragmentNotificationPreferencesGastropaySdkBinding
 import com.inventiv.gastropaysdk.repository.MainRepositoryImp
 import com.inventiv.gastropaysdk.repository.ProfileRepositoryImp
 import com.inventiv.gastropaysdk.shared.GastroPaySdk
 import com.inventiv.gastropaysdk.ui.MainViewModel
 import com.inventiv.gastropaysdk.ui.MainViewModelFactory
-import com.inventiv.gastropaysdk.ui.settings.notification.NotificationPreferencesAdapter
-import com.inventiv.gastropaysdk.ui.settings.notification.NotificationPreferencesBase
-import com.inventiv.gastropaysdk.ui.settings.notification.NotificationPreferencesViewModel
-import com.inventiv.gastropaysdk.ui.settings.notification.NotificationPreferencesViewModelFactory
 import com.inventiv.gastropaysdk.utils.REFERENCE_UNDEFINED
-import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.ConvertUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.LogUtils
 import com.inventiv.gastropaysdk.utils.blankj.utilcode.util.StringUtils
 import com.inventiv.gastropaysdk.utils.delegate.viewBinding
 import com.inventiv.gastropaysdk.utils.handleError
-import com.inventiv.gastropaysdk.utils.itemdecorator.RecyclerMarginDecoration
 import com.inventiv.gastropaysdk.view.GastroPaySdkToolbar
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -80,14 +75,9 @@ internal class NotificationPreferencesFragment :
     private fun setupNotificationPreferencesAdapter() {
         notificationPreferencesAdapter = NotificationPreferencesAdapter(notificationPreferencesList)
         { id: Int, channel: Int, newState: Int ->
-            LogUtils.d("Clicked", id)
             preferencesViewModel.updateNotificationPreferences(id, channel, newState)
         }
-        binding.notificationPreferencesRecyclerView.addItemDecoration(
-            RecyclerMarginDecoration(ConvertUtils.dp2px(16f))
-        )
-        binding.notificationPreferencesRecyclerView.adapter =
-            notificationPreferencesAdapter
+        binding.notificationPreferencesRecyclerView.adapter = notificationPreferencesAdapter
 
     }
 
@@ -96,24 +86,20 @@ internal class NotificationPreferencesFragment :
             launch {
                 preferencesViewModel.notificationPreferencesState.collect { uiState ->
                     when (uiState) {
-                        is com.inventiv.gastropaysdk.data.Resource.Loading -> {
+                        is Resource.Loading -> {
                             if (uiState.isLoading) {
-                                binding.loadingLayout.visibility = View.VISIBLE
+                                binding.loading.loadingLayout.visibility = View.VISIBLE
                             } else {
-                                binding.loadingLayout.visibility = View.GONE
+                                binding.loading.loadingLayout.visibility = View.GONE
                             }
                         }
-                        is com.inventiv.gastropaysdk.data.Resource.Success -> {
+                        is Resource.Success -> {
                             LogUtils.d(uiState.data)
                             notificationPreferencesList.clear()
-                            preferencesViewModel.mapNotificationPreferenceToNotificationPreferenceBase(
-                                uiState.data
-                            )?.forEach {
-                                notificationPreferencesList.add(it)
-                            }
+                            notificationPreferencesList.addAll(uiState.data)
                             notificationPreferencesAdapter.notifyDataSetChanged()
                         }
-                        is com.inventiv.gastropaysdk.data.Resource.Error -> {
+                        is Resource.Error -> {
                             uiState.apiError.handleError(requireActivity())
                         }
                         else -> {

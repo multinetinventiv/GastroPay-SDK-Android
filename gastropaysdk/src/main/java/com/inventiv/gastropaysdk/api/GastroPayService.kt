@@ -73,5 +73,5 @@ internal interface GastroPayService {
     ): Response<Unit>
 
     @POST("auth/notification_preferences")
-    suspend fun notificationPreferences(): ArrayList<NotificationPreferencesResponse>
+    suspend fun notificationPreferences(): List<NotificationPreferencesResponse>
 }

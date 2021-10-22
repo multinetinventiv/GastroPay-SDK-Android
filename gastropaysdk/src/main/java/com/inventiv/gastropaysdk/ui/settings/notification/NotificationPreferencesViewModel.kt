@@ -4,7 +4,6 @@ import androidx.lifecycle.viewModelScope
 import com.inventiv.gastropaysdk.common.BaseViewModel
 import com.inventiv.gastropaysdk.data.Resource
 import com.inventiv.gastropaysdk.data.request.NotificationPreferencesRequest
-import com.inventiv.gastropaysdk.data.response.NotificationPreferencesResponse
 import com.inventiv.gastropaysdk.repository.ProfileRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,48 +16,14 @@ internal class NotificationPreferencesViewModel(private val repository: ProfileR
     BaseViewModel() {
 
     private val _notificationPreferencesState =
-        MutableStateFlow<Resource<ArrayList<NotificationPreferencesResponse>>>(Resource.Empty)
-    val notificationPreferencesState: StateFlow<Resource<ArrayList<NotificationPreferencesResponse>>>
+        MutableStateFlow<Resource<List<NotificationPreferencesBase>>>(Resource.Empty)
+    val notificationPreferencesState: StateFlow<Resource<List<NotificationPreferencesBase>>>
         get() = _notificationPreferencesState.asStateFlow()
 
     private val _updateNotificationPreferencesState =
         MutableStateFlow<Resource<Response<Unit>>>(Resource.Empty)
     val updateNotificationPreferencesState: StateFlow<Resource<Response<Unit>>>
         get() = _updateNotificationPreferencesState.asStateFlow()
-
-
-    fun mapNotificationPreferenceToNotificationPreferenceBase(
-        networkNotificationPreferenceList: ArrayList<NotificationPreferencesResponse>
-    ): ArrayList<NotificationPreferencesBase>? {
-        if (networkNotificationPreferenceList.isNullOrEmpty()) {
-            return null
-        }
-
-        val notificationList: ArrayList<NotificationPreferencesBase> = arrayListOf()
-
-        val groupedList = networkNotificationPreferenceList.groupBy { it.id }
-        for ((groupId, groupItemList) in groupedList) {
-            notificationList.add(
-                NotificationPreferencesBase.NotificationPreferencesHeader(
-                    groupId,
-                    groupItemList.first().label
-                )
-            )
-            groupItemList.sortedBy { it.channel }
-                .filter { it.channel != NotificationPreferencesChannelType.PUSH }
-                .forEach {
-                    notificationList.add(
-                        NotificationPreferencesBase.NotificationPreferencesItem(
-                            it.id,
-                            it.channel,
-                            it.state
-                        )
-                    )
-                }
-        }
-
-        return notificationList
-    }
 
     fun notificationPreferences() {
         viewModelScope.launch {
