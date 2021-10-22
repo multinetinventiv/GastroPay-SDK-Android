@@ -125,5 +125,5 @@
     <string name="settings_notification_toolbar_title_gastropay_sdk">Bildirim</string>
     <string name="settings_notification_channel_1_gastropay_sdk">Sms</string>
     <string name="settings_notification_channel_2_gastropay_sdk">E-posta</string>
-    <!--endregion ContactUs-->
+    <!--endregion Notification Preferences-->
 </resources>
