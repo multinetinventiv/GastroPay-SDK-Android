@@ -26,3 +26,5 @@ Tags: [Added, Changed, Deprecated, Removed, Fixed, Security]
 - Publishing Automation [#119713](http://isttfs02:8080/tfs/MultinetCollection/Prj%20-%20%C4%B0sfanbul/_workitems/edit/119713)
 - SDK Setup [#117878](http://isttfs02:8080/tfs/MultinetCollection/Prj%20-%20%C4%B0sfanbul/_workitems/edit/117878)
 
+### Removed
+- Contact Us Call [#5732](https://dev.azure.com/inventivtech/Panda/_workitems/edit/5732)
