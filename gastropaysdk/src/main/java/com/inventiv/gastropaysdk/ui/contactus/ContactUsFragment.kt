@@ -44,13 +44,6 @@ internal class ContactUsFragment : BaseFragment(R.layout.fragment_contactus_gast
         binding.toolbar.setNavigationOnClickListener {
             sharedViewModel.onBackPressed()
         }
-        binding.callButton.setOnClickListener {
-            val dialNumber =
-                getSettings().phoneNumber ?: getString(R.string.default_phone_number_gastropay_sdk)
-            val intent = Intent(Intent.ACTION_DIAL)
-            intent.data = Uri.parse("tel:$dialNumber")
-            startActivity(intent)
-        }
         binding.writeButton.setOnClickListener {
             val email = getSettings().email ?: getString(R.string.default_email_gastropay_sdk)
             val emailIntent = Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:$email"))
