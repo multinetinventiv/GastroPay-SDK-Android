@@ -102,7 +102,9 @@ internal class WebViewFragment : BaseFragment(R.layout.fragment_webview_gastropa
 
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
-                    binding.loading.loadingLayout.visibility = View.GONE
+                    if (getView() != null) {
+                        binding.loading.loadingLayout.visibility = View.GONE
+                    }
                 }
             }
             loadUrl(webViewUrl)
