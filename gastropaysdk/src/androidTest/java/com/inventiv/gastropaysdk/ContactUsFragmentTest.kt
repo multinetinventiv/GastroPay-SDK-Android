@@ -55,37 +55,16 @@ class ContactUsFragmentTest {
         }
 
         val title = getResourceString(R.string.contact_us_title_gastropay_sdk)
-        val callButtonTitle = getResourceString(R.string.contact_us_call_gastropay_sdk)
         val writeButtonTitle = getResourceString(R.string.contact_us_write_gastropay_sdk)
 
         Espresso.onView(ViewMatchers.withId(R.id.titleToolbar))
             .check(ViewAssertions.matches(ViewMatchers.withText(title)))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
-        Espresso.onView(ViewMatchers.withId(R.id.callButton))
-            .check(ViewAssertions.matches(ViewMatchers.withText(callButtonTitle)))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-
         Espresso.onView(ViewMatchers.withId(R.id.writeButton))
             .check(ViewAssertions.matches(ViewMatchers.withText(writeButtonTitle)))
             .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
-    }
-
-    @Test
-    fun call_button_click_check() {
-        val scenario =
-            launchFragmentInContainer<ContactUsFragment>(
-                themeResId = R.style.Theme_GastroPaySdk
-            )
-        scenario.onFragment { fragment ->
-
-        }
-
-        Espresso.onView(ViewMatchers.withId(R.id.callButton))
-            .check(ViewAssertions.matches(ViewMatchers.isClickable()))
-
-        Espresso.onView(ViewMatchers.withId(R.id.callButton)).perform(ViewActions.click())
     }
 
     @Test

@@ -85,18 +85,6 @@
                     android:orientation="vertical"
                     android:showDividers="middle">
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/callButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_contact_us_gastropay_sdk"
-                        android:drawableEnd="@drawable/ic_chevron_right_gastropay_sdk"
-                        android:drawablePadding="8dp"
-                        android:gravity="center|start"
-                        android:padding="16dp"
-                        android:text="@string/contact_us_call_gastropay_sdk"
-                        android:textColor="@color/celtic_gastropay_sdk"
-                        android:textSize="16sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/writeButton"
